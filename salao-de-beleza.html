@@ -111,12 +111,14 @@
   .step-row.reverse { grid-template-columns: 370px 1fr 40px; direction: rtl; }
   .step-row.reverse > * { direction: ltr; }
   .steps-cta { display: flex; gap: 12px; justify-content: flex-start; margin-top: 24px; flex-wrap: wrap; }
+  /* Desktop: mostra a versão dentro do body (logo abaixo dos itens), esconde a mobile */
+  .steps-cta-mobile { display: none; }
 
   /* ─── Por que escolher ─── */
   .pq-section { width: 1200px; max-width: calc(100% - 48px); margin: 0 auto 80px; padding: 0; }
   .pq-section h2 { font-family: var(--ff-display); font-weight: 400; font-size: 40px; line-height: 1.1; text-align: center; color: var(--c-text); margin: 0 0 50px; }
   .pq-section h2 em { font-style: normal; color: var(--c-accent); }
-  .pq-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .pq-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .pq-card { background: var(--c-card); border: 1px solid var(--c-ink-soft-06); border-radius: 12px; padding: 28px 24px; text-align: center; transition: transform .3s, box-shadow .3s; }
   .pq-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card-2); }
   .pq-card .ico { width: 44px; height: 44px; border-radius: 100px; background: var(--c-accent-soft); color: var(--c-accent); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px; }
@@ -190,10 +192,11 @@
 
     /* 5 passos ---------------------------------------------------- */
     /* Mobile: max-width: none libera o width auto (padrão da home — sem clamp do desktop) */
-    .steps-section { padding: 40px 20px !important; margin: 0 16px 60px !important; width: auto !important; max-width: none !important; }
+    .steps-section { padding: 40px 20px 20px !important; margin: 0 16px 50px !important; width: auto !important; max-width: none !important; }
     .steps-section h2 { font-size: 30px; line-height: 1.1; }
     .steps-section .lead { font-size: 14px; line-height: 22px; margin-bottom: 24px; }
     .step-row { grid-template-columns: 40px 1fr !important; gap: 16px; padding: 32px 0; }
+    .step-row.tl-last { padding-bottom: 0; }
     .step-row .dot { display: none; }
     /* Linha vertical (.tl-seg): visível no mobile com fill conforme scroll.
        Recalculada para o padding mobile 32px (vs 50px desktop):
@@ -206,13 +209,18 @@
     .step-row .num { grid-column: 1; grid-row: 1; }
     .step-row .body { grid-column: 2; grid-row: 1; }
     .step-row .photo { grid-column: 2; grid-row: 2; width: 100%; height: 200px; margin-top: 16px; }
+    /* Mobile: esconde a CTA-desktop (dentro do body) e mostra a CTA-mobile abaixo do photo */
+    .step-row .steps-cta-desktop { display: none; }
+    /* Mobile: CTAs ocupam 100% do .step-row (span nas 2 colunas, não só col 2) */
+    .step-row .steps-cta-mobile { display: flex; grid-column: 1 / -1; grid-row: 3; flex-direction: column; gap: 20px; width: 100%; margin-top: 20px; }
+    .step-row .steps-cta-mobile .btn { width: 100% !important; }
     .step-row .body p { white-space: normal; }
 
     /* Por que escolher ------------------------------------------- */
     /* Mobile: padrão da home — width 100% + padding 0 16px (não-card) */
-    .pq-section { padding: 0 16px !important; margin: 0 0 30px !important; width: 100% !important; max-width: none !important; }
+    .pq-section { padding: 0 16px !important; margin: 0 0 20px !important; width: 100% !important; max-width: none !important; }
     .pq-section h2 { font-size: 30px; line-height: 1.1; }
-    .pq-grid { grid-template-columns: 1fr; gap: 14px; }
+    .pq-grid { grid-template-columns: 1fr; gap: 20px; }
     /* Cards alinhados ao padrão da home (.veja-card mobile: padding 16px / gap 18px) */
     .pq-card { padding: 16px; gap: 18px; }
     .pq-card .ico { margin-bottom: 14px; }
@@ -220,7 +228,7 @@
 
     /* Por trás da Easy ------------------------------------------- */
     /* Mobile: max-width: none libera o width auto */
-    .team-section { padding: 16px !important; margin: 0 16px 60px !important; width: auto !important; max-width: none !important; }
+    .team-section { padding: 16px !important; margin: 0 16px 50px !important; width: auto !important; max-width: none !important; }
     .team-block { grid-template-columns: 1fr; gap: 20px; }
     .team-photo { width: 100%; height: 240px; }
     /* .team-text mobile base: ver design-system.css */
@@ -395,18 +403,24 @@ Com a IA da Easy, a agenda deixa de ser a maior dor e se torna o que destrava to
           <li>Tudo é transparente, acessível e livre de conflitos.</li>
           <li>Discussões de repasse deixam de existir, vira parte natural da rotina.</li>
         </ul>
-        <div class="steps-cta" style="margin: 30px 0px 0px">
+        <!-- CTAs desktop: dentro do body, logo abaixo dos itens (mantém comportamento original) -->
+        <div class="steps-cta steps-cta-desktop" style="margin: 30px 0px 0px">
           <button class="btn btn-primary" style="width:177px;">Comece grátis</button>
           <button class="btn btn-tan-soft" style="width:180px;">Agendar demonstração</button>
         </div>
       </div>
       <div class="photo"></div>
+      <!-- CTAs mobile: fora do body, abaixo do photo placeholder -->
+      <div class="steps-cta steps-cta-mobile">
+        <button class="btn btn-primary">Comece grátis</button>
+        <button class="btn btn-tan-soft">Agendar demonstração</button>
+      </div>
     </div>
 
   </section>
 
   <!-- ─────────────── POR QUE ESCOLHER ─────────────── -->
-  <section class="pq-section" style="margin: 0 auto 30px">
+  <section class="pq-section" style="margin: 0 auto 20px">
     <h2>Por que escolher a Easy <em>para seu salão</em></h2>
     <div class="pq-grid">
       <div class="pq-card">
