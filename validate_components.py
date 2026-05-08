@@ -41,7 +41,7 @@ from typing import Iterable
 # ───────────────────────────────────────────────────────────────
 
 MASTER_FILE = "home.html"
-DESIGN_SYSTEM_FILE = "Design System.html"
+DESIGN_SYSTEM_FILE = "design-system.html"
 DESIGN_SYSTEM_CSS = "design-system.css"
 
 # Famílias de fonte permitidas (qualquer outra dispara aviso).

@@ -7,7 +7,7 @@ Este projeto trata a **página inicial** (`home.html`) como a fonte da verdade d
 | Arquivo | Papel |
 |---|---|
 | `home.html` | **Master** — origem dos tokens e componentes |
-| `Design System.html` | Guia visual com paleta, tipografia, componentes ao vivo e snippets |
+| `design-system.html` | Guia visual com paleta, tipografia, componentes ao vivo e snippets |
 | `validate_components.py` | Validador automático |
 
 ## Regra
@@ -19,7 +19,7 @@ Toda nova página HTML deste projeto deve:
 3. **Usar apenas as duas famílias** do sistema: `Gyst` (display) e `Manrope` (text). Nada de Inter, Arial, Roboto.
 4. **Seguir a escala** de raios (6 / 10 / 12 / 100), sombras (`--shadow-card`, `--shadow-card-2`) e espaçamento (múltiplos de 4).
 
-Se um componente novo precisa existir e não está na home, ele entra **primeiro** na home e é refletido no `Design System.html` — só então pode ser usado nas demais páginas.
+Se um componente novo precisa existir e não está na home, ele entra **primeiro** na home e é refletido no `design-system.html` — só então pode ser usado nas demais páginas.
 
 ## Como validar
 
@@ -46,5 +46,5 @@ Exit code `1` quando há violações — fácil de plugar em CI.
 Mudou um token (cor, fonte, sombra) ou criou/alterou componente?
 
 1. Edite **`home.html`** primeiro.
-2. Reflita no **`Design System.html`** (swatch / snippet correspondente).
+2. Reflita no **`design-system.html`** (swatch / snippet correspondente).
 3. Rode `python3 validate_components.py` — todas as páginas devem continuar verdes.
