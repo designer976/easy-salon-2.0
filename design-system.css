@@ -1573,6 +1573,7 @@ body.has-nav { padding-top: 70px; }
   transition: box-shadow .35s ease;
 }
 .faq-item[open] { box-shadow: var(--shadow-card-2); }
+.faq-item[open] summary { font-weight: 600; }
 .faq-item summary {
   list-style: none;
   cursor: pointer;
