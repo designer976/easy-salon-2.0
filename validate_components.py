@@ -112,6 +112,12 @@ CANONICAL_BREAKPOINT_PX = 640
 # (geralmente significa "centralização travada" no lugar de margin auto).
 SIDE_MARGIN_PX_THRESHOLD = 100
 
+# Páginas devem herdar do design-system.css. <style> inline com mais
+# linhas (não-vazias) que isso dispara aviso — é sinal de que regras
+# CSS deveriam ter sido movidas pro arquivo canônico. design-system.html
+# é exempt (é a documentação do sistema, pode ter o próprio <style>).
+INLINE_STYLE_LINES_THRESHOLD = 30
+
 
 # ───────────────────────────────────────────────────────────────
 # Resultado por arquivo
@@ -361,6 +367,25 @@ def validate_file(
         ):
             line = css_start_line + css_clean[: mar_m.start()].count("\n")
             _check_margin_shorthand(mar_m.group(1), line, "CSS")
+
+    # ── 8) <style> inline excessivo: páginas devem herdar do design-system
+    # design-system.html é exempt (documentação do sistema)
+    if not is_design_system:
+        total_inline_lines = 0
+        first_style_line = 0
+        for css_match in RE_STYLE_BLOCK.finditer(text):
+            if first_style_line == 0:
+                first_style_line = text[: css_match.start()].count("\n") + 1
+            css_body = css_match.group(1)
+            total_inline_lines += sum(1 for ln in css_body.split("\n") if ln.strip())
+        if total_inline_lines > INLINE_STYLE_LINES_THRESHOLD:
+            report.warn(
+                first_style_line,
+                f"<style> inline com {total_inline_lines} linhas não-vazias — "
+                f"páginas devem herdar de design-system.css. Mova as regras "
+                f"pra lá e mantenha o inline ≤ {INLINE_STYLE_LINES_THRESHOLD} "
+                f"linhas (preferencialmente vazio).",
+            )
 
     return report
 
