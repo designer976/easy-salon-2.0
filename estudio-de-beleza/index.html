@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="pt-BR" data-screen-label="Solução · Salão de Beleza">
+<html lang="pt-BR" data-screen-label="Solução · Estúdio de Beleza">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Easy Salon — Salão de Beleza</title>
+<title>Easy Salon — Estúdio de Beleza</title>
+<link rel="icon" type="image/png" href="/assets/fav.png">
 
 <!-- Sistema de design (mestre). Fontes, tokens, .nav, .btn, .pill (com pill-glow), footer-bleed. -->
-<link rel="stylesheet" href="design-system.css">
+<link rel="stylesheet" href="/design-system.css">
 
 <style>
-  /* Página /salao-de-beleza.html — todas as regras vivem em design-system.css
-     (seção "Páginas: Salão de Beleza"). Este bloco é mantido vazio para enforce
-     a herança 100%% via CSS canônico. */
+  /* Página /estudio-de-beleza.html — todas as regras vivem em design-system.css.
+     Este bloco é mantido vazio para enforce a herança 100% via CSS canônico. */
 </style>
 </head>
 <body class="has-nav">
@@ -29,20 +29,20 @@
             </svg>
           </button>
           <div class="dropdown-content" role="menu">
-            <a class="dropdown-item" role="menuitem" href="salao-de-beleza.html">Salão de beleza</a>
-            <a class="dropdown-item" role="menuitem" href="home.html#barbearia">Barbearia</a>
-            <a class="dropdown-item" role="menuitem" href="home.html#estudio">Estúdio de beleza</a>
+            <a class="dropdown-item" role="menuitem" href="/salao-de-beleza">Salão de beleza</a>
+            <a class="dropdown-item" role="menuitem" href="/barbearia">Barbearia</a>
+            <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a href="home.html#quem-somos">Que somos</a>
-        <a href="home.html#planos">Planos</a>
+        <a href="/#quem-somos">Quem somos</a>
+        <a href="/#planos">Planos</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path>
         </svg>
       </button>
-      <a class="nav-logo" href="home.html" aria-label="Easy Salon · página inicial">
+      <a class="nav-logo" href="/" aria-label="Easy Salon · página inicial">
         <svg width="179" height="24" viewBox="0 0 179 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Easy Salon">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M112.79 14.9516C112.79 15.8226 112.548 16.5968 112.063 17.2742C111.578 17.9194 110.932 18.4194 110.124 18.7742C109.316 19.0968 108.444 19.2581 107.507 19.2581C106.763 19.2581 105.988 19.129 105.18 18.871C104.34 18.6129 103.581 18.1935 102.902 17.6129C102.643 17.3871 102.401 17.1452 102.175 16.8871C102.078 17.1129 101.981 17.3226 101.884 17.5161C101.69 18 101.529 18.5323 101.399 19.1129H101.012V14.1774H101.448C101.706 15.1452 102.159 15.9839 102.805 16.6935C103.451 17.4032 104.195 17.9355 105.035 18.2903C105.875 18.6452 106.731 18.8226 107.604 18.8226C108.573 18.8226 109.397 18.5806 110.076 18.0968C110.754 17.6129 111.093 16.9194 111.093 16.0161C111.093 15.5 110.9 15.0645 110.512 14.7097C110.124 14.3226 109.639 14 109.058 13.7419C108.444 13.4839 107.652 13.2097 106.683 12.9194C105.455 12.5323 104.485 12.1613 103.774 11.8064C103.031 11.4839 102.401 11.0484 101.884 10.5C101.367 9.95161 101.109 9.25806 101.109 8.41935C101.109 7.64516 101.351 6.98387 101.836 6.43548C102.32 5.85484 102.967 5.41936 103.774 5.12903C104.615 4.83871 105.503 4.69355 106.44 4.69355C107.248 4.69355 108.024 4.80645 108.767 5.03225C109.51 5.25806 110.286 5.64516 111.093 6.19355C111.287 6.12903 111.465 5.93549 111.627 5.61291C111.788 5.32258 111.901 5.04838 111.966 4.79032H112.354V8.41935H111.966C111.32 7.32258 110.496 6.5 109.494 5.95161C108.492 5.43548 107.474 5.17742 106.44 5.17742C105.439 5.17742 104.582 5.35484 103.871 5.70968C103.16 6.09677 102.805 6.62903 102.805 7.30645C102.805 7.79032 102.999 8.20967 103.387 8.56451C103.774 8.91935 104.243 9.22581 104.792 9.48387C105.374 9.70968 106.133 9.98387 107.07 10.3065C108.298 10.7258 109.3 11.1129 110.076 11.4677C110.819 11.7903 111.449 12.2419 111.966 12.8226C112.515 13.4032 112.79 14.1129 112.79 14.9516ZM113.275 18.9677V18.5323C113.759 18.5323 114.179 18.4355 114.535 18.2419C114.89 18.0161 115.181 17.7419 115.407 17.4194C115.633 17.129 115.86 16.7419 116.086 16.2581L120.109 6.62903L119.382 5.12903H122.145L127.67 17.7097C127.767 17.9677 127.913 18.1613 128.106 18.2903C128.3 18.4516 128.543 18.5323 128.833 18.5323H130.239V18.9677H122.872V18.5323H124.81C124.94 18.5323 125.02 18.5 125.053 18.4355C125.117 18.371 125.134 18.2581 125.101 18.0968L120.4 7.25806L116.037 17.5161C115.908 17.7742 115.94 17.9677 116.134 18.0968C116.296 18.2581 116.603 18.371 117.055 18.4355C117.54 18.5 118.154 18.5323 118.897 18.5323V18.9677H113.275ZM130.821 18.5323H132.856C133.147 18.5323 133.293 18.371 133.293 18.0484V6.04839C133.293 5.72581 133.147 5.56452 132.856 5.56452H130.821V5.12903H138.334V5.56452H136.249C135.991 5.56452 135.862 5.72581 135.862 6.04839V18.0484C135.862 18.371 135.991 18.5323 136.249 18.5323H141.096C141.775 18.5323 142.308 18.4032 142.696 18.1452C143.084 17.8871 143.358 17.4677 143.52 16.8871C143.714 16.3064 143.811 15.5161 143.811 14.5161V11.6613H144.247V18.9677H130.821V18.5323ZM149.627 18.5806C148.496 17.9677 147.624 17.0968 147.01 15.9677C146.363 14.8387 146.04 13.5323 146.04 12.0484C146.04 10.5645 146.363 9.24193 147.01 8.08064C147.624 6.95161 148.496 6.08065 149.627 5.46774C150.758 4.82258 152.051 4.5 153.505 4.5C154.991 4.5 156.3 4.82258 157.431 5.46774C158.529 6.08065 159.386 6.95161 160 8.08064C160.614 9.24193 160.921 10.5645 160.921 12.0484C160.921 13.5323 160.614 14.8387 160 15.9677C159.386 17.0968 158.529 17.9677 157.431 18.5806C156.3 19.2258 154.991 19.5484 153.505 19.5484C152.051 19.5484 150.758 19.2258 149.627 18.5806ZM156.025 18.1935C156.736 17.5806 157.285 16.7419 157.673 15.6774C158.029 14.6129 158.206 13.4032 158.206 12.0484C158.206 10.6935 158.029 9.48387 157.673 8.41935C157.285 7.35483 156.736 6.51613 156.025 5.90322C155.314 5.29032 154.474 4.98387 153.505 4.98387C152.535 4.98387 151.695 5.29032 150.984 5.90322C150.273 6.51613 149.724 7.35483 149.336 8.41935C148.949 9.48387 148.755 10.6935 148.755 12.0484C148.755 13.4032 148.949 14.5968 149.336 15.629C149.724 16.6935 150.273 17.5323 150.984 18.1452C151.695 18.7581 152.535 19.0645 153.505 19.0645C154.474 19.0645 155.314 18.7742 156.025 18.1935ZM162.181 18.5323H163.199C163.425 18.5323 163.651 18.4839 163.877 18.3871C164.136 18.2581 164.362 18.0645 164.556 17.8064C164.75 17.5484 164.847 17.1935 164.847 16.7419V6.48387C164.588 6.12903 164.314 5.88709 164.023 5.75806C163.732 5.66129 163.312 5.61291 162.763 5.61291H162.423V5.12903H167.367L175.995 15.5323V7.40323C175.995 6.79032 175.866 6.33871 175.607 6.04839C175.349 5.75806 175.042 5.61291 174.686 5.61291H173.571V5.12903H179V5.61291H178.031C177.611 5.61291 177.255 5.75806 176.964 6.04839C176.641 6.37097 176.48 6.82258 176.48 7.40323V19.2097H175.946L165.331 6.91936V16.7419C165.331 17.3548 165.477 17.8064 165.768 18.0968C166.091 18.3871 166.446 18.5323 166.834 18.5323H167.9V19.0161H162.181V18.5323ZM7.90062 11.5645C8.51458 11.5645 8.98312 11.4516 9.30626 11.2258C9.59708 11 9.79096 10.7097 9.8879 10.3548C9.98484 9.96774 10.0333 9.5 10.0333 8.95161V8.12903H10.4695V15.6774H10.0333V14.9032C10.0333 14.2903 9.98484 13.7742 9.8879 13.3548C9.79096 12.9677 9.59708 12.6613 9.30626 12.4355C9.01544 12.1774 8.54689 12.0484 7.90062 12.0484H5.04089V18.0484C5.04089 18.371 5.1863 18.5323 5.47712 18.5323H11.1481C11.7621 18.5323 12.2629 18.4032 12.6507 18.1452C13.0385 17.8871 13.3293 17.4839 13.5232 16.9355C13.717 16.3548 13.814 15.5968 13.814 14.6613V13.3548H14.2017V18.9677H0V18.5323H2.08421C2.34272 18.5323 2.47197 18.371 2.47197 18.0484V6.04839C2.47197 5.72581 2.34272 5.56452 2.08421 5.56452H0V5.12903H13.8624V10.3548H13.4747V9.19355C13.4747 8.22581 13.3777 7.48387 13.1839 6.96774C13.0223 6.45161 12.7315 6.09677 12.3114 5.90322C11.8913 5.67742 11.342 5.56452 10.6634 5.56452H5.47712C5.1863 5.56452 5.04089 5.72581 5.04089 6.04839V11.5645H7.90062ZM15.462 18.9677V18.5323C15.979 18.5323 16.399 18.4355 16.7222 18.2419C17.0776 18.0161 17.3684 17.7419 17.5946 17.4194C17.8208 17.0968 18.047 16.7097 18.2732 16.2581L22.3447 6.62903L21.6177 5.12903H24.3805L29.906 17.7097C30.003 17.9677 30.1322 18.1613 30.2938 18.2903C30.4877 18.4516 30.73 18.5323 31.0209 18.5323H32.4265V18.9677H25.1075V18.5323H27.0463C27.1432 18.5323 27.224 18.5 27.2887 18.4355C27.321 18.3387 27.321 18.2258 27.2887 18.0968L22.5871 7.25806L18.2247 17.5161C18.1278 17.7742 18.1601 17.9677 18.3217 18.0968C18.4833 18.2581 18.8064 18.371 19.2911 18.4355C19.7435 18.5 20.3574 18.5323 21.133 18.5323V18.9677H15.462ZM45.7073 14.9516C45.7073 15.8226 45.4649 16.5968 44.9802 17.2742C44.4955 17.9194 43.8493 18.4194 43.0414 18.7742C42.2336 19.0968 41.3611 19.2581 40.424 19.2581C39.6808 19.2581 38.8892 19.129 38.049 18.871C37.2412 18.6129 36.4818 18.1935 35.7709 17.6129C35.5124 17.3871 35.2862 17.1452 35.0923 16.8871C34.9631 17.1129 34.85 17.3226 34.753 17.5161C34.5915 18 34.4461 18.5323 34.3168 19.1129H33.9291V14.1774H34.3653C34.6238 15.1452 35.0762 15.9839 35.7224 16.6935C36.3687 17.4032 37.1119 17.9355 37.9521 18.2903C38.7922 18.6452 39.6485 18.8226 40.521 18.8226C41.4904 18.8226 42.3144 18.5806 42.993 18.0968C43.6715 17.6129 44.0108 16.9194 44.0108 16.0161C44.0108 15.5 43.817 15.0645 43.4292 14.7097C43.0091 14.3226 42.5083 14 41.9266 13.7419C41.345 13.4839 40.5533 13.2097 39.5516 12.9194C38.356 12.5323 37.3866 12.1613 36.6434 11.8064C35.9325 11.4839 35.3024 11.0484 34.753 10.5C34.236 9.95161 33.9775 9.25806 33.9775 8.41935C33.9775 7.64516 34.2199 6.98387 34.7046 6.43548C35.2216 5.85484 35.884 5.41936 36.6918 5.12903C37.4997 4.83871 38.3721 4.69355 39.3092 4.69355C40.1171 4.69355 40.8926 4.80645 41.6358 5.03225C42.379 5.25806 43.1707 5.64516 44.0108 6.19355C44.2047 6.12903 44.3824 5.93549 44.544 5.61291C44.7056 5.32258 44.8025 5.04838 44.8348 4.79032H45.2226V8.41935H44.8348C44.1886 7.32258 43.3646 6.5 42.3629 5.95161C41.3934 5.43548 40.3917 5.17742 39.3577 5.17742C38.3237 5.17742 37.4512 5.35484 36.7403 5.70968C36.0617 6.09677 35.7224 6.62903 35.7224 7.30645C35.7224 7.79032 35.9002 8.20967 36.2556 8.56451C36.6434 8.91935 37.1281 9.22581 37.7097 9.48387C38.2591 9.70968 39.0184 9.98387 39.9878 10.3065C41.2157 10.7258 42.2013 11.1129 42.9445 11.4677C43.72 11.7903 44.3663 12.2419 44.8833 12.8226C45.4326 13.4032 45.7073 14.1129 45.7073 14.9516ZM46.7252 5.12903H54.5288V5.56452H52.1538C52.0246 5.56452 51.9438 5.6129 51.9115 5.70968C51.8468 5.77419 51.863 5.85484 51.9599 5.95161L56.2738 12.0484L60.006 7.45161C60.3937 7 60.5876 6.6129 60.5876 6.29032C60.5876 6.06452 60.4745 5.88709 60.2483 5.75806C60.0544 5.62903 59.7474 5.56452 59.3274 5.56452H58.0187V5.12903H63.7866V5.56452C63.3342 5.56452 62.9303 5.64516 62.5749 5.80645C62.2194 5.93548 61.9124 6.11291 61.6539 6.33871C61.3954 6.56452 61.1208 6.85483 60.8299 7.20967L56.6131 12.4839V18.0484C56.6131 18.371 56.7423 18.5323 57.0008 18.5323H59.182V18.9677H51.4268V18.5323H53.6079C53.8987 18.5323 54.0441 18.371 54.0441 18.0484V12.9194L49.2941 6.38709C49.1325 6.12903 48.9709 5.93548 48.8094 5.80645C48.6478 5.64516 48.4378 5.56452 48.1793 5.56452H46.7252V5.12903ZM82.3991 17.7097C84.8711 17.7097 86.8584 19.6935 86.8584 22.1613V24C85.9374 23.5161 85.1135 22.8871 84.4349 22.1129C83.8532 21.4839 83.417 20.7581 83.0777 20.0323C82.7384 19.3064 82.4961 18.5323 82.3991 17.7097ZM80.3149 20.0323C79.9756 20.7581 79.5394 21.4839 78.9578 22.1129C78.2792 22.8871 77.4552 23.5161 76.5343 24V22.1613C76.5343 19.6935 78.5215 17.7097 80.9935 17.7097C80.8966 18.5323 80.6542 19.3064 80.3149 20.0323ZM87.44 11.3226C87.44 8.85483 89.4273 6.87097 91.8993 6.87097H93.7411C93.2564 7.79032 92.6263 8.6129 91.8023 9.29032C91.1722 9.87097 90.4936 10.3064 89.7666 10.6452C88.9911 10.9839 88.2155 11.2258 87.44 11.3226ZM89.7666 13.4032C90.4936 13.7419 91.1722 14.1774 91.8023 14.7581C92.6263 15.4355 93.2564 16.2581 93.7411 17.1774H91.8993C89.4273 17.1774 87.44 15.1935 87.44 12.7258C88.2155 12.8226 88.9911 13.0645 89.7666 13.4032ZM81.042 6.29032C78.57 6.29032 76.5827 4.30645 76.5827 1.83871V0C77.4552 0.483871 78.3277 1.1129 79.0062 1.93548C79.5394 2.56452 79.9756 3.24193 80.3149 3.96774C80.6542 4.74193 80.8966 5.51613 81.042 6.29032ZM83.1262 3.96774C83.4655 3.24193 83.9017 2.56452 84.4349 1.93548C85.1619 1.1129 85.9859 0.483871 86.9069 0V1.83871C86.9069 4.30645 84.9196 6.29032 82.4476 6.29032C82.5445 5.51613 82.7869 4.74193 83.1262 3.96774ZM76.0011 12.6774C76.0011 15.1452 74.0138 17.129 71.5418 17.129H69.7C70.1847 16.2581 70.8148 15.3871 71.5903 14.7097C72.2204 14.1774 72.9475 13.7419 73.6745 13.4032C74.4016 13.0645 75.1771 12.8226 76.0011 12.6774ZM73.6745 10.5968C72.9475 10.2581 72.2204 9.82258 71.5903 9.29032C70.8148 8.56451 70.1847 7.74194 69.7 6.82258H71.5418C74.0138 6.82258 76.0011 8.80645 76.0011 11.2742C75.1771 11.1774 74.4016 10.9355 73.6745 10.5968ZM80.945 12.7742C80.6542 15.5806 78.4246 17.8064 75.6133 18.0968C75.9041 15.2903 78.1338 13.0645 80.945 12.7742ZM82.4476 12.7742C85.2589 13.1129 87.4885 15.2903 87.8278 18.0968V18.1452L87.7793 18.0968C84.9681 17.8064 82.7869 15.5806 82.4476 12.7742ZM82.4961 11.2742C82.4961 11.2742 82.4799 11.2742 82.4476 11.2742H82.4961C82.7869 8.46774 85.0165 6.24194 87.8278 5.95161V5.90322C87.8278 5.93548 87.8278 5.95161 87.8278 5.95161C87.4885 8.75806 85.3073 10.9839 82.4961 11.2742ZM80.9935 11.2742C80.9612 11.2742 80.945 11.2742 80.945 11.2742C78.1338 10.9355 75.9526 8.70967 75.6133 5.90322C78.4246 6.24193 80.6542 8.41935 80.945 11.2258L80.9935 11.2742Z" fill="#CE4836"></path>
         </svg>
@@ -57,9 +57,9 @@
   <!-- ─────────────── HERO SOLUÇÃO ─────────────── -->
   <section class="sol-hero" style="margin: 50px auto">
     <div class="sol-hero-left">
-      <span class="pill pill-accent pill-glow" style="margin: 0px 0px 20px">Salão de beleza</span>
-      <h1 style="margin: 0px 0px 50px; width: 500px">Transforme a rotina do seu salão com uma <em>recepcionista virtual 24h</em></h1>
-      <p class="sol-hero-sub" style="margin: 0px 0px 50px; width: 500px; font-weight: 400">Ela responde seus clientes, agenda horários e organiza sua rotina automaticamente. <strong style="font-weight:700;">Mais clientes atendidos, menos confusão e zero tempo perdido no WhatsApp.</strong></p>
+      <span class="pill pill-accent pill-glow" style="margin: 0px 0px 20px">Estúdio de beleza</span>
+      <h1 style="margin: 0px 0px 50px; width: 500px">Transforme a rotina do seu <em>estúdio de beleza com a Easy</em></h1>
+      <p class="sol-hero-sub" style="margin: 0px 0px 50px; width: 500px; font-weight: 400">Comece organizando sua agenda com a nossa <strong style="font-weight:700;">recepcionista virtual humanizada</strong> e descubra como sua rotina fica mais leve, clara e previsível, mesmo atendendo o dia inteiro.</p>
       <div class="cta-row">
         <button class="btn btn-primary" style="width:177px;">Comece grátis</button>
         <button class="btn btn-tan-soft" style="width:180px;">Agendar demonstração</button>
@@ -85,19 +85,19 @@
 
   <!-- ─────────────── 5 PASSOS ─────────────── -->
   <section class="steps-section" data-screen-label="5 passos Easy" style="margin: 0 auto 80px; padding: 80px 80px 30px">
-    <h2>Os <em>5 passos Easy</em> para salões de beleza</h2>
-    <p class="lead">A Easy organiza sua agenda e devolve previsibilidade ao seu dia a dia e permite que você economize mais de R$ 30 mil por ano em equipe.</p>
+    <h2>Os <em>5 passos Easy</em> para estúdios de beleza</h2>
+    <p class="lead">A Easy organiza sua agenda e devolve previsibilidade ao seu dia a dia e permite que você <strong style="font-weight:700;">economize mais de R$ 30 mil por ano em equipe.</strong></p>
 
     <div class="step-row">
       <span class="tl-seg" aria-hidden="true"></span>
       <span class="num">01</span>
       <div class="body">
         <h3 style="margin: 13px 0px 20px">Tudo começa pela agenda</h3>
-        <p>A Easy transforma horários confusos em uma rotina simples e previsível, sem sobreposição, sem esquecimentos e sem perda de clientes.
+        <p>A sua recepcionista virtual centraliza e organiza os horários de todos os profissionais do seu estúdio: sem sobreposição, sem falhas e sem fazer ninguém parar para agendar clientes pelo WhatsApp.
 
-Tudo isso com uma recepcionista virtual que responde seus clientes no WhatsApp. Nem você nem a equipe precisam parar o atendimento para agendar.
+A partir daqui, tudo muda: o estúdio passa a ter uma rotina unificada, padronizada e previsível.
 
-A partir daqui, seu salão evolui naturalmente: uma agenda organizada, mais controle da operação e mais clareza no dia a dia, sem esforço extra.</p>
+Depois disso, a gestão evoluirá naturalmente: percentuais, caixa e atendimento ficam claros para todos.</p>
       </div>
       <div class="photo"></div>
     </div>
@@ -106,13 +106,14 @@ A partir daqui, seu salão evolui naturalmente: uma agenda organizada, mais cont
       <span class="tl-seg" aria-hidden="true"></span>
       <div class="photo"></div>
       <div class="body">
-        <h3 style="margin: 13px 0px 20px">Cada profissional com seu próprio Aplicativo</h3>
-        <p>Cada profissional tem acesso ao próprio aplicativo para acompanhar atendimentos e horários.
-Nada de depender de você. Nada de dúvidas. Nada de confusão.</p>
+        <h3 style="margin: 13px 0px 20px">Seu estúdio alinhado: cada profissional com seu próprio aplicativo</h3>
+        <p>Cada membro da equipe acompanha seus atendimentos, horários, percentuais e créditos direto no app da Easy.
+
+Nada de depender do dono. Nada de agendas isoladas. Nada de diferenças de comunicação.</p>
         <ul style="margin: 30px 0px 0px; gap: 16px">
-          <li>A equipe ganha clareza.</li>
-          <li>Você ganha tranquilidade.</li>
-          <li>E o salão passa a funcionar de forma mais leve e organizada.</li>
+          <li>Equipe alinhada.</li>
+          <li>Menos dúvidas.</li>
+          <li>Mais organização.</li>
         </ul>
       </div>
       <span class="num">02</span>
@@ -122,15 +123,14 @@ Nada de depender de você. Nada de dúvidas. Nada de confusão.</p>
       <span class="tl-seg" aria-hidden="true"></span>
       <span class="num">03</span>
       <div class="body">
-        <h3 style="margin: 13px 0px 20px">A Inteligência que organiza seu salão sozinha</h3>
-        <p>Lembretes automáticos, horários corretos, previsibilidade do dia e um salão fluindo sem esforço.
+        <h3 style="margin: 13px 0px 20px">Clientes lembram do horário</h3>
+        <p>A IA da Easy envia lembretes automáticos, confirmações e mensagens de relacionamento.
 
-Com a IA da Easy, a agenda deixa de ser a maior dor e se torna o que destrava todo o resto.</p>
+Isso reduz faltas, melhora a constância dos agendamentos e dá previsibilidade ao faturamento de cada profissional e do estúdio como um todo.</p>
         <ul style="gap: 16px; margin: 30px 0px 0px">
           <li>Menos faltas.</li>
-          <li>Zero sobreposição.</li>
-          <li>Atendimento sempre online.</li>
-          <li>Clientes satisfeitos desde o primeiro contato.</li>
+          <li>Mais recorrência.</li>
+          <li>Atendimento com mais ritmo e precisão.</li>
         </ul>
       </div>
       <div class="photo"></div>
@@ -140,13 +140,10 @@ Com a IA da Easy, a agenda deixa de ser a maior dor e se torna o que destrava to
       <span class="tl-seg" aria-hidden="true"></span>
       <div class="photo"></div>
       <div class="body">
-        <h3 style="margin: 13px 0px 20px">O salão ganha ritmo mesmo quando você não está lá</h3>
-        <p>A Easy envia confirmações, lembretes, pesquisas de satisfação e mensagens de relacionamento automaticamente.</p>
-        <ul style="margin: 30px 0px 0px; gap: 16px">
-          <li>Equipe não precisa lembrar de nada.</li>
-          <li>O cliente não esquece do horário.</li>
-          <li>E o salão segue funcionando com fluidez.</li>
-        </ul>
+        <h3 style="margin: 13px 0px 20px">A Easy cuida da operação enquanto você cuida dos atendimentos</h3>
+        <p>Ela confirma horários, envia lembretes, coleta avaliações e mantém a organização mesmo quando a equipe está em atendimento.
+
+Seu estúdio não trava. A rotina não para.</p>
       </div>
       <span class="num">04</span>
     </div>
@@ -155,11 +152,14 @@ Com a IA da Easy, a agenda deixa de ser a maior dor e se torna o que destrava to
       <span class="tl-seg" aria-hidden="true"></span>
       <span class="num">05</span>
       <div class="body">
-        <h3 style="margin: 13px 0px 20px">Percentuais claros. Equipe tranquila. Repasses sem discussão</h3>
-        <p>Easy calcula automaticamente quanto cada profissional deve receber com base na própria agenda.</p>
+        <h3 style="margin: 13px 0px 20px">Clareza no caixa. Transparência nos percentuais</h3>
+        <p>A Easy calcula automaticamente quanto cada profissional deve receber com base nos atendimentos registrados.
+
+Entradas, saídas e repasses ficam organizados, sem discussões, erros ou divergências.</p>
         <ul style="margin: 30px 0px 0px; gap: 16px">
-          <li>Tudo é transparente, acessível e livre de conflitos.</li>
-          <li>Discussões de repasse deixam de existir, vira parte natural da rotina.</li>
+          <li>Transparência.</li>
+          <li>Previsibilidade.</li>
+          <li>Segurança para você e sua equipe.</li>
         </ul>
         <!-- CTAs desktop: dentro do body, logo abaixo dos itens (mantém comportamento original) -->
         <div class="steps-cta steps-cta-desktop" style="margin: 30px 0px 0px">
@@ -179,35 +179,42 @@ Com a IA da Easy, a agenda deixa de ser a maior dor e se torna o que destrava to
 
   <!-- ─────────────── POR QUE ESCOLHER ─────────────── -->
   <section class="pq-section" style="margin: 0 auto 20px">
-    <h2>Por que escolher a Easy <em>para seu salão</em></h2>
+    <h2>Por que escolher a <em>Easy para o seu estúdio</em></h2>
     <div class="pq-grid">
       <div class="pq-card">
         <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         </span>
-        <p>Recepcionista humanizada
-24h ativa.</p>
+        <p>Agenda unificada para
+toda a equipe.</p>
       </div>
       <div class="pq-card">
         <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
         </span>
-        <p>Plataforma criada com
-especialistas do setor.</p>
+        <p>App individual para
+cada profissional.</p>
       </div>
       <div class="pq-card">
         <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M14 7h7v7"></path></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>
         </span>
-        <p>Evolui no ritmo do
-seu negócio.</p>
+        <p>IA que
+reduz faltas.</p>
       </div>
       <div class="pq-card">
         <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </span>
-        <p>Economize até
-R$ 30 mil em equipe.</p>
+        <p>Automação de comunicação
+via WhatsApp.</p>
+      </div>
+      <div class="pq-card">
+        <span class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </span>
+        <p>Clareza financeira
+completa.</p>
       </div>
     </div>
   </section>
@@ -220,7 +227,7 @@ R$ 30 mil em equipe.</p>
         <div class="pill-row"><span class="pill" style="background:var(--c-accent-soft);color:var(--c-accent);">Por trás da Easy</span></div>
         <h2>Nascida dentro de<br><span style="color:var(--c-accent);">salões reais!</span></h2>
         <p class="quote">A Easy é a parceria que transforma o caos da agenda em uma<br>operação previsível e profissional nos meus salões, barbearias e<br>estúdios de beleza.</p>
-        <div class="cta-row" style="display:flex;gap:12px;">
+        <div class="cta-row">
           <button class="btn btn-primary" style="width:177px;">Saiba mais</button>
           <button class="btn btn-tan-soft" style="width:180px;">Agendar demonstração</button>
         </div>
@@ -232,14 +239,11 @@ R$ 30 mil em equipe.</p>
   <section class="faq-section">
     <h2>Ficou com <em>dúvida</em>?</h2>
     <div class="faq-list">
-      <details class="faq-item"><summary>Preciso treinar minha equipe para usar o sistema do salão?</summary><div class="answer">Não. A Easy foi desenhada para que qualquer profissional comece a usar em minutos: a recepcionista virtual cuida da agenda e cada profissional tem o próprio app para acompanhar os horários.</div></details>
-      <details class="faq-item"><summary>A Easy substitui a agenda física do salão?</summary><div class="answer">Sim. A agenda digital concentra todos os horários, encaixes e cancelamentos em um só lugar — sem risco de sobreposição e com histórico completo de cada cliente.</div></details>
-      <details class="faq-item"><summary>Posso usar a Easy para controlar o caixa do meu salão de beleza?</summary><div class="answer">Sim. Você controla recebimentos, repasses por profissional e fechamento diário direto pela plataforma.</div></details>
-      <details class="faq-item"><summary>A Easy funciona em qualquer cidade do Brasil?</summary><div class="answer">Sim. Funciona em qualquer cidade — basta ter internet e um número de WhatsApp.</div></details>
-      <details class="faq-item"><summary>A Easy é boa para salões de beleza com muitos profissionais?</summary><div class="answer">Sim. Salões com equipes grandes ganham ainda mais com agenda compartilhada, repasses transparentes e o app individual para cada profissional.</div></details>
-      <details class="faq-item"><summary>A Easy atende salões que trabalham com agenda por WhatsApp?</summary><div class="answer">Esse é exatamente o ponto: a recepcionista virtual responde seus clientes no WhatsApp, agenda e confirma — sem você precisar parar o atendimento.</div></details>
-      <details class="faq-item"><summary>Preciso instalar algo no computador do salão?</summary><div class="answer">Não. A Easy roda no navegador e nos apps de celular. Sem instalação, sem servidor local.</div></details>
-      <details class="faq-item"><summary>A Easy ajuda a fidelizar clientes do salão?</summary><div class="answer">Sim. Lembretes automáticos, histórico de atendimentos e mensagens personalizadas mantêm o cliente próximo e reduzem faltas.</div></details>
+      <details class="faq-item"><summary>A Easy funciona para estúdios com vários profissionais?</summary><div class="answer">Sim, a plataforma foi criada tanto para equipes quanto para profissionais individuais.</div></details>
+      <details class="faq-item"><summary>O sistema ajuda a reduzir faltas no estúdio?</summary><div class="answer">Sim, o agendamento em tempo real a qualquer hora reduz no-show e facilita para o cliente.</div></details>
+      <details class="faq-item"><summary>Cada profissional tem seu próprio acesso?</summary><div class="answer">Sim, cada profissional tem app para ver horários, atendimentos e percentuais.</div></details>
+      <details class="faq-item"><summary>A Easy organiza o caixa e percentuais?</summary><div class="answer">A Easy está em constante evolução para que tudo fique claro, organizado e automático.</div></details>
+      <details class="faq-item"><summary>Funciona em qualquer cidade do Brasil?</summary><div class="answer">Sim, basta ter acesso à internet.</div></details>
     </div>
   </section>
 
@@ -251,7 +255,7 @@ R$ 30 mil em equipe.</p>
           <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 30 dias</span>
           <h2>Pronto para Profissionalizar<br>o seu negócio da beleza com<br>a Easy Salon?</h2>
           <p>A Easy Salon ajuda donos de salão, barbearia e estúdios de beleza a organizarem sua agenda e evoluírem para uma gestão simples e inteligente.</p>
-          <div class="cta-row" style="display:flex;gap:12px;">
+          <div class="btn-cta-row" style="justify-content:flex-start;">
             <button class="btn btn-primary" style="width:177px;">Comece grátis</button>
             <button class="btn btn-outline-cream" style="width:180px;">Agendar demonstração</button>
           </div>
@@ -265,19 +269,19 @@ R$ 30 mil em equipe.</p>
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
-        <a class="footer-logo" href="home.html" aria-label="Easy Salon">
+        <a class="footer-logo" href="/" aria-label="Easy Salon">
           <svg width="179" height="24" viewBox="0 0 179 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Easy Salon">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M112.79 14.9516C112.79 15.8226 112.548 16.5968 112.063 17.2742C111.578 17.9194 110.932 18.4194 110.124 18.7742C109.316 19.0968 108.444 19.2581 107.507 19.2581C106.763 19.2581 105.988 19.129 105.18 18.871C104.34 18.6129 103.581 18.1935 102.902 17.6129C102.643 17.3871 102.401 17.1452 102.175 16.8871C102.078 17.1129 101.981 17.3226 101.884 17.5161C101.69 18 101.529 18.5323 101.399 19.1129H101.012V14.1774H101.448C101.706 15.1452 102.159 15.9839 102.805 16.6935C103.451 17.4032 104.195 17.9355 105.035 18.2903C105.875 18.6452 106.731 18.8226 107.604 18.8226C108.573 18.8226 109.397 18.5806 110.076 18.0968C110.754 17.6129 111.093 16.9194 111.093 16.0161C111.093 15.5 110.9 15.0645 110.512 14.7097C110.124 14.3226 109.639 14 109.058 13.7419C108.444 13.4839 107.652 13.2097 106.683 12.9194C105.455 12.5323 104.485 12.1613 103.774 11.8064C103.031 11.4839 102.401 11.0484 101.884 10.5C101.367 9.95161 101.109 9.25806 101.109 8.41935C101.109 7.64516 101.351 6.98387 101.836 6.43548C102.32 5.85484 102.967 5.41936 103.774 5.12903C104.615 4.83871 105.503 4.69355 106.44 4.69355C107.248 4.69355 108.024 4.80645 108.767 5.03225C109.51 5.25806 110.286 5.64516 111.093 6.19355C111.287 6.12903 111.465 5.93549 111.627 5.61291C111.788 5.32258 111.901 5.04838 111.966 4.79032H112.354V8.41935H111.966C111.32 7.32258 110.496 6.5 109.494 5.95161C108.492 5.43548 107.474 5.17742 106.44 5.17742C105.439 5.17742 104.582 5.35484 103.871 5.70968C103.16 6.09677 102.805 6.62903 102.805 7.30645C102.805 7.79032 102.999 8.20967 103.387 8.56451C103.774 8.91935 104.243 9.22581 104.792 9.48387C105.374 9.70968 106.133 9.98387 107.07 10.3065C108.298 10.7258 109.3 11.1129 110.076 11.4677C110.819 11.7903 111.449 12.2419 111.966 12.8226C112.515 13.4032 112.79 14.1129 112.79 14.9516ZM113.275 18.9677V18.5323C113.759 18.5323 114.179 18.4355 114.535 18.2419C114.89 18.0161 115.181 17.7419 115.407 17.4194C115.633 17.129 115.86 16.7419 116.086 16.2581L120.109 6.62903L119.382 5.12903H122.145L127.67 17.7097C127.767 17.9677 127.913 18.1613 128.106 18.2903C128.3 18.4516 128.543 18.5323 128.833 18.5323H130.239V18.9677H122.872V18.5323H124.81C124.94 18.5323 125.02 18.5 125.053 18.4355C125.117 18.371 125.134 18.2581 125.101 18.0968L120.4 7.25806L116.037 17.5161C115.908 17.7742 115.94 17.9677 116.134 18.0968C116.296 18.2581 116.603 18.371 117.055 18.4355C117.54 18.5 118.154 18.5323 118.897 18.5323V18.9677H113.275ZM130.821 18.5323H132.856C133.147 18.5323 133.293 18.371 133.293 18.0484V6.04839C133.293 5.72581 133.147 5.56452 132.856 5.56452H130.821V5.12903H138.334V5.56452H136.249C135.991 5.56452 135.862 5.72581 135.862 6.04839V18.0484C135.862 18.371 135.991 18.5323 136.249 18.5323H141.096C141.775 18.5323 142.308 18.4032 142.696 18.1452C143.084 17.8871 143.358 17.4677 143.52 16.8871C143.714 16.3064 143.811 15.5161 143.811 14.5161V11.6613H144.247V18.9677H130.821V18.5323ZM149.627 18.5806C148.496 17.9677 147.624 17.0968 147.01 15.9677C146.363 14.8387 146.04 13.5323 146.04 12.0484C146.04 10.5645 146.363 9.24193 147.01 8.08064C147.624 6.95161 148.496 6.08065 149.627 5.46774C150.758 4.82258 152.051 4.5 153.505 4.5C154.991 4.5 156.3 4.82258 157.431 5.46774C158.529 6.08065 159.386 6.95161 160 8.08064C160.614 9.24193 160.921 10.5645 160.921 12.0484C160.921 13.5323 160.614 14.8387 160 15.9677C159.386 17.0968 158.529 17.9677 157.431 18.5806C156.3 19.2258 154.991 19.5484 153.505 19.5484C152.051 19.5484 150.758 19.2258 149.627 18.5806ZM156.025 18.1935C156.736 17.5806 157.285 16.7419 157.673 15.6774C158.029 14.6129 158.206 13.4032 158.206 12.0484C158.206 10.6935 158.029 9.48387 157.673 8.41935C157.285 7.35483 156.736 6.51613 156.025 5.90322C155.314 5.29032 154.474 4.98387 153.505 4.98387C152.535 4.98387 151.695 5.29032 150.984 5.90322C150.273 6.51613 149.724 7.35483 149.336 8.41935C148.949 9.48387 148.755 10.6935 148.755 12.0484C148.755 13.4032 148.949 14.5968 149.336 15.629C149.724 16.6935 150.273 17.5323 150.984 18.1452C151.695 18.7581 152.535 19.0645 153.505 19.0645C154.474 19.0645 155.314 18.7742 156.025 18.1935ZM162.181 18.5323H163.199C163.425 18.5323 163.651 18.4839 163.877 18.3871C164.136 18.2581 164.362 18.0645 164.556 17.8064C164.75 17.5484 164.847 17.1935 164.847 16.7419V6.48387C164.588 6.12903 164.314 5.88709 164.023 5.75806C163.732 5.66129 163.312 5.61291 162.763 5.61291H162.423V5.12903H167.367L175.995 15.5323V7.40323C175.995 6.79032 175.866 6.33871 175.607 6.04839C175.349 5.75806 175.042 5.61291 174.686 5.61291H173.571V5.12903H179V5.61291H178.031C177.611 5.61291 177.255 5.75806 176.964 6.04839C176.641 6.37097 176.48 6.82258 176.48 7.40323V19.2097H175.946L165.331 6.91936V16.7419C165.331 17.3548 165.477 17.8064 165.768 18.0968C166.091 18.3871 166.446 18.5323 166.834 18.5323H167.9V19.0161H162.181V18.5323ZM7.90062 11.5645C8.51458 11.5645 8.98312 11.4516 9.30626 11.2258C9.59708 11 9.79096 10.7097 9.8879 10.3548C9.98484 9.96774 10.0333 9.5 10.0333 8.95161V8.12903H10.4695V15.6774H10.0333V14.9032C10.0333 14.2903 9.98484 13.7742 9.8879 13.3548C9.79096 12.9677 9.59708 12.6613 9.30626 12.4355C9.01544 12.1774 8.54689 12.0484 7.90062 12.0484H5.04089V18.0484C5.04089 18.371 5.1863 18.5323 5.47712 18.5323H11.1481C11.7621 18.5323 12.2629 18.4032 12.6507 18.1452C13.0385 17.8871 13.3293 17.4839 13.5232 16.9355C13.717 16.3548 13.814 15.5968 13.814 14.6613V13.3548H14.2017V18.9677H0V18.5323H2.08421C2.34272 18.5323 2.47197 18.371 2.47197 18.0484V6.04839C2.47197 5.72581 2.34272 5.56452 2.08421 5.56452H0V5.12903H13.8624V10.3548H13.4747V9.19355C13.4747 8.22581 13.3777 7.48387 13.1839 6.96774C13.0223 6.45161 12.7315 6.09677 12.3114 5.90322C11.8913 5.67742 11.342 5.56452 10.6634 5.56452H5.47712C5.1863 5.56452 5.04089 5.72581 5.04089 6.04839V11.5645H7.90062ZM15.462 18.9677V18.5323C15.979 18.5323 16.399 18.4355 16.7222 18.2419C17.0776 18.0161 17.3684 17.7419 17.5946 17.4194C17.8208 17.0968 18.047 16.7097 18.2732 16.2581L22.3447 6.62903L21.6177 5.12903H24.3805L29.906 17.7097C30.003 17.9677 30.1322 18.1613 30.2938 18.2903C30.4877 18.4516 30.73 18.5323 31.0209 18.5323H32.4265V18.9677H25.1075V18.5323H27.0463C27.1432 18.5323 27.224 18.5 27.2887 18.4355C27.321 18.3387 27.321 18.2258 27.2887 18.0968L22.5871 7.25806L18.2247 17.5161C18.1278 17.7742 18.1601 17.9677 18.3217 18.0968C18.4833 18.2581 18.8064 18.371 19.2911 18.4355C19.7435 18.5 20.3574 18.5323 21.133 18.5323V18.9677H15.462ZM45.7073 14.9516C45.7073 15.8226 45.4649 16.5968 44.9802 17.2742C44.4955 17.9194 43.8493 18.4194 43.0414 18.7742C42.2336 19.0968 41.3611 19.2581 40.424 19.2581C39.6808 19.2581 38.8892 19.129 38.049 18.871C37.2412 18.6129 36.4818 18.1935 35.7709 17.6129C35.5124 17.3871 35.2862 17.1452 35.0923 16.8871C34.9631 17.1129 34.85 17.3226 34.753 17.5161C34.5915 18 34.4461 18.5323 34.3168 19.1129H33.9291V14.1774H34.3653C34.6238 15.1452 35.0762 15.9839 35.7224 16.6935C36.3687 17.4032 37.1119 17.9355 37.9521 18.2903C38.7922 18.6452 39.6485 18.8226 40.521 18.8226C41.4904 18.8226 42.3144 18.5806 42.993 18.0968C43.6715 17.6129 44.0108 16.9194 44.0108 16.0161C44.0108 15.5 43.817 15.0645 43.4292 14.7097C43.0091 14.3226 42.5083 14 41.9266 13.7419C41.345 13.4839 40.5533 13.2097 39.5516 12.9194C38.356 12.5323 37.3866 12.1613 36.6434 11.8064C35.9325 11.4839 35.3024 11.0484 34.753 10.5C34.236 9.95161 33.9775 9.25806 33.9775 8.41935C33.9775 7.64516 34.2199 6.98387 34.7046 6.43548C35.2216 5.85484 35.884 5.41936 36.6918 5.12903C37.4997 4.83871 38.3721 4.69355 39.3092 4.69355C40.1171 4.69355 40.8926 4.80645 41.6358 5.03225C42.379 5.25806 43.1707 5.64516 44.0108 6.19355C44.2047 6.12903 44.3824 5.93549 44.544 5.61291C44.7056 5.32258 44.8025 5.04838 44.8348 4.79032H45.2226V8.41935H44.8348C44.1886 7.32258 43.3646 6.5 42.3629 5.95161C41.3934 5.43548 40.3917 5.17742 39.3577 5.17742C38.3237 5.17742 37.4512 5.35484 36.7403 5.70968C36.0617 6.09677 35.7224 6.62903 35.7224 7.30645C35.7224 7.79032 35.9002 8.20967 36.2556 8.56451C36.6434 8.91935 37.1281 9.22581 37.7097 9.48387C38.2591 9.70968 39.0184 9.98387 39.9878 10.3065C41.2157 10.7258 42.2013 11.1129 42.9445 11.4677C43.72 11.7903 44.3663 12.2419 44.8833 12.8226C45.4326 13.4032 45.7073 14.1129 45.7073 14.9516ZM46.7252 5.12903H54.5288V5.56452H52.1538C52.0246 5.56452 51.9438 5.6129 51.9115 5.70968C51.8468 5.77419 51.863 5.85484 51.9599 5.95161L56.2738 12.0484L60.006 7.45161C60.3937 7 60.5876 6.6129 60.5876 6.29032C60.5876 6.06452 60.4745 5.88709 60.2483 5.75806C60.0544 5.62903 59.7474 5.56452 59.3274 5.56452H58.0187V5.12903H63.7866V5.56452C63.3342 5.56452 62.9303 5.64516 62.5749 5.80645C62.2194 5.93548 61.9124 6.11291 61.6539 6.33871C61.3954 6.56452 61.1208 6.85483 60.8299 7.20967L56.6131 12.4839V18.0484C56.6131 18.371 56.7423 18.5323 57.0008 18.5323H59.182V18.9677H51.4268V18.5323H53.6079C53.8987 18.5323 54.0441 18.371 54.0441 18.0484V12.9194L49.2941 6.38709C49.1325 6.12903 48.9709 5.93548 48.8094 5.80645C48.6478 5.64516 48.4378 5.56452 48.1793 5.56452H46.7252V5.12903ZM82.3991 17.7097C84.8711 17.7097 86.8584 19.6935 86.8584 22.1613V24C85.9374 23.5161 85.1135 22.8871 84.4349 22.1129C83.8532 21.4839 83.417 20.7581 83.0777 20.0323C82.7384 19.3064 82.4961 18.5323 82.3991 17.7097ZM80.3149 20.0323C79.9756 20.7581 79.5394 21.4839 78.9578 22.1129C78.2792 22.8871 77.4552 23.5161 76.5343 24V22.1613C76.5343 19.6935 78.5215 17.7097 80.9935 17.7097C80.8966 18.5323 80.6542 19.3064 80.3149 20.0323ZM87.44 11.3226C87.44 8.85483 89.4273 6.87097 91.8993 6.87097H93.7411C93.2564 7.79032 92.6263 8.6129 91.8023 9.29032C91.1722 9.87097 90.4936 10.3064 89.7666 10.6452C88.9911 10.9839 88.2155 11.2258 87.44 11.3226ZM89.7666 13.4032C90.4936 13.7419 91.1722 14.1774 91.8023 14.7581C92.6263 15.4355 93.2564 16.2581 93.7411 17.1774H91.8993C89.4273 17.1774 87.44 15.1935 87.44 12.7258C88.2155 12.8226 88.9911 13.0645 89.7666 13.4032ZM81.042 6.29032C78.57 6.29032 76.5827 4.30645 76.5827 1.83871V0C77.4552 0.483871 78.3277 1.1129 79.0062 1.93548C79.5394 2.56452 79.9756 3.24193 80.3149 3.96774C80.6542 4.74193 80.8966 5.51613 81.042 6.29032ZM83.1262 3.96774C83.4655 3.24193 83.9017 2.56452 84.4349 1.93548C85.1619 1.1129 85.9859 0.483871 86.9069 0V1.83871C86.9069 4.30645 84.9196 6.29032 82.4476 6.29032C82.5445 5.51613 82.7869 4.74193 83.1262 3.96774ZM76.0011 12.6774C76.0011 15.1452 74.0138 17.129 71.5418 17.129H69.7C70.1847 16.2581 70.8148 15.3871 71.5903 14.7097C72.2204 14.1774 72.9475 13.7419 73.6745 13.4032C74.4016 13.0645 75.1771 12.8226 76.0011 12.6774ZM73.6745 10.5968C72.9475 10.2581 72.2204 9.82258 71.5903 9.29032C70.8148 8.56451 70.1847 7.74194 69.7 6.82258H71.5418C74.0138 6.82258 76.0011 8.80645 76.0011 11.2742C75.1771 11.1774 74.4016 10.9355 73.6745 10.5968ZM80.945 12.7742C80.6542 15.5806 78.4246 17.8064 75.6133 18.0968C75.9041 15.2903 78.1338 13.0645 80.945 12.7742ZM82.4476 12.7742C85.2589 13.1129 87.4885 15.2903 87.8278 18.0968V18.1452L87.7793 18.0968C84.9681 17.8064 82.7869 15.5806 82.4476 12.7742ZM82.4961 11.2742C82.4961 11.2742 82.4799 11.2742 82.4476 11.2742H82.4961C82.7869 8.46774 85.0165 6.24194 87.8278 5.95161V5.90322C87.8278 5.93548 87.8278 5.95161 87.8278 5.95161C87.4885 8.75806 85.3073 10.9839 82.4961 11.2742ZM80.9935 11.2742C80.9612 11.2742 80.945 11.2742 80.945 11.2742C78.1338 10.9355 75.9526 8.70967 75.6133 5.90322C78.4246 6.24193 80.6542 8.41935 80.945 11.2258L80.9935 11.2742Z" fill="currentColor"></path>
           </svg>
         </a>
         <nav class="footer-nav">
-          <a href="salao-de-beleza.html">Salão</a>
-          <a href="home.html#barbearia">Barbearia</a>
-          <a href="home.html#estudio">Estúdio</a>
-          <a href="home.html#planos">Planos</a>
-          <a href="home.html#quem-somos">Quem somos</a>
-          <a href="home.html#contato">Contato</a>
-          <a href="home.html#termos">Termos de uso</a>
+          <a href="/salao-de-beleza">Salão de beleza</a>
+          <a href="/barbearia">Barbearia</a>
+          <a href="/estudio-de-beleza">Estúdio de beleza</a>
+          <a href="/#planos">Planos</a>
+          <a href="/#quem-somos">Quem somos</a>
+          <a href="/#contato">Contato</a>
+          <a href="/#termos">Termos de uso</a>
         </nav>
       </div>
       <div class="footer-copy-row" style="margin-top:30px;">
@@ -301,12 +305,12 @@ R$ 30 mil em equipe.</p>
       </button>
     </div>
     <nav class="drawer-nav">
-      <a class="drawer-link" href="salao-de-beleza.html">Salão de beleza</a>
-      <a class="drawer-link" href="home.html#barbearia">Barbearia</a>
-      <a class="drawer-link" href="home.html#estudio">Estúdio de beleza</a>
+      <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
+      <a class="drawer-link" href="/barbearia">Barbearia</a>
+      <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
       <span class="drawer-sep" aria-hidden="true"></span>
-      <a class="drawer-link" href="home.html#quem-somos">Quem somos</a>
-      <a class="drawer-link" href="home.html#planos">Planos</a>
+      <a class="drawer-link" href="/#quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/#planos">Planos</a>
     </nav>
     <div class="drawer-cta">
       <button class="btn btn-primary" style="width:100%;">Teste grátis</button>
@@ -464,65 +468,65 @@ R$ 30 mil em equipe.</p>
 
     // Conversation script — runs in a loop (apenas serviços de salão de beleza)
     var scripts = [
-      // ─── Conversa 1: Salão de Beleza (Marina) — Escova Progressiva ───
+      // ─── Conversa 1: Estúdio (Fernanda) — Extensão de Cílios ───
       [
-        { side: 'out', author: 'Marina A.',   html: 'Oi, dá pra fazer <strong>escova progressiva</strong> nessa semana?' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Claro, Marina! Tenho <strong>quinta às 14h</strong> ou <strong>sexta às 16h</strong> com a Júlia. Qual prefere?' },
-        { side: 'out', author: 'Marina A.',   html: 'Sexta 16h é perfeito 💇‍♀️' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1300 },
-        { side: 'in',  author: 'Easy IA',     html: 'Anotado! Reservei 2h pra você.' },
-        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
+        { side: 'out', author: 'Fernanda R.',  html: 'Oi! Tem horário pra <strong>extensão de cílios</strong> essa semana?' },
+        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1400 },
+        { side: 'in',  author: 'Easy IA',      html: 'Oi Fernanda! Tenho <strong>terça às 14h</strong> ou <strong>quinta às 10h</strong> com a Camila. Qual prefere?' },
+        { side: 'out', author: 'Fernanda R.',  html: 'Terça às 14h perfeito 😍' },
+        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1300 },
+        { side: 'in',  author: 'Easy IA',      html: 'Reservado! Separa 2h pra procedimento completo.' },
+        { side: 'in',  author: 'Easy IA',      type: 'card', card: {
             title: 'Agendamento confirmado',
             rows: [
-              ['Serviço',     'Escova Progressiva'],
-              ['Profissional', 'Júlia'],
-              ['Quando',      'Sex · 16:00 — 18:00'],
-              ['Total',       'R$ 320,00'],
+              ['Serviço',      'Extensão de Cílios'],
+              ['Profissional', 'Camila'],
+              ['Quando',       'Ter · 14:00 — 16:00'],
+              ['Total',        'R$ 180,00'],
             ]
         }},
-        { side: 'out', author: 'Marina A.',   html: 'Maravilha, obrigada!' },
-        { side: 'in',  author: 'Easy IA',     html: 'Até sexta! Mando lembrete na quinta 💌' },
+        { side: 'out', author: 'Fernanda R.',  html: 'Ótimo, obrigada!' },
+        { side: 'in',  author: 'Easy IA',      html: 'Até terça! Mando lembrete na véspera 💌' },
       ],
-      // ─── Conversa 2: Salão de Beleza (Camila) — Coloração + Corte ───
+      // ─── Conversa 2: Estúdio (Beatriz) — Design de Sobrancelha + Henna ───
       [
-        { side: 'out', author: 'Camila S.',   html: 'Oi! Queria fazer <strong>coloração e corte</strong> esse fim de semana ✨' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Oi Camila! Tenho <strong>sábado às 10h</strong> com a Patrícia. Reservo pra você?' },
-        { side: 'out', author: 'Camila S.',   html: 'Pode reservar 🙌' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1300 },
-        { side: 'in',  author: 'Easy IA',     html: 'Pronto! Bloqueei 3h na agenda.' },
-        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
+        { side: 'out', author: 'Beatriz M.',   html: 'Dá pra fazer <strong>design de sobrancelha com henna</strong>?' },
+        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1400 },
+        { side: 'in',  author: 'Easy IA',      html: 'Oi Beatriz! Tenho <strong>sexta às 11h</strong> com a Larissa. Posso reservar?' },
+        { side: 'out', author: 'Beatriz M.',   html: 'Pode sim! 🙌' },
+        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1200 },
+        { side: 'in',  author: 'Easy IA',      html: 'Feito! Reservei 1h pra você.' },
+        { side: 'in',  author: 'Easy IA',      type: 'card', card: {
             title: 'Agendamento confirmado',
             rows: [
-              ['Serviço',     'Coloração + Corte'],
-              ['Profissional', 'Patrícia'],
-              ['Quando',      'Sáb · 10:00 — 13:00'],
-              ['Total',       'R$ 280,00'],
+              ['Serviço',      'Design + Henna'],
+              ['Profissional', 'Larissa'],
+              ['Quando',       'Sex · 11:00 — 12:00'],
+              ['Total',        'R$ 90,00'],
             ]
         }},
-        { side: 'out', author: 'Camila S.',   html: 'Perfeito, obrigada!' },
-        { side: 'in',  author: 'Easy IA',     html: 'Até sábado! Te lembro na sexta 💌' },
+        { side: 'out', author: 'Beatriz M.',   html: 'Perfeito, obrigada!' },
+        { side: 'in',  author: 'Easy IA',      html: 'Até sexta! Te aviso na quinta 💌' },
       ],
-      // ─── Conversa 3: Salão de Beleza (Renata) — Hidratação + Manicure ───
+      // ─── Conversa 3: Estúdio (Juliana) — Limpeza de Pele + Hidratação ───
       [
-        { side: 'out', author: 'Renata L.',   html: 'Boa tarde! Tem horário pra <strong>hidratação e manicure</strong>?' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Oi Renata! Tenho <strong>quarta às 15h</strong> com a Aline e a Bruna em paralelo. Combina?' },
-        { side: 'out', author: 'Renata L.',   html: 'Combina sim 💅' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1200 },
-        { side: 'in',  author: 'Easy IA',     html: 'Fechado! Reservei 1h30 pra você.' },
-        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
+        { side: 'out', author: 'Juliana C.',   html: 'Oi! Quero fazer <strong>limpeza de pele e hidratação facial</strong> ✨' },
+        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1400 },
+        { side: 'in',  author: 'Easy IA',      html: 'Oi Juliana! Tenho <strong>sábado às 9h</strong> com a Mônica. Reservo pra você?' },
+        { side: 'out', author: 'Juliana C.',   html: 'Sim, por favor 🌿' },
+        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1300 },
+        { side: 'in',  author: 'Easy IA',      html: 'Pronto! Bloqueei 1h30 na agenda.' },
+        { side: 'in',  author: 'Easy IA',      type: 'card', card: {
             title: 'Agendamento confirmado',
             rows: [
-              ['Serviço',     'Hidratação + Manicure'],
-              ['Profissional', 'Aline & Bruna'],
-              ['Quando',      'Qua · 15:00 — 16:30'],
-              ['Total',       'R$ 145,00'],
+              ['Serviço',      'Limpeza + Hidratação'],
+              ['Profissional', 'Mônica'],
+              ['Quando',       'Sáb · 09:00 — 10:30'],
+              ['Total',        'R$ 220,00'],
             ]
         }},
-        { side: 'out', author: 'Renata L.',   html: 'Obrigada!' },
-        { side: 'in',  author: 'Easy IA',     html: 'Até quarta! Lembrete chega na véspera ⏰' },
+        { side: 'out', author: 'Juliana C.',   html: 'Maravilha!' },
+        { side: 'in',  author: 'Easy IA',      html: 'Até sábado! Lembrete chega na sexta ⏰' },
       ],
     ];
 

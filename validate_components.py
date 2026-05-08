@@ -40,7 +40,7 @@ from typing import Iterable
 # Configuração
 # ───────────────────────────────────────────────────────────────
 
-MASTER_FILE = "home.html"
+MASTER_FILE = "index.html"
 DESIGN_SYSTEM_FILE = "design-system.html"
 DESIGN_SYSTEM_CSS = "design-system.css"
 

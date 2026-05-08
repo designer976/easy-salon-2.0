@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Easy Salon — Sua recepção 24h para salões de beleza</title>
-<link rel="stylesheet" href="design-system.css">
+<link rel="icon" type="image/png" href="/assets/fav.png">
+<link rel="stylesheet" href="/design-system.css">
 <style>
   /* Página /home.html — todas as regras vivem em design-system.css
      (seção "Páginas: Home"). Bloco mantido vazio para enforce herança. */
@@ -25,12 +26,12 @@
             </svg>
           </button>
           <div class="dropdown-content" role="menu">
-            <a class="dropdown-item" role="menuitem" href="salao-de-beleza.html">Salão de beleza</a>
-            <a class="dropdown-item" role="menuitem">Barbearia</a>
-            <a class="dropdown-item" role="menuitem">Estúdio de beleza</a>
+            <a class="dropdown-item" role="menuitem" href="/salao-de-beleza">Salão de beleza</a>
+            <a class="dropdown-item" role="menuitem" href="/barbearia">Barbearia</a>
+            <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a>Que somos</a>
+        <a>Quem somos</a>
         <a>Planos</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
@@ -212,36 +213,36 @@ simplifica a gestão e impulsiona o crescimento.</p>
     </div>
 
     <div class="veja-cards" style="margin: 0px">
-      <a class="veja-card" href="salao-de-beleza.html" style="text-decoration:none;color:inherit;">
-        <div class="photo" style="background-image:url('assets/salao.png');"></div>
+      <a class="veja-card" href="/salao-de-beleza" style="text-decoration:none;color:inherit;">
+        <div class="photo" style="background-image:url('/assets/salao.png');"></div>
         <h3>Salão de Beleza</h3>
         <p>Gestão completa para salões com múltiplos profissionais e serviços.</p>
         <span class="more">Conhecer
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
         </span>
       </a>
-      <div class="veja-card">
-        <div class="photo" style="background-image:url('assets/barbearia.png');"></div>
+      <a class="veja-card" href="/barbearia" style="text-decoration:none;color:inherit;">
+        <div class="photo" style="background-image:url('/assets/barbearia.png');"></div>
         <h3>Barbearia</h3>
         <p>Agenda otimizada para barbearias modernas com fila e clientes recorrentes.</p>
-        <a class="more">Conhecer
+        <span class="more">Conhecer
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-        </a>
-      </div>
-      <div class="veja-card">
-        <div class="photo" style="background-image:url('assets/estudio.png');"></div>
+        </span>
+      </a>
+      <a class="veja-card" href="/estudio-de-beleza" style="text-decoration:none;color:inherit;">
+        <div class="photo" style="background-image:url('/assets/estudio.png');"></div>
         <h3>Estúdio de Beleza</h3>
         <p>Para estúdios menores que precisam de eficiência e identidade premium.</p>
-        <a class="more">Conhecer
+        <span class="more">Conhecer
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-        </a>
-      </div>
+        </span>
+      </a>
     </div>
   </section>
 
   <!-- ─────────────── SECTION: POR TRÁS DA EASY ─────────────── -->
   <section class="section-team">
-    <div class="team-photo" style="background-image:url('assets/equipe.png');"></div>
+    <div class="team-photo" style="background-image:url('/assets/equipe.png');"></div>
     <div class="team-text">
       <div class="pill-row"><span class="pill" style="background:var(--c-accent-soft);color:var(--c-accent);">Por trás da Easy</span></div>
       <h2>Nascida dentro de<br><span style="color:var(--c-accent);">salões reais!</span></h2>
@@ -323,7 +324,7 @@ simplifica a gestão e impulsiona o crescimento.</p>
         </div>
       </div>
 
-      <div class="footer-divider" style="margin: 0px 0px 50px"></div>
+      <div class="footer-divider"></div>
 
       <div class="footer-bottom">
         <div class="footer-logo">
@@ -332,13 +333,13 @@ simplifica a gestão e impulsiona o crescimento.</p>
           </svg>
         </div>
         <nav class="footer-nav" style="font-size: 13px; text-align: right">
-          <a>Salão</a>
-          <a>Barbearia</a>
-          <a>Estúdio</a>
-          <a>Planos</a>
-          <a>Quem somos</a>
-          <a>Contato</a>
-          <a>Termos de uso</a>
+          <a href="/salao-de-beleza">Salão de beleza</a>
+          <a href="/barbearia">Barbearia</a>
+          <a href="/estudio-de-beleza">Estúdio de beleza</a>
+          <a href="/#planos">Planos</a>
+          <a href="/#quem-somos">Quem somos</a>
+          <a href="/#contato">Contato</a>
+          <a href="/#termos">Termos de uso</a>
         </nav>
       </div>
 
@@ -382,7 +383,7 @@ simplifica a gestão e impulsiona o crescimento.</p>
       </button>
     </div>
     <nav class="drawer-nav">
-      <a class="drawer-link" href="salao-de-beleza.html">Salão de beleza</a>
+      <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
       <a class="drawer-link">Barbearia</a>
       <a class="drawer-link">Estúdio de beleza</a>
       <span class="drawer-sep" aria-hidden="true"></span>

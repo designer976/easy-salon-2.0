@@ -13,42 +13,42 @@
 /* ─── Fonts ─────────────────────────────────────────────────────────── */
 @font-face {
   font-family: 'Gyst';
-  src: url('fonts/Gyst-Light.otf') format('opentype');
+  src: url('/fonts/Gyst-Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Gyst';
-  src: url('fonts/Gyst-Regular.otf') format('opentype');
+  src: url('/fonts/Gyst-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Gyst';
-  src: url('fonts/Gyst-Italic.otf') format('opentype');
+  src: url('/fonts/Gyst-Italic.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Gyst';
-  src: url('fonts/Gyst-Medium.otf') format('opentype');
+  src: url('/fonts/Gyst-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Gyst';
-  src: url('fonts/Gyst-Bold.otf') format('opentype');
+  src: url('/fonts/Gyst-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Manrope';
-  src: url('fonts/Manrope.ttf') format('truetype-variations');
+  src: url('/fonts/Manrope.ttf') format('truetype-variations');
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;
@@ -284,8 +284,9 @@ body.has-nav { padding-top: 70px; }
   align-items: center;
   gap: 4px;
   cursor: pointer;
+  transition: opacity 280ms ease-out;
 }
-.nav-links a:hover { opacity: 0.7; }
+.nav-links a:hover { opacity: 0.55; }
 .nav-logo { display: flex; align-items: center; justify-self: center; }
 .nav-logo svg { display: block; height: 24px; width: auto; }
 .nav-cta { display: flex; gap: 12px; justify-self: end; }
@@ -451,6 +452,10 @@ body.has-nav { padding-top: 70px; }
 .btn-outline-dark { background: transparent; border: 1px solid var(--c-text); color: var(--c-text); }
 .btn-outline-cream { background: transparent; border: 1px solid var(--c-cream); color: var(--c-cream); }
 .btn-cta-row { display: flex; gap: 12px; justify-content: center; }
+/* Genérico para grupos de CTAs em qualquer contexto (sol-hero, team-text, footer).
+   Mobile @media sobrescreve para column + gap 20px sem precisar de !important
+   se não houver inline style competindo. */
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
 
 /* ─── Pills ─────────────────────────────────────────────────────────── */
@@ -614,7 +619,7 @@ body.has-nav { padding-top: 70px; }
 .footer-divider {
   height: 1px;
   background: rgba(239, 234, 221, 0.16);
-  margin: 0 0 24px;
+  margin: 0 0 50px;
 }
 .footer-bottom {
   display: grid;
@@ -649,8 +654,8 @@ body.has-nav { padding-top: 70px; }
   font-size: 13px;
   color: var(--c-cream);
 }
-.footer-nav a { color: var(--c-cream); text-decoration: none; }
-.footer-nav a:hover { opacity: 0.7; }
+.footer-nav a { color: var(--c-cream); text-decoration: none; transition: opacity 280ms ease-out; }
+.footer-nav a:hover { opacity: 0.55; }
 .footer-social { display: flex; gap: 8px; justify-self: end; align-items: center; }
 .footer-social .ico { width: 24px; height: 24px; color: var(--c-cream); }
 .footer-copy { font-size: 12px; color: var(--c-cream); opacity: 0.8; }
@@ -1054,7 +1059,7 @@ body.has-nav { padding-top: 70px; }
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .nav-logo { justify-self: start; order: 0; }
-  .nav-logo svg { height: 18px; }
+  .nav-logo svg { height: 20px; }
   .nav-burger { display: inline-flex; justify-self: end; order: 2; }
 
   .btn { font-size: 14px; height: 46px; border-radius: 12px; padding: 0 18px; }
@@ -1085,7 +1090,7 @@ body.has-nav { padding-top: 70px; }
     align-self: stretch !important;
   }
   .footer-bullet { font-size: 13.5px; text-align: left !important; }
-  .footer-divider { margin: 0 0 24px !important; }
+  .footer-divider { margin: 0 0 36px !important; }
   .footer-bottom {
     grid-template-columns: 1fr !important;
     gap: 18px !important;
@@ -1217,7 +1222,7 @@ body.has-nav { padding-top: 70px; }
   height: 580px;
   border-radius: 12px;
   overflow: hidden;
-  background: url('assets/salao-hero.png') center/cover no-repeat;
+  background: url('/assets/salao-hero.png') center/cover no-repeat;
   /* Centraliza o .chat sobreposto (em vez do .sol-hero-card legado) */
   padding: 30px;
   display: flex;
@@ -1515,7 +1520,7 @@ body.has-nav { padding-top: 70px; }
   width: 444px;
   height: 347px;
   border-radius: 8px;
-  background: url('assets/equipe.png') center/cover no-repeat;
+  background: url('/assets/equipe.png') center/cover no-repeat;
 }
 /* .team-text controla espaçamento via gap (já definido em .team-text na seção
    "Team text block" deste mesmo arquivo). Filhos não usam margin-bottom. */
@@ -1634,7 +1639,7 @@ body.has-nav { padding-top: 70px; }
   .page .nav-links { display: none; }
   .page .nav-cta { display: none; }
   .page .nav-logo { justify-self: start; order: 0; position: static; transform: none; }
-  .page .nav-logo svg { height: 18px; }
+  .page .nav-logo svg { height: 20px; }
 
   /* Buttons & pills -------------------------------------------- */
   .page .btn { font-size: 14px; height: 46px; border-radius: 12px; padding: 0 18px; }
@@ -1782,6 +1787,28 @@ body.has-nav { padding-top: 70px; }
 
 
 /* ═══════════════════════════════════════════════════════════════════
+   Páginas: Barbearia
+   ─────────────────────────────────────────────────────────────────
+   Componentes específicos da página /barbearia.html.
+   ═════════════════════════════════════════════════════════════════════ */
+
+[data-screen-label="Solução · Barbearia"] .sol-hero-right {
+  background-image: url('/assets/barbearia-hero.png');
+}
+
+[data-screen-label="Solução · Barbearia"] .pq-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+[data-screen-label="Solução · Estúdio de Beleza"] .sol-hero-right {
+  background-image: url('/assets/estudio-hero.png');
+}
+
+[data-screen-label="Solução · Estúdio de Beleza"] .pq-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    Páginas: Home
    ─────────────────────────────────────────────────────────────────
    Componentes específicos da página /home.html. Migrados do <style>
@@ -1795,42 +1822,42 @@ body.has-nav { padding-top: 70px; }
   /* ─── Fonts ─── */
   @font-face {
     font-family: 'Gyst';
-    src: url('fonts/Gyst-Light.otf') format('opentype');
+    src: url('/fonts/Gyst-Light.otf') format('opentype');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Gyst';
-    src: url('fonts/Gyst-Regular.otf') format('opentype');
+    src: url('/fonts/Gyst-Regular.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Gyst';
-    src: url('fonts/Gyst-Italic.otf') format('opentype');
+    src: url('/fonts/Gyst-Italic.otf') format('opentype');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
   }
   @font-face {
     font-family: 'Gyst';
-    src: url('fonts/Gyst-Medium.otf') format('opentype');
+    src: url('/fonts/Gyst-Medium.otf') format('opentype');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Gyst';
-    src: url('fonts/Gyst-Bold.otf') format('opentype');
+    src: url('/fonts/Gyst-Bold.otf') format('opentype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Manrope';
-    src: url('fonts/Manrope.ttf') format('truetype-variations');
+    src: url('/fonts/Manrope.ttf') format('truetype-variations');
     font-weight: 200 800;
     font-style: normal;
     font-display: swap;
@@ -1987,8 +2014,9 @@ body.has-nav { padding-top: 70px; }
     align-items: center;
     gap: 4px;
     cursor: pointer;
+    transition: opacity 280ms ease-out;
   }
-  .nav-links a:hover { opacity: 0.7; }
+  .nav-links a:hover { opacity: 0.55; }
 
   /* ─── Dropdown menu (shadcn/Radix style) ─── */
   .dropdown { position: relative; }  .dropdown-trigger {
@@ -2938,7 +2966,7 @@ body.has-nav { padding-top: 70px; }
   .footer-divider {
     height: 1px;
     background: rgba(239, 234, 221, 0.16);
-    margin: 0 0 24px;
+    margin: 0 0 50px;
   }
   .footer-bottom {
     display: grid;
@@ -2971,8 +2999,8 @@ body.has-nav { padding-top: 70px; }
     font-size: 13px;
     color: var(--c-cream);
   }
-  .footer-nav a { color: var(--c-cream); text-decoration: none; }
-  .footer-nav a:hover { opacity: 0.7; }
+  .footer-nav a { color: var(--c-cream); text-decoration: none; transition: opacity 280ms ease-out; }
+  .footer-nav a:hover { opacity: 0.55; }
   .footer-social {
     display: flex;
     gap: 8px;
@@ -3111,7 +3139,7 @@ body.has-nav { padding-top: 70px; }
     .nav-links { display: none; }
     .nav-cta { display: none; }
     .nav-logo { justify-self: start; order: 0; }
-    .nav-logo svg { height: 18px; }
+    .nav-logo svg { height: 20px; }
     .nav-burger { display: inline-flex; justify-self: end; order: 2; }
 
     /* Buttons & pills --------------------------------------------------- */
@@ -3293,7 +3321,7 @@ body.has-nav { padding-top: 70px; }
       font-size: 13.5px;
       text-align: left !important;
     }
-    .footer-divider { margin: 0 0 24px !important; }
+    .footer-divider { margin: 0 0 36px !important; }
 
     /* Bottom: stack everything; social row ABOVE the copy with copy left, social right */
     .footer-bottom {
