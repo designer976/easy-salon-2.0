@@ -1,0 +1,19 @@
+# Claude artefatos de conversas anteriores (paste-images, fontes duplicadas)
+uploads/
+
+# Screenshots antigos de checagem visual
+scrap/
+
+# Permissões locais do Claude Code (não compartilhar)
+.claude/settings.local.json
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo

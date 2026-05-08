@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy 3.0 — Design System</title>
+<link rel="stylesheet" href="design-system.css">
+
+<style>
+  /* ──────────────────────────────────────────────────────────────
+     FONTS — mirrors home.html
+     ────────────────────────────────────────────────────────────── */
+  @font-face {
+    font-family: 'Gyst';
+    src: url('fonts/Gyst-Light.otf') format('opentype');
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gyst';
+    src: url('fonts/Gyst-Regular.otf') format('opentype');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gyst';
+    src: url('fonts/Gyst-Italic.otf') format('opentype');
+    font-weight: 400; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gyst';
+    src: url('fonts/Gyst-Medium.otf') format('opentype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gyst';
+    src: url('fonts/Gyst-Bold.otf') format('opentype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Manrope';
+    src: url('fonts/Manrope.ttf') format('truetype-variations');
+    font-weight: 100 900; font-style: normal; font-display: swap;
+  }
+
+  /* ──────────────────────────────────────────────────────────────
+     TOKENS — single source of truth (exact mirror of home page)
+     ────────────────────────────────────────────────────────────── */
+  :root {
+    /* Backgrounds & surfaces */
+    --c-bg: rgb(242, 239, 230);
+    --c-card: rgba(251, 251, 251, 0.5);
+    --c-card-2: rgb(246, 245, 240);
+    --c-bubble: rgb(236, 232, 219);
+    --c-divider: rgb(236, 232, 219);
+
+    /* Text — primary brown */
+    --c-text: rgb(115, 42, 29);
+    --c-text-2: rgba(115, 42, 29, 0.5);
+    --c-text-3: rgba(115, 42, 29, 0.12);
+
+    /* Accent — signature red */
+    --c-accent: rgb(206, 72, 54);
+    --c-accent-soft:   rgba(206, 72, 54, 0.06);
+    --c-accent-soft-2: rgba(206, 72, 54, 0.10);
+    --c-accent-soft-3: rgba(206, 72, 54, 0.05);
+
+    /* Tan / beige */
+    --c-tan:      rgba(209, 191, 160, 0.50);
+    --c-tan-soft: rgba(209, 191, 160, 0.30);
+    --c-tan-veil: rgba(209, 191, 160, 0.16);
+
+    /* Cream — used on dark backgrounds */
+    --c-cream: rgb(237, 231, 217);
+    --c-cream-veil-08: rgba(237, 231, 217, 0.08);
+    --c-cream-veil-16: rgba(237, 231, 217, 0.16);
+
+    /* Status — green */
+    --c-green: rgb(125, 186, 68);
+    --c-green-soft:   rgba(125, 186, 68, 0.12);
+    --c-green-soft-2: rgba(125, 186, 68, 0.20);
+
+    /* Shadows */
+    --shadow-card:   0 12px 40px 0 rgba(115, 42, 29, 0.08);
+    --shadow-card-2: 0  4px 32px 0 rgba(115, 42, 29, 0.08);
+
+    /* Type families */
+    --ff-display: 'Gyst', 'Times New Roman', serif;
+    --ff-text:    'Manrope', system-ui, -apple-system, sans-serif;
+
+    /* Radii */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-pill: 100px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: var(--ff-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  /* ──────────────────────────────────────────────────────────────
+     LAYOUT — sidebar + main
+     ────────────────────────────────────────────────────────────── */
+  .ds-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+  }
+  .ds-sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 24px;
+    border-right: 1px solid var(--c-divider);
+    background: var(--c-card-2);
+  }
+  .ds-brand {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--c-text);
+    margin: 0 0 4px;
+  }
+  .ds-brand-sub {
+    font-size: 12px;
+    color: var(--c-text-2);
+    margin: 0 0 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .ds-nav { display: flex; flex-direction: column; gap: 2px; }
+  .ds-nav-group {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--c-text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 14px 8px 6px;
+  }
+  .ds-nav a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--c-text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 160ms ease, color 160ms ease;
+  }
+  .ds-nav a:hover {
+    background: var(--c-accent-soft);
+    color: var(--c-accent);
+  }
+
+  .ds-main { padding: 56px 64px 120px; max-width: 1100px; }
+
+  .ds-hero {
+    border-bottom: 1px solid var(--c-divider);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+  }
+  .ds-hero h1 {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1.05;
+    margin: 12px 0 16px;
+    color: var(--c-text);
+  }
+  .ds-hero p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--c-text);
+    max-width: 640px;
+    margin: 0;
+  }
+  .ds-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--c-accent);
+    background: var(--c-accent-soft);
+    box-shadow: inset 0 0 0 1px var(--c-accent-soft-2);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .ds-section { margin: 80px 0; scroll-margin-top: 24px; }
+  .ds-section > h2 {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.1;
+    margin: 0 0 8px;
+    color: var(--c-text);
+  }
+  .ds-section > .ds-section-sub {
+    font-size: 14px;
+    color: var(--c-text-2);
+    margin: 0 0 32px;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .ds-block { margin: 32px 0 48px; }
+  .ds-block h3 {
+    font-family: var(--ff-text);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-text-2);
+    margin: 0 0 16px;
+  }
+
+  /* Card frame around live previews */
+  .ds-preview {
+    background: var(--c-card-2);
+    border: 1px solid var(--c-divider);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    min-height: 120px;
+  }
+  .ds-preview.dark {
+    background: var(--c-text);
+    border-color: rgba(237, 231, 217, 0.08);
+  }
+  .ds-preview.footer {
+    background: var(--c-text);
+    color: var(--c-cream);
+    padding: 0;
+    overflow: hidden;
+  }
+  .ds-preview.column {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Code block */
+  .ds-code {
+    background: var(--c-text);
+    color: rgb(237, 231, 217);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: 16px 20px;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 0;
+    white-space: pre;
+  }
+  .ds-preview + .ds-code {
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    margin-top: -1px;
+  }
+  .ds-preview {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .ds-block.no-code .ds-preview { border-radius: var(--radius-lg); }
+  .ds-code .tag    { color: rgb(255, 162, 132); }
+  .ds-code .attr   { color: rgb(214, 195, 130); }
+  .ds-code .str    { color: rgb(170, 215, 170); }
+  .ds-code .com    { color: rgba(237, 231, 217, 0.45); font-style: italic; }
+  .ds-code .punc   { color: rgba(237, 231, 217, 0.7); }
+
+  /* ──────────────────────────────────────────────────────────────
+     TOKENS — color swatches
+     ────────────────────────────────────────────────────────────── */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .swatch {
+    background: rgb(251, 251, 251);
+    border: 1px solid var(--c-divider);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .swatch-chip {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background-image:
+      linear-gradient(45deg, rgba(0,0,0,0.06) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(0,0,0,0.06) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.06) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.06) 75%);
+    background-size: 10px 10px;
+    background-position: 0 0, 0 5px, 5px -5px, -5px 0;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .swatch-chip::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--swatch);
+  }
+  .swatch-meta { min-width: 0; flex: 1; }
+  .swatch-var {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-text);
+    word-break: break-all;
+    line-height: 1.3;
+  }
+  .swatch-val {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--c-text-2);
+    margin-top: 3px;
+    word-break: break-all;
+  }
+
+  /* ──────────────────────────────────────────────────────────────
+     TYPE SCALE
+     ────────────────────────────────────────────────────────────── */
+  .type-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--c-divider);
+  }
+  .type-row:last-child { border-bottom: 0; }
+  .type-meta {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--c-text-2);
+    line-height: 1.5;
+  }
+  .type-meta strong {
+    display: block;
+    font-family: var(--ff-text);
+    font-size: 13px;
+    color: var(--c-text);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .type-sample-display { font-family: var(--ff-display); color: var(--c-text); }
+  .type-sample-text    { font-family: var(--ff-text);    color: var(--c-text); }
+
+  /* ──────────────────────────────────────────────────────────────
+     COMPONENTS — exact mirror of home.html
+     ────────────────────────────────────────────────────────────── */
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 40px; padding: 0 16px;
+    border-radius: var(--radius-lg);
+    font-family: var(--ff-text); font-weight: 700;
+    font-size: 13px; line-height: 1;
+    border: 0; cursor: pointer; text-decoration: none; white-space: nowrap;
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.45s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary {
+    background-color: var(--c-accent);
+    color: rgb(244, 241, 234);
+    position: relative; overflow: hidden; isolation: isolate;
+  }
+  .btn-primary:hover { transform: translateY(-3px); }
+  .btn-primary::before {
+    content: ""; position: absolute; inset: -40%;
+    background: radial-gradient(closest-side, rgba(206, 72, 54, 0.55), transparent 70%);
+    filter: blur(14px); opacity: 0; z-index: -1; pointer-events: none;
+    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-primary::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.08) 35%, transparent 70%),
+      linear-gradient(180deg, rgb(214, 84, 64) 0%, rgb(186, 60, 44) 100%);
+    opacity: 0; pointer-events: none; border-radius: inherit; z-index: -1;
+    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-primary:hover {
+    box-shadow:
+      0 22px 36px -12px rgba(206, 72, 54, 0.55),
+      0 14px 22px -10px rgba(206, 72, 54, 0.40);
+  }
+  .btn-primary:hover::before, .btn-primary:hover::after { opacity: 1; }
+  .btn-tan      { background: var(--c-tan);      color: var(--c-text); }
+  .btn-tan-soft { background: var(--c-tan-soft); color: var(--c-text); }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--c-accent);
+    color: var(--c-accent);
+  }
+  .btn-outline-dark {
+    background: transparent;
+    border: 1px solid var(--c-text);
+    color: var(--c-text);
+  }
+  .btn-outline-cream {
+    background: transparent;
+    border: 1px solid var(--c-cream);
+    color: var(--c-cream);
+  }
+
+  /* Pills */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 31px; padding: 0 12px;
+    border-radius: var(--radius-pill);
+    font-family: var(--ff-text);
+    font-weight: 700; font-size: 11px; line-height: 1;
+    white-space: nowrap;
+  }
+  .pill-accent {
+    background: var(--c-accent-soft);
+    color: var(--c-accent);
+    box-shadow: inset 0 0 0 1px var(--c-accent-soft-2);
+  }
+  .pill-green {
+    background: var(--c-green-soft);
+    color: var(--c-green);
+  }
+  .pill-outline {
+    background: transparent;
+    border: 1px solid var(--c-text);
+    color: var(--c-text);
+  }
+  .pill-cream {
+    background: var(--c-cream-veil-08);
+    box-shadow: inset 0 0 0 1px var(--c-cream-veil-16);
+    color: var(--c-cream);
+  }
+
+  /* Cards */
+  .veja-card {
+    background: var(--c-card);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    text-align: left;
+    display: flex; flex-direction: column;
+    gap: 28px;
+    width: 280px;
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .veja-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-card);
+  }
+  .veja-card .photo {
+    width: 100%;
+    height: 140px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--c-tan) 0%, var(--c-tan-soft) 100%);
+    box-shadow: var(--shadow-card);
+    display: flex; align-items: center; justify-content: center;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--c-text-2);
+  }
+  .veja-card h4 {
+    font-family: var(--ff-display);
+    font-weight: 400; font-size: 24px; line-height: 1;
+    color: var(--c-text);
+    margin: 0;
+  }
+  .veja-card p {
+    font-family: var(--ff-text);
+    font-size: 14px; line-height: 24px;
+    color: var(--c-text);
+    margin: 0; flex: 1;
+  }
+  .veja-card .more {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--c-accent);
+    font-weight: 700; font-size: 13px;
+    text-decoration: none; cursor: pointer;
+    transition: gap 0.2s;
+  }
+  .veja-card .more:hover { gap: 10px; }
+
+  .demo-card {
+    background: var(--c-card-2);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 24px;
+    display: flex; flex-direction: column;
+    gap: 12px;
+    max-width: 360px;
+  }
+  .demo-card .demo-pill {
+    align-self: flex-start;
+    background: var(--c-green-soft);
+    color: var(--c-green);
+  }
+  .demo-card h4 {
+    font-family: var(--ff-display);
+    font-weight: 400; font-size: 28px; line-height: 1.05;
+    color: var(--c-text);
+    margin: 4px 0 4px;
+  }
+  .demo-card p {
+    font-family: var(--ff-text);
+    font-size: 14px; line-height: 1.6;
+    color: var(--c-text);
+    margin: 0;
+  }
+
+  /* Inputs */
+  .ds-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--c-divider);
+    background: rgb(251, 251, 251);
+    font-family: var(--ff-text);
+    font-size: 14px;
+    color: var(--c-text);
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+  .ds-input::placeholder { color: var(--c-text-2); }
+  .ds-input:focus {
+    outline: none;
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 3px var(--c-accent-soft-2);
+  }
+  .ds-textarea {
+    min-height: 100px;
+    padding: 12px 14px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .ds-field {
+    display: flex; flex-direction: column; gap: 6px;
+    width: 100%; max-width: 360px;
+  }
+  .ds-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-text);
+  }
+  .ds-checkbox {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14px; color: var(--c-text);
+    cursor: pointer;
+  }
+  .ds-checkbox input {
+    width: 18px; height: 18px;
+    accent-color: var(--c-accent);
+    cursor: pointer;
+  }
+
+  /* Nav */
+  .ds-nav-mock {
+    height: 70px;
+    background: var(--c-bg);
+    border-bottom: 1px solid var(--c-divider);
+    display: flex; align-items: center;
+    padding: 0 24px;
+    gap: 24px;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card-2);
+  }
+  .ds-nav-logo {
+    font-family: var(--ff-display);
+    font-size: 22px;
+    color: var(--c-text);
+    font-weight: 400;
+  }
+  .ds-nav-links {
+    display: flex; gap: 22px;
+    font-size: 13px; font-weight: 500;
+    margin-left: 24px;
+    color: var(--c-text);
+  }
+  .ds-nav-links a {
+    color: var(--c-text);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+  .ds-nav-links a:hover { color: var(--c-accent); }
+  .ds-nav-cta { margin-left: auto; display: flex; gap: 12px; }
+
+  /* Drawer */
+  .ds-drawer-mock {
+    width: 280px;
+    background: var(--c-card-2);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-card-2);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .ds-drawer-mock a {
+    padding: 12px 8px;
+    color: var(--c-text);
+    font-size: 15px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 160ms ease;
+  }
+  .ds-drawer-mock a:hover { background: var(--c-accent-soft); color: var(--c-accent); }
+  .ds-drawer-sep {
+    height: 1px;
+    background: var(--c-divider);
+    margin: 8px 0;
+  }
+
+  /* Dropdown */
+  .ds-dropdown-mock {
+    width: 280px;
+    background: rgb(251, 251, 251);
+    border-radius: var(--radius-lg);
+    padding: 6px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--c-divider);
+  }
+  .ds-dropdown-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px;
+    border-radius: 6px;
+    color: var(--c-text);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .ds-dropdown-item:hover {
+    background: color-mix(in oklch, var(--c-cream) 50%, transparent);
+  }
+  .ds-dropdown-ico {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--c-cream);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--c-accent);
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .ds-dropdown-text .title { font-weight: 600; font-size: 13px; line-height: 1.2; }
+  .ds-dropdown-text .desc  { font-size: 12px; line-height: 1.35; color: var(--c-text-2); margin-top: 2px; }
+
+  /* Shadow / radii samples */
+  .shadow-sample {
+    width: 180px; height: 100px;
+    background: rgb(251, 251, 251);
+    border-radius: var(--radius-lg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--c-text);
+  }
+  .shadow-sample.shadow-1 { box-shadow: var(--shadow-card); }
+  .shadow-sample.shadow-2 { box-shadow: var(--shadow-card-2); }
+  .shadow-sample .label { font-weight: 700; font-size: 12px; }
+  .shadow-sample .val { color: var(--c-text-2); }
+
+  .radii-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+  .radii-sample {
+    width: 100px; height: 100px;
+    background: var(--c-tan);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--c-text);
+  }
+
+  /* Spacing */
+  .spacing-row {
+    display: grid;
+    grid-template-columns: 80px 80px 1fr;
+    gap: 16px; align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--c-divider);
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+  }
+  .spacing-row:last-child { border-bottom: 0; }
+  .spacing-row .bar {
+    height: 12px;
+    background: var(--c-accent);
+    border-radius: 2px;
+  }
+
+  /* Section examples — hero / footer cta */
+  .ex-hero {
+    background: var(--c-bg);
+    padding: 48px 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    width: 100%;
+  }
+  .ex-hero h3 {
+    font-family: var(--ff-display);
+    font-weight: 400; font-size: 44px; line-height: 1;
+    color: var(--c-text);
+    margin: 16px 0;
+  }
+  .ex-hero p {
+    font-size: 14px; line-height: 1.7;
+    max-width: 420px; margin: 0 auto 20px;
+    color: var(--c-text);
+  }
+
+  .ex-footer-cta {
+    background: var(--c-text);
+    border-radius: var(--radius-lg);
+    padding: 48px 32px;
+    color: var(--c-cream);
+    width: 100%;
+  }
+  .ex-footer-cta h3 {
+    font-family: var(--ff-display);
+    font-weight: 400; font-size: 36px; line-height: 1.1;
+    color: var(--c-cream);
+    margin: 16px 0;
+  }
+  .ex-footer-cta p {
+    font-size: 14px; line-height: 1.7;
+    color: rgba(237, 231, 217, 0.8);
+    max-width: 420px; margin: 0 0 20px;
+  }
+
+  /* Iconography — using inline SVG strokes */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+  }
+  .icon-cell {
+    background: rgb(251, 251, 251);
+    border: 1px solid var(--c-divider);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--c-text);
+  }
+  .icon-cell svg { width: 22px; height: 22px; color: var(--c-accent); }
+  .icon-cell .name {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--c-text-2);
+  }
+
+  /* Grid demo */
+  .grid-demo {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+    width: 100%;
+  }
+  .grid-demo .col {
+    background: var(--c-accent-soft);
+    border: 1px dashed var(--c-accent-soft-2);
+    border-radius: 4px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--c-accent);
+  }
+
+  /* Validation note */
+  .validate-note {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: var(--c-accent-soft);
+    border-left: 3px solid var(--c-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-size: 13px; line-height: 1.6;
+    color: var(--c-text);
+  }
+  .validate-note strong { color: var(--c-accent); }
+  .validate-note code {
+    font-family: ui-monospace, Menlo, monospace;
+    background: rgb(251, 251, 251);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  /* ──────────────────────────────────────────────────────────────
+     EFFECTS — scroll BlurFade, cycling word, pill glow
+     ────────────────────────────────────────────────────────────── */
+
+  /* (1) BlurFade scroll-in */
+  .fx-fade {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(18px);
+    transition:
+      opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      filter  1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, filter, transform;
+  }
+  .fx-fade.is-in { opacity: 1; filter: none; transform: none; }
+  .fx-replay-btn {
+    align-self: flex-start;
+    margin-top: 16px;
+  }
+  .fx-fade-stage {
+    display: flex; flex-direction: column; gap: 14px;
+    width: 100%;
+  }
+  .fx-fade-line {
+    height: 18px;
+    border-radius: 6px;
+    background: var(--c-tan);
+  }
+  .fx-fade-line.short { width: 40%; }
+  .fx-fade-line.med   { width: 65%; }
+  .fx-fade-line.long  { width: 85%; }
+
+  /* (2) Cycling word — per-letter blur-in */
+  .cycle-word { color: var(--c-accent); display: inline-block; }
+  .cycle-word__inner { display: inline-block; white-space: nowrap; }
+  .cycle-word__char {
+    display: inline-block;
+    will-change: filter, opacity, transform;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(6px);
+    animation: cw-blur-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--cw-delay, 0s);
+  }
+  .cycle-word__inner.is-out .cycle-word__char {
+    animation: cw-blur-out 0.35s cubic-bezier(0.4, 0, 1, 1) forwards;
+    animation-delay: var(--cw-delay-out, 0s);
+  }
+  @keyframes cw-blur-in {
+    0%   { opacity: 0; filter: blur(10px); transform: translateY(6px); }
+    100% { opacity: 1; filter: blur(0);    transform: translateY(0); }
+  }
+  @keyframes cw-blur-out {
+    0%   { opacity: 1; filter: blur(0);    transform: translateY(0); }
+    100% { opacity: 0; filter: blur(10px); transform: translateY(-6px); }
+  }
+  .fx-cycle-host {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.1;
+    color: var(--c-text);
+  }
+
+  /* (3) Pill glow — rotating conic streak */
+  .pill-glow {
+    position: relative;
+    isolation: isolate;
+    --pill-glow-color: 206, 72, 54;
+  }
+  .pill-glow.pill-glow-cream { --pill-glow-color: 237, 231, 217; }
+  .pill-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--angle, 0deg),
+      transparent 0deg,
+      transparent 200deg,
+      rgba(var(--pill-glow-color), 0.0) 220deg,
+      rgba(var(--pill-glow-color), 0.95) 350deg,
+      rgba(var(--pill-glow-color), 0.0) 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    animation: pill-glow-spin 3.2s linear infinite;
+    z-index: 1;
+  }
+  @property --angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+  }
+  @keyframes pill-glow-spin { to { --angle: 360deg; } }
+
+  @media (max-width: 900px) {
+    .ds-shell { grid-template-columns: 1fr; }
+    .ds-sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--c-divider); }
+    .ds-main { padding: 32px 20px 80px; }
+    .type-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="ds-shell">
+
+  <!-- ─────────────── SIDEBAR ─────────────── -->
+  <aside class="ds-sidebar">
+    <h2 class="ds-brand">Easy 3.0</h2>
+    <p class="ds-brand-sub">Design System</p>
+
+    <nav class="ds-nav">
+      <span class="ds-nav-group">Fundação</span>
+      <a href="#colors">Cores</a>
+      <a href="#typography">Tipografia</a>
+      <a href="#shadows">Sombras</a>
+      <a href="#radii">Raios</a>
+      <a href="#spacing">Espaçamento &amp; Grid</a>
+      <a href="#icons">Iconografia</a>
+
+      <span class="ds-nav-group">Componentes</span>
+      <a href="#buttons">Botões</a>
+      <a href="#pills">Pills / Badges</a>
+      <a href="#cards">Cards</a>
+      <a href="#inputs">Inputs / Forms</a>
+      <a href="#navigation">Navegação</a>
+
+      <span class="ds-nav-group">Padrões</span>
+      <a href="#section-hero">Hero</a>
+      <a href="#section-footer">Footer CTA</a>
+      <a href="#effects">Efeitos &amp; animações</a>
+
+      <span class="ds-nav-group">Validação</span>
+      <a href="#validation">Regra &amp; script Python</a>
+    </nav>
+  </aside>
+
+  <!-- ─────────────── MAIN ─────────────── -->
+  <main class="ds-main">
+
+    <header class="ds-hero">
+      <span class="ds-eyebrow">v1.0 · página inicial como mestre</span>
+      <h1>Componentes mestre da Easy 3.0</h1>
+      <p>
+        Este guia documenta os tokens e componentes presentes na home (<code style="font-family: ui-monospace,Menlo,monospace;font-size:14px;background:var(--c-card);padding:1px 6px;border-radius:4px;">home.html</code>).
+        Toda nova tela ou ajuste deve reutilizar estas variáveis e classes — sem inventar cores, fontes ou tamanhos novos.
+        Um script Python (<code style="font-family: ui-monospace,Menlo,monospace;font-size:14px;background:var(--c-card);padding:1px 6px;border-radius:4px;">validate_components.py</code>) valida automaticamente se as páginas seguem esta regra.
+      </p>
+    </header>
+
+    <!-- ─────────────── COLORS ─────────────── -->
+    <section id="colors" class="ds-section">
+      <h2>Paleta de cores</h2>
+      <p class="ds-section-sub">Tokens definidos em <code>:root</code>. Sempre referenciar via <code>var(--c-…)</code>; nunca usar hex direto no markup.</p>
+
+      <div class="ds-block">
+        <h3>Backgrounds &amp; Surfaces</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgb(242, 239, 230);"></div><div class="swatch-meta"><div class="swatch-var">--c-bg</div><div class="swatch-val">rgb(242, 239, 230) · #F2EFE6</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(251, 251, 251, 0.5);"></div><div class="swatch-meta"><div class="swatch-var">--c-card</div><div class="swatch-val">rgba(251, 251, 251, 0.5)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgb(246, 245, 240);"></div><div class="swatch-meta"><div class="swatch-var">--c-card-2</div><div class="swatch-val">rgb(246, 245, 240) · #F6F5F0</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgb(236, 232, 219);"></div><div class="swatch-meta"><div class="swatch-var">--c-bubble</div><div class="swatch-val">rgb(236, 232, 219) · #ECE8DB</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgb(236, 232, 219);"></div><div class="swatch-meta"><div class="swatch-var">--c-divider</div><div class="swatch-val">rgb(236, 232, 219) · #ECE8DB</div></div></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Texto — marrom assinatura</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgb(115, 42, 29);"></div><div class="swatch-meta"><div class="swatch-var">--c-text</div><div class="swatch-val">rgb(115, 42, 29) · #732A1D</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(115, 42, 29, 0.5);"></div><div class="swatch-meta"><div class="swatch-var">--c-text-2</div><div class="swatch-val">rgba(115, 42, 29, 0.5)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(115, 42, 29, 0.12);"></div><div class="swatch-meta"><div class="swatch-var">--c-text-3</div><div class="swatch-val">rgba(115, 42, 29, 0.12)</div></div></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Accent — vermelho assinatura</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgb(206, 72, 54);"></div><div class="swatch-meta"><div class="swatch-var">--c-accent</div><div class="swatch-val">rgb(206, 72, 54) · #CE4836</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(206, 72, 54, 0.06);"></div><div class="swatch-meta"><div class="swatch-var">--c-accent-soft</div><div class="swatch-val">rgba(206, 72, 54, 0.06)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(206, 72, 54, 0.10);"></div><div class="swatch-meta"><div class="swatch-var">--c-accent-soft-2</div><div class="swatch-val">rgba(206, 72, 54, 0.10)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(206, 72, 54, 0.05);"></div><div class="swatch-meta"><div class="swatch-var">--c-accent-soft-3</div><div class="swatch-val">rgba(206, 72, 54, 0.05)</div></div></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Tan / Cream</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(209, 191, 160, 0.5);"></div><div class="swatch-meta"><div class="swatch-var">--c-tan</div><div class="swatch-val">rgba(209, 191, 160, 0.5)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(209, 191, 160, 0.3);"></div><div class="swatch-meta"><div class="swatch-var">--c-tan-soft</div><div class="swatch-val">rgba(209, 191, 160, 0.3)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(209, 191, 160, 0.16);"></div><div class="swatch-meta"><div class="swatch-var">--c-tan-veil</div><div class="swatch-val">rgba(209, 191, 160, 0.16)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgb(237, 231, 217);"></div><div class="swatch-meta"><div class="swatch-var">--c-cream</div><div class="swatch-val">rgb(237, 231, 217) · #EDE7D9</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(237, 231, 217, 0.08);"></div><div class="swatch-meta"><div class="swatch-var">--c-cream-veil-08</div><div class="swatch-val">rgba(237, 231, 217, 0.08)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(237, 231, 217, 0.16);"></div><div class="swatch-meta"><div class="swatch-var">--c-cream-veil-16</div><div class="swatch-val">rgba(237, 231, 217, 0.16)</div></div></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Status — verde</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgb(125, 186, 68);"></div><div class="swatch-meta"><div class="swatch-var">--c-green</div><div class="swatch-val">rgb(125, 186, 68) · #7DBA44</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(125, 186, 68, 0.12);"></div><div class="swatch-meta"><div class="swatch-var">--c-green-soft</div><div class="swatch-val">rgba(125, 186, 68, 0.12)</div></div></div>
+          <div class="swatch"><div class="swatch-chip" style="--swatch: rgba(125, 186, 68, 0.20);"></div><div class="swatch-meta"><div class="swatch-var">--c-green-soft-2</div><div class="swatch-val">rgba(125, 186, 68, 0.20)</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── TYPOGRAPHY ─────────────── -->
+    <section id="typography" class="ds-section">
+      <h2>Tipografia</h2>
+      <p class="ds-section-sub">Duas famílias: <strong>Gyst</strong> (display, serif customizada) para títulos e momentos editoriais, e <strong>Manrope</strong> (sans variável) para UI e corpo.</p>
+
+      <div class="ds-block no-code">
+        <h3>Famílias</h3>
+        <div class="ds-preview column">
+          <div class="type-row">
+            <div class="type-meta"><strong>Display</strong>--ff-display<br>'Gyst', 'Times New Roman', serif<br>weights: 300 / 400 / 500 / 700 + italic</div>
+            <div class="type-sample-display" style="font-size: 56px; line-height: 1; font-weight: 400;">Sua recepção 24h</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta"><strong>Text</strong>--ff-text<br>'Manrope', system-ui, sans-serif<br>weights: 100–900 (variável)</div>
+            <div class="type-sample-text" style="font-size: 18px; line-height: 1.7;">Teste grátis por 30 dias a atendente virtual humanizada.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-block no-code">
+        <h3>Escala</h3>
+        <div class="ds-preview column">
+          <div class="type-row">
+            <div class="type-meta"><strong>Hero / H1</strong>60px · 1.0 · 400<br>display</div>
+            <div class="type-sample-display" style="font-size: 60px; line-height: 1; font-weight: 400;">Hero title</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta"><strong>Section H2</strong>40–48px · 1.05 · 400<br>display</div>
+            <div class="type-sample-display" style="font-size: 44px; line-height: 1.05; font-weight: 400;">Section title</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta"><strong>Card H3</strong>24–28px · 1 · 400<br>display</div>
+            <div class="type-sample-display" style="font-size: 24px; line-height: 1; font-weight: 400;">Card title</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta"><strong>Lead</strong>18px · 30px · 500<br>text</div>
+            <div class="type-sample-text" style="font-size: 18px; line-height: 30px; font-weight: 500;">Lead paragraph for hero subtitles.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta"><strong>Body</strong>14px · 24px · 400<br>text</div>
+            <div class="type-sample-text" style="font-size: 14px; line-height: 24px; font-weight: 400;">Body copy used inside cards and sections.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta"><strong>Button / Pill</strong>11–13px · 1 · 700<br>text</div>
+            <div class="type-sample-text" style="font-size: 13px; line-height: 1; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">CALL TO ACTION</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── SHADOWS ─────────────── -->
+    <section id="shadows" class="ds-section">
+      <h2>Sombras</h2>
+      <p class="ds-section-sub">Apenas duas elevações. A cor da sombra usa o marrom da marca (<code>rgba(115, 42, 29, …)</code>), nunca preto puro.</p>
+
+      <div class="ds-block no-code">
+        <div class="ds-preview" style="gap: 32px;">
+          <div class="shadow-sample shadow-1">
+            <span class="label">--shadow-card</span>
+            <span class="val">0 12px 40px 0 rgba(115,42,29,.08)</span>
+          </div>
+          <div class="shadow-sample shadow-2">
+            <span class="label">--shadow-card-2</span>
+            <span class="val">0 4px 32px 0 rgba(115,42,29,.08)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── RADII ─────────────── -->
+    <section id="radii" class="ds-section">
+      <h2>Raios</h2>
+      <p class="ds-section-sub">Geometria suave. Nunca usar valores fora desta escala.</p>
+
+      <div class="ds-block no-code">
+        <div class="ds-preview">
+          <div class="radii-grid">
+            <div class="radii-sample" style="border-radius: 6px;">6px<br><span style="color:var(--c-text-2)">--radius-sm</span></div>
+            <div class="radii-sample" style="border-radius: 10px;">10px<br><span style="color:var(--c-text-2)">--radius-md</span></div>
+            <div class="radii-sample" style="border-radius: 12px;">12px<br><span style="color:var(--c-text-2)">--radius-lg</span></div>
+            <div class="radii-sample" style="border-radius: 100px;">100px<br><span style="color:var(--c-text-2)">--radius-pill</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── SPACING ─────────────── -->
+    <section id="spacing" class="ds-section">
+      <h2>Espaçamento &amp; Grid</h2>
+      <p class="ds-section-sub">Escala em múltiplos de 4 (0, 4, 8, 12, 16, 20, 24, 30, 40, 50, 64, 80, 120). Layout principal usa grid de 12 colunas.</p>
+
+      <div class="ds-block no-code">
+        <h3>Escala</h3>
+        <div class="ds-preview column" style="gap: 0;">
+          <div class="spacing-row"><span>4px</span><div class="bar" style="width: 4px;"></div><span style="color: var(--c-text-2);">gap mínimo (icones inline)</span></div>
+          <div class="spacing-row"><span>8px</span><div class="bar" style="width: 8px;"></div><span style="color: var(--c-text-2);">gap entre pill + texto</span></div>
+          <div class="spacing-row"><span>12px</span><div class="bar" style="width: 12px;"></div><span style="color: var(--c-text-2);">gap em CTAs / btn-cta-row</span></div>
+          <div class="spacing-row"><span>16px</span><div class="bar" style="width: 16px;"></div><span style="color: var(--c-text-2);">padding interno padrão</span></div>
+          <div class="spacing-row"><span>20px</span><div class="bar" style="width: 20px;"></div><span style="color: var(--c-text-2);">padding de cards</span></div>
+          <div class="spacing-row"><span>24px</span><div class="bar" style="width: 24px;"></div><span style="color: var(--c-text-2);">gap entre blocos</span></div>
+          <div class="spacing-row"><span>30px</span><div class="bar" style="width: 30px;"></div><span style="color: var(--c-text-2);">gap em grid de cards</span></div>
+          <div class="spacing-row"><span>50px</span><div class="bar" style="width: 50px;"></div><span style="color: var(--c-text-2);">padding entre seções (mobile)</span></div>
+          <div class="spacing-row"><span>120px</span><div class="bar" style="width: 120px;"></div><span style="color: var(--c-text-2);">padding entre seções (desktop)</span></div>
+        </div>
+      </div>
+
+      <div class="ds-block no-code">
+        <h3>Grid 12 colunas</h3>
+        <div class="ds-preview">
+          <div class="grid-demo">
+            <div class="col">1</div><div class="col">2</div><div class="col">3</div><div class="col">4</div>
+            <div class="col">5</div><div class="col">6</div><div class="col">7</div><div class="col">8</div>
+            <div class="col">9</div><div class="col">10</div><div class="col">11</div><div class="col">12</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── ICONS ─────────────── -->
+    <section id="icons" class="ds-section">
+      <h2>Iconografia</h2>
+      <p class="ds-section-sub">Família <strong>Lucide</strong>. <code>stroke-width: 2</code>, <code>stroke-linecap: round</code>, <code>stroke-linejoin: round</code>. Tamanhos típicos: 14, 16, 22, 24px. Cor herdada via <code>currentColor</code>.</p>
+
+      <div class="ds-block no-code">
+        <div class="ds-preview">
+          <div class="icon-grid">
+            <div class="icon-cell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+              <span class="name">arrow-up-right</span>
+            </div>
+            <div class="icon-cell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span class="name">check</span>
+            </div>
+            <div class="icon-cell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+              <span class="name">menu</span>
+            </div>
+            <div class="icon-cell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span class="name">x</span>
+            </div>
+            <div class="icon-cell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <span class="name">chevron-down</span>
+            </div>
+            <div class="icon-cell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span class="name">clock</span>
+            </div>
+            <div class="icon-cell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <span class="name">calendar</span>
+            </div>
+            <div class="icon-cell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              <span class="name">message-circle</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── BUTTONS ─────────────── -->
+    <section id="buttons" class="ds-section">
+      <h2>Botões</h2>
+      <p class="ds-section-sub">Altura fixa de 40px, raio 12px, peso 700, fonte 13px. <code>.btn-primary</code> tem glow + gradient overlay no hover; demais são limpos.</p>
+
+      <div class="ds-block">
+        <h3>Variantes</h3>
+        <div class="ds-preview">
+          <button class="btn btn-primary">Comece grátis</button>
+          <button class="btn btn-outline">Comece grátis</button>
+          <button class="btn btn-outline-dark">Saiba mais</button>
+          <button class="btn btn-tan">Secundário</button>
+          <button class="btn btn-tan-soft">Suave</button>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-primary"</span><span class="tag">&gt;</span>Comece grátis<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-outline"</span><span class="tag">&gt;</span>Comece grátis<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-outline-dark"</span><span class="tag">&gt;</span>Saiba mais<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-tan"</span><span class="tag">&gt;</span>Secundário<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-tan-soft"</span><span class="tag">&gt;</span>Suave<span class="tag">&lt;/button&gt;</span></pre>
+      </div>
+
+      <div class="ds-block">
+        <h3>Em fundo escuro</h3>
+        <div class="ds-preview dark">
+          <button class="btn btn-primary">Comece grátis</button>
+          <button class="btn btn-outline-cream">Saiba mais</button>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-primary"</span><span class="tag">&gt;</span>Comece grátis<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-outline-cream"</span><span class="tag">&gt;</span>Saiba mais<span class="tag">&lt;/button&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- ─────────────── PILLS ─────────────── -->
+    <section id="pills" class="ds-section">
+      <h2>Pills / Badges</h2>
+      <p class="ds-section-sub">Altura 31px, raio 100px, fonte 11px peso 700. Use para etiquetas curtas, status, eyebrows.</p>
+
+      <div class="ds-block">
+        <h3>Variantes</h3>
+        <div class="ds-preview">
+          <span class="pill pill-accent">Recepcionista virtual com IA</span>
+          <span class="pill pill-green">● Online</span>
+          <span class="pill pill-outline">Comece agora!</span>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pill pill-accent"</span><span class="tag">&gt;</span>Recepcionista virtual com IA<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pill pill-green"</span><span class="tag">&gt;</span>● Online<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pill pill-outline"</span><span class="tag">&gt;</span>Comece agora!<span class="tag">&lt;/span&gt;</span></pre>
+      </div>
+
+      <div class="ds-block">
+        <h3>Em fundo escuro</h3>
+        <div class="ds-preview dark">
+          <span class="pill pill-cream">Teste grátis por 30 dias</span>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pill pill-cream"</span><span class="tag">&gt;</span>Teste grátis por 30 dias<span class="tag">&lt;/span&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- ─────────────── CARDS ─────────────── -->
+    <section id="cards" class="ds-section">
+      <h2>Cards</h2>
+      <p class="ds-section-sub">Dois cards-padrão da home: <code>.veja-card</code> (segmento) e <code>.demo-card</code> (destaque com sombra). Ambos usam radius 12px.</p>
+
+      <div class="ds-block">
+        <h3>veja-card</h3>
+        <div class="ds-preview">
+          <div class="veja-card">
+            <div class="photo">[ imagem ]</div>
+            <h4>Salão de Beleza</h4>
+            <p>Gestão completa para salões com múltiplos profissionais e serviços.</p>
+            <a class="more">Conhecer
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+            </a>
+          </div>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"veja-card"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"photo"</span> <span class="attr">style</span>=<span class="str">"background-image:url(...)"</span><span class="tag">&gt;&lt;/div&gt;</span>
+  <span class="tag">&lt;h3&gt;</span>Salão de Beleza<span class="tag">&lt;/h3&gt;</span>
+  <span class="tag">&lt;p&gt;</span>Gestão completa para salões…<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">class</span>=<span class="str">"more"</span><span class="tag">&gt;</span>Conhecer →<span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+
+      <div class="ds-block">
+        <h3>demo-card</h3>
+        <div class="ds-preview">
+          <div class="demo-card">
+            <span class="pill pill-green demo-pill">● Conversa em tempo real</span>
+            <h4>Atendimento que parece humano</h4>
+            <p>A IA responde dúvidas, agenda horários e envia lembretes — automaticamente, no WhatsApp.</p>
+            <button class="btn btn-primary" style="align-self: flex-start;">Comece grátis</button>
+          </div>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"demo-card"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pill pill-green"</span><span class="tag">&gt;</span>● Conversa em tempo real<span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;h3&gt;</span>Atendimento que parece humano<span class="tag">&lt;/h3&gt;</span>
+  <span class="tag">&lt;p&gt;</span>A IA responde dúvidas…<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-primary"</span><span class="tag">&gt;</span>Comece grátis<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- ─────────────── INPUTS ─────────────── -->
+    <section id="inputs" class="ds-section">
+      <h2>Inputs / Forms</h2>
+      <p class="ds-section-sub">Altura 44px, raio 10px, foco com anel de <code>--c-accent-soft-2</code>. Sempre acompanhar de <code>label</code> visível.</p>
+
+      <div class="ds-block">
+        <h3>Text input</h3>
+        <div class="ds-preview column">
+          <div class="ds-field">
+            <label for="ds-i1">Nome do salão</label>
+            <input id="ds-i1" class="ds-input" type="text" placeholder="Ex: Studio Marina">
+          </div>
+          <div class="ds-field">
+            <label for="ds-i2">E-mail</label>
+            <input id="ds-i2" class="ds-input" type="email" placeholder="seu@email.com">
+          </div>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"ds-field"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="str">"name"</span><span class="tag">&gt;</span>Nome do salão<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">id</span>=<span class="str">"name"</span> <span class="attr">class</span>=<span class="str">"ds-input"</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">placeholder</span>=<span class="str">"Ex: Studio Marina"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+
+      <div class="ds-block">
+        <h3>Textarea</h3>
+        <div class="ds-preview">
+          <div class="ds-field" style="max-width: 100%;">
+            <label for="ds-t1">Mensagem</label>
+            <textarea id="ds-t1" class="ds-input ds-textarea" placeholder="Conte como podemos ajudar…"></textarea>
+          </div>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;textarea</span> <span class="attr">class</span>=<span class="str">"ds-input ds-textarea"</span> <span class="attr">placeholder</span>=<span class="str">"…"</span><span class="tag">&gt;&lt;/textarea&gt;</span></pre>
+      </div>
+
+      <div class="ds-block">
+        <h3>Checkbox</h3>
+        <div class="ds-preview column">
+          <label class="ds-checkbox"><input type="checkbox" checked> Concordo com os termos de uso</label>
+          <label class="ds-checkbox"><input type="checkbox"> Quero receber novidades por e-mail</label>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;label</span> <span class="attr">class</span>=<span class="str">"ds-checkbox"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="str">"checkbox"</span><span class="tag">&gt;</span> Concordo com os termos
+<span class="tag">&lt;/label&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- ─────────────── NAVIGATION ─────────────── -->
+    <section id="navigation" class="ds-section">
+      <h2>Navegação</h2>
+      <p class="ds-section-sub">Três padrões: <code>.nav</code> (topo desktop), <code>.drawer</code> (menu mobile) e <code>.dropdown</code> (mega-menu de itens com ícone, título e descrição).</p>
+
+      <div class="ds-block">
+        <h3>Top nav</h3>
+        <div class="ds-preview">
+          <div class="ds-nav-mock">
+            <div class="ds-nav-logo">Easy</div>
+            <div class="ds-nav-links">
+              <a>Soluções</a>
+              <a>Planos</a>
+              <a>Quem somos</a>
+              <a>Contato</a>
+            </div>
+            <div class="ds-nav-cta">
+              <button class="btn btn-outline-dark">Entrar</button>
+              <button class="btn btn-primary">Comece grátis</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Drawer (mobile)</h3>
+        <div class="ds-preview">
+          <div class="ds-drawer-mock">
+            <a>Salão de beleza</a>
+            <a>Barbearia</a>
+            <a>Estúdio de beleza</a>
+            <div class="ds-drawer-sep"></div>
+            <a>Quem somos</a>
+            <a>Planos</a>
+            <a>Contato</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Dropdown</h3>
+        <div class="ds-preview">
+          <div class="ds-dropdown-mock">
+            <a class="ds-dropdown-item">
+              <span class="ds-dropdown-ico">SB</span>
+              <span class="ds-dropdown-text">
+                <span class="title">Salão de beleza</span>
+                <span class="desc">Gestão completa para múltiplos profissionais.</span>
+              </span>
+            </a>
+            <a class="ds-dropdown-item">
+              <span class="ds-dropdown-ico">BB</span>
+              <span class="ds-dropdown-text">
+                <span class="title">Barbearia</span>
+                <span class="desc">Agenda otimizada com fila e clientes recorrentes.</span>
+              </span>
+            </a>
+            <a class="ds-dropdown-item">
+              <span class="ds-dropdown-ico">EB</span>
+              <span class="ds-dropdown-text">
+                <span class="title">Estúdio de beleza</span>
+                <span class="desc">Eficiência e identidade premium para estúdios menores.</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── HERO PATTERN ─────────────── -->
+    <section id="section-hero" class="ds-section">
+      <h2>Padrão · Hero</h2>
+      <p class="ds-section-sub">Pill accent + título display em 2 linhas + lead em sans + duas CTAs lado a lado.</p>
+
+      <div class="ds-block no-code">
+        <div class="ds-preview">
+          <div class="ex-hero">
+            <span class="pill pill-accent">Recepcionista virtual com IA</span>
+            <h3>Sua recepção 24h<br>para o seu negócio</h3>
+            <p>Teste grátis por 30 dias a atendente virtual humanizada que responde seus clientes, agenda horários e organiza sua rotina.</p>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+              <button class="btn btn-primary">Comece grátis</button>
+              <button class="btn btn-outline">Ver planos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── FOOTER CTA PATTERN ─────────────── -->
+    <section id="section-footer" class="ds-section">
+      <h2>Padrão · Footer CTA</h2>
+      <p class="ds-section-sub">Bloco escuro de fechamento. Pill cream + título display invertido + CTA primário.</p>
+
+      <div class="ds-block no-code">
+        <div class="ds-preview dark" style="padding: 0;">
+          <div class="ex-footer-cta">
+            <span class="pill pill-cream">Teste grátis por 30 dias</span>
+            <h3>Pronto para profissionalizar<br>o seu negócio da beleza?</h3>
+            <p>A Easy Salon ajuda donos de salão, barbearia e estúdios a organizarem sua agenda e evoluírem para uma gestão simples e inteligente.</p>
+            <div style="display: flex; gap: 12px;">
+              <button class="btn btn-primary">Comece grátis</button>
+              <button class="btn btn-outline-cream">Falar com vendas</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── EFFECTS ─────────────── -->
+    <section id="effects" class="ds-section">
+      <h2>Efeitos &amp; animações</h2>
+      <p class="ds-section-sub">Três efeitos assinatura da home: revelação no scroll (BlurFade), troca de palavra com blur por letra, e o glow rotativo nas pills especiais.</p>
+
+      <div class="ds-block">
+        <h3>BlurFade no scroll</h3>
+        <p style="font-size: 13px; color: var(--c-text-2); margin: -8px 0 16px; line-height: 1.6;">
+          Elementos entram com <code>opacity: 0 → 1</code>, <code>filter: blur(10px) → 0</code> e <code>translateY(18px) → 0</code> em 1.4s. Disparado por <code>IntersectionObserver</code> com stagger de 90ms entre irmãos da mesma seção.
+        </p>
+        <div class="ds-preview column">
+          <div class="fx-fade-stage" id="fx-fade-stage">
+            <div class="fx-fade long"></div>
+            <div class="fx-fade med"></div>
+            <div class="fx-fade short"></div>
+            <div class="fx-fade med"></div>
+          </div>
+          <button class="btn btn-outline fx-replay-btn" id="fx-fade-replay">Reproduzir novamente</button>
+        </div>
+        <pre class="ds-code"><span class="com">/* CSS */</span>
+.fade {
+  opacity: 0; filter: blur(10px); transform: translateY(18px);
+  transition: opacity 1.4s, filter 1.4s, transform 1.4s
+              cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fade.is-in { opacity: 1; filter: none; transform: none; }
+
+<span class="com">/* JS */</span>
+new IntersectionObserver((entries) =&gt; {
+  entries.forEach(e =&gt; e.isIntersecting &amp;&amp; e.target.classList.add('is-in'));
+}, { threshold: 0.12 }).observe(el);</pre>
+      </div>
+
+      <div class="ds-block">
+        <h3>Cycling word (blur por letra)</h3>
+        <p style="font-size: 13px; color: var(--c-text-2); margin: -8px 0 16px; line-height: 1.6;">
+          Cada letra entra com blur + translateY, com stagger de ~40ms. Sai espelhada antes de a próxima palavra entrar. Usado no hero (“Sua recepção 24h para…”).
+        </p>
+        <div class="ds-preview column">
+          <div class="fx-cycle-host">
+            Sua recepção 24h para <span class="cycle-word"><span class="cycle-word__inner" id="fx-cycle"></span></span>
+          </div>
+          <button class="btn btn-outline fx-replay-btn" id="fx-cycle-replay">Reproduzir novamente</button>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"cycle-word"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"cycle-word__inner"</span> <span class="attr">data-cycle</span>=<span class="str">'["salões","barbearias","estúdios"]'</span><span class="tag">&gt;&lt;/span&gt;</span>
+<span class="tag">&lt;/span&gt;</span>
+
+<span class="com">/* CSS */</span>
+.cycle-word__char {
+  opacity: 0; filter: blur(10px); transform: translateY(6px);
+  animation: cw-blur-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--cw-delay, 0s);
+}</pre>
+      </div>
+
+      <div class="ds-block">
+        <h3>Pill glow (linha rotativa)</h3>
+        <p style="font-size: 13px; color: var(--c-text-2); margin: -8px 0 16px; line-height: 1.6;">
+          Borda animada à la Attio: um traço em <code>conic-gradient</code> que gira em torno da pill (3.2s, linear, infinito). Usa <code>@property --angle</code> para animar gradiente.
+        </p>
+        <div class="ds-preview" style="gap: 28px;">
+          <span class="pill pill-accent pill-glow">Recepcionista virtual com IA</span>
+        </div>
+        <div class="ds-preview dark" style="gap: 28px; margin-top: 12px;">
+          <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 30 dias</span>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pill pill-accent pill-glow"</span><span class="tag">&gt;</span>Texto<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pill pill-cream pill-glow pill-glow-cream"</span><span class="tag">&gt;</span>Texto<span class="tag">&lt;/span&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- ─────────────── VALIDATION ─────────────── -->
+    <section id="validation" class="ds-section">
+      <h2>Regra &amp; script de validação</h2>
+      <p class="ds-section-sub">Os componentes da home (<code>home.html</code>) são <strong>mestres</strong>. Toda nova página deve reutilizar tokens (<code>--c-…</code>, <code>--ff-…</code>, <code>--shadow-…</code>) e classes (<code>.btn</code>, <code>.pill</code>, <code>.veja-card</code>, etc) sem redefinir.</p>
+
+      <div class="validate-note">
+        <strong>Como rodar:</strong> a partir da raiz do projeto, execute<br>
+        <code>python3 validate_components.py</code><br>
+        O script analisa todos os <code>.html</code> e reporta:
+        <ul style="margin: 8px 0 0; padding-left: 20px;">
+          <li>cores hex/rgb fora da paleta (não-tokens)</li>
+          <li>uso de famílias de fonte fora do sistema (Inter, Arial, Roboto…)</li>
+          <li>classes-mestre redefinidas (override de <code>.btn-primary</code>, <code>.pill-accent</code>, etc)</li>
+          <li>componentes que existem só na home mas foram “copiados” em outras páginas</li>
+        </ul>
+      </div>
+
+      <div class="ds-block" style="margin-top: 24px;">
+        <h3>Saída esperada (exemplo)</h3>
+        <pre class="ds-code"><span class="com">$ python3 validate_components.py</span>
+
+<span class="com">━━━ home.html ━━━</span>
+<span class="str">  ✓ master file</span> · 14 tokens · 11 componentes mestre
+
+<span class="com">━━━ Design System.html ━━━</span>
+<span class="str">  ✓ ok</span> · usa apenas tokens da home
+
+<span class="com">━━━ Nova página.html ━━━</span>
+  <span class="tag">⚠</span> linha 142: cor hex <span class="attr">#FF0000</span> fora da paleta
+  <span class="tag">⚠</span> linha  87: redefine <span class="attr">.btn-primary</span>
+  <span class="tag">⚠</span> linha 203: usa <span class="attr">font-family: Inter</span> (não-mestre)
+
+<span class="str">2 arquivos OK · 1 com avisos · 3 problemas</span></pre>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+<script>
+  // (1) BlurFade — replayable demo
+  (function () {
+    var stage = document.getElementById('fx-fade-stage');
+    var btn   = document.getElementById('fx-fade-replay');
+    if (!stage || !btn) return;
+
+    var nodes = stage.querySelectorAll('.fx-fade');
+    function play() {
+      nodes.forEach(function (n, i) {
+        n.classList.remove('is-in');
+        n.style.transitionDelay = (i * 120) + 'ms';
+      });
+      // double-rAF to ensure reset paints first
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          nodes.forEach(function (n) { n.classList.add('is-in'); });
+        });
+      });
+    }
+    btn.addEventListener('click', play);
+
+    // Auto-play once when section enters viewport
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { play(); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(stage);
+    } else {
+      play();
+    }
+  })();
+
+  // (2) Cycling word — blur in/out per letter, looping
+  (function () {
+    var host = document.getElementById('fx-cycle');
+    var btn  = document.getElementById('fx-cycle-replay');
+    if (!host) return;
+
+    var words = ['salões', 'barbearias', 'estúdios'];
+    var idx = 0;
+    var timer = null;
+    var STEP_IN = 40, STEP_OUT = 30, HOLD = 1800, OUT_DUR = 350;
+
+    function render(word, out) {
+      host.classList.toggle('is-out', !!out);
+      host.innerHTML = '';
+      Array.from(word).forEach(function (ch, i) {
+        var s = document.createElement('span');
+        s.className = 'cycle-word__char';
+        s.textContent = ch === ' ' ? '\u00A0' : ch;
+        s.style.setProperty(out ? '--cw-delay-out' : '--cw-delay', (i * (out ? STEP_OUT : STEP_IN)) + 'ms');
+        host.appendChild(s);
+      });
+    }
+
+    function loop() {
+      render(words[idx], false);
+      var inDur = words[idx].length * STEP_IN + 550;
+      timer = setTimeout(function () {
+        render(words[idx], true);
+        timer = setTimeout(function () {
+          idx = (idx + 1) % words.length;
+          loop();
+        }, words[idx].length * STEP_OUT + OUT_DUR);
+      }, inDur + HOLD);
+    }
+    function restart() {
+      clearTimeout(timer);
+      idx = 0;
+      loop();
+    }
+    if (btn) btn.addEventListener('click', restart);
+    loop();
+  })();
+</script>
+</html>
