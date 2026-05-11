@@ -826,6 +826,9 @@ body.has-nav { padding-top: 70px; }
   flex-direction: column;
   gap: 0;
 }
+.sol-hero .chat {
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.6), var(--shadow-card-2);
+}
 .chat-header {
   display: flex;
   align-items: center;
@@ -1354,11 +1357,11 @@ body.has-nav { padding-top: 70px; }
   margin: 0;
 }
 .step-row .body h3 {
-  font-family: var(--ff-display);
+  font-family: var(--ff-text);
   font-weight: 700;
-  font-size: 14px;
-  line-height: 1;
-  color: var(--c-accent);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--c-text);
   margin: 13px 0 16px;
 }
 .step-row .body p {
@@ -1368,6 +1371,16 @@ body.has-nav { padding-top: 70px; }
   margin: 0 0 16px;
   max-width: 420px;
   white-space: pre-line;
+}
+.step-row .body p.step-cat {
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--c-accent);
+  margin: 0 0 4px;
+  max-width: none;
+  letter-spacing: 0;
 }
 .step-row .body ul {
   list-style: none;
@@ -1546,7 +1559,7 @@ body.has-nav { padding-top: 70px; }
 .faq-section {
   width: 1200px;
   max-width: calc(100% - 48px);
-  margin: 0 auto 100px;
+  margin: 80px auto 100px;
 }
 .faq-divider {
   width: 1200px;
@@ -1808,6 +1821,565 @@ body.has-nav { padding-top: 70px; }
 [data-screen-label="Solução · Estúdio de Beleza"] .pq-grid {
   grid-template-columns: repeat(5, 1fr);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Páginas: Planos
+   ─────────────────────────────────────────────────────────────────
+   Componentes específicos da página /planos. Inclui:
+   - .plans-hero        — hero text-only (sem chat)
+   - .pricing-section   — wrapper do bloco "Escolha seu plano"
+   - .pricing-grid      — grid 3 colunas de .pricing-card
+   - .pricing-card      — card individual (com variantes .featured / .soon)
+   - .compare-section   — wrapper do comparador
+   - .compare-table     — tabela de features × planos
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Hero Planos (text-only, centralizado) ─── */
+.plans-hero {
+  width: 100%;
+  margin: 0;
+  padding: 60px 24px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  background: var(--c-tan-veil);
+}
+.plans-hero h1 {
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--c-text);
+  margin: 0 0 24px;
+  max-width: 800px;
+}
+.plans-hero h1 em {
+  font-style: normal;
+  color: var(--c-accent);
+}
+.plans-hero .plans-hero-sub {
+  font-family: var(--ff-text);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--c-text);
+  margin: 0 0 32px;
+  max-width: 560px;
+}
+.plans-hero .cta-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 0 0 28px;
+}
+.plans-hero-bullets {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--ff-text);
+  font-size: 13.5px;
+  color: var(--c-text);
+}
+.plans-hero-bullets .b {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.plans-hero-bullets .b .dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--c-accent);
+}
+
+/* ─── Pricing Section ─── */
+.pricing-section {
+  width: 1200px;
+  max-width: calc(100% - 48px);
+  margin: 0 auto 30px;
+  padding: 50px 0 0;
+  text-align: center;
+}
+.pricing-section .pricing-title {
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--c-text);
+  margin: 0 0 65px;
+}
+.pricing-section .pricing-title em {
+  font-style: normal;
+  color: var(--c-accent);
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+  margin: 32px 0 0;
+}
+.pricing-card {
+  position: relative;
+  background: var(--c-card-2);
+  border-radius: 16px;
+  box-shadow: none;
+  padding: 30px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  border: 1.5px solid transparent;
+  transition: transform 280ms ease-out, box-shadow 280ms ease-out;
+}
+.pricing-card.featured {
+  border-color: transparent;
+  box-shadow: 0 0 0 6px rgba(206, 72, 54, 0.05);
+}
+.pricing-card .pricing-badge {
+  position: absolute;
+  top: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--c-accent);
+  color: #fff;
+  font-family: var(--ff-text);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1;
+  padding: 8px 14px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.pricing-card .pricing-name {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--c-text);
+  margin: 0 0 20px;
+}
+.pricing-card .pricing-desc {
+  font-family: var(--ff-text);
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--c-text);
+  margin: 0 0 28px;
+  max-width: 320px;
+  min-height: 66px;
+}
+.pricing-card .hero-divider {
+  margin: 0 0 28px;
+  gap: 4px;
+}
+.pricing-card .hero-divider .line { width: 40px; }
+.pricing-card .pricing-price {
+  margin: 0 0 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.pricing-card .pricing-price .num {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--c-accent);
+  margin: 0 0 8px;
+}
+.pricing-card .pricing-price-note {
+  font-family: var(--ff-text);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--c-text);
+  margin: 0 0 4px;
+}
+.pricing-card .pricing-annual-note {
+  font-family: var(--ff-text);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--c-accent);
+  margin: 0 0 24px;
+  max-width: 320px;
+}
+.pricing-card .pricing-cta {
+  margin-top: auto;
+  width: 100%;
+}
+.pricing-card:not(.featured) .pricing-price {
+  flex: 1;
+  justify-content: center;
+}
+.pricing-card.soon .pricing-cta {
+  background: var(--c-tan-soft) !important;
+  color: var(--c-text-2) !important;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Compare Section (tabela de features) ─── */
+.compare-section {
+  width: 1200px;
+  max-width: calc(100% - 48px);
+  margin: 0 auto 30px;
+  padding: 0;
+}
+.compare-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--c-card-2);
+  border-radius: 16px;
+  box-shadow: none;
+  padding: 8px 0;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 12px 0;
+  font-family: var(--ff-text);
+  font-size: 14.5px;
+  color: var(--c-text);
+  min-width: 720px;
+  table-layout: fixed;
+}
+.compare-table thead th:not(:first-child),
+.compare-table tbody td:not(:first-child),
+.compare-table tfoot td:not(:first-child) {
+  width: 262px;
+}
+.compare-table thead th {
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--c-text);
+  padding: 22px 18px;
+  text-align: center;
+  vertical-align: middle;
+}
+.compare-table thead th:first-child {
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--c-accent);
+  text-align: left;
+}
+.compare-table thead th:not(:first-child) {
+  background: var(--c-tan-veil);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.compare-table tbody td {
+  padding: 16px 18px;
+  vertical-align: middle;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.compare-table tbody td:first-child {
+  text-align: left;
+  font-weight: 400;
+  color: var(--c-text);
+}
+.compare-table tbody td:first-child strong {
+  font-weight: 700;
+}
+.compare-table tbody td:not(:first-child) {
+  text-align: center;
+  background: var(--c-tan-veil);
+}
+.compare-table tfoot td {
+  padding: 24px 20px 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+.compare-table tfoot td:first-child {
+  text-align: left;
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--c-accent);
+}
+.compare-table tfoot td:not(:first-child) {
+  background: var(--c-tan-veil);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.compare-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--c-accent);
+  color: #fff;
+}
+.compare-check svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+.compare-empty {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(115, 42, 29, 0.2);
+  border-radius: 999px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.compare-table tfoot .btn {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  min-height: 40px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Troca de texto do CTA "Iniciar teste grátis por 30 dias" → "Teste grátis por 30 dias" no mobile */
+.cta-label-mobile { display: none; }
+.cta-label-desktop { display: inline; }
+@media (max-width: 640px) {
+  .cta-label-desktop { display: none; }
+  .cta-label-mobile { display: inline; }
+}
+
+/* ─── Mobile (planos) ─── */
+@media (max-width: 900px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .pricing-card.featured {
+    order: -1; /* destaque vai pro topo no mobile */
+  }
+
+  /* Compare table — em viewports menores que 900px (tablet+mobile),
+     usa scroll horizontal com colunas largas o suficiente para o botão CTA
+     ficar em 1 linha. */
+  .compare-section {
+    max-width: calc(100% - 32px);
+    padding: 0;
+  }
+  .compare-table-wrap {
+    border-radius: 12px;
+    margin: 0;
+    padding: 8px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    table-layout: fixed;
+    width: 960px;
+    min-width: 960px;
+    border-spacing: 8px 0;
+    font-size: 12px;
+  }
+  .compare-table thead th {
+    font-size: 13px;
+    padding: 14px 10px;
+  }
+  .compare-table thead th:first-child,
+  .compare-table tbody td:first-child,
+  .compare-table tfoot td:first-child {
+    width: 320px;
+  }
+  .compare-table thead th:first-child {
+    font-size: 14px;
+  }
+  .compare-table tbody td {
+    padding: 10px 10px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .compare-table thead th:not(:first-child),
+  .compare-table tbody td:not(:first-child),
+  .compare-table tfoot td:not(:first-child) {
+    width: 200px;
+  }
+  .compare-table tfoot td {
+    padding: 16px 10px;
+  }
+  .compare-table tfoot td:first-child {
+    font-size: 14px;
+  }
+  .compare-check { width: 20px; height: 20px; }
+  .compare-check svg { width: 11px; height: 11px; }
+  .compare-empty { width: 18px; height: 18px; border-width: 2px; }
+  .compare-table tfoot .btn {
+    font-size: 12px;
+    height: auto;
+    min-height: 36px;
+    padding: 0 12px 12px;
+    max-width: none;
+    white-space: normal;
+    line-height: 1.3;
+    text-align: center;
+  }
+}
+@media (max-width: 640px) {
+  /* ── Plans Hero ── */
+  .plans-hero {
+    padding: 30px 16px 24px;
+    margin: 0;
+  }
+  .plans-hero h1 {
+    font-size: 30px;
+    line-height: 1.1;
+    margin: 0 0 18px;
+  }
+  .plans-hero .plans-hero-sub {
+    font-size: 14px;
+    margin: 0 0 24px;
+  }
+  .plans-hero .cta-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    margin: 0 0 22px;
+  }
+  .plans-hero .cta-row .btn {
+    width: 100% !important;
+  }
+  .plans-hero-bullets {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+    font-size: 12.5px;
+  }
+
+  /* ── Pricing ── */
+  .pricing-section {
+    max-width: calc(100% - 32px);
+    padding: 40px 0 0;
+    margin: 0 auto 24px;
+  }
+  .pricing-section .pricing-title {
+    font-size: 26px;
+    margin: 0 0 36px;
+  }
+  .pricing-card {
+    padding: 26px 20px 20px;
+  }
+  .pricing-card .pricing-name {
+    font-size: 22px;
+  }
+  .pricing-card .pricing-desc {
+    font-size: 14px;
+    min-height: 0;
+  }
+  .pricing-card .pricing-price .num {
+    font-size: 22px;
+  }
+  .pricing-card.featured {
+    box-shadow: 0 0 0 4px rgba(206, 72, 54, 0.08);
+  }
+
+  /* ── Compare table — horizontal scroll com colunas largas o suficiente
+        para o texto do botão CTA ficar em 1 linha ── */
+  .compare-section {
+    max-width: calc(100% - 32px);
+    padding: 0;
+    margin: 0 auto 24px;
+  }
+  .compare-table-wrap {
+    border-radius: 12px;
+    margin: 0;
+    padding: 8px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    table-layout: fixed;
+    width: 960px;
+    min-width: 960px;
+    border-spacing: 8px 0;
+    font-size: 12px;
+  }
+  .compare-table thead th {
+    font-size: 13px;
+    padding: 14px 10px;
+  }
+  .compare-table thead th:first-child {
+    font-size: 14px;
+    width: 320px;
+  }
+  .compare-table tbody td:first-child {
+    width: 320px;
+  }
+  .compare-table tfoot td:first-child {
+    width: 320px;
+  }
+  .compare-table tbody td {
+    padding: 10px 10px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .compare-table thead th:not(:first-child),
+  .compare-table tbody td:not(:first-child),
+  .compare-table tfoot td:not(:first-child) {
+    width: 200px;
+  }
+  .compare-table tfoot td {
+    padding: 16px 10px 16px;
+  }
+  .compare-table tfoot td:first-child {
+    font-size: 14px;
+  }
+  .compare-check { width: 20px; height: 20px; }
+  .compare-check svg { width: 11px; height: 11px; }
+  .compare-empty { width: 18px; height: 18px; border-width: 2px; }
+  .compare-table tfoot .btn {
+    font-size: 12px;
+    height: auto;
+    min-height: 36px;
+    padding: 0 12px 12px;
+    max-width: none;
+    white-space: normal;
+    line-height: 1.3;
+    text-align: center;
+  }
+}
+
+/* ─── BlurFade hidden state — Planos ─── */
+.plans-hero > *,
+.pricing-grid > *,
+.compare-table tbody tr {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(18px);
+  transition:
+    opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, filter, transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plans-hero > *,
+  .pricing-grid > *,
+  .compare-table tbody tr {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════
    Páginas: Home
