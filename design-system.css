@@ -1364,12 +1364,25 @@ body.has-nav { padding-top: 70px; }
   margin: 0;
 }
 .step-row .body h3 {
-  font-family: var(--ff-text);
+  font-family: var(--ff-display);
   font-weight: 700;
+  font-size: 14px;
+  line-height: 40px;
+  color: var(--c-accent);
+  margin: 0 0 16px !important;
+}
+/* /planos — step-cat alinhado ao número, h3 como subtítulo da lista */
+[data-screen-label="Planos"] .step-row .body p.step-cat {
   font-size: 15px;
+  font-weight: 700;
+  line-height: 40px;
+  margin: 0;
+}
+[data-screen-label="Planos"] .step-row .body h3 {
+  font-family: var(--ff-text);
+  color: #732A1D;
   line-height: 1.4;
-  color: var(--c-text);
-  margin: 13px 0 16px;
+  margin: 14px 0 12px !important;
 }
 .step-row .body p {
   font-size: 14px;
