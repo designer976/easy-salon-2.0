@@ -1,17 +1,18 @@
 <!doctype html>
-<html lang="pt-BR" data-screen-label="Solução · Estúdio de Beleza">
+<html lang="pt-BR" data-screen-label="Quem somos">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Easy Salon — Estúdio de Beleza</title>
+<title>Easy Salon — Quem somos</title>
 <link rel="icon" type="image/png" href="/assets/fav.png">
 
-<!-- Sistema de design (mestre). Fontes, tokens, .nav, .btn, .pill (com pill-glow), footer-bleed. -->
+<!-- Sistema de design (mestre). Fontes, tokens, .nav, .btn, .pill, footer-bleed. -->
 <link rel="stylesheet" href="/design-system.css">
 
 <style>
-  /* Página /estudio-de-beleza.html — todas as regras vivem em design-system.css.
-     Este bloco é mantido vazio para enforce a herança 100% via CSS canônico. */
+  /* Página /quem-somos — todas as regras vivem em design-system.css
+     (seção "Páginas: Quem somos"). Este bloco é mantido vazio para enforce
+     a herança 100% via CSS canônico. */
 </style>
 </head>
 <body class="has-nav">
@@ -54,196 +55,78 @@
     </div>
   </nav>
 
-  <!-- ─────────────── HERO SOLUÇÃO ─────────────── -->
-  <section class="sol-hero" style="margin: 50px auto">
-    <div class="sol-hero-left">
-      <span class="pill pill-accent pill-glow" style="margin: 0px 0px 20px">Estúdio de beleza</span>
-      <h1 style="margin: 0px 0px 50px; width: 500px">Transforme a rotina do seu <em>estúdio de beleza com a Easy</em></h1>
-      <p class="sol-hero-sub" style="margin: 0px 0px 50px; width: 500px; font-weight: 400">Comece organizando sua agenda com a nossa <strong style="font-weight:700;">recepcionista virtual humanizada</strong> e descubra como sua rotina fica mais leve, clara e previsível, mesmo atendendo o dia inteiro.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="/planos" style="width:177px;">Comece grátis</a>
-        <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
-      </div>
-    </div>
-    <div class="sol-hero-right">
-      <div class="chat" role="region" aria-label="Conversa de exemplo">
-        <div class="chat-header">
-          <div class="chat-avatar">
-            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 18px; height: 18px">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.78968 12.2787C10.5006 12.2787 11.8761 13.6542 11.8761 15.3652V16.64C11.2387 16.3045 10.6684 15.8684 10.1987 15.3316C9.79613 14.8955 9.49419 14.3923 9.25935 13.889C9.02451 13.3858 8.85678 12.849 8.78968 12.2787ZM7.34709 13.889C7.11226 14.3923 6.81032 14.8955 6.40774 15.3316C5.93806 15.8684 5.36774 16.3045 4.73032 16.64V15.3652C4.73032 13.6542 6.10581 12.2787 7.81678 12.2787C7.74968 12.849 7.58193 13.3858 7.34709 13.889ZM12.2787 7.85032C12.2787 6.13935 13.6542 4.76387 15.3652 4.76387H16.64C16.3045 5.40129 15.8684 5.97161 15.2981 6.44129C14.8619 6.84387 14.3923 7.14581 13.889 7.38064C13.3523 7.61548 12.8155 7.78322 12.2787 7.85032ZM13.889 9.2929C14.3923 9.52774 14.8619 9.82968 15.2981 10.2323C15.8684 10.7019 16.3045 11.2723 16.64 11.9097H15.3652C13.6542 11.9097 12.2787 10.5342 12.2787 8.82323C12.8155 8.89032 13.3523 9.05806 13.889 9.2929ZM7.85032 4.36129C6.13935 4.36129 4.76387 2.98581 4.76387 1.27484V0C5.36774 0.335484 5.97161 0.771613 6.44129 1.34194C6.81032 1.77806 7.11226 2.24774 7.34709 2.75097C7.58193 3.28774 7.74967 3.82452 7.85032 4.36129ZM9.2929 2.75097C9.52774 2.24774 9.82967 1.77806 10.1987 1.34194C10.7019 0.771613 11.2723 0.335484 11.9097 0V1.27484C11.9097 2.98581 10.5342 4.36129 8.82323 4.36129C8.89032 3.82452 9.05807 3.28774 9.2929 2.75097ZM4.36129 8.78967C4.36129 10.5006 2.98581 11.8761 1.27484 11.8761H0C0.335484 11.2723 0.771614 10.6684 1.30839 10.1987C1.74452 9.82967 2.24774 9.52774 2.75097 9.2929C3.25419 9.05806 3.79097 8.89032 4.36129 8.78967ZM2.75097 7.34709C2.24774 7.11225 1.74452 6.81032 1.30839 6.44129C0.771614 5.93806 0.335484 5.36774 0 4.73032H1.27484C2.98581 4.73032 4.36129 6.10581 4.36129 7.81677C3.79097 7.74968 3.25419 7.58193 2.75097 7.34709ZM7.78322 8.85677C7.58193 10.8026 6.03871 12.3458 4.09291 12.5471C4.2942 10.6013 5.83742 9.05806 7.78322 8.85677ZM8.82323 8.85677C10.769 9.09161 12.3123 10.6013 12.5471 12.5471V12.5806L12.5136 12.5471C10.5677 12.3458 9.05807 10.8026 8.82323 8.85677ZM8.85677 7.81677C8.85677 7.81677 8.84559 7.81677 8.82323 7.81677H8.85677C9.05806 5.87097 10.6013 4.32774 12.5471 4.12645V4.0929C12.5471 4.11527 12.5471 4.12645 12.5471 4.12645C12.3123 6.07226 10.8026 7.61548 8.85677 7.81677ZM7.81678 7.81677C7.79441 7.81677 7.78322 7.81677 7.78322 7.81677C5.83742 7.58194 4.32774 6.03871 4.09291 4.0929C6.03871 4.32774 7.58193 5.83742 7.78322 7.78322L7.81678 7.81677Z" fill="#F2EFE6"></path>
-                </svg>
-          </div>
-          <div class="chat-id">
-            <div class="name">Recepcionista Easy</div>
-            <div class="status"><span class="status-dot"></span>Online · Responde em segundos</div>
-          </div>
-        </div>
-        <div class="chat-feed" id="chat-feed" aria-live="polite"></div>
-      </div>
-    </div>
+  <!-- ─────────────── HERO (Seção 1) ─────────────── -->
+  <section class="plans-hero plans-hero--flush-bottom" style="background:none;">
+    <div class="pill pill-accent pill-glow" style="margin: 0 0 20px">Quem somos</div>
+    <h1>Nossa missão é <em>simplificar o mercado da beleza</em></h1>
+    <p class="plans-hero-sub" style="margin-bottom:0;">A Easy nasceu para ajudar salões, barbearias e estúdios de beleza a terem uma operação organizada, previsível e leve. Começando pela agenda e evoluindo para a gestão completa.</p>
   </section>
 
-  <!-- ─────────────── 5 PASSOS ─────────────── -->
-  <section class="steps-section" data-screen-label="5 passos Easy" style="margin: 0 auto 80px; padding: 80px 80px 30px">
-    <h2>Os <em>5 passos Easy</em> para estúdios de beleza</h2>
-    <p class="lead">A Easy organiza sua agenda e devolve previsibilidade ao seu dia a dia e permite que você <strong style="font-weight:700;">economize mais de R$ 30 mil por ano em equipe.</strong></p>
-
-    <div class="step-row">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">01</span>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">Tudo começa pela agenda</h3>
-        <p>A sua recepcionista virtual centraliza e organiza os horários de todos os profissionais do seu estúdio: sem sobreposição, sem falhas e sem fazer ninguém parar para agendar clientes pelo WhatsApp.
-
-A partir daqui, tudo muda: o estúdio passa a ter uma rotina unificada, padronizada e previsível.
-
-Depois disso, a gestão evoluirá naturalmente: percentuais, caixa e atendimento ficam claros para todos.</p>
-      </div>
-      <div class="photo"></div>
-    </div>
-
-    <div class="step-row reverse">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <div class="photo"></div>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">Seu estúdio alinhado: cada profissional com seu próprio aplicativo</h3>
-        <p>Cada membro da equipe acompanha seus atendimentos, horários, percentuais e créditos direto no app da Easy.
-
-Nada de depender do dono. Nada de agendas isoladas. Nada de diferenças de comunicação.</p>
-        <ul style="margin: 30px 0px 0px; gap: 16px">
-          <li>Equipe alinhada.</li>
-          <li>Menos dúvidas.</li>
-          <li>Mais organização.</li>
-        </ul>
-      </div>
-      <span class="num">02</span>
-    </div>
-
-    <div class="step-row">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">03</span>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">Clientes lembram do horário</h3>
-        <p>A IA da Easy envia lembretes automáticos, confirmações e mensagens de relacionamento.
-
-Isso reduz faltas, melhora a constância dos agendamentos e dá previsibilidade ao faturamento de cada profissional e do estúdio como um todo.</p>
-        <ul style="gap: 16px; margin: 30px 0px 0px">
-          <li>Menos faltas.</li>
-          <li>Mais recorrência.</li>
-          <li>Atendimento com mais ritmo e precisão.</li>
-        </ul>
-      </div>
-      <div class="photo"></div>
-    </div>
-
-    <div class="step-row reverse">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <div class="photo"></div>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">A Easy cuida da operação enquanto você cuida dos atendimentos</h3>
-        <p>Ela confirma horários, envia lembretes, coleta avaliações e mantém a organização mesmo quando a equipe está em atendimento.
-
-Seu estúdio não trava. A rotina não para.</p>
-      </div>
-      <span class="num">04</span>
-    </div>
-
-    <div class="step-row tl-last">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">05</span>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">Clareza no caixa. Transparência nos percentuais</h3>
-        <p>A Easy calcula automaticamente quanto cada profissional deve receber com base nos atendimentos registrados.
-
-Entradas, saídas e repasses ficam organizados, sem discussões, erros ou divergências.</p>
-        <ul style="margin: 30px 0px 0px; gap: 16px">
-          <li>Transparência.</li>
-          <li>Previsibilidade.</li>
-          <li>Segurança para você e sua equipe.</li>
-        </ul>
-        <!-- CTAs desktop: dentro do body, logo abaixo dos itens (mantém comportamento original) -->
-        <div class="steps-cta steps-cta-desktop" style="margin: 30px 0px 0px">
-          <a class="btn btn-primary" href="/planos" style="width:177px;">Comece grátis</a>
-          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
-        </div>
-      </div>
-      <div class="photo"></div>
-      <!-- CTAs mobile: fora do body, abaixo do photo placeholder -->
-      <div class="steps-cta steps-cta-mobile">
-        <a class="btn btn-primary" href="/planos">Comece grátis</a>
-        <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener">Agendar demonstração</a>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ─────────────── POR QUE ESCOLHER ─────────────── -->
-  <section class="pq-section" style="margin: 0 auto 20px">
-    <h2>Por que escolher a <em>Easy para o seu estúdio</em></h2>
-    <div class="pq-grid">
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        </span>
-        <p>Agenda unificada para
-toda a equipe.</p>
-      </div>
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
-        </span>
-        <p>App individual para
-cada profissional.</p>
-      </div>
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>
-        </span>
-        <p>IA que
-reduz faltas.</p>
-      </div>
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </span>
-        <p>Automação de comunicação
-via WhatsApp.</p>
-      </div>
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </span>
-        <p>Clareza financeira
-completa.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────── POR TRÁS DA EASY ─────────────── -->
-  <section class="team-section" style="margin: 0 auto 80px">
-    <div class="team-block">
-      <div class="team-photo" aria-label="Equipe Easy"></div>
+  <!-- ─────────────── SEÇÃO 2: Criada com quem vive a rotina ─────────────── -->
+  <section class="team-section team-section--mirror" style="margin: 60px auto 30px">
+    <div class="team-block team-block--story">
       <div class="team-text">
-        <div class="pill-row"><span class="pill" style="background:var(--c-accent-soft);color:var(--c-accent);">Por trás da Easy</span></div>
-        <h2>Nascida dentro de<br><span style="color:var(--c-accent);">salões reais!</span></h2>
-        <p class="quote">A Easy é a parceria que transforma o caos da agenda em uma<br>operação previsível e profissional nos meus salões, barbearias e<br>estúdios de beleza.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="/quem-somos" style="width:177px;">Saiba mais</a>
-          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
-        </div>
+        <h2 style="font-size:32px;">Criada com quem vive a rotina <br>da beleza todos os dias</h2>
+        <p class="body">A Easy surgiu de uma verdade simples: <strong>A gestão do dia a dia nos salões, barbearias e estúdios é caótica.</strong></p>
+        <p class="body">Agenda confusa, equipe desorganizada, repasses sem clareza, WhatsApp explodindo e falta de previsibilidade no caixa.</p>
+        <p class="body">Ao lado de donos de salão, barbeiros, esteticistas e líderes do mercado, construímos uma plataforma simples e inteligente que resolve tudo isso na prática — sem complicar o que já é difícil.</p>
+        <p class="body">A Easy é tecnologia feita para a vida real.</p>
+        <p class="body">Simples, acessível e pensada para equipes que precisam de clareza para crescer.</p>
+      </div>
+      <div class="team-photo team-photo--edge" aria-label="Equipe Easy"></div>
+    </div>
+  </section>
+
+  <!-- ─────────────── SEÇÃO 3: Organizar o presente ─────────────── -->
+  <section class="section-card" style="margin: 30px auto 30px">
+    <h2>Organizar o presente. <span style="color:var(--c-accent);">Preparar o futuro.</span></h2>
+    <div class="grid-organize grid-organize--cols-3">
+      <div class="org-item">
+        <span class="num">01</span>
+        <h3 class="sub">Simplicidade como valor</h3>
+        <p class="copy">Coisas simples funcionam todos os dias. Por isso, a Easy foi criada para ser rápida, intuitiva e fácil de aprender.</p>
+      </div>
+      <div class="org-item">
+        <span class="num">02</span>
+        <h3 class="sub">Organização como base</h3>
+        <p class="copy">A agenda é o coração do negócio. Organizando ela, todo o resto começa a fluir naturalmente.</p>
+      </div>
+      <div class="org-item">
+        <span class="num">03</span>
+        <h3 class="sub">Inteligência aplicada ao dia a dia</h3>
+        <p class="copy">Automação e IA só fazem sentido quando resolvem problemas reais — e esse é o foco da Easy.</p>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── FAQ ─────────────── -->
-  <section class="faq-section">
-    <h2>Ficou com <em>dúvida</em>?</h2>
-    <div class="faq-list">
-      <details class="faq-item"><summary>A Easy funciona para estúdios com vários profissionais?</summary><div class="answer">Sim, a plataforma foi criada tanto para equipes quanto para profissionais individuais.</div></details>
-      <details class="faq-item"><summary>O sistema ajuda a reduzir faltas no estúdio?</summary><div class="answer">Sim, o agendamento em tempo real a qualquer hora reduz no-show e facilita para o cliente.</div></details>
-      <details class="faq-item"><summary>Cada profissional tem seu próprio acesso?</summary><div class="answer">Sim, cada profissional tem app para ver horários, atendimentos e percentuais.</div></details>
-      <details class="faq-item"><summary>A Easy organiza o caixa e percentuais?</summary><div class="answer">A Easy está em constante evolução para que tudo fique claro, organizado e automático.</div></details>
-      <details class="faq-item"><summary>Funciona em qualquer cidade do Brasil?</summary><div class="answer">Sim, basta ter acesso à internet.</div></details>
+  <!-- ─────────────── SEÇÃO 4: Ajudar profissionais ─────────────── -->
+  <section class="team-section team-section--mirror" style="margin: 30px auto 30px">
+    <div class="team-block">
+      <div class="team-text">
+        <h2>Ajudar profissionais da <br>beleza a crescer com <br>clareza e tranquilidade</h2>
+        <p class="body">Um negócio da beleza não deveria depender de planilhas, agendas improvisadas e mensagens perdidas no WhatsApp.</p>
+        <p class="body">Ele merece previsibilidade, organização e uma operação que funcione sozinha.</p>
+        <p class="body accent"><strong>A Easy existe para isso:</strong></p>
+        <p class="body">Para transformar rotina em crescimento, dia após dia.</p>
+      </div>
+      <div class="team-photo team-photo--placeholder" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ─────────────── SEÇÃO 5: Veja a Easy (partial reutilizado) ─────────────── -->
+  <div data-include="/partials/section-veja.html"></div>
+
+  <!-- ─────────────── SEÇÃO 6: Imprensa e Contato ─────────────── -->
+  <section class="team-section team-section--mirror" style="margin: 30px auto 80px">
+    <div class="team-block">
+      <div class="team-text">
+        <h2>Imprensa e <br>Contato Profissional</h2>
+        <p class="body">A Easy está disponível para entrevistas, matérias e participações sobre tecnologia aplicada ao mercado da beleza, organização operacional, automações, IA para WhatsApp e gestão de salões, barbearias e estúdios.</p>
+        <p class="body"><strong>Material institucional Solicitações específicas:</strong></p>
+        <p class="body">Eventos, entrevistas, podcasts e estudos sobre o setor podem ser solicitados pelo e-mail acima.</p>
+        <p class="body"><strong style="color:var(--c-accent);">Assessoria de Imprensa:</strong><br>marketing@easysalon.com.br</p>
+      </div>
+      <div class="team-photo team-photo--flor" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -319,55 +202,54 @@ completa.</p>
 </div>
 
 <script>
-  // BlurFade observer (mestre)
+  // Include processor — fetches /partials/*.html and replaces [data-include] placeholders.
+  (function () {
+    var includes = document.querySelectorAll('[data-include]');
+    includes.forEach(function (placeholder) {
+      var url = placeholder.getAttribute('data-include');
+      var xhr = new XMLHttpRequest();
+      var bust = url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + Date.now();
+      xhr.open('GET', bust, false);
+      xhr.setRequestHeader('Cache-Control', 'no-cache');
+      try {
+        xhr.send();
+        if (xhr.status >= 200 && xhr.status < 300) {
+          var temp = document.createElement('div');
+          temp.innerHTML = xhr.responseText;
+          while (temp.firstChild) {
+            placeholder.parentNode.insertBefore(temp.firstChild, placeholder);
+          }
+          placeholder.parentNode.removeChild(placeholder);
+        }
+      } catch (e) {
+        console.error('include failed:', url, e);
+      }
+    });
+  })();
+</script>
+
+<script>
+  // BlurFade observer
   (function () {
     if (!('IntersectionObserver' in window)) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return;
-    var nodes = document.querySelectorAll('.nav-inner > *, .sol-hero > *, .hero-grid > *, .step-row > *, .pq-grid > *, .team-block > *, .faq-list > *, .footer-cta-left > *, .footer-cta-right > *, .footer-bottom > *');
+    var nodes = document.querySelectorAll('.nav-inner > *, .plans-hero > *, .team-block > *, .section-card h2, .section-card .org-item, .section-veja .pill, .section-veja .veja-sub, .section-veja .btn-cta-row, .veja-card, .footer-cta-left > *, .footer-cta-right > *, .footer-bottom > *');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     nodes.forEach(function (n, i) { n.style.transitionDelay = Math.min((i % 6) * 90, 540) + 'ms'; io.observe(n); });
-  })();
 
-  // Timeline (5 passos) — linha vertical que se preenche conforme o scroll.
-  // Para cada .step-row, mede a altura disponível do segmento e define
-  // --tl-progress entre 0 e essa altura, baseado em quanto da linha já
-  // passou pelo "ponto-gatilho" no viewport (centro inferior).
-  (function () {
-    var rows = Array.prototype.slice.call(document.querySelectorAll('.step-row'));
-    if (!rows.length) return;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function update() {
-      var triggerY = window.innerHeight * 0.62; // ponto onde a linha "chega" no viewport
-      rows.forEach(function (row) {
-        var seg = row.querySelector('.tl-seg');
-        if (!seg) return;
-        var rect = seg.getBoundingClientRect();
-        if (rect.height <= 0) return;
-        var filled;
-        if (reduce) {
-          // sem animação: linha cheia se já passou
-          filled = (rect.top < triggerY) ? rect.height : 0;
-        } else {
-          var offset = triggerY - rect.top;
-          filled = Math.max(0, Math.min(rect.height, offset));
-        }
-        row.style.setProperty('--tl-progress', filled.toFixed(1) + 'px');
+    // Reveal above-the-fold immediately (nav + hero), sem esperar scroll
+    var aboveFold = [];
+    nodes.forEach(function (el) {
+      if (el.matches('.nav-inner > *, .plans-hero > *')) aboveFold.push(el);
+    });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        aboveFold.forEach(function (el) { el.classList.add('is-in'); io.unobserve(el); });
       });
-    }
-
-    var ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () { update(); ticking = false; });
-    }
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    });
   })();
 
   // Nav scroll shadow
@@ -399,25 +281,17 @@ completa.</p>
     window.addEventListener('hashchange', setActive);
   })();
 
-  // Dropdown menu — comportamento canônico (igual home): abre no hover,
-  // fecha ao sair com delay de 120ms (forgiveness pra gap), ESC fecha,
-  // click fora fecha. Suporta múltiplos .dropdown na página.
+  // Dropdown menu
   (function () {
     document.querySelectorAll('.dropdown').forEach(function (dd) {
       var trigger = dd.querySelector('.dropdown-trigger');
       var content = dd.querySelector('.dropdown-content');
       if (!trigger || !content) return;
-
       function setOpen(open) {
         dd.setAttribute('data-state', open ? 'open' : 'closed');
         trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
       }
-
-      trigger.addEventListener('click', function (e) {
-        e.stopPropagation();
-      });
-
-      // Hover to open / leave to close (with small delay so the gap forgives)
+      trigger.addEventListener('click', function (e) { e.stopPropagation(); });
       var closeTimer = null;
       function scheduleClose() {
         clearTimeout(closeTimer);
@@ -426,345 +300,34 @@ completa.</p>
       function cancelClose() { clearTimeout(closeTimer); }
       dd.addEventListener('mouseenter', function () { cancelClose(); setOpen(true); });
       dd.addEventListener('mouseleave', scheduleClose);
-
-      document.addEventListener('click', function (e) {
-        if (!dd.contains(e.target)) setOpen(false);
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setOpen(false);
-      });
+      document.addEventListener('click', function (e) { if (!dd.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
     });
   })();
 
-  // ─── Mobile drawer + logo clone (mestre / igual à home) ───
+  // Mobile drawer
   (function () {
     var burger = document.querySelector('.nav-burger');
     var drawer = document.getElementById('mobile-drawer');
     var backdrop = document.querySelector('[data-drawer-backdrop]');
     var closeBtn = drawer && drawer.querySelector('.drawer-close');
-    var logoSlot = drawer && drawer.querySelector('[data-drawer-logo]');
-    var navLogo = document.querySelector('.nav-logo svg');
-
-    // Clone the nav logo into the drawer head (smaller).
-    if (logoSlot && navLogo) {
-      var clone = navLogo.cloneNode(true);
-      clone.setAttribute('width', '120');
-      clone.setAttribute('height', '16');
-      clone.removeAttribute('aria-label');
-      logoSlot.appendChild(clone);
-    }
-
     if (!burger || !drawer || !backdrop) return;
-
     function setOpen(open) {
       drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
       drawer.classList.toggle('is-open', open);
-      backdrop.hidden = !open;
-      backdrop.classList.toggle('is-visible', open);
+      backdrop.toggleAttribute('hidden', !open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       document.body.style.overflow = open ? 'hidden' : '';
     }
-
     burger.addEventListener('click', function () { setOpen(true); });
-    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
     backdrop.addEventListener('click', function () { setOpen(false); });
-    drawer.querySelectorAll('.drawer-link').forEach(function (a) {
-      a.addEventListener('click', function () { setOpen(false); });
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setOpen(false);
-    });
-  })();
-</script>
-
-<script>
-// Interactive chat with typewriter effect
-  (function () {
-    var feed = document.getElementById('chat-feed');
-    if (!feed) return;
-
-    // Conversation script — runs in a loop (apenas serviços de salão de beleza)
-    var scripts = [
-      // ─── Conversa 1: Estúdio (Fernanda) — Extensão de Cílios ───
-      [
-        { side: 'out', author: 'Fernanda R.',  html: 'Oi! Tem horário pra <strong>extensão de cílios</strong> essa semana?' },
-        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',      html: 'Oi Fernanda! Tenho <strong>terça às 14h</strong> ou <strong>quinta às 10h</strong> com a Camila. Qual prefere?' },
-        { side: 'out', author: 'Fernanda R.',  html: 'Terça às 14h perfeito 😍' },
-        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1300 },
-        { side: 'in',  author: 'Easy IA',      html: 'Reservado! Separa 2h pra procedimento completo.' },
-        { side: 'in',  author: 'Easy IA',      type: 'card', card: {
-            title: 'Agendamento confirmado',
-            rows: [
-              ['Serviço',      'Extensão de Cílios'],
-              ['Profissional', 'Camila'],
-              ['Quando',       'Ter · 14:00 — 16:00'],
-              ['Total',        'R$ 180,00'],
-            ]
-        }},
-        { side: 'out', author: 'Fernanda R.',  html: 'Ótimo, obrigada!' },
-        { side: 'in',  author: 'Easy IA',      html: 'Até terça! Mando lembrete na véspera 💌' },
-      ],
-      // ─── Conversa 2: Estúdio (Beatriz) — Design de Sobrancelha + Henna ───
-      [
-        { side: 'out', author: 'Beatriz M.',   html: 'Dá pra fazer <strong>design de sobrancelha com henna</strong>?' },
-        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',      html: 'Oi Beatriz! Tenho <strong>sexta às 11h</strong> com a Larissa. Posso reservar?' },
-        { side: 'out', author: 'Beatriz M.',   html: 'Pode sim! 🙌' },
-        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1200 },
-        { side: 'in',  author: 'Easy IA',      html: 'Feito! Reservei 1h pra você.' },
-        { side: 'in',  author: 'Easy IA',      type: 'card', card: {
-            title: 'Agendamento confirmado',
-            rows: [
-              ['Serviço',      'Design + Henna'],
-              ['Profissional', 'Larissa'],
-              ['Quando',       'Sex · 11:00 — 12:00'],
-              ['Total',        'R$ 90,00'],
-            ]
-        }},
-        { side: 'out', author: 'Beatriz M.',   html: 'Perfeito, obrigada!' },
-        { side: 'in',  author: 'Easy IA',      html: 'Até sexta! Te aviso na quinta 💌' },
-      ],
-      // ─── Conversa 3: Estúdio (Juliana) — Limpeza de Pele + Hidratação ───
-      [
-        { side: 'out', author: 'Juliana C.',   html: 'Oi! Quero fazer <strong>limpeza de pele e hidratação facial</strong> ✨' },
-        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',      html: 'Oi Juliana! Tenho <strong>sábado às 9h</strong> com a Mônica. Reservo pra você?' },
-        { side: 'out', author: 'Juliana C.',   html: 'Sim, por favor 🌿' },
-        { side: 'in',  author: 'Easy IA',      type: 'typing', dur: 1300 },
-        { side: 'in',  author: 'Easy IA',      html: 'Pronto! Bloqueei 1h30 na agenda.' },
-        { side: 'in',  author: 'Easy IA',      type: 'card', card: {
-            title: 'Agendamento confirmado',
-            rows: [
-              ['Serviço',      'Limpeza + Hidratação'],
-              ['Profissional', 'Mônica'],
-              ['Quando',       'Sáb · 09:00 — 10:30'],
-              ['Total',        'R$ 220,00'],
-            ]
-        }},
-        { side: 'out', author: 'Juliana C.',   html: 'Maravilha!' },
-        { side: 'in',  author: 'Easy IA',      html: 'Até sábado! Lembrete chega na sexta ⏰' },
-      ],
-    ];
-
-    function makeMsg(side, author) {
-      var wrap = document.createElement('div');
-      wrap.className = 'msg msg-' + (side === 'out' ? 'outgoing' : 'incoming');
-      if (author) {
-        var a = document.createElement('span');
-        a.className = 'author';
-        if (side === 'in') a.innerHTML = '<span style="color: rgb(206, 72, 54);">' + author + '</span>';
-        else a.textContent = author;
-        wrap.appendChild(a);
-      }
-      return wrap;
-    }
-    function makeBubble(side) {
-      var b = document.createElement('div');
-      b.className = 'bubble';
-      if (side === 'in') b.style.backgroundColor = 'rgb(243, 228, 221)';
-      return b;
-    }
-    function makeTyping() {
-      var t = document.createElement('div');
-      t.className = 'typing';
-      t.style.backgroundColor = 'rgb(243, 228, 221)';
-      t.innerHTML = '<span></span><span></span><span></span>';
-      return t;
-    }
-    function makeCard(c) {
-      var card = document.createElement('div');
-      card.className = 'confirm-card';
-      var head = document.createElement('div');
-      head.className = 'confirm-head';
-      head.innerHTML = '<span class="confirm-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6 L5 8.5 L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' + c.title;
-      card.appendChild(head);
-      var rows = document.createElement('div');
-      rows.className = 'confirm-rows';
-      c.rows.forEach(function (r) {
-        var k = document.createElement('span'); k.className = 'k'; k.textContent = r[0];
-        var v = document.createElement('span'); v.className = 'v'; v.textContent = r[1];
-        rows.appendChild(k); rows.appendChild(v);
-      });
-      card.appendChild(rows);
-      return card;
-    }
-
-    function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
-
-    function pruneOverflow() {
-      // Drop oldest visible messages while content overflows the feed.
-      while (feed.scrollHeight > feed.clientHeight + 1 && feed.children.length > 1) {
-        var first = feed.firstElementChild;
-        first.classList.add('is-fading');
-        // remove after fade
-        feed.removeChild(first);
-      }
-    }
-
-    async function typeInto(el, html, speed) {
-      // Animates text content while preserving inline tags (parses HTML, walks tree).
-      var tmp = document.createElement('div');
-      tmp.innerHTML = html;
-      var nodes = [];
-      (function walk(parent, dest) {
-        parent.childNodes.forEach(function (n) {
-          if (n.nodeType === 3) {
-            nodes.push({ kind: 'text', text: n.nodeValue, dest: dest });
-          } else if (n.nodeType === 1) {
-            var clone = n.cloneNode(false);
-            dest.appendChild(clone);
-            walk(n, clone);
-          }
-        });
-      })(tmp, el);
-
-      // Re-walk: we need to *type* the text, so recreate without text first
-      el.innerHTML = '';
-      var struct = [];
-      (function rebuild(parent, dest) {
-        parent.childNodes.forEach(function (n) {
-          if (n.nodeType === 3) {
-            var t = document.createTextNode('');
-            dest.appendChild(t);
-            struct.push({ node: t, text: n.nodeValue });
-          } else if (n.nodeType === 1) {
-            var c = n.cloneNode(false);
-            dest.appendChild(c);
-            rebuild(n, c);
-          }
-        });
-      })(tmp, el);
-
-      var cursor = document.createElement('span');
-      cursor.className = 'tw-cursor';
-      el.appendChild(cursor);
-
-      for (var i = 0; i < struct.length; i++) {
-        var seg = struct[i];
-        var chars = Array.from(seg.text);
-        for (var j = 0; j < chars.length; j++) {
-          var ch = chars[j];
-          seg.node.nodeValue += ch;
-          // keep cursor at end
-          el.appendChild(cursor);
-          pruneOverflow();
-          // Natural pacing: jitter + longer pauses on punctuation
-          var base = speed + (Math.random() * 30 - 10); // ±10ms jitter, +0-20ms
-          if (ch === ',' || ch === ';') base += 120;
-          else if (ch === '.' || ch === '!' || ch === '?') base += 180;
-          else if (ch === ' ') base += 20;
-          await sleep(Math.max(20, base));
-        }
-      }
-      cursor.remove();
-    }
-
-    async function showStep(step) {
-      var msg = makeMsg(step.side, step.author);
-      var content;
-      if (step.type === 'typing') {
-        content = makeTyping();
-        msg.appendChild(content);
-        feed.appendChild(msg);
-        requestAnimationFrame(function () { msg.classList.add('is-visible'); });
-        pruneOverflow();
-        await sleep(step.dur || 800);
-        msg.classList.add('is-fading');
-        await sleep(300);
-        msg.remove();
-        return;
-      }
-      if (step.type === 'card') {
-        content = makeCard(step.card);
-        msg.appendChild(content);
-        feed.appendChild(msg);
-        requestAnimationFrame(function () { msg.classList.add('is-visible'); });
-        pruneOverflow();
-        return;
-      }
-      content = makeBubble(step.side);
-      msg.appendChild(content);
-      feed.appendChild(msg);
-      requestAnimationFrame(function () { msg.classList.add('is-visible'); });
-      pruneOverflow();
-      await typeInto(content, step.html, step.side === 'out' ? 55 : 45);
-    }
-
-    async function run() {
-      // Intersection observer — only animate when chat is visible
-      var visible = false;
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { visible = e.isIntersecting; });
-      }, { threshold: 0.25 });
-      io.observe(feed);
-
-      var convoIdx = 0;
-      while (true) {
-        var script = scripts[convoIdx];
-        for (var i = 0; i < script.length; i++) {
-          // Wait until visible
-          while (!visible) await sleep(300);
-          await showStep(script[i]);
-          // Hold between steps
-          await sleep(script[i].type === 'typing' ? 300 : (script[i].type === 'card' ? 2400 : 1800));
-        }
-        // End of conversation: clear feed and move to next
-        await sleep(1200);
-        Array.from(feed.children).forEach(function (m) { m.classList.add('is-fading'); });
-        await sleep(500);
-        feed.innerHTML = '';
-        convoIdx = (convoIdx + 1) % scripts.length;
-      }
-    }
-
-    run();
-  })();
-</script>
-
-<script>
-  // FAQ accordion: wrap each .answer in animatable structure + toggle [open]
-  // Animation handled in CSS via grid-template-rows + opacity (shadcn-style)
-  (function () {
-    document.querySelectorAll('.faq-item').forEach(function (item) {
-      var summary = item.querySelector('summary');
-      var answer  = item.querySelector('.answer');
-      if (!summary || !answer) return;
-
-      // marker (sparkle) — substitui o ::after pra ficar consistente com transitions
-      if (!summary.querySelector('.marker')) {
-        var marker = document.createElement('span');
-        marker.className = 'marker';
-        marker.setAttribute('aria-hidden', 'true');
-        summary.appendChild(marker);
-      }
-
-      // Envolve .answer em wrap + inner pra animar grid-template-rows
-      if (!item.querySelector('.answer-wrap')) {
-        var wrap = document.createElement('div');
-        wrap.className = 'answer-wrap';
-        var inner = document.createElement('div');
-        inner.className = 'answer-inner';
-        answer.parentNode.insertBefore(wrap, answer);
-        inner.appendChild(answer);
-        wrap.appendChild(inner);
-      }
-
-      // Hijack o clique pra animar o fechamento (caso contrário o <details> some na hora)
-      summary.addEventListener('click', function (e) {
-        if (item.hasAttribute('open')) {
-          e.preventDefault();
-          // Espera a transição de saída (mesma duração do CSS) antes de remover [open]
-          item.classList.add('closing');
-          setTimeout(function () {
-            item.removeAttribute('open');
-            item.classList.remove('closing');
-          }, 350);
-        }
-      });
+    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+    drawer.querySelectorAll('.drawer-link, .drawer-cta a').forEach(function (link) {
+      link.addEventListener('click', function () { setOpen(false); });
     });
   })();
 </script>
+
 </body>
 </html>

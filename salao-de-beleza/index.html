@@ -35,7 +35,7 @@
             <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a href="/#quem-somos">Quem somos</a>
+        <a href="/quem-somos">Quem somos</a>
         <a href="/planos">Planos</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
@@ -222,7 +222,7 @@ R$ 30 mil em equipe.</p>
         <h2>Nascida dentro de<br><span style="color:var(--c-accent);">salões reais!</span></h2>
         <p class="quote">A Easy é a parceria que transforma o caos da agenda em uma<br>operação previsível e profissional nos meus salões, barbearias e<br>estúdios de beleza.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="/#quem-somos" style="width:177px;">Saiba mais</a>
+          <a class="btn btn-primary" href="/quem-somos" style="width:177px;">Saiba mais</a>
           <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
         </div>
       </div>
@@ -277,7 +277,7 @@ R$ 30 mil em equipe.</p>
           <a href="/barbearia">Barbearia</a>
           <a href="/estudio-de-beleza">Estúdio de beleza</a>
           <a href="/planos">Planos</a>
-          <a href="/#quem-somos">Quem somos</a>
+          <a href="/quem-somos">Quem somos</a>
           <a href="/#termos">Termos de uso</a>
         </nav>
       </div>
@@ -305,7 +305,7 @@ R$ 30 mil em equipe.</p>
       <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
       <a class="drawer-link" href="/barbearia">Barbearia</a>
       <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
-      <a class="drawer-link" href="/#quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/quem-somos">Quem somos</a>
       <a class="drawer-link" href="/planos">Planos</a>
     </nav>
     <div class="drawer-cta">
@@ -375,6 +375,26 @@ R$ 30 mil em equipe.</p>
     var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 8); };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // Nav active link (Planos / Quem somos)
+  (function () {
+    function setActive() {
+      var path = location.pathname.replace(/\/$/, '');
+      var hash = location.hash;
+      document.querySelectorAll('.nav-links a').forEach(function (a) {
+        var href = a.getAttribute('href') || '';
+        var hashIdx = href.indexOf('#');
+        var hrefPath = (hashIdx === -1 ? href : href.substring(0, hashIdx)).replace(/\/$/, '');
+        var hrefHash = hashIdx === -1 ? '' : href.substring(hashIdx);
+        var active = hrefHash
+          ? (hrefPath === path && hrefHash === hash)
+          : (hrefPath === path);
+        a.classList.toggle('active', active);
+      });
+    }
+    setActive();
+    window.addEventListener('hashchange', setActive);
   })();
 
   // Dropdown menu — comportamento canônico (igual home): abre no hover,

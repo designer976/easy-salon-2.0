@@ -35,7 +35,7 @@
             <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a href="/#quem-somos">Quem somos</a>
+        <a href="/quem-somos">Quem somos</a>
         <a href="/planos">Planos</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
@@ -451,7 +451,7 @@
           <a href="/barbearia">Barbearia</a>
           <a href="/estudio-de-beleza">Estúdio de beleza</a>
           <a href="/planos">Planos</a>
-          <a href="/#quem-somos">Quem somos</a>
+          <a href="/quem-somos">Quem somos</a>
           <a href="/#termos">Termos de uso</a>
         </nav>
       </div>
@@ -479,7 +479,7 @@
       <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
       <a class="drawer-link" href="/barbearia">Barbearia</a>
       <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
-      <a class="drawer-link" href="/#quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/quem-somos">Quem somos</a>
       <a class="drawer-link" href="/planos">Planos</a>
     </nav>
     <div class="drawer-cta">
@@ -573,6 +573,26 @@
     var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 8); };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // Nav active link (Planos / Quem somos)
+  (function () {
+    function setActive() {
+      var path = location.pathname.replace(/\/$/, '');
+      var hash = location.hash;
+      document.querySelectorAll('.nav-links a').forEach(function (a) {
+        var href = a.getAttribute('href') || '';
+        var hashIdx = href.indexOf('#');
+        var hrefPath = (hashIdx === -1 ? href : href.substring(0, hashIdx)).replace(/\/$/, '');
+        var hrefHash = hashIdx === -1 ? '' : href.substring(hashIdx);
+        var active = hrefHash
+          ? (hrefPath === path && hrefHash === hash)
+          : (hrefPath === path);
+        a.classList.toggle('active', active);
+      });
+    }
+    setActive();
+    window.addEventListener('hashchange', setActive);
   })();
 
   // Dropdown menu
