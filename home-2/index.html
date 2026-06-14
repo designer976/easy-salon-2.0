@@ -15,6 +15,41 @@
 
   [data-screen-label="Home-2"] .h2-wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
+  /* BlurFade inicial — necessário para o efeito scroll-in funcionar nos seletores .h2-* */
+  [data-screen-label="Home-2"] .h2-hero-text > *,
+  [data-screen-label="Home-2"] .h2-hero-img,
+  [data-screen-label="Home-2"] .h2-section-head > *,
+  [data-screen-label="Home-2"] .h2-card,
+  [data-screen-label="Home-2"] .h2-step,
+  [data-screen-label="Home-2"] .h2-method-panel,
+  [data-screen-label="Home-2"] .h2-compare,
+  [data-screen-label="Home-2"] .h2-neg-card,
+  [data-screen-label="Home-2"] .h2-ia-card,
+  [data-screen-label="Home-2"] .h2-cta-final-box > * {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(18px);
+    transition:
+      opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, filter, transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-screen-label="Home-2"] .h2-hero-text > *,
+    [data-screen-label="Home-2"] .h2-hero-img,
+    [data-screen-label="Home-2"] .h2-section-head > *,
+    [data-screen-label="Home-2"] .h2-card,
+    [data-screen-label="Home-2"] .h2-step,
+    [data-screen-label="Home-2"] .h2-method-panel,
+    [data-screen-label="Home-2"] .h2-compare,
+    [data-screen-label="Home-2"] .h2-neg-card,
+    [data-screen-label="Home-2"] .h2-ia-card,
+    [data-screen-label="Home-2"] .h2-cta-final-box > * {
+      opacity: 1; filter: none; transform: none; transition: none;
+    }
+  }
+
   /* Section base */
   [data-screen-label="Home-2"] .h2-section { max-width: 1200px; margin: 0 auto; padding: 50px 0; }
   [data-screen-label="Home-2"] .h2-section-head { text-align: center; margin: 0 auto 40px; max-width: 920px; }
@@ -902,10 +937,9 @@
     nodes.forEach(function (el) { io.observe(el); });
 
     // Initial reveal: above-the-fold elements (nav + hero) animate in on load.
-    var aboveFoldSelectors = '.nav-inner > *, .hero-top > *, .hero-bleed *';
     var aboveFold = [];
     nodes.forEach(function (el) {
-      if (el.matches('.nav-inner > *, .hero-top > *') || el.closest('.hero-bleed')) {
+      if (el.matches('.nav-inner > *') || el.closest('.h2-hero')) {
         aboveFold.push(el);
       }
     });
