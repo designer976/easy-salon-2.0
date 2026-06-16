@@ -63,6 +63,12 @@
   [data-screen-label="Home-2"] .h2-section:has(.h2-grid-3) { padding-top: 80px; padding-bottom: 0; }
   [data-screen-label="Home-2"] .h2-section:has(.h2-grid-4) { padding-top: 80px; padding-bottom: 0; }
   [data-screen-label="Home-2"] footer.footer-bleed { margin-top: 0; }
+  [data-screen-label="Home-2"] .nav-links { gap: 20px; }
+  /* Swap: logo na esquerda, menu no centro, CTA na direita — colunas auto 1fr auto (gap visual igual) */
+  [data-screen-label="Home-2"] .nav-inner { grid-template-columns: auto 1fr auto; }
+  [data-screen-label="Home-2"] .nav-logo { order: -1; justify-self: start; }
+  [data-screen-label="Home-2"] .nav-links { order: 0; justify-self: center; }
+  [data-screen-label="Home-2"] .nav-cta { order: 1; justify-self: end; }
   [data-screen-label="Home-2"] .h2-section-head {
     text-align: center; margin: 0 auto 30px; max-width: 760px; padding: 0 24px;
   }
@@ -187,7 +193,7 @@
   [data-screen-label="Home-2"] .h2-gallery-cap {
     flex: 0 0 300px;
     padding: 248px 0;
-    font-family: var(--ff-display); font-size: 22px; font-weight: 400;
+    font-family: var(--ff-display); font-size: 20px; font-weight: 400;
     color: var(--c-text);
   }
   [data-screen-label="Home-2"] .h2-gallery-cap:has(.h2-cap-3l) { padding: 233px 0; }
@@ -322,7 +328,7 @@
     color: var(--c-text); opacity: 0.55;
   }
   [data-screen-label="Home-2"] .h2-method-panel h3 {
-    font-family: var(--ff-display); font-weight: 700; font-size: 25px;
+    font-family: var(--ff-display); font-weight: 700; font-size: 20px;
     line-height: 1.15; color: var(--c-accent); margin: 0 0 8px;
   }
   [data-screen-label="Home-2"] .h2-method-panel p {
@@ -364,7 +370,7 @@
   [data-screen-label="Home-2"] .h2-compare-list li {
     display: flex; align-items: center; gap: 14px;
     width: fit-content;
-    font-family: var(--ff-text); font-size: 15px; line-height: 1.4; font-weight: 600;
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.4; font-weight: 600;
     color: var(--c-text);
   }
   [data-screen-label="Home-2"] .h2-compare-col--neg .h2-compare-list li { opacity: 0.5; }
@@ -389,6 +395,8 @@
   [data-screen-label="Home-2"] .h2-compare-cta {
     display: flex; justify-content: center; gap: 12px; margin-top: 50px;
   }
+  /* Dots only visível em mobile (≤640) — escondidos por default */
+  [data-screen-label="Home-2"] .h2-compare-dots { display: none; }
 
   /* Negócios atendidos (3 cards) */
   [data-screen-label="Home-2"] .h2-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
@@ -402,7 +410,7 @@
     background-size: cover; background-position: center; background-repeat: no-repeat;
   }
   [data-screen-label="Home-2"] .h2-neg-card h3 {
-    font-family: var(--ff-display); font-weight: 400; font-size: 22px;
+    font-family: var(--ff-display); font-weight: 400; font-size: 20px;
     color: var(--c-text); margin: 0 0 10px;
   }
   [data-screen-label="Home-2"] .h2-neg-card p {
@@ -410,7 +418,7 @@
     color: var(--c-text); opacity: 0.7; margin: 0 0 18px; flex: 1;
   }
   [data-screen-label="Home-2"] .h2-neg-link {
-    font-family: var(--ff-text); font-size: 14px; font-weight: 500;
+    font-family: var(--ff-text); font-size: 13px; font-weight: 700;
     color: var(--c-accent); align-self: flex-start; text-decoration: none;
     display: inline-flex; align-items: center; gap: 6px;
     transition: opacity .2s ease;
@@ -471,35 +479,282 @@
     max-width: 440px; margin: 18px auto 0;
   }
 
-  /* Mobile */
-  @media (max-width: 900px) {
-    [data-screen-label="Home-2"] .h2-hero-grid,
-    [data-screen-label="Home-2"] .h2-bento,
-    [data-screen-label="Home-2"] .h2-grid-3,
-    [data-screen-label="Home-2"] .h2-grid-4,
-    [data-screen-label="Home-2"] .h2-method { grid-template-columns: 1fr; }
-    [data-screen-label="Home-2"] .h2-compare-head,
-    [data-screen-label="Home-2"] .h2-compare-row { grid-template-columns: 1fr; }
-    [data-screen-label="Home-2"] .h2-compare-head > div:first-child,
-    [data-screen-label="Home-2"] .h2-compare-row > div:first-child {
-      border-right: none; border-bottom: 1px solid rgba(115, 42, 29, 0.08);
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE — Tablet + Mobile (max-width: 1024px)
+     Opção A: tudo colapsa para 1 coluna (lógica única).
+     Refinos finos pra mobile virão em @media (max-width: 640px).
+     ═══════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    /* ── Nav: burger em tablet+mobile (override DS) ── */
+    [data-screen-label="Home-2"] .nav-links { display: none; }
+    [data-screen-label="Home-2"] .nav-cta { display: none; }
+    [data-screen-label="Home-2"] .nav-burger {
+      display: inline-flex; justify-self: end; order: 2;
     }
-    [data-screen-label="Home-2"] .h2-section { padding: 0; }
-    [data-screen-label="Home-2"] .h2-hero { padding: 24px 16px 48px; }
-    [data-screen-label="Home-2"] .h2-section-head h2,
-    [data-screen-label="Home-2"] .h2-cta-final-box h2 { font-size: 28px; }
-    [data-screen-label="Home-2"] .h2-section-head h2 { white-space: normal; }
-    [data-screen-label="Home-2"] .h2-section-head { padding: 0 16px; }
-    [data-screen-label="Home-2"] .h2-hero-text h1 { font-size: 32px; }
-    [data-screen-label="Home-2"] .h2-method-panel h3 { font-size: 22px; }
-    [data-screen-label="Home-2"] .h2-card { padding: 22px; min-height: 280px; }
+
+    /* ── Section base + heads ── */
+    [data-screen-label="Home-2"] .h2-section { padding: 60px 0; }
+    [data-screen-label="Home-2"] #h2-method-section,
+    [data-screen-label="Home-2"] .h2-section:has(.h2-grid-3),
+    [data-screen-label="Home-2"] .h2-section:has(.h2-grid-4) { padding-top: 60px; padding-bottom: 0; }
+    [data-screen-label="Home-2"] .h2-section:has(.h2-section-head--left) { padding-top: 60px; padding-bottom: 0; }
+    [data-screen-label="Home-2"] .h2-section-head { padding: 0 24px; }
+    [data-screen-label="Home-2"] .h2-section-head h2 {
+      font-size: 28px; white-space: normal;
+    }
+    [data-screen-label="Home-2"] .h2-section-head--left {
+      flex-direction: column; align-items: flex-start; gap: 12px;
+      padding: 0 24px; margin: 0 0 32px;
+    }
+
+    /* ── 1. HERO ── */
+    [data-screen-label="Home-2"] .h2-hero { padding: 20px 24px 60px; }
+    [data-screen-label="Home-2"] .h2-hero-grid {
+      grid-template-columns: 1fr; gap: 32px;
+    }
+    [data-screen-label="Home-2"] .h2-hero-text h1 {
+      font-size: 40px; white-space: normal;
+    }
+    [data-screen-label="Home-2"] .h2-hero-text p { max-width: 100%; }
+    [data-screen-label="Home-2"] .h2-hero-img {
+      width: 100%; height: auto; aspect-ratio: 702 / 420;
+    }
+
+    /* ── 2. GALLERY / CAROUSEL ── */
     [data-screen-label="Home-2"] .h2-gallery-card {
-      flex: 0 0 calc(100vw - 32px); height: auto;
-      padding: 22px; flex-direction: column; gap: 22px;
+      flex: 0 0 calc(100vw - 48px); height: auto;
+      padding: 24px; flex-direction: column; gap: 24px;
+      border-radius: 16px;
     }
-    [data-screen-label="Home-2"] .h2-gallery-img { min-height: 220px; }
-    [data-screen-label="Home-2"] .h2-gallery-cap { flex: none; font-size: 17px; }
+    [data-screen-label="Home-2"] .h2-gallery-img-wrap {
+      flex: none; padding-top: 0; aspect-ratio: 16 / 10;
+    }
+    [data-screen-label="Home-2"] .h2-gallery-img { border-radius: 12px; }
+    [data-screen-label="Home-2"] .h2-gallery-cap,
+    [data-screen-label="Home-2"] .h2-gallery-cap:has(.h2-cap-3l) {
+      flex: none; padding: 0; font-size: 18px;
+    }
+    [data-screen-label="Home-2"] .h2-gallery-cap strong,
+    [data-screen-label="Home-2"] .h2-gallery-cap span,
+    [data-screen-label="Home-2"] .h2-gallery-cap span.h2-cap-3l {
+      height: auto; line-height: 1.4;
+    }
+
+    /* ── 3. METHOD ── */
+    [data-screen-label="Home-2"] .h2-method { padding: 0; }
+    [data-screen-label="Home-2"] .h2-method-list {
+      overflow-x: auto;
+      padding: 0 24px 8px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    [data-screen-label="Home-2"] .h2-method-list::-webkit-scrollbar { display: none; }
+    [data-screen-label="Home-2"] .h2-step,
+    [data-screen-label="Home-2"] .h2-step[data-step="3"] { flex: 0 0 auto; }
+    [data-screen-label="Home-2"] .h2-method-panel {
+      grid-template-columns: 1fr; gap: 0;
+      min-height: auto;
+      margin: 0 24px;
+    }
+    [data-screen-label="Home-2"] .h2-method-panel-text {
+      margin-left: 0; padding: 56px 24px 24px;
+    }
+    [data-screen-label="Home-2"] .h2-method-panel h3 { font-size: 22px; }
+    [data-screen-label="Home-2"] .h2-method-panel-img-wrap {
+      padding: 0; aspect-ratio: 16 / 9;
+    }
+    [data-screen-label="Home-2"] .h2-method-panel-img {
+      border-radius: 0 0 20px 20px;
+    }
+
+    /* ── 4. COMPARE ── */
+    [data-screen-label="Home-2"] .h2-section:has(.h2-compare) {
+      margin: 32px 24px 0; padding: 40px 24px;
+    }
+    [data-screen-label="Home-2"] .h2-compare {
+      grid-template-columns: 1fr; gap: 28px;
+    }
+    [data-screen-label="Home-2"] .h2-compare-col,
+    [data-screen-label="Home-2"] .h2-compare-col--neg,
+    [data-screen-label="Home-2"] .h2-compare-col--pos {
+      justify-self: stretch; width: 100%;
+    }
+    [data-screen-label="Home-2"] .h2-compare-col h3 { margin-bottom: 18px; }
+    [data-screen-label="Home-2"] .h2-compare-divider {
+      flex-direction: row; padding: 0; gap: 8px; width: 100%;
+    }
+    [data-screen-label="Home-2"] .h2-compare-divider::before,
+    [data-screen-label="Home-2"] .h2-compare-divider::after {
+      width: 100%; height: 1px;
+    }
+    [data-screen-label="Home-2"] .h2-compare-cta { margin-top: 32px; }
+
+    /* ── 5. NEGÓCIOS ── */
+    [data-screen-label="Home-2"] .h2-grid-3 {
+      grid-template-columns: 1fr; gap: 16px; padding: 0 24px;
+    }
+    [data-screen-label="Home-2"] .h2-neg-card { height: auto; min-height: 380px; }
+
+    /* ── 6. IA ── */
+    [data-screen-label="Home-2"] .h2-grid-4 {
+      grid-template-columns: 1fr; gap: 16px; padding: 0 24px;
+    }
+    [data-screen-label="Home-2"] .h2-ia-card {
+      min-height: auto; padding: 24px;
+    }
+    [data-screen-label="Home-2"] .h2-ia-icon { margin-bottom: 20px; }
+
+    /* ── 7. TEAM ── */
+    [data-screen-label="Home-2"] .team-section { margin: 18px 24px 60px; }
+    [data-screen-label="Home-2"] .team-block { grid-template-columns: 1fr; gap: 20px; }
+    [data-screen-label="Home-2"] .team-photo { width: 100%; height: 280px; }
+
+    /* ── Legacy bento (caso reapareça) ── */
+    [data-screen-label="Home-2"] .h2-bento { grid-template-columns: 1fr; }
+    [data-screen-label="Home-2"] .h2-card { padding: 22px; min-height: 280px; }
+
+    /* ── CTA Final ── */
+    [data-screen-label="Home-2"] .h2-cta-final-box h2 { font-size: 28px; }
     [data-screen-label="Home-2"] .h2-cta-final-box { padding: 40px 24px; }
+
+    /* ── 8. FOOTER ── */
+    [data-screen-label="Home-2"] .footer-inner {
+      max-width: 100%; padding: 60px 24px;
+    }
+    [data-screen-label="Home-2"] .footer-cta-grid {
+      grid-template-columns: 1fr; gap: 32px;
+    }
+    [data-screen-label="Home-2"] .footer-cta-left h2 { font-size: 32px; }
+    [data-screen-label="Home-2"] .footer-cta-left p {
+      font-size: 14px; line-height: 22px; max-width: 100%;
+    }
+    [data-screen-label="Home-2"] .footer-cta-right {
+      max-width: 100%;
+    }
+    [data-screen-label="Home-2"] .footer-bottom {
+      flex-direction: column; align-items: flex-start; gap: 20px;
+    }
+    [data-screen-label="Home-2"] .footer-nav {
+      text-align: left !important;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    [data-screen-label="Home-2"] .footer-copy-row {
+      flex-direction: column; align-items: flex-start; gap: 16px;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════
+     MOBILE REFINEMENTS — @media (max-width: 640px)
+     Refinos finos sobre o bloco 1024px (escalas / proporções).
+     Estrutura (1 coluna) já herdada do bloco anterior.
+     ═══════════════════════════════════════════════ */
+  @media (max-width: 640px) {
+    /* A · Hero H1: 40 → 32 + padding-top 30 + padding-bottom 0 */
+    [data-screen-label="Home-2"] .h2-hero { padding-top: 30px; padding-bottom: 0; }
+    [data-screen-label="Home-2"] .h2-hero-text h1 { font-size: 32px; }
+
+    /* B · CTAs Hero: width 100% (cada um) */
+    [data-screen-label="Home-2"] .h2-hero-text .h2-cta-row { flex-direction: column; }
+    [data-screen-label="Home-2"] .h2-hero-text .h2-cta-row .btn { width: 100% !important; }
+
+    /* C · Section heads h2: 28 → 24 */
+    [data-screen-label="Home-2"] .h2-section-head h2 { font-size: 24px; }
+
+    /* D · Carousel card: padding 24 → 16, aspect 16/10 → 4/3 */
+    [data-screen-label="Home-2"] .h2-gallery-card { padding: 16px; gap: 16px; }
+    [data-screen-label="Home-2"] .h2-gallery-img-wrap { aspect-ratio: 4 / 3; }
+    [data-screen-label="Home-2"] .h2-gallery-cap { font-size: 17px; }
+
+    /* E · Method steps: mask-fade nas duas bordas (afordância de scroll + breathing) */
+    [data-screen-label="Home-2"] .h2-method-list {
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    }
+
+    /* F · Negócios cards: img 250 → 200, card height adjust */
+    [data-screen-label="Home-2"] .h2-neg-img { height: 200px; }
+    [data-screen-label="Home-2"] .h2-neg-card { min-height: auto; height: auto; }
+
+    /* G · Team photo: 280 → 240 */
+    [data-screen-label="Home-2"] .team-photo { height: 240px; }
+
+    /* H · Footer h2: 32 → 26 */
+    [data-screen-label="Home-2"] .footer-cta-left h2 { font-size: 26px !important; }
+
+    /* I · Compare items font: 15 → 14 */
+    [data-screen-label="Home-2"] .h2-compare-list li { font-size: 14px; }
+
+    /* K · Team-section margin-bottom override (DS sobrescrevia com 24px) */
+    [data-screen-label="Home-2"] .team-section { margin-bottom: 60px !important; }
+
+    /* L · Footer-bleed: zerar padding top/bottom (DS aplicava 40/24) */
+    [data-screen-label="Home-2"] footer.footer-bleed {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    /* M · Drawer header: "Menu" texto no lugar da logo */
+    [data-screen-label="Home-2"] .drawer-logo {
+      font-family: var(--ff-display);
+      font-weight: 500;
+      font-size: 18px;
+      color: var(--c-text);
+    }
+
+    /* J · Compare → carousel horizontal 2 cards (Com Easy default + Sem Easy) */
+    [data-screen-label="Home-2"] .h2-section:has(.h2-compare) {
+      background: transparent; padding: 0; margin: 32px 0 0; border-radius: 0;
+    }
+    [data-screen-label="Home-2"] .h2-section:has(.h2-compare) .h2-section-head {
+      padding: 0 24px;
+    }
+    [data-screen-label="Home-2"] .h2-compare {
+      display: flex; flex-direction: row;
+      grid-template-columns: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 12px;
+      padding: 0 24px;
+      scroll-padding: 0 24px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 28px;
+    }
+    [data-screen-label="Home-2"] .h2-compare::-webkit-scrollbar { display: none; }
+    [data-screen-label="Home-2"] .h2-compare-col {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      background: var(--c-card, #faf6ed);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin: 0; width: auto;
+      justify-self: stretch;
+      box-sizing: border-box;
+    }
+    [data-screen-label="Home-2"] .h2-compare-col h3 { margin-bottom: 20px; }
+    [data-screen-label="Home-2"] .h2-compare-divider { display: none; }
+    [data-screen-label="Home-2"] .h2-compare-cta {
+      padding: 0 24px; margin-top: 24px;
+      flex-direction: column;
+    }
+    [data-screen-label="Home-2"] .h2-compare-cta .btn { width: 100% !important; }
+    [data-screen-label="Home-2"] .h2-compare-dots {
+      display: flex; justify-content: center; gap: 8px;
+      margin: 16px 0 0; padding: 0;
+    }
+    [data-screen-label="Home-2"] .h2-compare-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(115, 42, 29, 0.2); border: none;
+      padding: 0; cursor: pointer;
+      transition: width 0.25s ease, background 0.25s ease, border-radius 0.25s ease;
+    }
+    [data-screen-label="Home-2"] .h2-compare-dot.active {
+      width: 24px; height: 8px; border-radius: 4px;
+      background: var(--c-accent);
+    }
   }
 </style>
 </head>
@@ -512,7 +767,7 @@
       <div class="nav-links">
         <div class="dropdown" data-state="closed">
           <button type="button" class="dropdown-trigger" aria-haspopup="menu" aria-expanded="false">
-            Soluções
+            Negócios
             <svg class="chev" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
@@ -523,8 +778,10 @@
             <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a href="/quem-somos">Quem somos</a>
+        <a href="/funcionalidades">Funcionalidades</a>
         <a href="/planos">Planos</a>
+        <a href="/quem-somos">Quem somos</a>
+        <a href="/blog">Blog</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -547,7 +804,7 @@
   <section class="h2-hero">
     <div class="h2-hero-grid">
       <div class="h2-hero-text">
-        <span class="pill pill-accent pill-glow">Gestão para salão · barbearia · estúdio</span>
+        <span class="pill pill-accent pill-glow">Gestão para Salão · Barbearia · Estúdio</span>
         <h1>Sua recepção 24h para<br><span class="cycle-word" aria-live="polite"><span class="cycle-word__inner" data-cycle='["salões de beleza","barbearias","estúdios de beleza"]'>salões de beleza</span></span></h1>
         <p>Organize agenda, equipe, financeiro e estoque em uma plataforma feita para o ritmo do salão de beleza, da barbearia e do estúdio de estética.</p>
         <div class="h2-cta-row">
@@ -709,6 +966,10 @@
         </ul>
       </div>
     </div>
+    <div class="h2-compare-dots" aria-hidden="true">
+      <button type="button" class="h2-compare-dot active" data-idx="0" aria-label="Mostrar Com Easy"></button>
+      <button type="button" class="h2-compare-dot" data-idx="1" aria-label="Mostrar Sem Easy"></button>
+    </div>
     <div class="h2-compare-cta">
       <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:180px;">Comece grátis</a>
       <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&amp;text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon." style="width:220px;">Agendar demonstração</a>
@@ -726,7 +987,7 @@
         <h3>Salão de Beleza</h3>
         <p>Gestão completa para salões com múltiplos profissionais e serviços.</p>
         <a class="h2-neg-link" href="/salao-de-beleza">Conhecer
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3335 11.3333V4.66663H4.66683" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.66683 11.3333L11.3335 4.66663" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
       <div class="h2-neg-card">
@@ -734,7 +995,7 @@
         <h3>Barbearia</h3>
         <p>Agenda otimizada para barbearias modernas com fila e clientes recorrentes.</p>
         <a class="h2-neg-link" href="/barbearia">Conhecer
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3335 11.3333V4.66663H4.66683" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.66683 11.3333L11.3335 4.66663" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
       <div class="h2-neg-card">
@@ -742,7 +1003,7 @@
         <h3>Estúdio de Beleza</h3>
         <p>Para estúdios menores que precisam de eficiência e identidade premium.</p>
         <a class="h2-neg-link" href="/estudio-de-beleza">Conhecer
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3335 11.3333V4.66663H4.66683" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.66683 11.3333L11.3335 4.66663" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -756,28 +1017,28 @@
     <div class="h2-grid-4">
       <div class="h2-ia-card">
         <div class="h2-ia-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect x="2" y="8" width="20" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot-message-square" aria-hidden="true"><path d="M12 6V2H8"/><path d="m8 18-4 4V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z"/><path d="M2 12h2"/><path d="M9 11v2"/><path d="M15 11v2"/><path d="M20 12h2"/></svg>
         </div>
         <h3>Recepcionista virtual no WhatsApp</h3>
         <p>A IA responde clientes, confirma agendamentos e organiza a agenda automaticamente — mesmo fora do horário comercial.</p>
       </div>
       <div class="h2-ia-card">
         <div class="h2-ia-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
         </div>
         <h3>Sugere os melhores horários</h3>
         <p>Identifica horários ociosos e sugere encaixes inteligentes para maximizar a ocupação da sua agenda.</p>
       </div>
       <div class="h2-ia-card">
         <div class="h2-ia-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
         </div>
         <h3>Cria promoções com base no comportamento</h3>
         <p>Analisa o histórico dos seus clientes e sugere promoções certas para os clientes certos, no momento certo.</p>
       </div>
       <div class="h2-ia-card">
         <div class="h2-ia-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-pie" aria-hidden="true"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/></svg>
         </div>
         <h3>Analisa o desempenho do seu salão</h3>
         <p>Mostra quais serviços e profissionais geram mais resultado, quais clientes estão inativos e onde está a oportunidade.</p>
@@ -786,7 +1047,7 @@
   </section>
 
   <!-- ─────────────── SECTION · POR TRÁS DA EASY (team) ─────────────── -->
-  <section class="team-section" style="margin: 18px auto; border-radius: 20px;">
+  <section class="team-section" style="margin: 18px auto 80px; border-radius: 20px;">
     <div class="team-block">
       <div class="team-photo" aria-label="Equipe Easy" style="background-image: url('/assets/equipe.png');"></div>
       <div class="team-text">
@@ -886,8 +1147,10 @@
           <a href="/salao-de-beleza">Salão de beleza</a>
           <a href="/barbearia">Barbearia</a>
           <a href="/estudio-de-beleza">Estúdio de beleza</a>
+          <a href="/funcionalidades">Funcionalidades</a>
           <a href="/planos">Planos</a>
           <a href="/quem-somos">Quem somos</a>
+          <a href="/blog">Blog</a>
           <a href="/termos-de-uso">Termos de uso</a>
         </nav>
       </div>
@@ -935,8 +1198,10 @@
       <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
       <a class="drawer-link" href="/barbearia">Barbearia</a>
       <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
-      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/funcionalidades">Funcionalidades</a>
       <a class="drawer-link" href="/planos">Planos</a>
+      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/blog">Blog</a>
     </nav>
     <div class="drawer-cta">
       <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:100%;">Teste grátis</a>
@@ -1012,6 +1277,21 @@
     });
   })();
 
+  // Home-2 · Hero · full-bleed sync (mesma lógica da gallery — usa
+  // documentElement.clientWidth p/ excluir scrollbar real do Chrome Windows
+  // e evitar overflow horizontal de 100vw quando o scrollbar rouba pixels)
+  (function () {
+    var hero = document.querySelector('.h2-hero');
+    if (!hero) return;
+    function sync() {
+      var docW = document.documentElement.clientWidth;
+      hero.style.width = docW + 'px';
+      hero.style.marginLeft = 'calc(50% - ' + (docW / 2) + 'px)';
+    }
+    sync();
+    window.addEventListener('resize', sync);
+  })();
+
   // Home-2 · Gallery (carousel estilo Apple Highlights — autoplay + dotnav + progress)
   (function () {
     var root = document.getElementById('h2-gallery');
@@ -1083,8 +1363,12 @@
     dots.forEach(function (d, i2) {
       d.addEventListener('click', function () { setActive(i2); });
     });
-    root.addEventListener('mouseenter', function () { paused = true; });
-    root.addEventListener('mouseleave', function () { paused = false; });
+    // Pause-on-hover só em hover-capable (desktop). Mobile usa play/pause button explícito.
+    var hoverCapable = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+    if (hoverCapable) {
+      root.addEventListener('mouseenter', function () { paused = true; });
+      root.addEventListener('mouseleave', function () { paused = false; });
+    }
 
     window.addEventListener('resize', function () { setActive(idx); });
 
@@ -1126,6 +1410,13 @@
       panel.querySelector('p').textContent = p.desc;
       panel.querySelector('.h2-method-panel-img').textContent = p.img;
     }
+    function scrollActiveIntoView(i) {
+      var list = steps[i].parentElement;
+      if (!list || list.scrollWidth <= list.clientWidth) return;
+      var step = steps[i];
+      var target = step.offsetLeft - (list.clientWidth - step.offsetWidth) / 2;
+      list.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }
     function setActive(i) {
       active = i;
       steps.forEach(function (s, k) {
@@ -1133,6 +1424,7 @@
         s.querySelector('.h2-step-progress-fill').style.width = '0%';
       });
       renderPanel(i);
+      scrollActiveIntoView(i);
       elapsed = 0; lastT = null;
     }
     function tick(t) {
@@ -1148,12 +1440,33 @@
       raf = requestAnimationFrame(tick);
     }
 
+    // Mobile não tem hover — só click/tap/drag. Hover-activate só em hover-capable
+    // devices p/ evitar setActive disparar enquanto o dedo arrasta os steps.
+    var hoverCapable = window.matchMedia && window.matchMedia('(hover: hover)').matches;
     steps.forEach(function (s, i) {
-      s.addEventListener('mouseenter', function () { setActive(i); });
+      if (hoverCapable) {
+        s.addEventListener('mouseenter', function () { setActive(i); });
+      }
       s.addEventListener('click', function () { setActive(i); });
     });
-    root.addEventListener('mouseenter', function () { paused = true; });
-    root.addEventListener('mouseleave', function () { paused = false; });
+    if (hoverCapable) {
+      root.addEventListener('mouseenter', function () { paused = true; });
+      root.addEventListener('mouseleave', function () { paused = false; });
+    } else {
+      // Touch: pausa autoplay enquanto o usuário arrasta a lista (evita briga
+      // entre scrollIntoView do autoplay e o gesto manual). Resume 800ms após soltar.
+      var list = steps[0].parentElement;
+      if (list) {
+        var resumeTimer;
+        list.addEventListener('touchstart', function () {
+          paused = true; clearTimeout(resumeTimer);
+        }, { passive: true });
+        list.addEventListener('touchend', function () {
+          clearTimeout(resumeTimer);
+          resumeTimer = setTimeout(function () { paused = false; }, 800);
+        }, { passive: true });
+      }
+    }
 
     // só roda quando está visível
     var io = new IntersectionObserver(function (entries) {
@@ -1166,6 +1479,60 @@
       });
     }, { threshold: 0.25 });
     io.observe(root);
+  })();
+
+  // Home-2 · Compare mobile carousel — snap-scroll com dots + init na Com Easy
+  (function () {
+    var compare = document.querySelector('.h2-compare');
+    var dots = document.querySelectorAll('.h2-compare-dot');
+    if (!compare || !dots.length) return;
+    function isMobile() { return window.matchMedia('(max-width: 640px)').matches; }
+    // DOM idx: 0 = neg (Sem), 1 = pos (Com)  →  Dot idx: 0 = pos, 1 = neg
+    function activeDotIdx() {
+      if (!isMobile()) return -1;
+      var cols = compare.querySelectorAll('.h2-compare-col');
+      var center = compare.scrollLeft + compare.clientWidth / 2;
+      var closestDom = 0, closestDist = Infinity;
+      cols.forEach(function (c, i) {
+        var cc = c.offsetLeft + c.offsetWidth / 2;
+        var d = Math.abs(cc - center);
+        if (d < closestDist) { closestDist = d; closestDom = i; }
+      });
+      return closestDom === 1 ? 0 : 1;
+    }
+    function updateDots() {
+      var idx = activeDotIdx();
+      if (idx < 0) return;
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+    }
+    function initScroll() {
+      if (!isMobile()) { compare.scrollLeft = 0; return; }
+      var pos = compare.querySelector('.h2-compare-col--pos');
+      if (pos) {
+        // Sem smooth no init — direto na Com Easy
+        compare.scrollLeft = pos.offsetLeft - 24;
+        updateDots();
+      }
+    }
+    var to;
+    compare.addEventListener('scroll', function () {
+      clearTimeout(to);
+      to = setTimeout(updateDots, 50);
+    }, { passive: true });
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () {
+        if (!isMobile()) return;
+        var sel = i === 0 ? '.h2-compare-col--pos' : '.h2-compare-col--neg';
+        var card = compare.querySelector(sel);
+        if (card) compare.scrollTo({ left: card.offsetLeft - 24, behavior: 'smooth' });
+      });
+    });
+    // Init após layout settle
+    setTimeout(initScroll, 50);
+    window.addEventListener('resize', function () {
+      clearTimeout(to);
+      to = setTimeout(initScroll, 100);
+    });
   })();
 </script>
 
@@ -1617,15 +1984,11 @@
     var backdrop = document.querySelector('[data-drawer-backdrop]');
     var closeBtn = drawer && drawer.querySelector('.drawer-close');
     var logoSlot = drawer && drawer.querySelector('[data-drawer-logo]');
-    var navLogo = document.querySelector('.nav-logo svg');
 
-    // Clone the nav logo into the drawer head (smaller).
-    if (logoSlot && navLogo) {
-      var clone = navLogo.cloneNode(true);
-      clone.setAttribute('width', '120');
-      clone.setAttribute('height', '16');
-      clone.removeAttribute('aria-label');
-      logoSlot.appendChild(clone);
+    // Home-2 mobile drawer: usa o texto "Menu" no lugar da logo
+    if (logoSlot) {
+      logoSlot.textContent = 'Menu';
+      logoSlot.setAttribute('aria-label', 'Menu');
     }
 
     if (!burger || !drawer || !backdrop) return;

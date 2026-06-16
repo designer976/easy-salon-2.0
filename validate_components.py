@@ -25,6 +25,194 @@ projeto:
 
 Saída: relatório por arquivo com avisos e contagem total de
 problemas. Exit code != 0 quando há violações (útil em CI).
+
+
+══════════════════════════════════════════════════════════════════
+PADRÃO DE RESPONSIVIDADE — sandbox v2 (home-2 / quem-somos-2)
+══════════════════════════════════════════════════════════════════
+
+As páginas /home-2/ e /quem-somos-2/ são as referências MESTRE.
+Qualquer nova página da sandbox v2 (sufixo "-2") DEVE replicar
+esse padrão sem desvios. Resumo:
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. BREAKPOINTS (canônicos — não inventar outros)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    • Desktop ........................... > 1024px
+    • Tablet + Mobile (estrutura) ...... ≤ 1024px
+    • Mobile (refinos de escala) ........ ≤ 640px
+
+    Tablet e mobile compartilham a MESMA estrutura (1 coluna).
+    Diferença só em 640: ajuste fino de fonte/padding/break.
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  2. TOPO (NAV) — SEMPRE PADRÃO, NÃO MUDA ENTRE PÁGINAS
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Estrutura (desktop):
+      .nav-inner → grid-template-columns: auto 1fr auto
+        ├─ .nav-logo  (order: -1, justify-self: start)
+        ├─ .nav-links (order:  0, justify-self: center, gap 20px)
+        └─ .nav-cta   (order:  1, justify-self: end)
+
+    Mobile (≤ 1024):
+      • .nav-links → display: none
+      • .nav-cta   → display: none
+      • .nav-burger → display: inline-flex; justify-self: end; order: 2
+      • Drawer logo SVG → texto "Menu" (Gyst, 18px, var(--c-text))
+        via IIFE no [data-drawer-logo]
+      • Itens do drawer espelham o top nav (mesma ordem)
+
+    REGRA: nav e drawer NUNCA são redesenhados por página. Apenas
+    items do menu podem variar (links). Estrutura é imutável.
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  3. FOOTER — SEMPRE PADRÃO; SÓ A FRASE DO CTA MUDA
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Estrutura (desktop):
+      footer.footer-bleed
+        └─ .footer-inner (max-width 1200px, padding 80px 32px)
+            ├─ .footer-cta-grid (2-col: CTA-left + CTA-right)
+            │   ├─ .footer-cta-left  → h2 + bullets
+            │   └─ .footer-cta-right → botão âncora
+            ├─ .footer-sep
+            └─ .footer-bottom
+                ├─ .footer-logo
+                ├─ .footer-nav (links horizontais)
+                └─ .footer-copy-row (©, redes)
+
+    Mobile (≤ 1024):
+      • .footer-inner → max-width: 100%, padding 60px 24px
+      • .footer-cta-grid → 1 col, gap 32px
+      • .footer-cta-left h2 → 32px
+      • .footer-bottom → flex-direction: column, align-items: start
+      • .footer-nav → text-align: left, flex-wrap: wrap, gap 12px 18px
+      • .footer-copy-row → column, gap 16px
+
+    Mobile (≤ 640):
+      • footer.footer-bleed padding-top/bottom: 0
+      • .footer-nav flex-direction: column (1 link/linha)
+
+    REGRA: A ÚNICA coisa que pode variar entre páginas é a frase
+    do .footer-cta-left h2 (ex.: "Vamos transformar o seu salão"
+    vs. "Conheça quem está por trás"). Tudo o resto — grid,
+    bullets, botão, footer-bottom, copy-row — é imutável.
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  4. TIPOGRAFIA — TABELA OBRIGATÓRIA DESKTOP → MOBILE (≤ 640)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hero / H1
+      ├─ Desktop ........ 50–64px (Gyst, line-height 1.05)
+      └─ Mobile ......... 32px
+
+    Section title / H2 grande
+      ├─ Desktop ........ 36–44px
+      └─ Mobile ......... 32px (line-height 1.05)
+
+    Section sub-head / H2 médio
+      ├─ Desktop ........ 30px
+      └─ Mobile ......... 24px
+
+    Card title / H3
+      ├─ Desktop ........ 20–22px
+      └─ Mobile ......... 18–20px
+
+    Body / parágrafo
+      ├─ Desktop ........ 15–17px
+      └─ Mobile ......... 14px
+
+    Footer CTA h2
+      ├─ Desktop ........ 36–44px
+      └─ Mobile ......... 32px (regra do footer, item 3)
+
+    Pill / kicker / eyebrow
+      ├─ Desktop ........ 13–14px
+      └─ Mobile ......... 12–13px (mantém)
+
+    Botão (.btn)
+      ├─ Desktop ........ 14–15px
+      └─ Mobile ......... 14px (mantém; só largura → 100%)
+
+    REGRA DE OURO: títulos grandes (50px+ desktop) viram 32px
+    no mobile. Títulos médios (30px desktop) viram 24px. Body
+    (15-17px desktop) vira 14px. Sempre via @media (max-width: 640).
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  5. PADDINGS DE SEÇÃO — DESKTOP 80 → MOBILE 60
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Padding vertical de section (.h2-section, .qs2-section):
+      ├─ Desktop ........ 80px top / 80px bottom
+      └─ Mobile (≤ 640).. 60px top / 60px bottom
+
+    Padding horizontal (gutter):
+      ├─ Desktop ........ 32px
+      └─ Mobile ......... 24px
+
+    Footer .footer-inner:
+      ├─ Desktop ........ 80px 32px
+      └─ Mobile ......... 60px 24px
+
+    REGRA: tudo que é 80 no desktop → 60 no mobile. Tudo que é
+    32 lateral → 24 lateral. Aplicar via @media 640 com
+    !important quando houver override de :has() ou DS conflitando.
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  6. GRIDS (≤ 1024)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    • Todos os grids 2/3/4 colunas → 1 coluna
+    • Bento (1 grande + tiles) → tile-big/wide perdem span
+    • Compare 2-col com divisor vertical → 1-col com divisor
+      horizontal (apenas home-2)
+    • Contato (channels + form) → channels stack + form abaixo
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  7. CAROUSEL / SCROLL HORIZONTAL (≤ 1024, apenas home-2)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    • .h2-method-list → overflow-x: auto com scroll-snap
+    • Compare vira carousel snap horizontal (2 cards) ≤ 640
+    • Mask gradient nas bordas (afordância de scroll)
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  8. HOVER vs TOUCH
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    • Listeners mouseenter/leave SÓ atachados se
+      matchMedia('(hover: hover)').matches === true
+    • Em touch: usar click/tap; autoplay pausa via touchstart
+      com retomada 800ms após touchend (apenas home-2 carousel)
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  9. REFINOS MOBILE EXTRAS (≤ 640)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    • CTAs Hero → flex-direction: column + width: 100%
+    • Form-row 2-col → 1 col
+    • Bento aspect-ratio 16/10 → 4/3
+    • Method steps: padding interno 0 24px + mask-fade ambos lados
+    • <br class="qs2-br-desktop"> visível só desktop;
+      <br class="qs2-br-mobile"> visível só mobile (controle fino
+      de quebra de linha em títulos longos)
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  10. JS PATTERNS (sync helpers)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    • syncFullBleed(): usa documentElement.clientWidth em vez de
+      100vw — evita overflow horizontal em Chrome Windows com
+      scrollbar clássico. Aplicar em qualquer seção full-bleed.
+    • Drawer logo → "Menu": IIFE que sobrescreve o textContent
+      do [data-drawer-logo] após DOM load.
+    • BlurFade observer próprio por página (toggle 'is-in').
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CHECKLIST — toda nova página "*-2" DEVE
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Usar [data-screen-label="<Nome da Página>"] na <html>
+    2. Escopar 100% do CSS a esse atributo (zero vazamento)
+    3. Aplicar os 2 blocos @media canônicos (1024 + 640)
+    4. Reutilizar nav/drawer/footer SEM redesenhar — só trocar
+       a frase do .footer-cta-left h2 e os links do nav
+    5. Seguir tabela de tipografia (item 4): título grande 50→32,
+       título médio 30→24, body 15-17→14
+    6. Seguir regra de padding (item 5): 80→60 vertical, 32→24
+       horizontal no mobile
+    7. Manter BlurFade scroll-in com observer próprio
 """
 
 from __future__ import annotations

@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="pt-BR" data-screen-label="Salão de Beleza 2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Easy Salon — Salão de Beleza</title>
+<link rel="icon" type="image/png" href="/assets/fav.png">
+
+<!-- Sistema de design (mestre). Fontes, tokens, .nav, .btn, .pill (com pill-glow), footer-bleed. -->
+<link rel="stylesheet" href="/design-system.css">
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════
+     PÁGINA /salao-de-beleza-2 — grid do wireframe Claude Design
+     Tudo escopado a [data-screen-label="Salão de Beleza 2"]
+     Responsivo segue padrão sandbox v2: 1024 + 640
+     ═══════════════════════════════════════════════════════════════ */
+
+  [data-screen-label="Salão de Beleza 2"] .nav-inner { grid-template-columns: auto 1fr auto; }
+  [data-screen-label="Salão de Beleza 2"] .nav-logo { order: -1; justify-self: start; }
+  [data-screen-label="Salão de Beleza 2"] .nav-links { order: 0; justify-self: center; gap: 20px; }
+  [data-screen-label="Salão de Beleza 2"] .nav-cta { order: 1; justify-self: end; }
+
+  /* ── Layout-shell ── */
+  [data-screen-label="Salão de Beleza 2"] .sb2-section {
+    padding: 80px 32px;
+    border-top: 1px solid var(--c-line, rgba(115,42,29,.12));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-section.first { border-top: none; padding: 56px 32px; }
+  [data-screen-label="Salão de Beleza 2"] .sb2-wrap { max-width: 1200px; margin: 0 auto; }
+
+  /* ── SecHead ── */
+  [data-screen-label="Salão de Beleza 2"] .sb2-sechead { text-align: center; margin-bottom: 40px; }
+  [data-screen-label="Salão de Beleza 2"] .sb2-sechead.left { text-align: left; }
+  [data-screen-label="Salão de Beleza 2"] .sb2-sechead .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 14px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-sechead .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-sechead h2 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 36px; line-height: 1.1; color: var(--c-text);
+    margin: 0 auto 12px; max-width: 760px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-sechead h2 em {
+    font-style: italic; color: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-sechead p {
+    font-family: var(--ff-text); font-size: 16px; line-height: 1.5;
+    color: var(--c-text-soft, rgba(115,42,29,.7));
+    margin: 0 auto; max-width: 620px;
+  }
+
+  /* ═══════════════ HERO (split 45/55) ═══════════════ */
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-grid {
+    display: grid; grid-template-columns: 45fr 55fr; gap: 32px;
+    align-items: center; margin-top: 16px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-left .eyebrow {
+    display: inline-block;
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 16px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-left h1 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 48px; line-height: 1.05; color: var(--c-text); margin: 0;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-left h1 em {
+    font-style: italic; color: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-lead {
+    font-family: var(--ff-text); font-size: 17px; line-height: 1.5;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+    margin: 20px 0 28px; max-width: 480px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-ctas {
+    display: flex; gap: 14px; margin-bottom: 14px; flex-wrap: wrap;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-bullets {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.7));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-bullets .b {
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-bullets .b svg { color: var(--c-accent); }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-right {
+    border-radius: 24px; overflow: hidden;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    min-height: 380px;
+    background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px; text-align: center;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-hero-right .placeholder {
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.6));
+    letter-spacing: 0.04em; max-width: 360px;
+  }
+
+  /* ═══════════════ SEÇÃO 01 — FUNCIONALIDADES (zigue-zague) ═══════════════ */
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-list {
+    display: flex; flex-direction: column; gap: 28px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    align-items: stretch;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8px 4px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-text .eyebrow {
+    display: inline-block;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 12px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-text h3 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 30px; line-height: 1.1; color: var(--c-text);
+    margin: 0 0 14px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-text h3 em {
+    font-style: italic; color: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-text p {
+    font-family: var(--ff-text); font-size: 15px; line-height: 1.55;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+    margin: 0; max-width: 440px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-text .link {
+    align-self: flex-start; margin-top: 22px;
+    font-family: var(--ff-text); font-size: 14px; font-weight: 500;
+    color: var(--c-accent);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px; text-decoration: none;
+    transition: color .15s ease;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-text .link:hover { color: rgb(186,60,44); }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-img {
+    border-radius: 20px; overflow: hidden;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    min-height: 250px;
+    background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px; text-align: center;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-func-img .placeholder {
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.6));
+    letter-spacing: 0.04em; max-width: 320px;
+  }
+
+  /* ═══════════════ SEÇÃO 02 — METODOLOGIA (interativa) ═══════════════ */
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-grid {
+    display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 24px;
+    align-items: stretch; margin-top: 16px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-list {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-item {
+    cursor: pointer; flex: 1; position: relative; overflow: hidden;
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 22px;
+    border-radius: 16px;
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background: rgb(251,251,251);
+    transition: background .15s ease, border-color .15s ease;
+    user-select: none;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-item[aria-selected="true"] {
+    background: rgba(206,72,54,.06);
+    border-color: rgba(206,72,54,.35);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-num {
+    width: 48px; height: 48px; flex: 0 0 auto;
+    border-radius: 50%;
+    background: rgb(251,251,251);
+    border: 1px solid var(--c-line, rgba(115,42,29,.18));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-display); font-size: 18px;
+    color: var(--c-text-soft, rgba(115,42,29,.5));
+    transition: color .15s ease, border-color .15s ease;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-item[aria-selected="true"] .sb2-method-num {
+    color: var(--c-accent); border-color: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-title {
+    font-family: var(--ff-display); font-size: 18px; line-height: 1.2;
+    color: var(--c-text-soft, rgba(115,42,29,.65));
+    transition: color .15s ease;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-item[aria-selected="true"] .sb2-method-title {
+    color: var(--c-text);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-bar {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background: rgba(115,42,29,.10);
+    opacity: 0; transition: opacity .15s ease;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-item[aria-selected="true"] .sb2-method-bar { opacity: 1; }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-bar > span {
+    display: block; height: 100%; width: 0%;
+    background: var(--c-accent);
+    transition: width .08s linear;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-panel {
+    background: rgb(251,251,251);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-radius: 20px;
+    padding: 32px;
+    display: flex; flex-direction: column;
+    min-height: 380px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-panel .eyebrow {
+    display: inline-block;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 12px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-panel h3 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 28px; line-height: 1.15; color: var(--c-text);
+    margin: 0 0 14px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-panel p {
+    font-family: var(--ff-text); font-size: 15px; line-height: 1.55;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+    margin: 0 0 20px; max-width: 480px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-preview {
+    flex: 1; min-height: 200px; margin-top: auto;
+    border-radius: 14px;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px; text-align: center;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-method-preview .placeholder {
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.6));
+    letter-spacing: 0.04em;
+  }
+
+  /* ═══════════════ SEÇÃO 03 — ANTES E DEPOIS ═══════════════ */
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-table {
+    background: rgb(251,251,251);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 16px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-head {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--c-line, rgba(115,42,29,.12));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-head-cell {
+    padding: 18px 28px;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-text-soft, rgba(115,42,29,.7));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-head-cell.left {
+    border-right: 1px solid var(--c-line, rgba(115,42,29,.12));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-head-cell.right {
+    background: rgba(206,72,54,.05);
+    color: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--c-line, rgba(115,42,29,.10));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-row:first-of-type { border-top: none; }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-cell {
+    padding: 14px 28px;
+    display: flex; gap: 12px; align-items: flex-start;
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-cell.left {
+    border-right: 1px solid var(--c-line, rgba(115,42,29,.12));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-cell.right {
+    background: rgba(206,72,54,.05);
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-icon {
+    flex: 0 0 auto; width: 18px; height: 18px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+    margin-top: 3px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-icon.x {
+    background: rgba(115,42,29,.12);
+    color: var(--c-text-soft, rgba(115,42,29,.7));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ad-icon.v {
+    background: var(--c-accent);
+    color: rgb(244,241,234);
+  }
+
+  /* ═══════════════ SEÇÃO 04 — IA PARA ACELERAR ═══════════════ */
+  [data-screen-label="Salão de Beleza 2"] .sb2-ia-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin-top: 16px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ia-card {
+    background: rgb(251,251,251);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-radius: 20px;
+    padding: 24px;
+    display: flex; flex-direction: column;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ia-card .head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ia-card .ico {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: rgba(206,72,54,.10);
+    color: var(--c-accent);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ia-card .tag {
+    font-family: var(--ff-text); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    color: var(--c-text-soft, rgba(115,42,29,.55));
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ia-card h3 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 18px; line-height: 1.2; color: var(--c-text);
+    margin: 0 0 10px;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-ia-card p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+    margin: 0; flex: 1;
+  }
+
+  /* ── Responsive 1024 (estrutural) ─────────────── */
+  @media (max-width: 1024px) {
+    [data-screen-label="Salão de Beleza 2"] .nav-links { display: none; }
+    [data-screen-label="Salão de Beleza 2"] .nav-cta    { display: none; }
+    [data-screen-label="Salão de Beleza 2"] .nav-burger { display: inline-flex; justify-self: end; order: 2; }
+
+    [data-screen-label="Salão de Beleza 2"] .sb2-section { padding: 64px 24px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-section.first { padding: 56px 24px; }
+
+    [data-screen-label="Salão de Beleza 2"] .sb2-hero-grid { grid-template-columns: 1fr; gap: 24px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-hero-right { min-height: 280px; order: -1; }
+
+    [data-screen-label="Salão de Beleza 2"] .sb2-func-row { grid-template-columns: 1fr; gap: 20px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-func-row .sb2-func-img { order: -1; min-height: 200px; }
+
+    [data-screen-label="Salão de Beleza 2"] .sb2-method-grid { grid-template-columns: 1fr; gap: 16px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-method-panel { min-height: 300px; padding: 24px; }
+
+    [data-screen-label="Salão de Beleza 2"] .sb2-ad-head { grid-template-columns: 1fr; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-ad-head-cell.left { border-right: none; border-bottom: 1px solid var(--c-line, rgba(115,42,29,.12)); }
+    [data-screen-label="Salão de Beleza 2"] .sb2-ad-row { grid-template-columns: 1fr; border-top: 1px solid var(--c-line, rgba(115,42,29,.12)); }
+    [data-screen-label="Salão de Beleza 2"] .sb2-ad-cell.left { border-right: none; border-bottom: 1px dashed var(--c-line, rgba(115,42,29,.18)); }
+
+    [data-screen-label="Salão de Beleza 2"] .sb2-ia-grid { grid-template-columns: 1fr; }
+
+    /* Footer responsivo */
+    [data-screen-label="Salão de Beleza 2"] .footer-inner { max-width: 100%; padding: 60px 24px; }
+    [data-screen-label="Salão de Beleza 2"] .footer-cta-grid { grid-template-columns: 1fr; gap: 32px; }
+    [data-screen-label="Salão de Beleza 2"] .footer-cta-left h2 { font-size: 32px; }
+    [data-screen-label="Salão de Beleza 2"] .footer-bottom { flex-direction: column; align-items: flex-start; }
+    [data-screen-label="Salão de Beleza 2"] .footer-nav { text-align: left; flex-wrap: wrap; gap: 12px 18px; }
+    [data-screen-label="Salão de Beleza 2"] .footer-copy-row { flex-direction: column; gap: 16px; }
+  }
+
+  /* ── Mobile refino 640 ─────────────── */
+  @media (max-width: 640px) {
+    [data-screen-label="Salão de Beleza 2"] .sb2-section { padding: 60px 24px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-section.first { padding: 48px 24px; }
+
+    [data-screen-label="Salão de Beleza 2"] .sb2-hero-left h1 { font-size: 32px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-hero-lead { font-size: 14px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-hero-ctas { flex-direction: column; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-hero-ctas .btn { width: 100%; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-sechead h2 { font-size: 24px; line-height: 1.1; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-sechead p { font-size: 14px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-func-text h3 { font-size: 24px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-func-text p { font-size: 14px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-method-panel h3 { font-size: 22px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-method-panel p { font-size: 14px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-method-title { font-size: 16px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-ad-cell { padding: 12px 18px; font-size: 13px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-ad-head-cell { padding: 14px 18px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-ia-card h3 { font-size: 17px; }
+    [data-screen-label="Salão de Beleza 2"] .sb2-ia-card p { font-size: 13px; }
+
+    [data-screen-label="Salão de Beleza 2"] footer.footer-bleed { padding-top: 0; padding-bottom: 0; }
+    [data-screen-label="Salão de Beleza 2"] .footer-nav { flex-direction: column; }
+  }
+
+  /* BlurFade scroll-in */
+  [data-screen-label="Salão de Beleza 2"] .sb2-fade {
+    opacity: 0; transform: translateY(8px) scale(.995); filter: blur(4px);
+    transition: opacity .65s ease, transform .65s ease, filter .65s ease;
+  }
+  [data-screen-label="Salão de Beleza 2"] .sb2-fade.is-in {
+    opacity: 1; transform: none; filter: none;
+  }
+</style>
+</head>
+<body class="has-nav">
+<div class="page">
+
+  <!-- ─────────────── NAV ─────────────── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-links">
+        <div class="dropdown" data-state="closed">
+          <button type="button" class="dropdown-trigger" aria-haspopup="menu" aria-expanded="false">
+            Soluções
+            <svg class="chev" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <div class="dropdown-content" role="menu">
+            <a class="dropdown-item" role="menuitem" href="/salao-de-beleza">Salão de beleza</a>
+            <a class="dropdown-item" role="menuitem" href="/barbearia">Barbearia</a>
+            <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
+          </div>
+        </div>
+        <a href="/quem-somos">Quem somos</a>
+        <a href="/planos">Planos</a>
+      </div>
+      <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path>
+        </svg>
+      </button>
+      <a class="nav-logo" href="/" aria-label="Easy Salon · página inicial">
+        <svg width="179" height="24" viewBox="0 0 179 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Easy Salon">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M112.79 14.9516C112.79 15.8226 112.548 16.5968 112.063 17.2742C111.578 17.9194 110.932 18.4194 110.124 18.7742C109.316 19.0968 108.444 19.2581 107.507 19.2581C106.763 19.2581 105.988 19.129 105.18 18.871C104.34 18.6129 103.581 18.1935 102.902 17.6129C102.643 17.3871 102.401 17.1452 102.175 16.8871C102.078 17.1129 101.981 17.3226 101.884 17.5161C101.69 18 101.529 18.5323 101.399 19.1129H101.012V14.1774H101.448C101.706 15.1452 102.159 15.9839 102.805 16.6935C103.451 17.4032 104.195 17.9355 105.035 18.2903C105.875 18.6452 106.731 18.8226 107.604 18.8226C108.573 18.8226 109.397 18.5806 110.076 18.0968C110.754 17.6129 111.093 16.9194 111.093 16.0161C111.093 15.5 110.9 15.0645 110.512 14.7097C110.124 14.3226 109.639 14 109.058 13.7419C108.444 13.4839 107.652 13.2097 106.683 12.9194C105.455 12.5323 104.485 12.1613 103.774 11.8064C103.031 11.4839 102.401 11.0484 101.884 10.5C101.367 9.95161 101.109 9.25806 101.109 8.41935C101.109 7.64516 101.351 6.98387 101.836 6.43548C102.32 5.85484 102.967 5.41936 103.774 5.12903C104.615 4.83871 105.503 4.69355 106.44 4.69355C107.248 4.69355 108.024 4.80645 108.767 5.03225C109.51 5.25806 110.286 5.64516 111.093 6.19355C111.287 6.12903 111.465 5.93549 111.627 5.61291C111.788 5.32258 111.901 5.04838 111.966 4.79032H112.354V8.41935H111.966C111.32 7.32258 110.496 6.5 109.494 5.95161C108.492 5.43548 107.474 5.17742 106.44 5.17742C105.439 5.17742 104.582 5.35484 103.871 5.70968C103.16 6.09677 102.805 6.62903 102.805 7.30645C102.805 7.79032 102.999 8.20967 103.387 8.56451C103.774 8.91935 104.243 9.22581 104.792 9.48387C105.374 9.70968 106.133 9.98387 107.07 10.3065C108.298 10.7258 109.3 11.1129 110.076 11.4677C110.819 11.7903 111.449 12.2419 111.966 12.8226C112.515 13.4032 112.79 14.1129 112.79 14.9516ZM113.275 18.9677V18.5323C113.759 18.5323 114.179 18.4355 114.535 18.2419C114.89 18.0161 115.181 17.7419 115.407 17.4194C115.633 17.129 115.86 16.7419 116.086 16.2581L120.109 6.62903L119.382 5.12903H122.145L127.67 17.7097C127.767 17.9677 127.913 18.1613 128.106 18.2903C128.3 18.4516 128.543 18.5323 128.833 18.5323H130.239V18.9677H122.872V18.5323H124.81C124.94 18.5323 125.02 18.5 125.053 18.4355C125.117 18.371 125.134 18.2581 125.101 18.0968L120.4 7.25806L116.037 17.5161C115.908 17.7742 115.94 17.9677 116.134 18.0968C116.296 18.2581 116.603 18.371 117.055 18.4355C117.54 18.5 118.154 18.5323 118.897 18.5323V18.9677H113.275ZM130.821 18.5323H132.856C133.147 18.5323 133.293 18.371 133.293 18.0484V6.04839C133.293 5.72581 133.147 5.56452 132.856 5.56452H130.821V5.12903H138.334V5.56452H136.249C135.991 5.56452 135.862 5.72581 135.862 6.04839V18.0484C135.862 18.371 135.991 18.5323 136.249 18.5323H141.096C141.775 18.5323 142.308 18.4032 142.696 18.1452C143.084 17.8871 143.358 17.4677 143.52 16.8871C143.714 16.3064 143.811 15.5161 143.811 14.5161V11.6613H144.247V18.9677H130.821V18.5323ZM149.627 18.5806C148.496 17.9677 147.624 17.0968 147.01 15.9677C146.363 14.8387 146.04 13.5323 146.04 12.0484C146.04 10.5645 146.363 9.24193 147.01 8.08064C147.624 6.95161 148.496 6.08065 149.627 5.46774C150.758 4.82258 152.051 4.5 153.505 4.5C154.991 4.5 156.3 4.82258 157.431 5.46774C158.529 6.08065 159.386 6.95161 160 8.08064C160.614 9.24193 160.921 10.5645 160.921 12.0484C160.921 13.5323 160.614 14.8387 160 15.9677C159.386 17.0968 158.529 17.9677 157.431 18.5806C156.3 19.2258 154.991 19.5484 153.505 19.5484C152.051 19.5484 150.758 19.2258 149.627 18.5806ZM156.025 18.1935C156.736 17.5806 157.285 16.7419 157.673 15.6774C158.029 14.6129 158.206 13.4032 158.206 12.0484C158.206 10.6935 158.029 9.48387 157.673 8.41935C157.285 7.35483 156.736 6.51613 156.025 5.90322C155.314 5.29032 154.474 4.98387 153.505 4.98387C152.535 4.98387 151.695 5.29032 150.984 5.90322C150.273 6.51613 149.724 7.35483 149.336 8.41935C148.949 9.48387 148.755 10.6935 148.755 12.0484C148.755 13.4032 148.949 14.5968 149.336 15.629C149.724 16.6935 150.273 17.5323 150.984 18.1452C151.695 18.7581 152.535 19.0645 153.505 19.0645C154.474 19.0645 155.314 18.7742 156.025 18.1935ZM162.181 18.5323H163.199C163.425 18.5323 163.651 18.4839 163.877 18.3871C164.136 18.2581 164.362 18.0645 164.556 17.8064C164.75 17.5484 164.847 17.1935 164.847 16.7419V6.48387C164.588 6.12903 164.314 5.88709 164.023 5.75806C163.732 5.66129 163.312 5.61291 162.763 5.61291H162.423V5.12903H167.367L175.995 15.5323V7.40323C175.995 6.79032 175.866 6.33871 175.607 6.04839C175.349 5.75806 175.042 5.61291 174.686 5.61291H173.571V5.12903H179V5.61291H178.031C177.611 5.61291 177.255 5.75806 176.964 6.04839C176.641 6.37097 176.48 6.82258 176.48 7.40323V19.2097H175.946L165.331 6.91936V16.7419C165.331 17.3548 165.477 17.8064 165.768 18.0968C166.091 18.3871 166.446 18.5323 166.834 18.5323H167.9V19.0161H162.181V18.5323ZM7.90062 11.5645C8.51458 11.5645 8.98312 11.4516 9.30626 11.2258C9.59708 11 9.79096 10.7097 9.8879 10.3548C9.98484 9.96774 10.0333 9.5 10.0333 8.95161V8.12903H10.4695V15.6774H10.0333V14.9032C10.0333 14.2903 9.98484 13.7742 9.8879 13.3548C9.79096 12.9677 9.59708 12.6613 9.30626 12.4355C9.01544 12.1774 8.54689 12.0484 7.90062 12.0484H5.04089V18.0484C5.04089 18.371 5.1863 18.5323 5.47712 18.5323H11.1481C11.7621 18.5323 12.2629 18.4032 12.6507 18.1452C13.0385 17.8871 13.3293 17.4839 13.5232 16.9355C13.717 16.3548 13.814 15.5968 13.814 14.6613V13.3548H14.2017V18.9677H0V18.5323H2.08421C2.34272 18.5323 2.47197 18.371 2.47197 18.0484V6.04839C2.47197 5.72581 2.34272 5.56452 2.08421 5.56452H0V5.12903H13.8624V10.3548H13.4747V9.19355C13.4747 8.22581 13.3777 7.48387 13.1839 6.96774C13.0223 6.45161 12.7315 6.09677 12.3114 5.90322C11.8913 5.67742 11.342 5.56452 10.6634 5.56452H5.47712C5.1863 5.56452 5.04089 5.72581 5.04089 6.04839V11.5645H7.90062ZM15.462 18.9677V18.5323C15.979 18.5323 16.399 18.4355 16.7222 18.2419C17.0776 18.0161 17.3684 17.7419 17.5946 17.4194C17.8208 17.0968 18.047 16.7097 18.2732 16.2581L22.3447 6.62903L21.6177 5.12903H24.3805L29.906 17.7097C30.003 17.9677 30.1322 18.1613 30.2938 18.2903C30.4877 18.4516 30.73 18.5323 31.0209 18.5323H32.4265V18.9677H25.1075V18.5323H27.0463C27.1432 18.5323 27.224 18.5 27.2887 18.4355C27.321 18.3387 27.321 18.2258 27.2887 18.0968L22.5871 7.25806L18.2247 17.5161C18.1278 17.7742 18.1601 17.9677 18.3217 18.0968C18.4833 18.2581 18.8064 18.371 19.2911 18.4355C19.7435 18.5 20.3574 18.5323 21.133 18.5323V18.9677H15.462ZM45.7073 14.9516C45.7073 15.8226 45.4649 16.5968 44.9802 17.2742C44.4955 17.9194 43.8493 18.4194 43.0414 18.7742C42.2336 19.0968 41.3611 19.2581 40.424 19.2581C39.6808 19.2581 38.8892 19.129 38.049 18.871C37.2412 18.6129 36.4818 18.1935 35.7709 17.6129C35.5124 17.3871 35.2862 17.1452 35.0923 16.8871C34.9631 17.1129 34.85 17.3226 34.753 17.5161C34.5915 18 34.4461 18.5323 34.3168 19.1129H33.9291V14.1774H34.3653C34.6238 15.1452 35.0762 15.9839 35.7224 16.6935C36.3687 17.4032 37.1119 17.9355 37.9521 18.2903C38.7922 18.6452 39.6485 18.8226 40.521 18.8226C41.4904 18.8226 42.3144 18.5806 42.993 18.0968C43.6715 17.6129 44.0108 16.9194 44.0108 16.0161C44.0108 15.5 43.817 15.0645 43.4292 14.7097C43.0091 14.3226 42.5083 14 41.9266 13.7419C41.345 13.4839 40.5533 13.2097 39.5516 12.9194C38.356 12.5323 37.3866 12.1613 36.6434 11.8064C35.9325 11.4839 35.3024 11.0484 34.753 10.5C34.236 9.95161 33.9775 9.25806 33.9775 8.41935C33.9775 7.64516 34.2199 6.98387 34.7046 6.43548C35.2216 5.85484 35.884 5.41936 36.6918 5.12903C37.4997 4.83871 38.3721 4.69355 39.3092 4.69355C40.1171 4.69355 40.8926 4.80645 41.6358 5.03225C42.379 5.25806 43.1707 5.64516 44.0108 6.19355C44.2047 6.12903 44.3824 5.93549 44.544 5.61291C44.7056 5.32258 44.8025 5.04838 44.8348 4.79032H45.2226V8.41935H44.8348C44.1886 7.32258 43.3646 6.5 42.3629 5.95161C41.3934 5.43548 40.3917 5.17742 39.3577 5.17742C38.3237 5.17742 37.4512 5.35484 36.7403 5.70968C36.0617 6.09677 35.7224 6.62903 35.7224 7.30645C35.7224 7.79032 35.9002 8.20967 36.2556 8.56451C36.6434 8.91935 37.1281 9.22581 37.7097 9.48387C38.2591 9.70968 39.0184 9.98387 39.9878 10.3065C41.2157 10.7258 42.2013 11.1129 42.9445 11.4677C43.72 11.7903 44.3663 12.2419 44.8833 12.8226C45.4326 13.4032 45.7073 14.1129 45.7073 14.9516ZM46.7252 5.12903H54.5288V5.56452H52.1538C52.0246 5.56452 51.9438 5.6129 51.9115 5.70968C51.8468 5.77419 51.863 5.85484 51.9599 5.95161L56.2738 12.0484L60.006 7.45161C60.3937 7 60.5876 6.6129 60.5876 6.29032C60.5876 6.06452 60.4745 5.88709 60.2483 5.75806C60.0544 5.62903 59.7474 5.56452 59.3274 5.56452H58.0187V5.12903H63.7866V5.56452C63.3342 5.56452 62.9303 5.64516 62.5749 5.80645C62.2194 5.93548 61.9124 6.11291 61.6539 6.33871C61.3954 6.56452 61.1208 6.85483 60.8299 7.20967L56.6131 12.4839V18.0484C56.6131 18.371 56.7423 18.5323 57.0008 18.5323H59.182V18.9677H51.4268V18.5323H53.6079C53.8987 18.5323 54.0441 18.371 54.0441 18.0484V12.9194L49.2941 6.38709C49.1325 6.12903 48.9709 5.93548 48.8094 5.80645C48.6478 5.64516 48.4378 5.56452 48.1793 5.56452H46.7252V5.12903ZM82.3991 17.7097C84.8711 17.7097 86.8584 19.6935 86.8584 22.1613V24C85.9374 23.5161 85.1135 22.8871 84.4349 22.1129C83.8532 21.4839 83.417 20.7581 83.0777 20.0323C82.7384 19.3064 82.4961 18.5323 82.3991 17.7097ZM80.3149 20.0323C79.9756 20.7581 79.5394 21.4839 78.9578 22.1129C78.2792 22.8871 77.4552 23.5161 76.5343 24V22.1613C76.5343 19.6935 78.5215 17.7097 80.9935 17.7097C80.8966 18.5323 80.6542 19.3064 80.3149 20.0323ZM87.44 11.3226C87.44 8.85483 89.4273 6.87097 91.8993 6.87097H93.7411C93.2564 7.79032 92.6263 8.6129 91.8023 9.29032C91.1722 9.87097 90.4936 10.3064 89.7666 10.6452C88.9911 10.9839 88.2155 11.2258 87.44 11.3226ZM89.7666 13.4032C90.4936 13.7419 91.1722 14.1774 91.8023 14.7581C92.6263 15.4355 93.2564 16.2581 93.7411 17.1774H91.8993C89.4273 17.1774 87.44 15.1935 87.44 12.7258C88.2155 12.8226 88.9911 13.0645 89.7666 13.4032ZM81.042 6.29032C78.57 6.29032 76.5827 4.30645 76.5827 1.83871V0C77.4552 0.483871 78.3277 1.1129 79.0062 1.93548C79.5394 2.56452 79.9756 3.24193 80.3149 3.96774C80.6542 4.74193 80.8966 5.51613 81.042 6.29032ZM83.1262 3.96774C83.4655 3.24193 83.9017 2.56452 84.4349 1.93548C85.1619 1.1129 85.9859 0.483871 86.9069 0V1.83871C86.9069 4.30645 84.9196 6.29032 82.4476 6.29032C82.5445 5.51613 82.7869 4.74193 83.1262 3.96774ZM76.0011 12.6774C76.0011 15.1452 74.0138 17.129 71.5418 17.129H69.7C70.1847 16.2581 70.8148 15.3871 71.5903 14.7097C72.2204 14.1774 72.9475 13.7419 73.6745 13.4032C74.4016 13.0645 75.1771 12.8226 76.0011 12.6774ZM73.6745 10.5968C72.9475 10.2581 72.2204 9.82258 71.5903 9.29032C70.8148 8.56451 70.1847 7.74194 69.7 6.82258H71.5418C74.0138 6.82258 76.0011 8.80645 76.0011 11.2742C75.1771 11.1774 74.4016 10.9355 73.6745 10.5968ZM80.945 12.7742C80.6542 15.5806 78.4246 17.8064 75.6133 18.0968C75.9041 15.2903 78.1338 13.0645 80.945 12.7742ZM82.4476 12.7742C85.2589 13.1129 87.4885 15.2903 87.8278 18.0968V18.1452L87.7793 18.0968C84.9681 17.8064 82.7869 15.5806 82.4476 12.7742ZM82.4961 11.2742C82.4961 11.2742 82.4799 11.2742 82.4476 11.2742H82.4961C82.7869 8.46774 85.0165 6.24194 87.8278 5.95161V5.90322C87.8278 5.93548 87.8278 5.95161 87.8278 5.95161C87.4885 8.75806 85.3073 10.9839 82.4961 11.2742ZM80.9935 11.2742C80.9612 11.2742 80.945 11.2742 80.945 11.2742C78.1338 10.9355 75.9526 8.70967 75.6133 5.90322C78.4246 6.24193 80.6542 8.41935 80.945 11.2258L80.9935 11.2742Z" fill="#CE4836"></path>
+        </svg>
+      </a>
+      <div class="nav-cta">
+        <a class="btn btn-tan-soft" href="https://app.easysalon.com.br/" style="height:40px;width:100px;">Entrar</a>
+        <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="height:40px;width:120px;">Teste grátis</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════ HERO (split 45/55) ═══════════════ -->
+  <section class="sb2-section first">
+    <div class="sb2-wrap">
+      <div class="sb2-hero-grid">
+        <div class="sb2-hero-left sb2-fade">
+          <span class="eyebrow">Negócios · Salão de Beleza</span>
+          <h1>O sistema de gestão para o seu <em>salão de beleza</em></h1>
+          <p class="sb2-hero-lead">Da escova ao financeiro: organize a agenda dos profissionais, o estoque de coloração e o caixa do dia em uma única plataforma.</p>
+          <div class="sb2-hero-ctas">
+            <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
+            <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&amp;text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">Agendar demonstração</a>
+          </div>
+          <div class="sb2-hero-bullets">
+            <span class="b"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5 L6 10.5 L11 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Sem cartão de crédito</span>
+            <span class="b"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5 L6 10.5 L11 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Cancele quando quiser</span>
+          </div>
+        </div>
+        <div class="sb2-hero-right sb2-fade">
+          <span class="placeholder">FOTO · cabeleireira / recepcionista usando a agenda em tablet, no salão (cadeiras, espelhos ao fundo)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SEÇÃO 01 — FUNCIONALIDADES (zigue-zague) ═══════════════ -->
+  <section class="sb2-section">
+    <div class="sb2-wrap">
+      <div class="sb2-sechead sb2-fade">
+        <span class="eyebrow"><span class="dot"></span>01 · Funcionalidades Principais</span>
+        <h2>Cada recurso pensado para o <em>ritmo do salão</em></h2>
+        <p>Multi-profissionais, serviços longos, coloração, escova. Tudo numa única plataforma.</p>
+      </div>
+      <div class="sb2-func-list">
+        <!-- Funcionalidade 01 — texto esquerda · imagem direita -->
+        <div class="sb2-func-row sb2-fade">
+          <div class="sb2-func-text">
+            <span class="eyebrow">Funcionalidade 01</span>
+            <h3>Agenda que <em>entende</em> o salão</h3>
+            <p>Vários profissionais, serviços com durações diferentes, intervalos respeitados. Chega de sobreposição, de horário esquecido e de cliente que sai sem agendar o retorno.</p>
+            <a class="link" href="#metodologia">Ver na prática →</a>
+          </div>
+          <div class="sb2-func-img">
+            <span class="placeholder">FOTO · cabeleireira consultando a agenda do dia em um tablet, na recepção</span>
+          </div>
+        </div>
+        <!-- Funcionalidade 02 — texto direita · imagem esquerda (zigue-zague) -->
+        <div class="sb2-func-row sb2-fade">
+          <div class="sb2-func-img">
+            <span class="placeholder">FOTO · dono(a) do salão olhando o relatório de comissões em um notebook</span>
+          </div>
+          <div class="sb2-func-text">
+            <span class="eyebrow">Funcionalidade 02</span>
+            <h3>Comissão <em>calculada sozinha</em></h3>
+            <p>Cada profissional tem o seu percentual por serviço. O sistema calcula tudo automaticamente, sem planilha, sem calculadora. Fim de mês sem briga.</p>
+            <a class="link" href="#metodologia">Ver na prática →</a>
+          </div>
+        </div>
+        <!-- Funcionalidade 03 — texto esquerda · imagem direita -->
+        <div class="sb2-func-row sb2-fade">
+          <div class="sb2-func-text">
+            <span class="eyebrow">Funcionalidade 03</span>
+            <h3>Sem ficar sem tintura na <em>hora H</em></h3>
+            <p>Tinturas, descolorantes, produtos de tratamento. Saiba o que consumiu em cada atendimento e o que está prestes a acabar. Sem aquele susto no meio da coloração.</p>
+            <a class="link" href="#metodologia">Ver na prática →</a>
+          </div>
+          <div class="sb2-func-img">
+            <span class="placeholder">FOTO · profissional verificando o estoque pelo sistema, com produtos visíveis</span>
+          </div>
+        </div>
+        <!-- Funcionalidade 04 — texto direita · imagem esquerda -->
+        <div class="sb2-func-row sb2-fade">
+          <div class="sb2-func-img">
+            <span class="placeholder">FOTO · cabeleireira usando o app do profissional no celular, dentro do salão</span>
+          </div>
+          <div class="sb2-func-text">
+            <span class="eyebrow">Funcionalidade 04</span>
+            <h3>Cada profissional na <em>palma da mão</em></h3>
+            <p>Sua equipe vê a própria agenda, comissões e ficha dos clientes pelo celular. Sem mais ligações para confirmar horário ou trocar turno.</p>
+            <a class="link" href="#metodologia">Ver na prática →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SEÇÃO 02 — METODOLOGIA EASY (interativa) ═══════════════ -->
+  <section class="sb2-section" id="metodologia">
+    <div class="sb2-wrap">
+      <div class="sb2-sechead sb2-fade">
+        <span class="eyebrow"><span class="dot"></span>02 · Metodologia Easy</span>
+        <h2>Como organizamos a gestão do <em>seu salão</em></h2>
+        <p>Cinco passos para sair da bagunça e chegar em um salão com gestão de verdade — sem precisar mudar tudo de uma vez.</p>
+      </div>
+      <div class="sb2-method-grid sb2-fade" data-method>
+        <div class="sb2-method-list" role="tablist">
+          <button type="button" class="sb2-method-item" role="tab" aria-selected="true" data-method-idx="0">
+            <span class="sb2-method-num">01</span>
+            <span class="sb2-method-title">Organize sua agenda</span>
+            <span class="sb2-method-bar"><span></span></span>
+          </button>
+          <button type="button" class="sb2-method-item" role="tab" aria-selected="false" data-method-idx="1">
+            <span class="sb2-method-num">02</span>
+            <span class="sb2-method-title">Tenha visão financeira</span>
+            <span class="sb2-method-bar"><span></span></span>
+          </button>
+          <button type="button" class="sb2-method-item" role="tab" aria-selected="false" data-method-idx="2">
+            <span class="sb2-method-num">03</span>
+            <span class="sb2-method-title">Domine seu estoque</span>
+            <span class="sb2-method-bar"><span></span></span>
+          </button>
+          <button type="button" class="sb2-method-item" role="tab" aria-selected="false" data-method-idx="3">
+            <span class="sb2-method-num">04</span>
+            <span class="sb2-method-title">Faça promoções inteligentes</span>
+            <span class="sb2-method-bar"><span></span></span>
+          </button>
+          <button type="button" class="sb2-method-item" role="tab" aria-selected="false" data-method-idx="4">
+            <span class="sb2-method-num">05</span>
+            <span class="sb2-method-title">Cuide dos seus clientes</span>
+            <span class="sb2-method-bar"><span></span></span>
+          </button>
+        </div>
+        <div class="sb2-method-panel" role="tabpanel">
+          <span class="eyebrow" data-method-step>Passo 01</span>
+          <h3 data-method-title>Organize sua agenda</h3>
+          <p data-method-desc>Comece pelo coração do salão: a agenda. Visibilidade total dos seus profissionais e dos serviços que cada um faz.</p>
+          <div class="sb2-method-preview"><span class="placeholder" data-method-preview>PREVIEW · Organize sua agenda</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SEÇÃO 03 — ANTES E DEPOIS ═══════════════ -->
+  <section class="sb2-section">
+    <div class="sb2-wrap">
+      <div class="sb2-sechead sb2-fade">
+        <span class="eyebrow"><span class="dot"></span>03 · Antes e Depois</span>
+        <h2>Como muda o <em>seu salão</em> com o Easy</h2>
+        <p>O dia a dia que você vive hoje, lado a lado com o que vai viver depois de implantar o sistema.</p>
+      </div>
+      <div class="sb2-ad-table sb2-fade">
+        <div class="sb2-ad-head">
+          <div class="sb2-ad-head-cell left">Antes · sem Easy</div>
+          <div class="sb2-ad-head-cell right">Depois · com Easy</div>
+        </div>
+        <div class="sb2-ad-row">
+          <div class="sb2-ad-cell left"><span class="sb2-ad-icon x">✗</span>Agenda do salão no papel ou no WhatsApp</div>
+          <div class="sb2-ad-cell right"><span class="sb2-ad-icon v">✓</span>Agenda centralizada e automática</div>
+        </div>
+        <div class="sb2-ad-row">
+          <div class="sb2-ad-cell left"><span class="sb2-ad-icon x">✗</span>Sobreposição de horário entre profissionais</div>
+          <div class="sb2-ad-cell right"><span class="sb2-ad-icon v">✓</span>Bloqueio de conflitos entre profissionais</div>
+        </div>
+        <div class="sb2-ad-row">
+          <div class="sb2-ad-cell left"><span class="sb2-ad-icon x">✗</span>Comissão calculada na calculadora no fim do mês</div>
+          <div class="sb2-ad-cell right"><span class="sb2-ad-icon v">✓</span>Comissão calculada pelo sistema, sem briga no fim do mês</div>
+        </div>
+        <div class="sb2-ad-row">
+          <div class="sb2-ad-cell left"><span class="sb2-ad-icon x">✗</span>Tintura acabando sem aviso no meio da coloração</div>
+          <div class="sb2-ad-cell right"><span class="sb2-ad-icon v">✓</span>Alerta automático de estoque baixo</div>
+        </div>
+        <div class="sb2-ad-row">
+          <div class="sb2-ad-cell left"><span class="sb2-ad-icon x">✗</span>Cliente fiel que sumiu e ninguém percebeu</div>
+          <div class="sb2-ad-cell right"><span class="sb2-ad-icon v">✓</span>Histórico do cliente para retornos automáticos</div>
+        </div>
+        <div class="sb2-ad-row">
+          <div class="sb2-ad-cell left"><span class="sb2-ad-icon x">✗</span>Sem saber qual serviço vende mais ou dá mais lucro</div>
+          <div class="sb2-ad-cell right"><span class="sb2-ad-icon v">✓</span>Relatórios de serviços e profissionais mais rentáveis</div>
+        </div>
+        <div class="sb2-ad-row">
+          <div class="sb2-ad-cell left"><span class="sb2-ad-icon x">✗</span>Profissional sem visibilidade da própria agenda</div>
+          <div class="sb2-ad-cell right"><span class="sb2-ad-icon v">✓</span>Cada profissional acessa sua agenda pelo app</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SEÇÃO 04 — IA PARA ACELERAR ═══════════════ -->
+  <section class="sb2-section">
+    <div class="sb2-wrap">
+      <div class="sb2-sechead sb2-fade">
+        <span class="eyebrow"><span class="dot"></span>04 · IA para Acelerar</span>
+        <h2>E ainda tem <em>IA</em> para acelerar sua operação</h2>
+        <p>Inteligência artificial integrada em todo o sistema — para automatizar o que toma seu tempo e abrir espaço para o que importa.</p>
+      </div>
+      <div class="sb2-ia-grid">
+        <div class="sb2-ia-card sb2-fade">
+          <div class="head">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></span>
+            <span class="tag">IA 01</span>
+          </div>
+          <h3>Recepcionista virtual no WhatsApp</h3>
+          <p>A IA responde clientes, confirma agendamentos e organiza a agenda automaticamente — mesmo fora do horário comercial.</p>
+        </div>
+        <div class="sb2-ia-card sb2-fade">
+          <div class="head">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><path d="m9 16 2 2 4-4"></path></svg></span>
+            <span class="tag">IA 02</span>
+          </div>
+          <h3>Sugere os melhores horários</h3>
+          <p>Identifica horários ociosos e sugere encaixes inteligentes para maximizar a ocupação da sua agenda.</p>
+        </div>
+        <div class="sb2-ia-card sb2-fade">
+          <div class="head">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg></span>
+            <span class="tag">IA 03</span>
+          </div>
+          <h3>Cria promoções com base no comportamento</h3>
+          <p>Analisa o histórico dos seus clientes e sugere promoções certas para os clientes certos, no momento certo.</p>
+        </div>
+        <div class="sb2-ia-card sb2-fade">
+          <div class="head">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 21H3"></path><path d="M7 17v-5"></path><path d="M12 17v-9"></path><path d="M17 17v-3"></path></svg></span>
+            <span class="tag">IA 04</span>
+          </div>
+          <h3>Analisa o desempenho do seu salão</h3>
+          <p>Mostra quais serviços e profissionais geram mais resultado, quais clientes estão inativos e onde está a oportunidade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── FOOTER CTA + FOOTER ─────────────── -->
+  <footer class="footer-bleed">
+    <div class="footer-inner">
+      <div class="footer-cta-grid">
+        <div class="footer-cta-left">
+          <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 30 dias</span>
+          <h2>Comece a transformar o <em>seu salão</em> hoje</h2>
+          <p>Teste grátis. Sem cartão de crédito. Sem fidelidade. Cancele quando quiser — sem burocracia, sem letra miúda.</p>
+          <div class="btn-cta-row" style="justify-content:flex-start;">
+            <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:177px;">Comece grátis</a>
+            <a class="btn btn-outline-cream" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
+          </div>
+        </div>
+        <div class="footer-cta-right">
+          <div class="footer-bullet"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(237,231,217)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Sem Cartão de crédito</div>
+          <div class="footer-bullet"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(237,231,217)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Importação de clientes inclusa</div>
+          <div class="footer-bullet"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(237,231,217)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Suporte humano em português</div>
+          <div class="footer-bullet"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(237,231,217)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cancele quando quiser</div>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <a class="footer-logo" href="/" aria-label="Easy Salon">
+          <svg width="179" height="24" viewBox="0 0 179 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Easy Salon">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M112.79 14.9516C112.79 15.8226 112.548 16.5968 112.063 17.2742C111.578 17.9194 110.932 18.4194 110.124 18.7742C109.316 19.0968 108.444 19.2581 107.507 19.2581C106.763 19.2581 105.988 19.129 105.18 18.871C104.34 18.6129 103.581 18.1935 102.902 17.6129C102.643 17.3871 102.401 17.1452 102.175 16.8871C102.078 17.1129 101.981 17.3226 101.884 17.5161C101.69 18 101.529 18.5323 101.399 19.1129H101.012V14.1774H101.448C101.706 15.1452 102.159 15.9839 102.805 16.6935C103.451 17.4032 104.195 17.9355 105.035 18.2903C105.875 18.6452 106.731 18.8226 107.604 18.8226C108.573 18.8226 109.397 18.5806 110.076 18.0968C110.754 17.6129 111.093 16.9194 111.093 16.0161C111.093 15.5 110.9 15.0645 110.512 14.7097C110.124 14.3226 109.639 14 109.058 13.7419C108.444 13.4839 107.652 13.2097 106.683 12.9194C105.455 12.5323 104.485 12.1613 103.774 11.8064C103.031 11.4839 102.401 11.0484 101.884 10.5C101.367 9.95161 101.109 9.25806 101.109 8.41935C101.109 7.64516 101.351 6.98387 101.836 6.43548C102.32 5.85484 102.967 5.41936 103.774 5.12903C104.615 4.83871 105.503 4.69355 106.44 4.69355C107.248 4.69355 108.024 4.80645 108.767 5.03225C109.51 5.25806 110.286 5.64516 111.093 6.19355C111.287 6.12903 111.465 5.93549 111.627 5.61291C111.788 5.32258 111.901 5.04838 111.966 4.79032H112.354V8.41935H111.966C111.32 7.32258 110.496 6.5 109.494 5.95161C108.492 5.43548 107.474 5.17742 106.44 5.17742C105.439 5.17742 104.582 5.35484 103.871 5.70968C103.16 6.09677 102.805 6.62903 102.805 7.30645C102.805 7.79032 102.999 8.20967 103.387 8.56451C103.774 8.91935 104.243 9.22581 104.792 9.48387C105.374 9.70968 106.133 9.98387 107.07 10.3065C108.298 10.7258 109.3 11.1129 110.076 11.4677C110.819 11.7903 111.449 12.2419 111.966 12.8226C112.515 13.4032 112.79 14.1129 112.79 14.9516ZM113.275 18.9677V18.5323C113.759 18.5323 114.179 18.4355 114.535 18.2419C114.89 18.0161 115.181 17.7419 115.407 17.4194C115.633 17.129 115.86 16.7419 116.086 16.2581L120.109 6.62903L119.382 5.12903H122.145L127.67 17.7097C127.767 17.9677 127.913 18.1613 128.106 18.2903C128.3 18.4516 128.543 18.5323 128.833 18.5323H130.239V18.9677H122.872V18.5323H124.81C124.94 18.5323 125.02 18.5 125.053 18.4355C125.117 18.371 125.134 18.2581 125.101 18.0968L120.4 7.25806L116.037 17.5161C115.908 17.7742 115.94 17.9677 116.134 18.0968C116.296 18.2581 116.603 18.371 117.055 18.4355C117.54 18.5 118.154 18.5323 118.897 18.5323V18.9677H113.275ZM130.821 18.5323H132.856C133.147 18.5323 133.293 18.371 133.293 18.0484V6.04839C133.293 5.72581 133.147 5.56452 132.856 5.56452H130.821V5.12903H138.334V5.56452H136.249C135.991 5.56452 135.862 5.72581 135.862 6.04839V18.0484C135.862 18.371 135.991 18.5323 136.249 18.5323H141.096C141.775 18.5323 142.308 18.4032 142.696 18.1452C143.084 17.8871 143.358 17.4677 143.52 16.8871C143.714 16.3064 143.811 15.5161 143.811 14.5161V11.6613H144.247V18.9677H130.821V18.5323ZM149.627 18.5806C148.496 17.9677 147.624 17.0968 147.01 15.9677C146.363 14.8387 146.04 13.5323 146.04 12.0484C146.04 10.5645 146.363 9.24193 147.01 8.08064C147.624 6.95161 148.496 6.08065 149.627 5.46774C150.758 4.82258 152.051 4.5 153.505 4.5C154.991 4.5 156.3 4.82258 157.431 5.46774C158.529 6.08065 159.386 6.95161 160 8.08064C160.614 9.24193 160.921 10.5645 160.921 12.0484C160.921 13.5323 160.614 14.8387 160 15.9677C159.386 17.0968 158.529 17.9677 157.431 18.5806C156.3 19.2258 154.991 19.5484 153.505 19.5484C152.051 19.5484 150.758 19.2258 149.627 18.5806ZM156.025 18.1935C156.736 17.5806 157.285 16.7419 157.673 15.6774C158.029 14.6129 158.206 13.4032 158.206 12.0484C158.206 10.6935 158.029 9.48387 157.673 8.41935C157.285 7.35483 156.736 6.51613 156.025 5.90322C155.314 5.29032 154.474 4.98387 153.505 4.98387C152.535 4.98387 151.695 5.29032 150.984 5.90322C150.273 6.51613 149.724 7.35483 149.336 8.41935C148.949 9.48387 148.755 10.6935 148.755 12.0484C148.755 13.4032 148.949 14.5968 149.336 15.629C149.724 16.6935 150.273 17.5323 150.984 18.1452C151.695 18.7581 152.535 19.0645 153.505 19.0645C154.474 19.0645 155.314 18.7742 156.025 18.1935ZM162.181 18.5323H163.199C163.425 18.5323 163.651 18.4839 163.877 18.3871C164.136 18.2581 164.362 18.0645 164.556 17.8064C164.75 17.5484 164.847 17.1935 164.847 16.7419V6.48387C164.588 6.12903 164.314 5.88709 164.023 5.75806C163.732 5.66129 163.312 5.61291 162.763 5.61291H162.423V5.12903H167.367L175.995 15.5323V7.40323C175.995 6.79032 175.866 6.33871 175.607 6.04839C175.349 5.75806 175.042 5.61291 174.686 5.61291H173.571V5.12903H179V5.61291H178.031C177.611 5.61291 177.255 5.75806 176.964 6.04839C176.641 6.37097 176.48 6.82258 176.48 7.40323V19.2097H175.946L165.331 6.91936V16.7419C165.331 17.3548 165.477 17.8064 165.768 18.0968C166.091 18.3871 166.446 18.5323 166.834 18.5323H167.9V19.0161H162.181V18.5323ZM7.90062 11.5645C8.51458 11.5645 8.98312 11.4516 9.30626 11.2258C9.59708 11 9.79096 10.7097 9.8879 10.3548C9.98484 9.96774 10.0333 9.5 10.0333 8.95161V8.12903H10.4695V15.6774H10.0333V14.9032C10.0333 14.2903 9.98484 13.7742 9.8879 13.3548C9.79096 12.9677 9.59708 12.6613 9.30626 12.4355C9.01544 12.1774 8.54689 12.0484 7.90062 12.0484H5.04089V18.0484C5.04089 18.371 5.1863 18.5323 5.47712 18.5323H11.1481C11.7621 18.5323 12.2629 18.4032 12.6507 18.1452C13.0385 17.8871 13.3293 17.4839 13.5232 16.9355C13.717 16.3548 13.814 15.5968 13.814 14.6613V13.3548H14.2017V18.9677H0V18.5323H2.08421C2.34272 18.5323 2.47197 18.371 2.47197 18.0484V6.04839C2.47197 5.72581 2.34272 5.56452 2.08421 5.56452H0V5.12903H13.8624V10.3548H13.4747V9.19355C13.4747 8.22581 13.3777 7.48387 13.1839 6.96774C13.0223 6.45161 12.7315 6.09677 12.3114 5.90322C11.8913 5.67742 11.342 5.56452 10.6634 5.56452H5.47712C5.1863 5.56452 5.04089 5.72581 5.04089 6.04839V11.5645H7.90062ZM15.462 18.9677V18.5323C15.979 18.5323 16.399 18.4355 16.7222 18.2419C17.0776 18.0161 17.3684 17.7419 17.5946 17.4194C17.8208 17.0968 18.047 16.7097 18.2732 16.2581L22.3447 6.62903L21.6177 5.12903H24.3805L29.906 17.7097C30.003 17.9677 30.1322 18.1613 30.2938 18.2903C30.4877 18.4516 30.73 18.5323 31.0209 18.5323H32.4265V18.9677H25.1075V18.5323H27.0463C27.1432 18.5323 27.224 18.5 27.2887 18.4355C27.321 18.3387 27.321 18.2258 27.2887 18.0968L22.5871 7.25806L18.2247 17.5161C18.1278 17.7742 18.1601 17.9677 18.3217 18.0968C18.4833 18.2581 18.8064 18.371 19.2911 18.4355C19.7435 18.5 20.3574 18.5323 21.133 18.5323V18.9677H15.462ZM45.7073 14.9516C45.7073 15.8226 45.4649 16.5968 44.9802 17.2742C44.4955 17.9194 43.8493 18.4194 43.0414 18.7742C42.2336 19.0968 41.3611 19.2581 40.424 19.2581C39.6808 19.2581 38.8892 19.129 38.049 18.871C37.2412 18.6129 36.4818 18.1935 35.7709 17.6129C35.5124 17.3871 35.2862 17.1452 35.0923 16.8871C34.9631 17.1129 34.85 17.3226 34.753 17.5161C34.5915 18 34.4461 18.5323 34.3168 19.1129H33.9291V14.1774H34.3653C34.6238 15.1452 35.0762 15.9839 35.7224 16.6935C36.3687 17.4032 37.1119 17.9355 37.9521 18.2903C38.7922 18.6452 39.6485 18.8226 40.521 18.8226C41.4904 18.8226 42.3144 18.5806 42.993 18.0968C43.6715 17.6129 44.0108 16.9194 44.0108 16.0161C44.0108 15.5 43.817 15.0645 43.4292 14.7097C43.0091 14.3226 42.5083 14 41.9266 13.7419C41.345 13.4839 40.5533 13.2097 39.5516 12.9194C38.356 12.5323 37.3866 12.1613 36.6434 11.8064C35.9325 11.4839 35.3024 11.0484 34.753 10.5C34.236 9.95161 33.9775 9.25806 33.9775 8.41935C33.9775 7.64516 34.2199 6.98387 34.7046 6.43548C35.2216 5.85484 35.884 5.41936 36.6918 5.12903C37.4997 4.83871 38.3721 4.69355 39.3092 4.69355C40.1171 4.69355 40.8926 4.80645 41.6358 5.03225C42.379 5.25806 43.1707 5.64516 44.0108 6.19355C44.2047 6.12903 44.3824 5.93549 44.544 5.61291C44.7056 5.32258 44.8025 5.04838 44.8348 4.79032H45.2226V8.41935H44.8348C44.1886 7.32258 43.3646 6.5 42.3629 5.95161C41.3934 5.43548 40.3917 5.17742 39.3577 5.17742C38.3237 5.17742 37.4512 5.35484 36.7403 5.70968C36.0617 6.09677 35.7224 6.62903 35.7224 7.30645C35.7224 7.79032 35.9002 8.20967 36.2556 8.56451C36.6434 8.91935 37.1281 9.22581 37.7097 9.48387C38.2591 9.70968 39.0184 9.98387 39.9878 10.3065C41.2157 10.7258 42.2013 11.1129 42.9445 11.4677C43.72 11.7903 44.3663 12.2419 44.8833 12.8226C45.4326 13.4032 45.7073 14.1129 45.7073 14.9516ZM46.7252 5.12903H54.5288V5.56452H52.1538C52.0246 5.56452 51.9438 5.6129 51.9115 5.70968C51.8468 5.77419 51.863 5.85484 51.9599 5.95161L56.2738 12.0484L60.006 7.45161C60.3937 7 60.5876 6.6129 60.5876 6.29032C60.5876 6.06452 60.4745 5.88709 60.2483 5.75806C60.0544 5.62903 59.7474 5.56452 59.3274 5.56452H58.0187V5.12903H63.7866V5.56452C63.3342 5.56452 62.9303 5.64516 62.5749 5.80645C62.2194 5.93548 61.9124 6.11291 61.6539 6.33871C61.3954 6.56452 61.1208 6.85483 60.8299 7.20967L56.6131 12.4839V18.0484C56.6131 18.371 56.7423 18.5323 57.0008 18.5323H59.182V18.9677H51.4268V18.5323H53.6079C53.8987 18.5323 54.0441 18.371 54.0441 18.0484V12.9194L49.2941 6.38709C49.1325 6.12903 48.9709 5.93548 48.8094 5.80645C48.6478 5.64516 48.4378 5.56452 48.1793 5.56452H46.7252V5.12903ZM82.3991 17.7097C84.8711 17.7097 86.8584 19.6935 86.8584 22.1613V24C85.9374 23.5161 85.1135 22.8871 84.4349 22.1129C83.8532 21.4839 83.417 20.7581 83.0777 20.0323C82.7384 19.3064 82.4961 18.5323 82.3991 17.7097ZM80.3149 20.0323C79.9756 20.7581 79.5394 21.4839 78.9578 22.1129C78.2792 22.8871 77.4552 23.5161 76.5343 24V22.1613C76.5343 19.6935 78.5215 17.7097 80.9935 17.7097C80.8966 18.5323 80.6542 19.3064 80.3149 20.0323ZM87.44 11.3226C87.44 8.85483 89.4273 6.87097 91.8993 6.87097H93.7411C93.2564 7.79032 92.6263 8.6129 91.8023 9.29032C91.1722 9.87097 90.4936 10.3064 89.7666 10.6452C88.9911 10.9839 88.2155 11.2258 87.44 11.3226ZM89.7666 13.4032C90.4936 13.7419 91.1722 14.1774 91.8023 14.7581C92.6263 15.4355 93.2564 16.2581 93.7411 17.1774H91.8993C89.4273 17.1774 87.44 15.1935 87.44 12.7258C88.2155 12.8226 88.9911 13.0645 89.7666 13.4032ZM81.042 6.29032C78.57 6.29032 76.5827 4.30645 76.5827 1.83871V0C77.4552 0.483871 78.3277 1.1129 79.0062 1.93548C79.5394 2.56452 79.9756 3.24193 80.3149 3.96774C80.6542 4.74193 80.8966 5.51613 81.042 6.29032ZM83.1262 3.96774C83.4655 3.24193 83.9017 2.56452 84.4349 1.93548C85.1619 1.1129 85.9859 0.483871 86.9069 0V1.83871C86.9069 4.30645 84.9196 6.29032 82.4476 6.29032C82.5445 5.51613 82.7869 4.74193 83.1262 3.96774ZM76.0011 12.6774C76.0011 15.1452 74.0138 17.129 71.5418 17.129H69.7C70.1847 16.2581 70.8148 15.3871 71.5903 14.7097C72.2204 14.1774 72.9475 13.7419 73.6745 13.4032C74.4016 13.0645 75.1771 12.8226 76.0011 12.6774ZM73.6745 10.5968C72.9475 10.2581 72.2204 9.82258 71.5903 9.29032C70.8148 8.56451 70.1847 7.74194 69.7 6.82258H71.5418C74.0138 6.82258 76.0011 8.80645 76.0011 11.2742C75.1771 11.1774 74.4016 10.9355 73.6745 10.5968ZM80.945 12.7742C80.6542 15.5806 78.4246 17.8064 75.6133 18.0968C75.9041 15.2903 78.1338 13.0645 80.945 12.7742ZM82.4476 12.7742C85.2589 13.1129 87.4885 15.2903 87.8278 18.0968V18.1452L87.7793 18.0968C84.9681 17.8064 82.7869 15.5806 82.4476 12.7742ZM82.4961 11.2742C82.4961 11.2742 82.4799 11.2742 82.4476 11.2742H82.4961C82.7869 8.46774 85.0165 6.24194 87.8278 5.95161V5.90322C87.8278 5.93548 87.8278 5.95161 87.8278 5.95161C87.4885 8.75806 85.3073 10.9839 82.4961 11.2742ZM80.9935 11.2742C80.9612 11.2742 80.945 11.2742 80.945 11.2742C78.1338 10.9355 75.9526 8.70967 75.6133 5.90322C78.4246 6.24193 80.6542 8.41935 80.945 11.2258L80.9935 11.2742Z" fill="currentColor"></path>
+          </svg>
+        </a>
+        <nav class="footer-nav">
+          <a href="/salao-de-beleza">Salão de beleza</a>
+          <a href="/barbearia">Barbearia</a>
+          <a href="/estudio-de-beleza">Estúdio de beleza</a>
+          <a href="/planos">Planos</a>
+          <a href="/quem-somos">Quem somos</a>
+          <a href="/termos-de-uso">Termos de uso</a>
+        </nav>
+      </div>
+      <div class="footer-copy-row" style="margin-top:30px;">
+        <div class="footer-copy">© Easy Salon · Tecsalao Desenvolvimento de Software LTDA · CNPJ 31.162.185/0001-64</div>
+        <div class="footer-social">
+          <svg class="ico" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="LinkedIn"><path d="M8 11v5"></path><path d="M8 8v.01"></path><path d="M12 16v-5"></path><path d="M16 16v-3a2 2 0 1 0 -4 0"></path><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10"></path></svg>
+          <svg class="ico" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Instagram"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8"></path><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path><path d="M16.5 7.5v.01"></path></svg>
+          <svg class="ico" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="YouTube"><path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8"></path><path d="M10 9l5 3l-5 3l0 -6"></path></svg>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─────────────── MOBILE DRAWER ─────────────── -->
+  <div class="drawer-backdrop" data-drawer-backdrop hidden></div>
+  <aside id="mobile-drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div class="drawer-logo" data-drawer-logo aria-label="Easy Salon"></div>
+      <button type="button" class="drawer-close" aria-label="Fechar menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </div>
+    <nav class="drawer-nav">
+      <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
+      <a class="drawer-link" href="/barbearia">Barbearia</a>
+      <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
+      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/planos">Planos</a>
+    </nav>
+    <div class="drawer-cta">
+      <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:100%;">Teste grátis</a>
+      <a class="btn btn-tan-soft" href="https://app.easysalon.com.br/" style="width:100%;">Entrar</a>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  // BlurFade observer (mestre)
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    var nodes = document.querySelectorAll('.nav-inner > *, .sb2-fade, .footer-cta-left > *, .footer-cta-right > *, .footer-bottom > *');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    nodes.forEach(function (n, i) { n.style.transitionDelay = Math.min((i % 6) * 90, 540) + 'ms'; io.observe(n); });
+  })();
+
+  // Metodologia Easy — autoplay ~2.6s, pausa no hover, clique/hover troca passo
+  (function () {
+    var grid = document.querySelector('[data-method]');
+    if (!grid) return;
+    var items = Array.prototype.slice.call(grid.querySelectorAll('.sb2-method-item'));
+    var panel = grid.querySelector('.sb2-method-panel');
+    var stepEl = panel.querySelector('[data-method-step]');
+    var titleEl = panel.querySelector('[data-method-title]');
+    var descEl = panel.querySelector('[data-method-desc]');
+    var previewEl = panel.querySelector('[data-method-preview]');
+
+    var STEPS = [
+      ['01', 'Organize sua agenda', 'Comece pelo coração do salão: a agenda. Visibilidade total dos seus profissionais e dos serviços que cada um faz.'],
+      ['02', 'Tenha visão financeira', 'Faturamento por profissional, comissões automáticas, caixa diário. Decisões baseadas em dado, não em achismo.'],
+      ['03', 'Domine seu estoque', 'Tintura, escova, máscara, produto de tratamento. Saiba o que entra, o que sai e o que está acabando. Sem prejuízo escondido.'],
+      ['04', 'Faça promoções inteligentes', 'Identifique horários ociosos, clientes que sumiram e oportunidades de venda. Promoção que faz sentido, não no chute.'],
+      ['05', 'Cuide dos seus clientes', 'Histórico completo: cor preferida, tipo de cabelo, observações de cada atendimento. Cliente fiel não some — porque você lembra dela.'],
+    ];
+    var DUR = 2600;
+    var active = 0;
+    var paused = false;
+    var elapsed = 0;
+    var last = null;
+    var raf = null;
+
+    function render(i) {
+      items.forEach(function (it, idx) {
+        it.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+        var bar = it.querySelector('.sb2-method-bar > span');
+        if (bar) bar.style.width = (idx === i ? '0%' : '0%');
+      });
+      var s = STEPS[i];
+      stepEl.textContent = 'Passo ' + s[0];
+      titleEl.textContent = s[1];
+      descEl.textContent = s[2];
+      previewEl.textContent = 'PREVIEW · ' + s[1];
+    }
+
+    function setActive(i) {
+      active = (i + STEPS.length) % STEPS.length;
+      elapsed = 0;
+      render(active);
+    }
+
+    function tick(t) {
+      if (last == null) last = t;
+      var dt = t - last; last = t;
+      if (!paused) {
+        elapsed += dt;
+        var p = Math.min(1, elapsed / DUR);
+        var bar = items[active].querySelector('.sb2-method-bar > span');
+        if (bar) bar.style.width = (p * 100) + '%';
+        if (p >= 1) { setActive(active + 1); }
+      }
+      raf = requestAnimationFrame(tick);
+    }
+
+    items.forEach(function (it, idx) {
+      it.addEventListener('click', function () { setActive(idx); });
+      if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+        it.addEventListener('mouseenter', function () { setActive(idx); });
+      }
+    });
+    grid.addEventListener('mouseenter', function () { paused = true; });
+    grid.addEventListener('mouseleave', function () { paused = false; last = null; });
+
+    render(active);
+    raf = requestAnimationFrame(tick);
+  })();
+
+  // Nav scroll shadow
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 8); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // Nav active link (Planos / Quem somos)
+  (function () {
+    function setActive() {
+      var path = location.pathname.replace(/\/$/, '');
+      var hash = location.hash;
+      document.querySelectorAll('.nav-links a').forEach(function (a) {
+        var href = a.getAttribute('href') || '';
+        var hashIdx = href.indexOf('#');
+        var hrefPath = (hashIdx === -1 ? href : href.substring(0, hashIdx)).replace(/\/$/, '');
+        var hrefHash = hashIdx === -1 ? '' : href.substring(hashIdx);
+        var active = hrefHash
+          ? (hrefPath === path && hrefHash === hash)
+          : (hrefPath === path);
+        a.classList.toggle('active', active);
+      });
+    }
+    setActive();
+    window.addEventListener('hashchange', setActive);
+  })();
+
+  // Dropdown menu — comportamento canônico (igual home): abre no hover,
+  // fecha ao sair com delay de 120ms (forgiveness pra gap), ESC fecha,
+  // click fora fecha. Suporta múltiplos .dropdown na página.
+  (function () {
+    document.querySelectorAll('.dropdown').forEach(function (dd) {
+      var trigger = dd.querySelector('.dropdown-trigger');
+      var content = dd.querySelector('.dropdown-content');
+      if (!trigger || !content) return;
+
+      function setOpen(open) {
+        dd.setAttribute('data-state', open ? 'open' : 'closed');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+
+      // Hover to open / leave to close (with small delay so the gap forgives)
+      var closeTimer = null;
+      function scheduleClose() {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(function () { setOpen(false); }, 120);
+      }
+      function cancelClose() { clearTimeout(closeTimer); }
+      dd.addEventListener('mouseenter', function () { cancelClose(); setOpen(true); });
+      dd.addEventListener('mouseleave', scheduleClose);
+
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) setOpen(false);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    });
+  })();
+
+  // ─── Mobile drawer + logo clone (mestre / igual à home) ───
+  (function () {
+    var burger = document.querySelector('.nav-burger');
+    var drawer = document.getElementById('mobile-drawer');
+    var backdrop = document.querySelector('[data-drawer-backdrop]');
+    var closeBtn = drawer && drawer.querySelector('.drawer-close');
+    var logoSlot = drawer && drawer.querySelector('[data-drawer-logo]');
+    var navLogo = document.querySelector('.nav-logo svg');
+
+    // Clone the nav logo into the drawer head (smaller).
+    if (logoSlot && navLogo) {
+      var clone = navLogo.cloneNode(true);
+      clone.setAttribute('width', '120');
+      clone.setAttribute('height', '16');
+      clone.removeAttribute('aria-label');
+      logoSlot.appendChild(clone);
+    }
+
+    if (!burger || !drawer || !backdrop) return;
+
+    function setOpen(open) {
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      drawer.classList.toggle('is-open', open);
+      backdrop.hidden = !open;
+      backdrop.classList.toggle('is-visible', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    burger.addEventListener('click', function () { setOpen(true); });
+    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
+    backdrop.addEventListener('click', function () { setOpen(false); });
+    drawer.querySelectorAll('.drawer-link').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  })();
+</script>
+
+<script>
+// Interactive chat with typewriter effect
+  (function () {
+    var feed = document.getElementById('chat-feed');
+    if (!feed) return;
+
+    // Conversation script — runs in a loop (apenas serviços de salão de beleza)
+    var scripts = [
+      // ─── Conversa 1: Salão de Beleza (Marina) — Escova Progressiva ───
+      [
+        { side: 'out', author: 'Marina A.',   html: 'Oi, dá pra fazer <strong>escova progressiva</strong> nessa semana?' },
+        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
+        { side: 'in',  author: 'Easy IA',     html: 'Claro, Marina! Tenho <strong>quinta às 14h</strong> ou <strong>sexta às 16h</strong> com a Júlia. Qual prefere?' },
+        { side: 'out', author: 'Marina A.',   html: 'Sexta 16h é perfeito 💇‍♀️' },
+        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1300 },
+        { side: 'in',  author: 'Easy IA',     html: 'Anotado! Reservei 2h pra você.' },
+        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
+            title: 'Agendamento confirmado',
+            rows: [
+              ['Serviço',     'Escova Progressiva'],
+              ['Profissional', 'Júlia'],
+              ['Quando',      'Sex · 16:00 — 18:00'],
+              ['Total',       'R$ 320,00'],
+            ]
+        }},
+        { side: 'out', author: 'Marina A.',   html: 'Maravilha, obrigada!' },
+        { side: 'in',  author: 'Easy IA',     html: 'Até sexta! Mando lembrete na quinta 💌' },
+      ],
+      // ─── Conversa 2: Salão de Beleza (Camila) — Coloração + Corte ───
+      [
+        { side: 'out', author: 'Camila S.',   html: 'Oi! Queria fazer <strong>coloração e corte</strong> esse fim de semana ✨' },
+        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
+        { side: 'in',  author: 'Easy IA',     html: 'Oi Camila! Tenho <strong>sábado às 10h</strong> com a Patrícia. Reservo pra você?' },
+        { side: 'out', author: 'Camila S.',   html: 'Pode reservar 🙌' },
+        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1300 },
+        { side: 'in',  author: 'Easy IA',     html: 'Pronto! Bloqueei 3h na agenda.' },
+        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
+            title: 'Agendamento confirmado',
+            rows: [
+              ['Serviço',     'Coloração + Corte'],
+              ['Profissional', 'Patrícia'],
+              ['Quando',      'Sáb · 10:00 — 13:00'],
+              ['Total',       'R$ 280,00'],
+            ]
+        }},
+        { side: 'out', author: 'Camila S.',   html: 'Perfeito, obrigada!' },
+        { side: 'in',  author: 'Easy IA',     html: 'Até sábado! Te lembro na sexta 💌' },
+      ],
+      // ─── Conversa 3: Salão de Beleza (Renata) — Hidratação + Manicure ───
+      [
+        { side: 'out', author: 'Renata L.',   html: 'Boa tarde! Tem horário pra <strong>hidratação e manicure</strong>?' },
+        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
+        { side: 'in',  author: 'Easy IA',     html: 'Oi Renata! Tenho <strong>quarta às 15h</strong> com a Aline e a Bruna em paralelo. Combina?' },
+        { side: 'out', author: 'Renata L.',   html: 'Combina sim 💅' },
+        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1200 },
+        { side: 'in',  author: 'Easy IA',     html: 'Fechado! Reservei 1h30 pra você.' },
+        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
+            title: 'Agendamento confirmado',
+            rows: [
+              ['Serviço',     'Hidratação + Manicure'],
+              ['Profissional', 'Aline & Bruna'],
+              ['Quando',      'Qua · 15:00 — 16:30'],
+              ['Total',       'R$ 145,00'],
+            ]
+        }},
+        { side: 'out', author: 'Renata L.',   html: 'Obrigada!' },
+        { side: 'in',  author: 'Easy IA',     html: 'Até quarta! Lembrete chega na véspera ⏰' },
+      ],
+    ];
+
+    function makeMsg(side, author) {
+      var wrap = document.createElement('div');
+      wrap.className = 'msg msg-' + (side === 'out' ? 'outgoing' : 'incoming');
+      if (author) {
+        var a = document.createElement('span');
+        a.className = 'author';
+        if (side === 'in') a.innerHTML = '<span style="color: rgb(206, 72, 54);">' + author + '</span>';
+        else a.textContent = author;
+        wrap.appendChild(a);
+      }
+      return wrap;
+    }
+    function makeBubble(side) {
+      var b = document.createElement('div');
+      b.className = 'bubble';
+      if (side === 'in') b.style.backgroundColor = 'rgb(243, 228, 221)';
+      return b;
+    }
+    function makeTyping() {
+      var t = document.createElement('div');
+      t.className = 'typing';
+      t.style.backgroundColor = 'rgb(243, 228, 221)';
+      t.innerHTML = '<span></span><span></span><span></span>';
+      return t;
+    }
+    function makeCard(c) {
+      var card = document.createElement('div');
+      card.className = 'confirm-card';
+      var head = document.createElement('div');
+      head.className = 'confirm-head';
+      head.innerHTML = '<span class="confirm-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6 L5 8.5 L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' + c.title;
+      card.appendChild(head);
+      var rows = document.createElement('div');
+      rows.className = 'confirm-rows';
+      c.rows.forEach(function (r) {
+        var k = document.createElement('span'); k.className = 'k'; k.textContent = r[0];
+        var v = document.createElement('span'); v.className = 'v'; v.textContent = r[1];
+        rows.appendChild(k); rows.appendChild(v);
+      });
+      card.appendChild(rows);
+      return card;
+    }
+
+    function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+    function pruneOverflow() {
+      // Drop oldest visible messages while content overflows the feed.
+      while (feed.scrollHeight > feed.clientHeight + 1 && feed.children.length > 1) {
+        var first = feed.firstElementChild;
+        first.classList.add('is-fading');
+        // remove after fade
+        feed.removeChild(first);
+      }
+    }
+
+    async function typeInto(el, html, speed) {
+      // Animates text content while preserving inline tags (parses HTML, walks tree).
+      var tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      var nodes = [];
+      (function walk(parent, dest) {
+        parent.childNodes.forEach(function (n) {
+          if (n.nodeType === 3) {
+            nodes.push({ kind: 'text', text: n.nodeValue, dest: dest });
+          } else if (n.nodeType === 1) {
+            var clone = n.cloneNode(false);
+            dest.appendChild(clone);
+            walk(n, clone);
+          }
+        });
+      })(tmp, el);
+
+      // Re-walk: we need to *type* the text, so recreate without text first
+      el.innerHTML = '';
+      var struct = [];
+      (function rebuild(parent, dest) {
+        parent.childNodes.forEach(function (n) {
+          if (n.nodeType === 3) {
+            var t = document.createTextNode('');
+            dest.appendChild(t);
+            struct.push({ node: t, text: n.nodeValue });
+          } else if (n.nodeType === 1) {
+            var c = n.cloneNode(false);
+            dest.appendChild(c);
+            rebuild(n, c);
+          }
+        });
+      })(tmp, el);
+
+      var cursor = document.createElement('span');
+      cursor.className = 'tw-cursor';
+      el.appendChild(cursor);
+
+      for (var i = 0; i < struct.length; i++) {
+        var seg = struct[i];
+        var chars = Array.from(seg.text);
+        for (var j = 0; j < chars.length; j++) {
+          var ch = chars[j];
+          seg.node.nodeValue += ch;
+          // keep cursor at end
+          el.appendChild(cursor);
+          pruneOverflow();
+          // Natural pacing: jitter + longer pauses on punctuation
+          var base = speed + (Math.random() * 30 - 10); // ±10ms jitter, +0-20ms
+          if (ch === ',' || ch === ';') base += 120;
+          else if (ch === '.' || ch === '!' || ch === '?') base += 180;
+          else if (ch === ' ') base += 20;
+          await sleep(Math.max(20, base));
+        }
+      }
+      cursor.remove();
+    }
+
+    async function showStep(step) {
+      var msg = makeMsg(step.side, step.author);
+      var content;
+      if (step.type === 'typing') {
+        content = makeTyping();
+        msg.appendChild(content);
+        feed.appendChild(msg);
+        requestAnimationFrame(function () { msg.classList.add('is-visible'); });
+        pruneOverflow();
+        await sleep(step.dur || 800);
+        msg.classList.add('is-fading');
+        await sleep(300);
+        msg.remove();
+        return;
+      }
+      if (step.type === 'card') {
+        content = makeCard(step.card);
+        msg.appendChild(content);
+        feed.appendChild(msg);
+        requestAnimationFrame(function () { msg.classList.add('is-visible'); });
+        pruneOverflow();
+        return;
+      }
+      content = makeBubble(step.side);
+      msg.appendChild(content);
+      feed.appendChild(msg);
+      requestAnimationFrame(function () { msg.classList.add('is-visible'); });
+      pruneOverflow();
+      await typeInto(content, step.html, step.side === 'out' ? 55 : 45);
+    }
+
+    async function run() {
+      // Intersection observer — only animate when chat is visible
+      var visible = false;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { visible = e.isIntersecting; });
+      }, { threshold: 0.25 });
+      io.observe(feed);
+
+      var convoIdx = 0;
+      while (true) {
+        var script = scripts[convoIdx];
+        for (var i = 0; i < script.length; i++) {
+          // Wait until visible
+          while (!visible) await sleep(300);
+          await showStep(script[i]);
+          // Hold between steps
+          await sleep(script[i].type === 'typing' ? 300 : (script[i].type === 'card' ? 2400 : 1800));
+        }
+        // End of conversation: clear feed and move to next
+        await sleep(1200);
+        Array.from(feed.children).forEach(function (m) { m.classList.add('is-fading'); });
+        await sleep(500);
+        feed.innerHTML = '';
+        convoIdx = (convoIdx + 1) % scripts.length;
+      }
+    }
+
+    run();
+  })();
+</script>
+
+<script>
+  // FAQ accordion: wrap each .answer in animatable structure + toggle [open]
+  // Animation handled in CSS via grid-template-rows + opacity (shadcn-style)
+  (function () {
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      var summary = item.querySelector('summary');
+      var answer  = item.querySelector('.answer');
+      if (!summary || !answer) return;
+
+      // marker (sparkle) — substitui o ::after pra ficar consistente com transitions
+      if (!summary.querySelector('.marker')) {
+        var marker = document.createElement('span');
+        marker.className = 'marker';
+        marker.setAttribute('aria-hidden', 'true');
+        summary.appendChild(marker);
+      }
+
+      // Envolve .answer em wrap + inner pra animar grid-template-rows
+      if (!item.querySelector('.answer-wrap')) {
+        var wrap = document.createElement('div');
+        wrap.className = 'answer-wrap';
+        var inner = document.createElement('div');
+        inner.className = 'answer-inner';
+        answer.parentNode.insertBefore(wrap, answer);
+        inner.appendChild(answer);
+        wrap.appendChild(inner);
+      }
+
+      // Hijack o clique pra animar o fechamento (caso contrário o <details> some na hora)
+      summary.addEventListener('click', function (e) {
+        if (item.hasAttribute('open')) {
+          e.preventDefault();
+          // Espera a transição de saída (mesma duração do CSS) antes de remover [open]
+          item.classList.add('closing');
+          setTimeout(function () {
+            item.removeAttribute('open');
+            item.classList.remove('closing');
+          }, 350);
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
