@@ -23,35 +23,23 @@
   [data-screen-label="Planos"] .nav-cta { order: 1; justify-self: end; }
 
   /* ── Layout-shell ── */
-  [data-screen-label="Planos"] .pl2-section {
-    padding: 80px 32px;
-    border-top: 1px solid var(--c-line, rgba(115,42,29,.12));
-  }
-  [data-screen-label="Planos"] .pl2-section.first { border-top: none; padding-top: 56px; padding-bottom: 56px; }
+  [data-screen-label="Planos"] .pl2-section { padding: 80px 32px; }
+  [data-screen-label="Planos"] .pl2-section.first { padding-top: 56px; padding-bottom: 56px; }
   [data-screen-label="Planos"] .pl2-wrap { max-width: 1200px; margin: 0 auto; }
 
-  /* ── SecHead (eyebrow + número · título · sub) ── */
+  /* ── SecHead (título · sub) — espelha .h2-section-head da home ── */
   [data-screen-label="Planos"] .pl2-sechead { text-align: center; margin-bottom: 40px; }
-  [data-screen-label="Planos"] .pl2-sechead .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--c-accent); margin-bottom: 14px;
-  }
-  [data-screen-label="Planos"] .pl2-sechead .eyebrow .dot {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent);
-  }
   [data-screen-label="Planos"] .pl2-sechead h2 {
-    font-family: var(--ff-display); font-weight: 400;
-    font-size: 36px; line-height: 1.1; color: var(--c-text);
+    font-family: var(--ff-display); font-weight: 500;
+    font-size: 30px; line-height: 1.2; color: var(--c-text);
     margin: 0 0 12px; max-width: 760px; margin-left: auto; margin-right: auto;
   }
   [data-screen-label="Planos"] .pl2-sechead h2 em {
     font-style: italic; color: var(--c-accent);
   }
   [data-screen-label="Planos"] .pl2-sechead p {
-    font-family: var(--ff-text); font-size: 16px; line-height: 1.5;
-    color: var(--c-text-soft, rgba(115,42,29,.7));
+    font-family: var(--ff-text); font-size: 15px; line-height: 1.55;
+    color: var(--c-text); opacity: .7;
     margin: 0 auto; max-width: 620px;
   }
 
@@ -70,43 +58,43 @@
   }
   [data-screen-label="Planos"] .pl2-hero-left h1 {
     font-family: var(--ff-display); font-weight: 400;
-    font-size: 48px; line-height: 1.05; color: var(--c-text); margin: 0;
+    font-size: 50px; line-height: 1.05; color: var(--c-text); margin: 0;
   }
   [data-screen-label="Planos"] .pl2-hero-left h1 em {
     font-style: italic; color: var(--c-accent);
   }
   [data-screen-label="Planos"] .pl2-hero-lead {
     font-family: var(--ff-text); font-size: 17px; line-height: 1.5;
-    color: var(--c-text-soft, rgba(115,42,29,.75));
+    color: var(--c-text); opacity: .75;
     margin: 20px 0 28px; max-width: 480px;
   }
   [data-screen-label="Planos"] .pl2-hero-right {
     border-radius: 24px; overflow: hidden;
-    background: var(--c-tan-veil, rgba(206,72,54,.06));
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background: var(--c-accent-soft);
+    border: 1px solid var(--c-text-3);
     min-height: 360px;
-    background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
+    background-image: linear-gradient(135deg, var(--c-accent-soft-2) 0%, transparent 60%);
     display: flex; align-items: center; justify-content: center;
     position: relative;
   }
   [data-screen-label="Planos"] .pl2-hero-right::after {
     content: 'Dono(a) do salão usando o sistema';
     font-family: var(--ff-text); font-size: 13px; font-weight: 500;
-    color: var(--c-text-soft, rgba(115,42,29,.6));
+    color: var(--c-text); opacity: .6;
     letter-spacing: 0.04em;
   }
 
   /* ── BillingToggle (mensal / anual) ── */
   [data-screen-label="Planos"] .pl2-billing {
     display: inline-flex; gap: 4px; padding: 4px;
-    border-radius: 999px; background: rgba(115,42,29,.06);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-radius: 999px; background: var(--c-accent-soft);
+    border: 1px solid var(--c-text-3);
     margin-top: auto;
   }
   [data-screen-label="Planos"] .pl2-billing button {
     cursor: pointer; border: none; border-radius: 999px;
     padding: 9px 20px; font-family: var(--ff-text); font-size: 13px; font-weight: 500;
-    background: transparent; color: var(--c-text-soft, rgba(115,42,29,.7));
+    background: transparent; color: var(--c-text); opacity: .7;
     transition: background .15s ease, color .15s ease;
   }
   [data-screen-label="Planos"] .pl2-billing button[aria-pressed="true"] {
@@ -123,14 +111,14 @@
   [data-screen-label="Planos"] .pl2-pcard {
     display: flex; flex-direction: column;
     padding: 24px;
-    background: rgb(251,251,251);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background: var(--c-card-2);
+    border: 1px solid var(--c-text-3);
     border-radius: 20px;
     transition: transform .2s ease, box-shadow .2s ease;
   }
   [data-screen-label="Planos"] .pl2-pcard:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 32px -16px rgba(115,42,29,.18);
+    box-shadow: var(--shadow-card-2);
   }
   [data-screen-label="Planos"] .pl2-pcard .tier {
     font-family: var(--ff-display); font-weight: 400;
@@ -138,7 +126,7 @@
   }
   [data-screen-label="Planos"] .pl2-pcard .who {
     font-family: var(--ff-text); font-size: 12px;
-    color: var(--c-text-soft, rgba(115,42,29,.7)); margin: 4px 0 16px;
+    color: var(--c-text); opacity: .7; margin: 4px 0 16px;
     text-transform: lowercase;
   }
   [data-screen-label="Planos"] .pl2-pcard .price {
@@ -151,11 +139,11 @@
   }
   [data-screen-label="Planos"] .pl2-pcard .price .small {
     font-family: var(--ff-text); font-size: 12px;
-    color: var(--c-text-soft, rgba(115,42,29,.7));
+    color: var(--c-text); opacity: .7;
   }
   [data-screen-label="Planos"] .pl2-pcard .desc {
     font-family: var(--ff-text); font-size: 13px; line-height: 1.5;
-    color: var(--c-text-soft, rgba(115,42,29,.75));
+    color: var(--c-text); opacity: .75;
     margin: 0 0 22px; flex: 1;
   }
   [data-screen-label="Planos"] .pl2-pcard .btn { width: 100%; }
@@ -165,8 +153,8 @@
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   }
   [data-screen-label="Planos"] .pl2-tile {
-    background: rgb(251,251,251);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background: var(--c-card-2);
+    border: 1px solid var(--c-text-3);
     border-radius: 20px;
     padding: 22px;
     display: flex; flex-direction: column;
@@ -191,7 +179,7 @@
   }
   [data-screen-label="Planos"] .pl2-tile .check-list li .ck {
     flex-shrink: 0; width: 16px; height: 16px;
-    border-radius: 50%; background: rgba(206,72,54,.12);
+    border-radius: 50%; background: var(--c-accent-soft-2);
     display: inline-flex; align-items: center; justify-content: center;
     margin-top: 2px;
   }
@@ -202,15 +190,15 @@
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   }
   [data-screen-label="Planos"] .pl2-acard {
-    background: rgb(251,251,251);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background: var(--c-card-2);
+    border: 1px solid var(--c-text-3);
     border-radius: 20px;
     padding: 28px;
     display: flex; flex-direction: column;
   }
   [data-screen-label="Planos"] .pl2-acard .ico {
     width: 44px; height: 44px; border-radius: 12px;
-    background: rgba(206,72,54,.10);
+    background: var(--c-accent-soft-2);
     color: var(--c-accent);
     display: inline-flex; align-items: center; justify-content: center;
     margin-bottom: 18px;
@@ -222,23 +210,23 @@
   }
   [data-screen-label="Planos"] .pl2-acard p {
     font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
-    color: var(--c-text-soft, rgba(115,42,29,.75));
+    color: var(--c-text); opacity: .75;
     margin: 0 0 18px; flex: 1;
   }
   [data-screen-label="Planos"] .pl2-acard .chip {
     align-self: flex-start;
     display: inline-flex; align-items: center; gap: 6px;
     padding: 6px 12px; border-radius: 999px;
-    background: rgba(115,42,29,.06);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background: var(--c-card-2);
+    border: 1px solid var(--c-text-3);
     font-family: var(--ff-text); font-size: 12px; font-weight: 500;
-    color: var(--c-text-soft, rgba(115,42,29,.75));
+    color: var(--c-text); opacity: .75;
   }
 
   /* ═══════════════════ SECTION 04 — CONTRATAÇÃO ═══════════════════ */
   [data-screen-label="Planos"] .pl2-contrato-card {
-    background: rgb(251,251,251);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background: var(--c-card-2);
+    border: 1px solid var(--c-text-3);
     border-radius: 20px;
     padding: 0;
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
@@ -249,10 +237,10 @@
   }
   [data-screen-label="Planos"] .pl2-contrato-item.col-mid,
   [data-screen-label="Planos"] .pl2-contrato-item.col-right {
-    border-left: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-left: 1px solid var(--c-text-3);
   }
   [data-screen-label="Planos"] .pl2-contrato-item.row-bot {
-    border-top: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-top: 1px solid var(--c-text-3);
   }
   [data-screen-label="Planos"] .pl2-contrato-item .head {
     display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
@@ -271,7 +259,7 @@
   }
   [data-screen-label="Planos"] .pl2-contrato-item p {
     font-family: var(--ff-text); font-size: 13px; line-height: 1.45;
-    color: var(--c-text-soft, rgba(115,42,29,.75));
+    color: var(--c-text); opacity: .75;
     margin: 0;
   }
 
@@ -297,8 +285,8 @@
     [data-screen-label="Planos"] .pl2-contrato-card { grid-template-columns: 1fr; }
     [data-screen-label="Planos"] .pl2-contrato-item.col-mid,
     [data-screen-label="Planos"] .pl2-contrato-item.col-right { border-left: none; }
-    [data-screen-label="Planos"] .pl2-contrato-item + .pl2-contrato-item { border-top: 1px solid var(--c-line, rgba(115,42,29,.12)); }
-    [data-screen-label="Planos"] .pl2-contrato-item.row-bot { border-top: 1px solid var(--c-line, rgba(115,42,29,.12)); }
+    [data-screen-label="Planos"] .pl2-contrato-item + .pl2-contrato-item { border-top: 1px solid var(--c-text-3); }
+    [data-screen-label="Planos"] .pl2-contrato-item.row-bot { border-top: 1px solid var(--c-text-3); }
 
     /* Footer responsivo (mesma lógica home / QS) */
     [data-screen-label="Planos"] .footer-inner { max-width: 100%; padding: 60px 24px; }
@@ -452,7 +440,7 @@
   <section class="pl2-section">
     <div class="pl2-wrap">
       <div class="pl2-sechead pl2-fade">
-        <span class="eyebrow"><span class="dot"></span>02 · Tudo Que Está Incluso</span>
+        
         <h2>Todas as funcionalidades em <em>todos os planos</em></h2>
         <p>Não importa o tamanho do seu salão — você tem acesso ao sistema completo.</p>
       </div>
@@ -541,7 +529,7 @@
   <section class="pl2-section">
     <div class="pl2-wrap">
       <div class="pl2-sechead pl2-fade">
-        <span class="eyebrow"><span class="dot"></span>03 · Recursos Adicionais</span>
+        
         <h2>Quer ir além? <em>Contrate por fora</em></h2>
         <p>Recursos opcionais que se contratam separadamente, conforme a necessidade do seu salão.</p>
       </div>
@@ -572,7 +560,7 @@
   <section class="pl2-section">
     <div class="pl2-wrap">
       <div class="pl2-sechead pl2-fade">
-        <span class="eyebrow"><span class="dot"></span>04 · Informações de Contratação</span>
+        
         <h2>Sem <em>letra miúda</em></h2>
         <p>O que você precisa saber antes de contratar — direto, sem rodeio.</p>
       </div>
