@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" data-screen-label="Solução · Salão de Beleza">
+<html lang="pt-BR" data-screen-label="Salão de Beleza">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,9 +10,593 @@
 <link rel="stylesheet" href="/design-system.css">
 
 <style>
-  /* Página /salao-de-beleza.html — todas as regras vivem em design-system.css
-     (seção "Páginas: Salão de Beleza"). Este bloco é mantido vazio para enforce
-     a herança 100%% via CSS canônico. */
+  /* ═══════════════════════════════════════════════════════════════
+     PÁGINA /salao-de-beleza — grid do wireframe Claude Design
+     Tudo escopado a [data-screen-label="Salão de Beleza"]
+     Responsivo segue padrão sandbox v2: 1024 + 640
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* overflow-x: clip permite position:sticky funcionar mantendo o bleed
+     horizontal contido (overflow:hidden cria scroll container e quebra sticky) */
+  html[data-screen-label="Salão de Beleza"],
+  [data-screen-label="Salão de Beleza"] body { overflow-x: clip; }
+
+  [data-screen-label="Salão de Beleza"] .nav-inner { grid-template-columns: auto 1fr auto; }
+  [data-screen-label="Salão de Beleza"] .nav-logo { order: -1; justify-self: start; }
+  [data-screen-label="Salão de Beleza"] .nav-links { order: 0; justify-self: center; gap: 20px; }
+  [data-screen-label="Salão de Beleza"] .nav-cta { order: 1; justify-self: end; }
+
+  /* ── Layout-shell ── */
+  [data-screen-label="Salão de Beleza"] .sb2-section {
+    padding: 80px 32px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-section.first { padding: 20px 32px 0; }
+  [data-screen-label="Salão de Beleza"] .sb2-section[data-func-section] { padding-bottom: 0; }
+  [data-screen-label="Salão de Beleza"] .sb2-wrap { max-width: 1200px; margin: 0 auto; }
+
+  /* ── .h2-section / .h2-section-head (componentes herdados da home) ── */
+  [data-screen-label="Salão de Beleza"] .h2-section {
+    max-width: 1200px; margin: 0 auto; padding: 50px 0;
+  }
+  [data-screen-label="Salão de Beleza"] #h2-method-section { padding-top: 80px; padding-bottom: 20px; }
+  [data-screen-label="Salão de Beleza"] .h2-section:has(.h2-grid-4) { padding-top: 80px; padding-bottom: 0; }
+  [data-screen-label="Salão de Beleza"] .h2-section-head {
+    text-align: center; margin: 0 auto 30px; max-width: 760px; padding: 0 24px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-section-head h2 {
+    font-family: var(--ff-display); font-weight: 500; font-size: 30px;
+    line-height: 1.2; color: var(--c-text); margin: 0 0 20px;
+    white-space: nowrap;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-section-head p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
+    color: var(--c-text); margin: 0 auto; max-width: none;
+  }
+
+  /* ── SecHead ── */
+  [data-screen-label="Salão de Beleza"] .sb2-sechead { text-align: center; margin: 0 auto 30px; max-width: 760px; padding: 0 24px; }
+  [data-screen-label="Salão de Beleza"] .sb2-sechead.left { text-align: left; }
+  [data-screen-label="Salão de Beleza"] .sb2-sechead .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 14px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-sechead .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-sechead h2 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 36px; line-height: 1.1; color: var(--c-text);
+    margin: 0 auto 12px; max-width: 760px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-sechead h2 em {
+    font-style: normal; color: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-sechead p {
+    font-family: var(--ff-text); font-size: 16px; line-height: 1.5;
+    color: var(--c-text-soft, rgba(115,42,29,.7));
+    margin: 0 auto; max-width: 620px;
+  }
+
+  /* ═══════════════ HERO (split 45/55 — componente .h2-hero, espelho da home) ═══════════════ */
+  [data-screen-label="Salão de Beleza"] .h2-hero {
+    position: relative;
+    width: 100vw; margin-left: calc(50% - 50vw);
+    padding: 20px 0 0;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-hero > * {
+    max-width: 1200px; margin: 0 auto; padding: 0;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-hero-grid {
+    display: grid; grid-template-columns: 1fr 702px; gap: 40px; align-items: center;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-hero-text { height: fit-content; }
+  [data-screen-label="Salão de Beleza"] .h2-hero-text .pill { margin-bottom: 0; }
+  [data-screen-label="Salão de Beleza"] .h2-hero-text h1 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 50px;
+    line-height: 1.05; color: var(--c-text); margin: 30px 0 30px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-hero-text h1 em {
+    font-style: normal; color: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza"] .h2-hero-text p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
+    color: var(--c-text); margin: 0 0 30px; max-width: 480px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-cta-row {
+    display: flex; gap: 14px; margin-bottom: 30px; flex-wrap: wrap;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-hero-text .plans-hero-bullets { justify-content: flex-start; }
+  [data-screen-label="Salão de Beleza"] .h2-hero-img {
+    width: 702px; height: 420px;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
+    border-radius: 14px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-hero-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-hero-img .placeholder {
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.6));
+    letter-spacing: 0.04em; max-width: 360px;
+  }
+
+  /* ═══════════════ SEÇÃO 01 — FUNCIONALIDADES (sticky-scroll estilo beside.com) ═══════════════ */
+  [data-screen-label="Salão de Beleza"] .sb2-func-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    align-items: stretch;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-col-text {
+    display: flex; flex-direction: column;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-block {
+    min-height: 80vh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  /* Cada bloco em sua própria região — texto sticky com a MESMA geometria
+     da imagem (top + height), assim ambos pinam centralizados ao mesmo tempo */
+  [data-screen-label="Salão de Beleza"] .sb2-func-region,
+  [data-screen-label="Salão de Beleza"] .sb2-func-last-region {
+    display: flex; flex-direction: column;
+    min-height: 80vh;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-region .sb2-func-block,
+  [data-screen-label="Salão de Beleza"] .sb2-func-last-region .sb2-func-block {
+    position: sticky;
+    top: calc(50vh - 260px);
+    min-height: 520px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-runway {
+    height: 50vh;
+    pointer-events: none;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-block .eyebrow {
+    display: inline-block; align-self: flex-start;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 14px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-block h3 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 28px; line-height: 1.15; color: var(--c-text);
+    margin: 0 0 14px; max-width: 480px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-block h3 .hl {
+    color: var(--c-accent);
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-block p {
+    font-family: var(--ff-text); font-size: 16px; line-height: 1.6;
+    color: var(--c-text-soft, rgba(115,42,29,.7));
+    margin: 0; max-width: 440px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-block ul {
+    list-style: none; padding: 0; margin: 24px 0 0;
+    display: flex; flex-direction: column; gap: 14px;
+    max-width: 440px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-block ul li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-family: var(--ff-text); font-size: 15px; line-height: 1.5;
+    color: var(--c-text); font-weight: 500;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-block ul li .ico {
+    flex-shrink: 0; width: 20px; height: 20px;
+    border-radius: 50%; background: rgba(206,72,54,.12);
+    color: var(--c-accent);
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+
+  /* Sticky visual (desktop) */
+  [data-screen-label="Salão de Beleza"] .sb2-func-col-visual { position: relative; }
+  [data-screen-label="Salão de Beleza"] .sb2-func-sticky {
+    position: sticky;
+    /* Centraliza verticalmente a imagem no viewport — alinha com o centro do texto
+       (que tem justify-content:center dentro de min-height:80vh) */
+    top: calc(50vh - 260px);
+    width: 100%; height: 520px;
+    border-radius: 24px; overflow: hidden;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-visual {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 28px; text-align: center;
+    opacity: 0; transform: translateY(8px) scale(.99);
+    transition: opacity .45s ease, transform .45s ease;
+    pointer-events: none;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-visual.is-active {
+    opacity: 1; transform: none; pointer-events: auto;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-visual .placeholder {
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.6));
+    letter-spacing: 0.04em; max-width: 360px;
+  }
+
+  /* Visual mobile inline (≤1024) — escondido no desktop */
+  [data-screen-label="Salão de Beleza"] .sb2-func-visual-mobile {
+    display: none;
+    border-radius: 20px; overflow: hidden;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    min-height: 220px;
+    background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
+    align-items: center; justify-content: center;
+    padding: 20px; text-align: center;
+    margin-top: 28px;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-func-visual-mobile .placeholder {
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.6));
+    letter-spacing: 0.04em; max-width: 320px;
+  }
+
+  /* Char-by-char animation no h2 da sechead */
+  [data-screen-label="Salão de Beleza"] .sb2-sechead .char {
+    display: inline-block;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-sechead .char.is-in {
+    opacity: 1; transform: none;
+  }
+
+  /* ═══════════════ SEÇÃO 02 — METODOLOGIA (estilo home: steps horizontais + painel) ═══════════════ */
+  [data-screen-label="Salão de Beleza"] .h2-method {
+    display: flex; flex-direction: column; gap: 12px; margin-top: 40px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-method-list {
+    display: flex; flex-direction: row; gap: 12px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-step {
+    flex: 0 0 225px;
+    cursor: pointer; position: relative; overflow: hidden;
+    display: grid; grid-template-areas: "num title" "progress progress";
+    grid-template-columns: auto auto; grid-template-rows: 1fr auto;
+    column-gap: 8px; row-gap: 3px;
+    align-items: center; justify-content: center; padding: 18px 24px 9px;
+    border-radius: 14px;
+    background: var(--c-card, #faf6ed);
+    transition: background .15s ease;
+    user-select: none;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-step[data-step="3"] { flex: 0 0 251px; }
+  [data-screen-label="Salão de Beleza"] .h2-step.active { background: var(--c-tan-veil, rgba(206,72,54,.08)); }
+  [data-screen-label="Salão de Beleza"] .h2-step-num {
+    grid-area: num;
+    font-family: var(--ff-display); font-weight: 700; font-size: 24px;
+    color: var(--c-text); opacity: 0.55;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-step.active .h2-step-num { color: var(--c-accent); opacity: 1; }
+  [data-screen-label="Salão de Beleza"] .h2-step-title {
+    grid-area: title; justify-self: start; width: max-content;
+    font-family: var(--ff-display); font-size: 14px; font-weight: 700;
+    color: var(--c-text); opacity: 0.65; white-space: nowrap;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-step.active .h2-step-title { opacity: 1; color: var(--c-accent); }
+  [data-screen-label="Salão de Beleza"] .h2-step-progress {
+    grid-area: progress; position: relative;
+    height: 3px; border-radius: 3px;
+    background: rgba(115, 42, 29, 0.1); overflow: hidden;
+    visibility: hidden;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-step.active .h2-step-progress { visibility: visible; }
+  [data-screen-label="Salão de Beleza"] .h2-step-progress-fill {
+    height: 100%; background: var(--c-accent); width: 0; border-radius: 3px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-method-panel {
+    position: relative;
+    display: grid; grid-template-columns: 385px 1fr; gap: 32px;
+    background: var(--c-card, #faf6ed); border-radius: 20px; padding: 0;
+    min-height: 420px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-method-panel-text {
+    display: flex; flex-direction: column; justify-content: center;
+    margin-left: 50px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-method-panel-eyebrow {
+    position: absolute; top: 20px; left: 20px;
+    font-family: var(--ff-display); font-size: 13px; font-weight: 700;
+    color: var(--c-text); opacity: 0.55;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-method-panel h3 {
+    font-family: var(--ff-display); font-weight: 700; font-size: 20px;
+    line-height: 1.15; color: var(--c-accent); margin: 0 0 8px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-method-panel p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text); margin: 0;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-method-panel-img-wrap {
+    padding-top: 15px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-method-panel-img {
+    width: 100%; height: 100%;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border-radius: 20px 0 20px 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-text); font-size: 12px;
+    color: rgba(115, 42, 29, 0.5); text-align: center; padding: 16px;
+  }
+
+  /* ═══════════════ SEÇÃO 03 — ANTES E DEPOIS (componente .h2-compare, espelho da home) ═══════════════ */
+  [data-screen-label="Salão de Beleza"] .h2-section:has(.h2-compare) {
+    background: var(--c-card, #faf6ed); border-radius: 20px; padding: 50px 40px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-compare {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 60px; margin-top: 40px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-compare-col { width: fit-content; }
+  [data-screen-label="Salão de Beleza"] .h2-compare-col--neg { justify-self: end; }
+  [data-screen-label="Salão de Beleza"] .h2-compare-col--pos { justify-self: start; }
+  [data-screen-label="Salão de Beleza"] .h2-compare-col h3 {
+    font-family: var(--ff-display); font-weight: 700; font-size: 20px;
+    color: var(--c-text); margin: 0 0 32px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-compare-col--pos h3 { color: var(--c-accent); }
+  [data-screen-label="Salão de Beleza"] .h2-compare-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 18px;
+    width: fit-content;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-compare-list li {
+    display: flex; align-items: center; gap: 14px;
+    width: fit-content;
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.4; font-weight: 600;
+    color: var(--c-text);
+  }
+  [data-screen-label="Salão de Beleza"] .h2-compare-col--neg .h2-compare-list li { opacity: 0.5; }
+  [data-screen-label="Salão de Beleza"] .h2-compare-icon {
+    width: 16px; height: 16px; flex-shrink: 0;
+    background: transparent; border: none;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-compare-icon svg { width: 16px; height: 16px; display: block; }
+  [data-screen-label="Salão de Beleza"] .h2-compare-divider {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; padding-top: 60px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-compare-divider::before,
+  [data-screen-label="Salão de Beleza"] .h2-compare-divider::after {
+    content: ''; width: 1px; height: 40px; background: rgba(206, 72, 54, 0.4);
+  }
+  [data-screen-label="Salão de Beleza"] .h2-compare-divider svg { width: 16px; height: 16px; display: block; }
+  [data-screen-label="Salão de Beleza"] .h2-compare-cta {
+    display: flex; justify-content: center; gap: 12px; margin-top: 50px;
+  }
+  /* Dots only visível em mobile (≤640) — escondidos por default */
+  [data-screen-label="Salão de Beleza"] .h2-compare-dots { display: none; }
+
+  /* ═══════════════ SEÇÃO 04 — IA PARA ACELERAR (estilo home: 4 cards) ═══════════════ */
+  [data-screen-label="Salão de Beleza"] .h2-grid-4 {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    margin-top: 44px; margin-bottom: 80px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-ia-card {
+    background: var(--c-card, #faf6ed); border: none;
+    border-radius: 20px; padding: 32px 28px;
+    display: flex; flex-direction: column; min-height: 280px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-ia-icon {
+    width: 28px; height: 28px; color: var(--c-accent); margin-bottom: 40px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-ia-icon svg { width: 100%; height: 100%; display: block; }
+  [data-screen-label="Salão de Beleza"] .h2-ia-card h3 {
+    font-family: var(--ff-display); font-weight: 700; font-size: 16px;
+    line-height: 1.3; color: var(--c-text); margin: 0 0 10px;
+  }
+  [data-screen-label="Salão de Beleza"] .h2-ia-card p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text); opacity: 0.7; margin: 0;
+  }
+
+  /* ── Responsive 1024 (estrutural) ─────────────── */
+  @media (max-width: 1024px) {
+    [data-screen-label="Salão de Beleza"] .nav-links { display: none; }
+    [data-screen-label="Salão de Beleza"] .nav-cta    { display: none; }
+    [data-screen-label="Salão de Beleza"] .nav-burger { display: inline-flex; justify-self: end; order: 2; }
+
+    [data-screen-label="Salão de Beleza"] .sb2-section { padding: 64px 24px; }
+    [data-screen-label="Salão de Beleza"] .sb2-section.first { padding: 56px 24px; }
+
+    [data-screen-label="Salão de Beleza"] .h2-hero { padding: 20px 24px 60px; }
+    [data-screen-label="Salão de Beleza"] .h2-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    [data-screen-label="Salão de Beleza"] .h2-hero-text h1 { font-size: 40px; white-space: normal; }
+    [data-screen-label="Salão de Beleza"] .h2-hero-text p { max-width: 100%; }
+    [data-screen-label="Salão de Beleza"] .h2-hero-img {
+      width: 100%; height: auto; aspect-ratio: 702 / 420;
+    }
+
+    [data-screen-label="Salão de Beleza"] .sb2-func-grid { grid-template-columns: 1fr; gap: 0; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-region,
+    [data-screen-label="Salão de Beleza"] .sb2-func-last-region { min-height: auto; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-region .sb2-func-block,
+    [data-screen-label="Salão de Beleza"] .sb2-func-last-region .sb2-func-block { position: static; top: auto; min-height: auto; padding: 32px 0; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-last-region .sb2-func-block { padding-bottom: 0; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-runway { display: none; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-col-visual { display: none; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-visual-mobile { display: flex; }
+
+    [data-screen-label="Salão de Beleza"] .h2-method { padding: 0; }
+    [data-screen-label="Salão de Beleza"] .h2-method-list {
+      overflow-x: auto;
+      padding: 0 24px 8px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-method-list::-webkit-scrollbar { display: none; }
+    [data-screen-label="Salão de Beleza"] .h2-step,
+    [data-screen-label="Salão de Beleza"] .h2-step[data-step="3"] { flex: 0 0 auto; }
+    [data-screen-label="Salão de Beleza"] .sb2-sechead h2 { font-size: 28px; white-space: normal; }
+
+    [data-screen-label="Salão de Beleza"] .h2-method-panel {
+      grid-template-columns: 1fr; gap: 0; min-height: auto; margin: 0 24px;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-method-panel-text {
+      margin-left: 0; padding: 56px 24px 24px;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-method-panel-img-wrap {
+      padding: 0; aspect-ratio: 16 / 9;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-method-panel-img {
+      border-radius: 0 0 20px 20px;
+    }
+
+    /* h2-section-head no tablet/mobile estrutura (espelho home) */
+    [data-screen-label="Salão de Beleza"] .h2-section { padding: 60px 0; }
+    [data-screen-label="Salão de Beleza"] #h2-method-section,
+    [data-screen-label="Salão de Beleza"] .h2-section:has(.h2-grid-4) { padding-top: 60px; padding-bottom: 0; }
+    [data-screen-label="Salão de Beleza"] .h2-section-head { padding: 0 24px; }
+    [data-screen-label="Salão de Beleza"] .h2-section-head h2 {
+      font-size: 28px; white-space: normal;
+    }
+
+    /* Compare 2-col → 1-col (stack neg, divider, pos) */
+    [data-screen-label="Salão de Beleza"] .h2-section:has(.h2-compare) {
+      margin: 32px 24px 0; padding: 40px 24px;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare { grid-template-columns: 1fr; gap: 28px; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-col,
+    [data-screen-label="Salão de Beleza"] .h2-compare-col--neg,
+    [data-screen-label="Salão de Beleza"] .h2-compare-col--pos { justify-self: stretch; width: 100%; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-col h3 { margin-bottom: 18px; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-divider {
+      flex-direction: row; padding: 0; gap: 8px; width: 100%;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare-divider::before,
+    [data-screen-label="Salão de Beleza"] .h2-compare-divider::after {
+      width: 100%; height: 1px;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare-cta { flex-direction: column; align-items: stretch; margin-top: 32px; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-cta .btn { width: 100% !important; }
+
+    /* IA grid 4-col → 1-col */
+    [data-screen-label="Salão de Beleza"] .h2-grid-4 { grid-template-columns: 1fr; gap: 16px; padding: 0 24px; }
+    [data-screen-label="Salão de Beleza"] .h2-ia-card { min-height: auto; padding: 24px; }
+    [data-screen-label="Salão de Beleza"] .h2-ia-icon { margin-bottom: 20px; }
+
+    /* Footer responsivo (padrão home) */
+    [data-screen-label="Salão de Beleza"] .footer-inner { max-width: 100%; padding: 60px 24px; }
+    [data-screen-label="Salão de Beleza"] .footer-cta-grid { grid-template-columns: 1fr; gap: 32px; }
+    [data-screen-label="Salão de Beleza"] .footer-cta-left h2 { font-size: 32px; }
+    [data-screen-label="Salão de Beleza"] .footer-cta-left p { font-size: 14px; line-height: 22px; max-width: 100%; }
+    [data-screen-label="Salão de Beleza"] .footer-cta-right { max-width: 100%; }
+    [data-screen-label="Salão de Beleza"] .footer-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
+    [data-screen-label="Salão de Beleza"] .footer-nav {
+      text-align: left !important; flex-direction: column; flex-wrap: nowrap;
+      gap: 12px; align-items: flex-start;
+    }
+    [data-screen-label="Salão de Beleza"] .footer-copy-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+
+  /* ── Mobile refino 640 ─────────────── */
+  @media (max-width: 640px) {
+    [data-screen-label="Salão de Beleza"] .sb2-section { padding: 60px 24px; }
+    [data-screen-label="Salão de Beleza"] .sb2-section.first { padding: 20px 24px 0; }
+
+    [data-screen-label="Salão de Beleza"] .h2-hero { padding-top: 30px; padding-bottom: 0; }
+    [data-screen-label="Salão de Beleza"] .h2-hero-text h1 { font-size: 32px; }
+    [data-screen-label="Salão de Beleza"] .h2-hero-text p { font-size: 14px; }
+    [data-screen-label="Salão de Beleza"] .h2-hero-text .h2-cta-row { flex-direction: column; }
+    [data-screen-label="Salão de Beleza"] .h2-hero-text .h2-cta-row .btn { width: 100% !important; }
+    [data-screen-label="Salão de Beleza"] .sb2-sechead h2 { font-size: 24px; line-height: 1.1; }
+    [data-screen-label="Salão de Beleza"] .sb2-sechead p { font-size: 14px; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-block h3 { font-size: 22px; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-block p { font-size: 14px; }
+    [data-screen-label="Salão de Beleza"] .sb2-func-block ul li { font-size: 14px; }
+    [data-screen-label="Salão de Beleza"] .h2-method-panel h3 { font-size: 20px; }
+    [data-screen-label="Salão de Beleza"] .h2-method-panel p { font-size: 14px; }
+    [data-screen-label="Salão de Beleza"] .h2-step-title { font-size: 13px; }
+    [data-screen-label="Salão de Beleza"] .h2-step-num { font-size: 22px; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-list li { font-size: 14px; }
+    [data-screen-label="Salão de Beleza"] .h2-section-head h2 { font-size: 24px; }
+
+    /* Compare → carousel horizontal 2 cards (Com Easy default + Sem Easy) */
+    [data-screen-label="Salão de Beleza"] .h2-section:has(.h2-compare) {
+      background: transparent; padding: 0; margin: 32px 0 0; border-radius: 0;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-section:has(.h2-compare) .h2-section-head {
+      padding: 0 24px;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare {
+      display: flex; flex-direction: row;
+      grid-template-columns: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 12px;
+      padding: 0 24px;
+      scroll-padding: 0 24px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 28px;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare::-webkit-scrollbar { display: none; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-col {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      background: var(--c-card, #faf6ed);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin: 0; width: auto;
+      justify-self: stretch;
+      box-sizing: border-box;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare-col h3 { margin-bottom: 20px; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-divider { display: none; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-cta {
+      padding: 0 24px; margin-top: 24px;
+      flex-direction: column;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare-cta .btn { width: 100% !important; }
+    [data-screen-label="Salão de Beleza"] .h2-compare-dots {
+      display: flex; justify-content: center; gap: 8px;
+      margin: 16px 0 0; padding: 0;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(115, 42, 29, 0.2); border: none;
+      padding: 0; cursor: pointer;
+      transition: width 0.25s ease, background 0.25s ease, border-radius 0.25s ease;
+    }
+    [data-screen-label="Salão de Beleza"] .h2-compare-dot.active {
+      width: 24px; height: 8px; border-radius: 4px;
+      background: var(--c-accent);
+    }
+
+    /* Footer h2: 32 → 26 (matching home mobile refino) */
+    [data-screen-label="Salão de Beleza"] .footer-cta-left h2 { font-size: 26px !important; }
+    [data-screen-label="Salão de Beleza"] .footer-inner { padding: 20px 24px; }
+  }
+
+  /* Footer sem margin-top — cola direto na seção anterior */
+  [data-screen-label="Salão de Beleza"] footer.footer-bleed {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* BlurFade scroll-in */
+  [data-screen-label="Salão de Beleza"] .sb2-fade,
+  [data-screen-label="Salão de Beleza"] .h2-hero-text > *,
+  [data-screen-label="Salão de Beleza"] .h2-hero-img {
+    opacity: 0; transform: translateY(8px) scale(.995); filter: blur(4px);
+    transition: opacity .65s ease, transform .65s ease, filter .65s ease;
+  }
+  [data-screen-label="Salão de Beleza"] .sb2-fade.is-in,
+  [data-screen-label="Salão de Beleza"] .h2-hero-text > *.is-in,
+  [data-screen-label="Salão de Beleza"] .h2-hero-img.is-in {
+    opacity: 1; transform: none; filter: none;
+  }
 </style>
 </head>
 <body class="has-nav">
@@ -24,7 +608,7 @@
       <div class="nav-links">
         <div class="dropdown" data-state="closed">
           <button type="button" class="dropdown-trigger" aria-haspopup="menu" aria-expanded="false">
-            Soluções
+            Negócios
             <svg class="chev" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
@@ -35,8 +619,10 @@
             <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a href="/quem-somos">Quem somos</a>
+        <a href="/funcionalidades">Funcionalidades</a>
         <a href="/planos">Planos</a>
+        <a href="/quem-somos">Quem somos</a>
+        <a href="/blog">Blog</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -55,207 +641,285 @@
     </div>
   </nav>
 
-  <!-- ─────────────── HERO SOLUÇÃO ─────────────── -->
-  <section class="sol-hero" style="margin: 50px auto">
-    <div class="sol-hero-left">
-      <span class="pill pill-accent pill-glow" style="margin: 0px 0px 20px">Salão de beleza</span>
-      <h1 style="margin: 0px 0px 50px; width: 500px">Transforme a rotina do seu salão com uma <em>recepcionista virtual 24h</em></h1>
-      <p class="sol-hero-sub" style="margin: 0px 0px 50px; width: 500px; font-weight: 400">Ela responde seus clientes, agenda horários e organiza sua rotina automaticamente. <strong style="font-weight:700;">Mais clientes atendidos, menos confusão e zero tempo perdido no WhatsApp.</strong></p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:177px;">Comece grátis</a>
-        <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
+  <!-- ═══════════════ HERO (split 45/55 — componente .h2-hero, idêntico à home) ═══════════════ -->
+  <section class="h2-hero">
+    <div class="h2-hero-grid">
+      <div class="h2-hero-text">
+        <span class="pill pill-accent pill-glow">Salão de Beleza</span>
+        <h1>O sistema de<br>gestão para o seu<br><em>salão de beleza</em></h1>
+        <p>Da escova ao financeiro: organize a agenda dos profissionais, o estoque de coloração e o caixa do dia em uma única plataforma.</p>
+        <div class="h2-cta-row">
+          <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:180px;">Teste grátis</a>
+          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&amp;text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener" style="width:200px;">Agendar demonstração</a>
+        </div>
+        <div class="plans-hero-bullets">
+          <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Sem cartão de crédito</span>
+          <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cancele quando quiser</span>
+        </div>
+      </div>
+      <div class="h2-hero-img">
+        <span class="placeholder">FOTO · cabeleireira / recepcionista usando a agenda em tablet, no salão (cadeiras, espelhos ao fundo)</span>
       </div>
     </div>
-    <div class="sol-hero-right">
-      <div class="chat" role="region" aria-label="Conversa de exemplo">
-        <div class="chat-header">
-          <div class="chat-avatar">
-            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 18px; height: 18px">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.78968 12.2787C10.5006 12.2787 11.8761 13.6542 11.8761 15.3652V16.64C11.2387 16.3045 10.6684 15.8684 10.1987 15.3316C9.79613 14.8955 9.49419 14.3923 9.25935 13.889C9.02451 13.3858 8.85678 12.849 8.78968 12.2787ZM7.34709 13.889C7.11226 14.3923 6.81032 14.8955 6.40774 15.3316C5.93806 15.8684 5.36774 16.3045 4.73032 16.64V15.3652C4.73032 13.6542 6.10581 12.2787 7.81678 12.2787C7.74968 12.849 7.58193 13.3858 7.34709 13.889ZM12.2787 7.85032C12.2787 6.13935 13.6542 4.76387 15.3652 4.76387H16.64C16.3045 5.40129 15.8684 5.97161 15.2981 6.44129C14.8619 6.84387 14.3923 7.14581 13.889 7.38064C13.3523 7.61548 12.8155 7.78322 12.2787 7.85032ZM13.889 9.2929C14.3923 9.52774 14.8619 9.82968 15.2981 10.2323C15.8684 10.7019 16.3045 11.2723 16.64 11.9097H15.3652C13.6542 11.9097 12.2787 10.5342 12.2787 8.82323C12.8155 8.89032 13.3523 9.05806 13.889 9.2929ZM7.85032 4.36129C6.13935 4.36129 4.76387 2.98581 4.76387 1.27484V0C5.36774 0.335484 5.97161 0.771613 6.44129 1.34194C6.81032 1.77806 7.11226 2.24774 7.34709 2.75097C7.58193 3.28774 7.74967 3.82452 7.85032 4.36129ZM9.2929 2.75097C9.52774 2.24774 9.82967 1.77806 10.1987 1.34194C10.7019 0.771613 11.2723 0.335484 11.9097 0V1.27484C11.9097 2.98581 10.5342 4.36129 8.82323 4.36129C8.89032 3.82452 9.05807 3.28774 9.2929 2.75097ZM4.36129 8.78967C4.36129 10.5006 2.98581 11.8761 1.27484 11.8761H0C0.335484 11.2723 0.771614 10.6684 1.30839 10.1987C1.74452 9.82967 2.24774 9.52774 2.75097 9.2929C3.25419 9.05806 3.79097 8.89032 4.36129 8.78967ZM2.75097 7.34709C2.24774 7.11225 1.74452 6.81032 1.30839 6.44129C0.771614 5.93806 0.335484 5.36774 0 4.73032H1.27484C2.98581 4.73032 4.36129 6.10581 4.36129 7.81677C3.79097 7.74968 3.25419 7.58193 2.75097 7.34709ZM7.78322 8.85677C7.58193 10.8026 6.03871 12.3458 4.09291 12.5471C4.2942 10.6013 5.83742 9.05806 7.78322 8.85677ZM8.82323 8.85677C10.769 9.09161 12.3123 10.6013 12.5471 12.5471V12.5806L12.5136 12.5471C10.5677 12.3458 9.05807 10.8026 8.82323 8.85677ZM8.85677 7.81677C8.85677 7.81677 8.84559 7.81677 8.82323 7.81677H8.85677C9.05806 5.87097 10.6013 4.32774 12.5471 4.12645V4.0929C12.5471 4.11527 12.5471 4.12645 12.5471 4.12645C12.3123 6.07226 10.8026 7.61548 8.85677 7.81677ZM7.81678 7.81677C7.79441 7.81677 7.78322 7.81677 7.78322 7.81677C5.83742 7.58194 4.32774 6.03871 4.09291 4.0929C6.03871 4.32774 7.58193 5.83742 7.78322 7.78322L7.81678 7.81677Z" fill="#F2EFE6"></path>
-                </svg>
+  </section>
+
+  <!-- ═══════════════ SEÇÃO 01 — FUNCIONALIDADES (sticky-scroll estilo beside.com) ═══════════════ -->
+  <section class="sb2-section" data-func-section>
+    <div class="sb2-wrap">
+      <div class="sb2-sechead sb2-fade">
+        <h2>Cada recurso pensado para o<br><em>ritmo do salão</em></h2>
+        <p>Multi-profissionais, serviços longos, coloração, escova.<br>Tudo numa única plataforma.</p>
+      </div>
+      <div class="sb2-func-grid">
+        <!-- Coluna esquerda: 4 blocos de texto, cada um em sua região (sticky center) -->
+        <div class="sb2-func-col-text">
+          <div class="sb2-func-region">
+          <article class="sb2-func-block sb2-fade" data-func-idx="0">
+            <h3>Agenda que <span class="hl">entende</span> o salão</h3>
+            <p>Vários profissionais, serviços com durações diferentes, intervalos respeitados. Chega de sobreposição, de horário esquecido e de cliente que sai sem agendar o retorno.</p>
+            <ul>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vários profissionais em um único painel</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Booking online com link do salão</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Confirmação automática por notificação</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Lista de espera ativa para cancelamentos</li>
+            </ul>
+            <div class="sb2-func-visual-mobile"><span class="placeholder">FOTO · cabeleireira consultando a agenda do dia em um tablet, na recepção</span></div>
+          </article>
           </div>
-          <div class="chat-id">
-            <div class="name">Recepcionista Easy</div>
-            <div class="status"><span class="status-dot"></span>Online · Responde em segundos</div>
+
+          <div class="sb2-func-region">
+          <article class="sb2-func-block sb2-fade" data-func-idx="1">
+            <h3>Comissão <span class="hl">calculada sozinha</span></h3>
+            <p>Cada profissional tem o seu percentual por serviço. O sistema calcula tudo automaticamente, sem planilha, sem calculadora. Fim de mês sem briga.</p>
+            <ul>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cálculo automático por serviço e profissional</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Repasses individuais sem planilha</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pagamento em massa de comissões</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Relatório mensal disponível para a equipe</li>
+            </ul>
+            <div class="sb2-func-visual-mobile"><span class="placeholder">FOTO · dono(a) do salão olhando o relatório de comissões em um notebook</span></div>
+          </article>
+          </div>
+
+          <div class="sb2-func-region">
+          <article class="sb2-func-block sb2-fade" data-func-idx="2">
+            <h3>Sem ficar sem tintura na <span class="hl">hora H</span></h3>
+            <p>Tinturas, descolorantes, produtos de tratamento. Saiba o que consumiu em cada atendimento e o que está prestes a acabar. Sem aquele susto no meio da coloração.</p>
+            <ul>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Alerta automático de estoque mínimo</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Consumo registrado por atendimento</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Histórico completo de movimentação</li>
+              <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Inventário sempre sob controle</li>
+            </ul>
+            <div class="sb2-func-visual-mobile"><span class="placeholder">FOTO · profissional verificando o estoque pelo sistema, com produtos visíveis</span></div>
+          </article>
+          </div>
+
+          <!-- Última região: bloco sticky + runway. Texto pinado para acompanhar a imagem
+               enquanto o usuário scrolla além do centro do bloco. -->
+          <div class="sb2-func-last-region">
+            <article class="sb2-func-block sb2-fade" data-func-idx="3">
+              <h3>Cada profissional na <span class="hl">palma da mão</span></h3>
+              <p>Sua equipe vê a própria agenda, comissões e ficha dos clientes pelo celular. Sem mais ligações para confirmar horário ou trocar turno.</p>
+              <ul>
+                <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>App iOS e Android com agenda própria</li>
+                <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Comissões em tempo real no bolso</li>
+                <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ficha completa dos clientes</li>
+                <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Notificações de novos agendamentos</li>
+              </ul>
+              <div class="sb2-func-visual-mobile"><span class="placeholder">FOTO · cabeleireira usando o app do profissional no celular, dentro do salão</span></div>
+            </article>
+            <div class="sb2-func-runway" aria-hidden="true"></div>
           </div>
         </div>
-        <div class="chat-feed" id="chat-feed" aria-live="polite"></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ─────────────── 5 PASSOS ─────────────── -->
-  <section class="steps-section" data-screen-label="5 passos Easy" style="margin: 0 auto 80px; padding: 80px 80px 30px">
-    <h2>Os <em>5 passos Easy</em> para salões de beleza</h2>
-    <p class="lead">A Easy organiza sua agenda e devolve previsibilidade ao seu dia a dia e permite que você <strong style="font-weight:700;">economize mais de R$ 30 mil por ano em equipe.</strong></p>
-
-    <div class="step-row">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">01</span>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">Tudo começa pela agenda</h3>
-        <p>A Easy transforma horários confusos em uma rotina simples e previsível, sem sobreposição, sem esquecimentos e sem perda de clientes.
-
-Tudo isso com uma recepcionista virtual que responde seus clientes no WhatsApp. Nem você nem a equipe precisam parar o atendimento para agendar.
-
-A partir daqui, seu salão evolui naturalmente: uma agenda organizada, mais controle da operação e mais clareza no dia a dia, sem esforço extra.</p>
-      </div>
-      <div class="photo" style="background-image:url('/assets/passos/passo-1-salao-de-beleza.png')"></div>
-    </div>
-
-    <div class="step-row reverse">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <div class="photo" style="background-image:url('/assets/passos/passo-2-salao-de-beleza.png')"></div>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">Cada profissional com seu próprio Aplicativo</h3>
-        <p>Cada profissional tem acesso ao próprio aplicativo para acompanhar atendimentos e horários.
-Nada de depender de você. Nada de dúvidas. Nada de confusão.</p>
-        <ul style="margin: 30px 0px 0px; gap: 16px">
-          <li>A equipe ganha clareza.</li>
-          <li>Você ganha tranquilidade.</li>
-          <li>E o salão passa a funcionar de forma mais leve e organizada.</li>
-        </ul>
-      </div>
-      <span class="num">02</span>
-    </div>
-
-    <div class="step-row">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">03</span>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">A Inteligência que organiza seu salão sozinha</h3>
-        <p>Lembretes automáticos, horários corretos, previsibilidade do dia e um salão fluindo sem esforço.
-
-Com a IA da Easy, a agenda deixa de ser a maior dor e se torna o que destrava todo o resto.</p>
-        <ul style="gap: 16px; margin: 30px 0px 0px">
-          <li>Menos faltas.</li>
-          <li>Zero sobreposição.</li>
-          <li>Atendimento sempre online.</li>
-          <li>Clientes satisfeitos desde o primeiro contato.</li>
-        </ul>
-      </div>
-      <div class="photo" style="background-image:url('/assets/passos/passo-3-salao-de-beleza.png')"></div>
-    </div>
-
-    <div class="step-row reverse">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <div class="photo" style="background-image:url('/assets/passos/passo-4-salao-de-beleza.png')"></div>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">O salão ganha ritmo mesmo quando você não está lá</h3>
-        <p>A Easy envia confirmações, lembretes, pesquisas de satisfação e mensagens de relacionamento automaticamente.</p>
-        <ul style="margin: 30px 0px 0px; gap: 16px">
-          <li>Equipe não precisa lembrar de nada.</li>
-          <li>O cliente não esquece do horário.</li>
-          <li>E o salão segue funcionando com fluidez.</li>
-        </ul>
-      </div>
-      <span class="num">04</span>
-    </div>
-
-    <div class="step-row tl-last">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">05</span>
-      <div class="body">
-        <h3 style="margin: 13px 0px 20px">Percentuais claros. Equipe tranquila. Repasses sem discussão</h3>
-        <p>Easy calcula automaticamente quanto cada profissional deve receber com base na própria agenda.</p>
-        <ul style="margin: 30px 0px 0px; gap: 16px">
-          <li>Tudo é transparente, acessível e livre de conflitos.</li>
-          <li>Discussões de repasse deixam de existir, vira parte natural da rotina.</li>
-        </ul>
-        <!-- CTAs desktop: dentro do body, logo abaixo dos itens (mantém comportamento original) -->
-        <div class="steps-cta steps-cta-desktop" style="margin: 30px 0px 0px">
-          <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:177px;">Comece grátis</a>
-          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
-        </div>
-      </div>
-      <div class="photo" style="background-image:url('/assets/passos/passo-5-salao-de-beleza.png')"></div>
-      <!-- CTAs mobile: fora do body, abaixo do photo placeholder -->
-      <div class="steps-cta steps-cta-mobile">
-        <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site">Comece grátis</a>
-        <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener">Agendar demonstração</a>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ─────────────── POR QUE ESCOLHER ─────────────── -->
-  <section class="pq-section" style="margin: 0 auto 20px">
-    <h2>Por que escolher a Easy <em>para seu salão</em></h2>
-    <div class="pq-grid">
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-        </span>
-        <p>Recepcionista humanizada
-24h ativa.</p>
-      </div>
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
-        </span>
-        <p>Plataforma criada com
-especialistas do setor.</p>
-      </div>
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M14 7h7v7"></path></svg>
-        </span>
-        <p>Evolui no ritmo do
-seu negócio.</p>
-      </div>
-      <div class="pq-card">
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-        </span>
-        <p>Economize até
-R$ 30 mil em equipe.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────── POR TRÁS DA EASY ─────────────── -->
-  <section class="team-section" style="margin: 0 auto 80px">
-    <div class="team-block">
-      <div class="team-photo" aria-label="Equipe Easy"></div>
-      <div class="team-text">
-        <div class="pill-row"><span class="pill" style="background:var(--c-accent-soft);color:var(--c-accent);">Por trás da Easy</span></div>
-        <h2>Nascida dentro de<br><span style="color:var(--c-accent);">salões reais!</span></h2>
-        <p class="quote">A Easy é a parceria que transforma o caos da agenda em uma<br>operação previsível e profissional nos meus salões, barbearias e<br>estúdios de beleza.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="/quem-somos" style="width:177px;">Saiba mais</a>
-          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
+        <!-- Coluna direita: visual sticky que troca de conteúdo conforme scroll -->
+        <div class="sb2-func-col-visual">
+          <div class="sb2-func-sticky">
+            <div class="sb2-func-visual is-active" data-visual-idx="0"><span class="placeholder">FOTO · cabeleireira consultando a agenda do dia em um tablet, na recepção</span></div>
+            <div class="sb2-func-visual" data-visual-idx="1"><span class="placeholder">FOTO · dono(a) do salão olhando o relatório de comissões em um notebook</span></div>
+            <div class="sb2-func-visual" data-visual-idx="2"><span class="placeholder">FOTO · profissional verificando o estoque pelo sistema, com produtos visíveis</span></div>
+            <div class="sb2-func-visual" data-visual-idx="3"><span class="placeholder">FOTO · cabeleireira usando o app do profissional no celular, dentro do salão</span></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── FAQ ─────────────── -->
-  <section class="faq-section">
-    <h2>Ficou com <em>dúvida</em>?</h2>
-    <div class="faq-list">
-      <details class="faq-item"><summary>A Easy funciona para qualquer tamanho de salão de beleza?</summary><div class="answer">Sim. A Easy atende desde salões pequenos e médios até estruturas maiores com vários profissionais. A lógica é a mesma: organizar a agenda, reduzir faltas e facilitar o controle dos percentuais e do caixa.</div></details>
-      <details class="faq-item"><summary>Preciso treinar minha equipe para usar o sistema do salão?</summary><div class="answer">Não. A experiência é simples e visual. Cada profissional recebe seu próprio acesso e aprende a usar o app em minutos, mesmo quem não tem familiaridade com tecnologia.</div></details>
-      <details class="faq-item"><summary>A Easy substitui a agenda física do salão?</summary><div class="answer">Sim. A agenda com IA evita erros, organiza horários, avisa clientes e dá clareza total da rotina. Você pode abandonar a agenda manual sem medo.</div></details>
-      <details class="faq-item"><summary>Posso usar a Easy para controlar o caixa do meu salão de beleza?</summary><div class="answer">Com o módulo financeiro, sim. Ele apresenta tudo que entrou, saiu e sobrou no caixa, diariamente e por profissional. É ideal para donos de salão que querem clareza e organização financeira.</div></details>
-      <details class="faq-item"><summary>A Easy funciona em qualquer cidade do Brasil?</summary><div class="answer">Sim. O sistema funciona para salões de beleza de todo o Brasil. Funciona em centros urbanos, bairros, cidades menores e regiões metropolitanas. Basta ter internet para acessar.</div></details>
-      <details class="faq-item"><summary>A Easy é boa para salões de beleza com muitos profissionais?</summary><div class="answer">Sim. A Easy foi criada para organizar salões com várias agendas simultâneas, mantendo clareza nos horários, repasses e rotinas da equipe.</div></details>
-      <details class="faq-item"><summary>A Easy atende salões que trabalham com agenda por WhatsApp?</summary><div class="answer">Sim. Essa é justamente a especialidade da Easy! A plataforma organiza os horários e automatiza lembretes para seus clientes via WhatsApp.</div></details>
-      <details class="faq-item"><summary>Preciso instalar algo no computador do salão?</summary><div class="answer">Não. A Easy funciona direto no navegador e no celular. Seu salão pode usar sem instalar programas ou depender de computadores específicos.</div></details>
-      <details class="faq-item"><summary>A Easy ajuda a fidelizar clientes do salão?</summary><div class="answer">Sim. Com lembretes, confirmações, pós-atendimento e recorrência automatizada, seus clientes retornam com mais frequência e param de esquecer os horários.</div></details>
+  <!-- ═══════════════ SEÇÃO 02 — METODOLOGIA EASY (componente .h2-method, espelho da home) ═══════════════ -->
+  <section class="h2-section" id="h2-method-section">
+    <div class="h2-section-head">
+      <h2>Como organizamos a gestão<br> do seu salão</h2>
+    </div>
+    <div class="h2-method" id="h2-method">
+      <div class="h2-method-list">
+        <div class="h2-step active" data-step="0">
+          <div class="h2-step-num">01</div>
+          <div class="h2-step-title">Organize sua agenda</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+        <div class="h2-step" data-step="1">
+          <div class="h2-step-num">02</div>
+          <div class="h2-step-title">Tenha visão financeira</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+        <div class="h2-step" data-step="2">
+          <div class="h2-step-num">03</div>
+          <div class="h2-step-title">Domine seu estoque</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+        <div class="h2-step" data-step="3">
+          <div class="h2-step-num">04</div>
+          <div class="h2-step-title">Faça promoções inteligentes</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+        <div class="h2-step" data-step="4">
+          <div class="h2-step-num">05</div>
+          <div class="h2-step-title">Cuide dos seus clientes</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+      </div>
+      <div class="h2-method-panel" id="h2-method-panel"
+        data-panels='[
+          {"step":"01","title":"Organize sua agenda","desc":"Comece pelo coração do salão: a agenda. Visibilidade total dos seus profissionais e dos serviços que cada um faz.","img":"FOTO · profissional organizando a agenda no painel"},
+          {"step":"02","title":"Tenha visão financeira","desc":"Faturamento por profissional, comissões automáticas, caixa diário. Decisões baseadas em dado, não em achismo.","img":"PREVIEW · dashboard financeiro"},
+          {"step":"03","title":"Domine seu estoque","desc":"Tintura, escova, máscara, produto de tratamento. Saiba o que entra, o que sai e o que está acabando.","img":"PREVIEW · controle de estoque"},
+          {"step":"04","title":"Faça promoções inteligentes","desc":"Identifique horários ociosos, clientes que sumiram e oportunidades reais de venda. Promoção que faz sentido, não no chute.","img":"PREVIEW · promoções / oportunidades"},
+          {"step":"05","title":"Cuide dos seus clientes","desc":"Histórico completo: cor preferida, tipo de cabelo, observações de cada atendimento. Cliente fiel não some.","img":"FOTO · ficha e histórico do cliente"}
+        ]'>
+        <div class="h2-method-panel-text">
+          <div class="h2-method-panel-eyebrow">Passo 01</div>
+          <h3>Organize sua agenda</h3>
+          <p>Comece pelo coração do salão: a agenda. Visibilidade total dos seus profissionais e dos serviços que cada um faz.</p>
+        </div>
+        <div class="h2-method-panel-img-wrap"><div class="h2-method-panel-img">FOTO · profissional organizando a agenda no painel</div></div>
+      </div>
     </div>
   </section>
 
-  <!-- ─────────────── FOOTER CTA + FOOTER ─────────────── -->
+  <!-- ═══════════════ SEÇÃO 03 — ANTES E DEPOIS (componente .h2-compare, espelho da home) ═══════════════ -->
+  <section class="h2-section">
+    <div class="h2-section-head">
+      <h2>Como muda o salão com o Easy</h2>
+      <p>O dia a dia que você vive hoje,<br class="br-m"> lado a lado com o que você vai viver depois<br class="br-m"> de implantar o sistema.</p>
+    </div>
+    <div class="h2-compare">
+        <div class="h2-compare-col h2-compare-col--neg">
+          <h3>Sem Easy</h3>
+          <ul class="h2-compare-list">
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Agenda no papel ou no WhatsApp.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Sobreposição de horário entre profissionais.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Comissão na calculadora.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Tintura acabando na hora H.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Cliente fiel que some e ninguém percebe.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Sem saber qual serviço dá mais lucro.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Profissional sem visibilidade da agenda.</span></li>
+          </ul>
+        </div>
+        <div class="h2-compare-divider"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.45162 11.8065C10.0968 11.8065 11.4194 13.129 11.4194 14.7742V16C10.8065 15.6774 10.2581 15.2581 9.80645 14.7419C9.41935 14.3226 9.12903 13.8387 8.90322 13.3548C8.67742 12.871 8.51613 12.3548 8.45162 11.8065ZM7.06451 13.3548C6.83871 13.8387 6.54838 14.3226 6.16129 14.7419C5.70967 15.2581 5.16129 15.6774 4.54839 16V14.7742C4.54839 13.129 5.87097 11.8065 7.51613 11.8065C7.45162 12.3548 7.29032 12.871 7.06451 13.3548ZM11.8064 7.54838C11.8064 5.90322 13.129 4.58064 14.7742 4.58064H16C15.6774 5.19355 15.2581 5.74193 14.7097 6.19355C14.2903 6.58064 13.8387 6.87097 13.3548 7.09677C12.8387 7.32258 12.3226 7.48387 11.8064 7.54838ZM13.3548 8.93548C13.8387 9.16129 14.2903 9.45161 14.7097 9.83871C15.2581 10.2903 15.6774 10.8387 16 11.4516H14.7742C13.129 11.4516 11.8064 10.129 11.8064 8.48387C12.3226 8.54839 12.8387 8.70967 13.3548 8.93548ZM7.54838 4.19355C5.90322 4.19355 4.58064 2.87097 4.58064 1.22581V0C5.16129 0.322581 5.74194 0.741935 6.19355 1.29032C6.54839 1.70968 6.83871 2.16129 7.06451 2.64516C7.29032 3.16129 7.45161 3.67742 7.54838 4.19355ZM8.93549 2.64516C9.16129 2.16129 9.45161 1.70968 9.80645 1.29032C10.2903 0.741935 10.8387 0.322581 11.4516 0V1.22581C11.4516 2.87097 10.129 4.19355 8.48387 4.19355C8.54839 3.67742 8.70968 3.16129 8.93549 2.64516ZM4.19355 8.45161C4.19355 10.0968 2.87097 11.4194 1.22581 11.4194H0C0.322581 10.8387 0.741937 10.2581 1.25807 9.80645C1.67742 9.45161 2.16129 9.16129 2.64516 8.93548C3.12903 8.70967 3.64516 8.54838 4.19355 8.45161ZM2.64516 7.06451C2.16129 6.83871 1.67742 6.54839 1.25807 6.19355C0.741937 5.70968 0.322581 5.16129 0 4.54839H1.22581C2.87097 4.54839 4.19355 5.87097 4.19355 7.51613C3.64516 7.45161 3.12903 7.29032 2.64516 7.06451ZM7.48387 8.51613C7.29032 10.3871 5.80645 11.871 3.93549 12.0645C4.12903 10.1935 5.6129 8.70967 7.48387 8.51613ZM8.48387 8.51613C10.3548 8.74193 11.8387 10.1935 12.0645 12.0645V12.0968L12.0323 12.0645C10.1613 11.871 8.70968 10.3871 8.48387 8.51613ZM8.51613 7.51613C8.51613 7.51613 8.50538 7.51613 8.48387 7.51613H8.51613C8.70967 5.64516 10.1935 4.16129 12.0645 3.96774V3.93548C12.0645 3.95699 12.0645 3.96774 12.0645 3.96774C11.8387 5.83871 10.3871 7.32258 8.51613 7.51613ZM7.51613 7.51613C7.49463 7.51613 7.48387 7.51613 7.48387 7.51613C5.6129 7.29032 4.16129 5.80645 3.93549 3.93548C5.80645 4.16129 7.29032 5.6129 7.48387 7.48387L7.51613 7.51613Z" fill="#CE4836"/></svg></div>
+        <div class="h2-compare-col h2-compare-col--pos">
+          <h3>Com Easy</h3>
+          <ul class="h2-compare-list">
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Agenda centralizada e automática.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Bloqueio de conflitos entre profissionais.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Comissão calculada pelo sistema.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Alerta automático de estoque baixo.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Histórico do cliente para retornos automáticos.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Relatórios de serviços e profissionais.</span></li>
+            <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Cada profissional acessa a agenda pelo app.</span></li>
+          </ul>
+        </div>
+      </div>
+    <div class="h2-compare-dots" aria-hidden="true">
+      <button type="button" class="h2-compare-dot active" data-idx="0" aria-label="Mostrar Com Easy"></button>
+      <button type="button" class="h2-compare-dot" data-idx="1" aria-label="Mostrar Sem Easy"></button>
+    </div>
+    <div class="h2-compare-cta">
+      <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:180px;">Comece grátis</a>
+      <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&amp;text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon." target="_blank" rel="noopener" style="width:220px;">Agendar demonstração</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SEÇÃO 04 — IA PARA ACELERAR (componente .h2-grid-4 + .h2-ia-card, espelho da home) ═══════════════ -->
+  <section class="h2-section">
+    <div class="h2-section-head">
+      <h2>E ainda tem IA para acelerar sua operação</h2>
+    </div>
+    <div class="h2-grid-4">
+      <div class="h2-ia-card">
+        <div class="h2-ia-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6V2H8"/><path d="m8 18-4 4V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z"/><path d="M2 12h2"/><path d="M9 11v2"/><path d="M15 11v2"/><path d="M20 12h2"/></svg>
+        </div>
+        <h3>Recepcionista virtual no WhatsApp</h3>
+        <p>A IA responde clientes, confirma agendamentos e organiza a agenda automaticamente — mesmo fora do horário comercial.</p>
+      </div>
+      <div class="h2-ia-card">
+        <div class="h2-ia-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+        </div>
+        <h3>Sugere os melhores horários</h3>
+        <p>Identifica horários ociosos e sugere encaixes inteligentes para maximizar a ocupação da sua agenda.</p>
+      </div>
+      <div class="h2-ia-card">
+        <div class="h2-ia-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+        </div>
+        <h3>Cria promoções com base no comportamento</h3>
+        <p>Analisa o histórico dos seus clientes e sugere promoções certas para os clientes certos, no momento certo.</p>
+      </div>
+      <div class="h2-ia-card">
+        <div class="h2-ia-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/></svg>
+        </div>
+        <h3>Analisa o desempenho do seu salão</h3>
+        <p>Mostra quais serviços e profissionais geram mais resultado, quais clientes estão inativos e onde está a oportunidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── FOOTER CTA + FOOTER (espelho idêntico da home) ─────────────── -->
   <footer class="footer-bleed">
+    <div class="leaves" aria-hidden="true">
+      <div class="leaf dark" style="top: 30px;  right: 40px;  width: 90px;  height: 120px; --r: -15deg; animation-delay: 0s;     animation-duration: 9s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 80px;  right: 180px; width: 64px;  height: 86px;  --r: 40deg;  animation-delay: -1.5s; animation-duration: 8s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 160px; right: 300px; width: 100px; height: 134px; --r: 175deg; animation-delay: -2.5s; animation-duration: 10s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 240px; right: 80px;  width: 76px;  height: 102px; --r: -60deg; animation-delay: -3.5s; animation-duration: 11s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 360px; right: 220px; width: 88px;  height: 118px; --r: 95deg;  animation-delay: -0.7s; animation-duration: 9.5s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 420px; right: 60px;  width: 58px;  height: 78px;  --r: -130deg; animation-delay: -2.1s; animation-duration: 8.5s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 60px;  left: 30px;   width: 80px;  height: 107px; --r: 210deg; animation-delay: -3.3s; animation-duration: 10.5s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 220px; left: 100px;  width: 110px; height: 147px; --r: 285deg; animation-delay: -1.8s; animation-duration: 9s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 380px; left: 200px;  width: 66px;  height: 88px;  --r: 65deg;  animation-delay: -4.2s; animation-duration: 8s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+      <div class="leaf dark" style="top: 500px; right: 360px; width: 72px;  height: 96px;  --r: 150deg; animation-delay: -0.9s; animation-duration: 10s;">
+        <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"/></svg>
+      </div>
+    </div>
     <div class="footer-inner">
       <div class="footer-cta-grid">
         <div class="footer-cta-left">
           <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 30 dias</span>
-          <h2>Pronto para Profissionalizar<br>o seu negócio da beleza com<br>a Easy Salon?</h2>
+          <h2 style="margin: 24px 0px">Pronto para Profissionalizar<br>o seu negócio da beleza com<br>a Easy Salon?</h2>
           <p>A Easy Salon ajuda donos de salão, barbearia e estúdios de beleza a organizarem sua agenda e evoluírem para uma gestão simples e inteligente.</p>
           <div class="btn-cta-row" style="justify-content:flex-start;">
-            <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:177px;">Comece grátis</a>
-            <a class="btn btn-outline-cream" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
+            <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width: 180px">Comece grátis</a>
+            <a class="btn btn-outline-cream" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width: 180px">Agendar demonstração</a>
           </div>
         </div>
         <div class="footer-cta-right">
@@ -267,21 +931,23 @@ R$ 30 mil em equipe.</p>
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
-        <a class="footer-logo" href="/" aria-label="Easy Salon">
+        <div class="footer-logo">
           <svg width="179" height="24" viewBox="0 0 179 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Easy Salon">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M112.79 14.9516C112.79 15.8226 112.548 16.5968 112.063 17.2742C111.578 17.9194 110.932 18.4194 110.124 18.7742C109.316 19.0968 108.444 19.2581 107.507 19.2581C106.763 19.2581 105.988 19.129 105.18 18.871C104.34 18.6129 103.581 18.1935 102.902 17.6129C102.643 17.3871 102.401 17.1452 102.175 16.8871C102.078 17.1129 101.981 17.3226 101.884 17.5161C101.69 18 101.529 18.5323 101.399 19.1129H101.012V14.1774H101.448C101.706 15.1452 102.159 15.9839 102.805 16.6935C103.451 17.4032 104.195 17.9355 105.035 18.2903C105.875 18.6452 106.731 18.8226 107.604 18.8226C108.573 18.8226 109.397 18.5806 110.076 18.0968C110.754 17.6129 111.093 16.9194 111.093 16.0161C111.093 15.5 110.9 15.0645 110.512 14.7097C110.124 14.3226 109.639 14 109.058 13.7419C108.444 13.4839 107.652 13.2097 106.683 12.9194C105.455 12.5323 104.485 12.1613 103.774 11.8064C103.031 11.4839 102.401 11.0484 101.884 10.5C101.367 9.95161 101.109 9.25806 101.109 8.41935C101.109 7.64516 101.351 6.98387 101.836 6.43548C102.32 5.85484 102.967 5.41936 103.774 5.12903C104.615 4.83871 105.503 4.69355 106.44 4.69355C107.248 4.69355 108.024 4.80645 108.767 5.03225C109.51 5.25806 110.286 5.64516 111.093 6.19355C111.287 6.12903 111.465 5.93549 111.627 5.61291C111.788 5.32258 111.901 5.04838 111.966 4.79032H112.354V8.41935H111.966C111.32 7.32258 110.496 6.5 109.494 5.95161C108.492 5.43548 107.474 5.17742 106.44 5.17742C105.439 5.17742 104.582 5.35484 103.871 5.70968C103.16 6.09677 102.805 6.62903 102.805 7.30645C102.805 7.79032 102.999 8.20967 103.387 8.56451C103.774 8.91935 104.243 9.22581 104.792 9.48387C105.374 9.70968 106.133 9.98387 107.07 10.3065C108.298 10.7258 109.3 11.1129 110.076 11.4677C110.819 11.7903 111.449 12.2419 111.966 12.8226C112.515 13.4032 112.79 14.1129 112.79 14.9516ZM113.275 18.9677V18.5323C113.759 18.5323 114.179 18.4355 114.535 18.2419C114.89 18.0161 115.181 17.7419 115.407 17.4194C115.633 17.129 115.86 16.7419 116.086 16.2581L120.109 6.62903L119.382 5.12903H122.145L127.67 17.7097C127.767 17.9677 127.913 18.1613 128.106 18.2903C128.3 18.4516 128.543 18.5323 128.833 18.5323H130.239V18.9677H122.872V18.5323H124.81C124.94 18.5323 125.02 18.5 125.053 18.4355C125.117 18.371 125.134 18.2581 125.101 18.0968L120.4 7.25806L116.037 17.5161C115.908 17.7742 115.94 17.9677 116.134 18.0968C116.296 18.2581 116.603 18.371 117.055 18.4355C117.54 18.5 118.154 18.5323 118.897 18.5323V18.9677H113.275ZM130.821 18.5323H132.856C133.147 18.5323 133.293 18.371 133.293 18.0484V6.04839C133.293 5.72581 133.147 5.56452 132.856 5.56452H130.821V5.12903H138.334V5.56452H136.249C135.991 5.56452 135.862 5.72581 135.862 6.04839V18.0484C135.862 18.371 135.991 18.5323 136.249 18.5323H141.096C141.775 18.5323 142.308 18.4032 142.696 18.1452C143.084 17.8871 143.358 17.4677 143.52 16.8871C143.714 16.3064 143.811 15.5161 143.811 14.5161V11.6613H144.247V18.9677H130.821V18.5323ZM149.627 18.5806C148.496 17.9677 147.624 17.0968 147.01 15.9677C146.363 14.8387 146.04 13.5323 146.04 12.0484C146.04 10.5645 146.363 9.24193 147.01 8.08064C147.624 6.95161 148.496 6.08065 149.627 5.46774C150.758 4.82258 152.051 4.5 153.505 4.5C154.991 4.5 156.3 4.82258 157.431 5.46774C158.529 6.08065 159.386 6.95161 160 8.08064C160.614 9.24193 160.921 10.5645 160.921 12.0484C160.921 13.5323 160.614 14.8387 160 15.9677C159.386 17.0968 158.529 17.9677 157.431 18.5806C156.3 19.2258 154.991 19.5484 153.505 19.5484C152.051 19.5484 150.758 19.2258 149.627 18.5806ZM156.025 18.1935C156.736 17.5806 157.285 16.7419 157.673 15.6774C158.029 14.6129 158.206 13.4032 158.206 12.0484C158.206 10.6935 158.029 9.48387 157.673 8.41935C157.285 7.35483 156.736 6.51613 156.025 5.90322C155.314 5.29032 154.474 4.98387 153.505 4.98387C152.535 4.98387 151.695 5.29032 150.984 5.90322C150.273 6.51613 149.724 7.35483 149.336 8.41935C148.949 9.48387 148.755 10.6935 148.755 12.0484C148.755 13.4032 148.949 14.5968 149.336 15.629C149.724 16.6935 150.273 17.5323 150.984 18.1452C151.695 18.7581 152.535 19.0645 153.505 19.0645C154.474 19.0645 155.314 18.7742 156.025 18.1935ZM162.181 18.5323H163.199C163.425 18.5323 163.651 18.4839 163.877 18.3871C164.136 18.2581 164.362 18.0645 164.556 17.8064C164.75 17.5484 164.847 17.1935 164.847 16.7419V6.48387C164.588 6.12903 164.314 5.88709 164.023 5.75806C163.732 5.66129 163.312 5.61291 162.763 5.61291H162.423V5.12903H167.367L175.995 15.5323V7.40323C175.995 6.79032 175.866 6.33871 175.607 6.04839C175.349 5.75806 175.042 5.61291 174.686 5.61291H173.571V5.12903H179V5.61291H178.031C177.611 5.61291 177.255 5.75806 176.964 6.04839C176.641 6.37097 176.48 6.82258 176.48 7.40323V19.2097H175.946L165.331 6.91936V16.7419C165.331 17.3548 165.477 17.8064 165.768 18.0968C166.091 18.3871 166.446 18.5323 166.834 18.5323H167.9V19.0161H162.181V18.5323ZM7.90062 11.5645C8.51458 11.5645 8.98312 11.4516 9.30626 11.2258C9.59708 11 9.79096 10.7097 9.8879 10.3548C9.98484 9.96774 10.0333 9.5 10.0333 8.95161V8.12903H10.4695V15.6774H10.0333V14.9032C10.0333 14.2903 9.98484 13.7742 9.8879 13.3548C9.79096 12.9677 9.59708 12.6613 9.30626 12.4355C9.01544 12.1774 8.54689 12.0484 7.90062 12.0484H5.04089V18.0484C5.04089 18.371 5.1863 18.5323 5.47712 18.5323H11.1481C11.7621 18.5323 12.2629 18.4032 12.6507 18.1452C13.0385 17.8871 13.3293 17.4839 13.5232 16.9355C13.717 16.3548 13.814 15.5968 13.814 14.6613V13.3548H14.2017V18.9677H0V18.5323H2.08421C2.34272 18.5323 2.47197 18.371 2.47197 18.0484V6.04839C2.47197 5.72581 2.34272 5.56452 2.08421 5.56452H0V5.12903H13.8624V10.3548H13.4747V9.19355C13.4747 8.22581 13.3777 7.48387 13.1839 6.96774C13.0223 6.45161 12.7315 6.09677 12.3114 5.90322C11.8913 5.67742 11.342 5.56452 10.6634 5.56452H5.47712C5.1863 5.56452 5.04089 5.72581 5.04089 6.04839V11.5645H7.90062ZM15.462 18.9677V18.5323C15.979 18.5323 16.399 18.4355 16.7222 18.2419C17.0776 18.0161 17.3684 17.7419 17.5946 17.4194C17.8208 17.0968 18.047 16.7097 18.2732 16.2581L22.3447 6.62903L21.6177 5.12903H24.3805L29.906 17.7097C30.003 17.9677 30.1322 18.1613 30.2938 18.2903C30.4877 18.4516 30.73 18.5323 31.0209 18.5323H32.4265V18.9677H25.1075V18.5323H27.0463C27.1432 18.5323 27.224 18.5 27.2887 18.4355C27.321 18.3387 27.321 18.2258 27.2887 18.0968L22.5871 7.25806L18.2247 17.5161C18.1278 17.7742 18.1601 17.9677 18.3217 18.0968C18.4833 18.2581 18.8064 18.371 19.2911 18.4355C19.7435 18.5 20.3574 18.5323 21.133 18.5323V18.9677H15.462ZM45.7073 14.9516C45.7073 15.8226 45.4649 16.5968 44.9802 17.2742C44.4955 17.9194 43.8493 18.4194 43.0414 18.7742C42.2336 19.0968 41.3611 19.2581 40.424 19.2581C39.6808 19.2581 38.8892 19.129 38.049 18.871C37.2412 18.6129 36.4818 18.1935 35.7709 17.6129C35.5124 17.3871 35.2862 17.1452 35.0923 16.8871C34.9631 17.1129 34.85 17.3226 34.753 17.5161C34.5915 18 34.4461 18.5323 34.3168 19.1129H33.9291V14.1774H34.3653C34.6238 15.1452 35.0762 15.9839 35.7224 16.6935C36.3687 17.4032 37.1119 17.9355 37.9521 18.2903C38.7922 18.6452 39.6485 18.8226 40.521 18.8226C41.4904 18.8226 42.3144 18.5806 42.993 18.0968C43.6715 17.6129 44.0108 16.9194 44.0108 16.0161C44.0108 15.5 43.817 15.0645 43.4292 14.7097C43.0091 14.3226 42.5083 14 41.9266 13.7419C41.345 13.4839 40.5533 13.2097 39.5516 12.9194C38.356 12.5323 37.3866 12.1613 36.6434 11.8064C35.9325 11.4839 35.3024 11.0484 34.753 10.5C34.236 9.95161 33.9775 9.25806 33.9775 8.41935C33.9775 7.64516 34.2199 6.98387 34.7046 6.43548C35.2216 5.85484 35.884 5.41936 36.6918 5.12903C37.4997 4.83871 38.3721 4.69355 39.3092 4.69355C40.1171 4.69355 40.8926 4.80645 41.6358 5.03225C42.379 5.25806 43.1707 5.64516 44.0108 6.19355C44.2047 6.12903 44.3824 5.93549 44.544 5.61291C44.7056 5.32258 44.8025 5.04838 44.8348 4.79032H45.2226V8.41935H44.8348C44.1886 7.32258 43.3646 6.5 42.3629 5.95161C41.3934 5.43548 40.3917 5.17742 39.3577 5.17742C38.3237 5.17742 37.4512 5.35484 36.7403 5.70968C36.0617 6.09677 35.7224 6.62903 35.7224 7.30645C35.7224 7.79032 35.9002 8.20967 36.2556 8.56451C36.6434 8.91935 37.1281 9.22581 37.7097 9.48387C38.2591 9.70968 39.0184 9.98387 39.9878 10.3065C41.2157 10.7258 42.2013 11.1129 42.9445 11.4677C43.72 11.7903 44.3663 12.2419 44.8833 12.8226C45.4326 13.4032 45.7073 14.1129 45.7073 14.9516ZM46.7252 5.12903H54.5288V5.56452H52.1538C52.0246 5.56452 51.9438 5.6129 51.9115 5.70968C51.8468 5.77419 51.863 5.85484 51.9599 5.95161L56.2738 12.0484L60.006 7.45161C60.3937 7 60.5876 6.6129 60.5876 6.29032C60.5876 6.06452 60.4745 5.88709 60.2483 5.75806C60.0544 5.62903 59.7474 5.56452 59.3274 5.56452H58.0187V5.12903H63.7866V5.56452C63.3342 5.56452 62.9303 5.64516 62.5749 5.80645C62.2194 5.93548 61.9124 6.11291 61.6539 6.33871C61.3954 6.56452 61.1208 6.85483 60.8299 7.20967L56.6131 12.4839V18.0484C56.6131 18.371 56.7423 18.5323 57.0008 18.5323H59.182V18.9677H51.4268V18.5323H53.6079C53.8987 18.5323 54.0441 18.371 54.0441 18.0484V12.9194L49.2941 6.38709C49.1325 6.12903 48.9709 5.93548 48.8094 5.80645C48.6478 5.64516 48.4378 5.56452 48.1793 5.56452H46.7252V5.12903ZM82.3991 17.7097C84.8711 17.7097 86.8584 19.6935 86.8584 22.1613V24C85.9374 23.5161 85.1135 22.8871 84.4349 22.1129C83.8532 21.4839 83.417 20.7581 83.0777 20.0323C82.7384 19.3064 82.4961 18.5323 82.3991 17.7097ZM80.3149 20.0323C79.9756 20.7581 79.5394 21.4839 78.9578 22.1129C78.2792 22.8871 77.4552 23.5161 76.5343 24V22.1613C76.5343 19.6935 78.5215 17.7097 80.9935 17.7097C80.8966 18.5323 80.6542 19.3064 80.3149 20.0323ZM87.44 11.3226C87.44 8.85483 89.4273 6.87097 91.8993 6.87097H93.7411C93.2564 7.79032 92.6263 8.6129 91.8023 9.29032C91.1722 9.87097 90.4936 10.3064 89.7666 10.6452C88.9911 10.9839 88.2155 11.2258 87.44 11.3226ZM89.7666 13.4032C90.4936 13.7419 91.1722 14.1774 91.8023 14.7581C92.6263 15.4355 93.2564 16.2581 93.7411 17.1774H91.8993C89.4273 17.1774 87.44 15.1935 87.44 12.7258C88.2155 12.8226 88.9911 13.0645 89.7666 13.4032ZM81.042 6.29032C78.57 6.29032 76.5827 4.30645 76.5827 1.83871V0C77.4552 0.483871 78.3277 1.1129 79.0062 1.93548C79.5394 2.56452 79.9756 3.24193 80.3149 3.96774C80.6542 4.74193 80.8966 5.51613 81.042 6.29032ZM83.1262 3.96774C83.4655 3.24193 83.9017 2.56452 84.4349 1.93548C85.1619 1.1129 85.9859 0.483871 86.9069 0V1.83871C86.9069 4.30645 84.9196 6.29032 82.4476 6.29032C82.5445 5.51613 82.7869 4.74193 83.1262 3.96774ZM76.0011 12.6774C76.0011 15.1452 74.0138 17.129 71.5418 17.129H69.7C70.1847 16.2581 70.8148 15.3871 71.5903 14.7097C72.2204 14.1774 72.9475 13.7419 73.6745 13.4032C74.4016 13.0645 75.1771 12.8226 76.0011 12.6774ZM73.6745 10.5968C72.9475 10.2581 72.2204 9.82258 71.5903 9.29032C70.8148 8.56451 70.1847 7.74194 69.7 6.82258H71.5418C74.0138 6.82258 76.0011 8.80645 76.0011 11.2742C75.1771 11.1774 74.4016 10.9355 73.6745 10.5968ZM80.945 12.7742C80.6542 15.5806 78.4246 17.8064 75.6133 18.0968C75.9041 15.2903 78.1338 13.0645 80.945 12.7742ZM82.4476 12.7742C85.2589 13.1129 87.4885 15.2903 87.8278 18.0968V18.1452L87.7793 18.0968C84.9681 17.8064 82.7869 15.5806 82.4476 12.7742ZM82.4961 11.2742C82.4961 11.2742 82.4799 11.2742 82.4476 11.2742H82.4961C82.7869 8.46774 85.0165 6.24194 87.8278 5.95161V5.90322C87.8278 5.93548 87.8278 5.95161 87.8278 5.95161C87.4885 8.75806 85.3073 10.9839 82.4961 11.2742ZM80.9935 11.2742C80.9612 11.2742 80.945 11.2742 80.945 11.2742C78.1338 10.9355 75.9526 8.70967 75.6133 5.90322C78.4246 6.24193 80.6542 8.41935 80.945 11.2258L80.9935 11.2742Z" fill="currentColor"></path>
           </svg>
-        </a>
-        <nav class="footer-nav">
+        </div>
+        <nav class="footer-nav" style="font-size: 13px; text-align: right">
           <a href="/salao-de-beleza">Salão de beleza</a>
           <a href="/barbearia">Barbearia</a>
           <a href="/estudio-de-beleza">Estúdio de beleza</a>
+          <a href="/funcionalidades">Funcionalidades</a>
           <a href="/planos">Planos</a>
           <a href="/quem-somos">Quem somos</a>
+          <a href="/blog">Blog</a>
           <a href="/termos-de-uso">Termos de uso</a>
         </nav>
       </div>
-      <div class="footer-copy-row" style="margin-top:30px;">
+      <div class="footer-copy-row" style="margin: 30px 0px 0px">
         <div class="footer-copy">© Easy Salon · Tecsalao Desenvolvimento de Software LTDA · CNPJ 31.162.185/0001-64</div>
         <div class="footer-social">
           <svg class="ico" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="LinkedIn"><path d="M8 11v5"></path><path d="M8 8v.01"></path><path d="M12 16v-5"></path><path d="M16 16v-3a2 2 0 1 0 -4 0"></path><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10"></path></svg>
@@ -305,8 +971,10 @@ R$ 30 mil em equipe.</p>
       <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
       <a class="drawer-link" href="/barbearia">Barbearia</a>
       <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
-      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/funcionalidades">Funcionalidades</a>
       <a class="drawer-link" href="/planos">Planos</a>
+      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/blog">Blog</a>
     </nav>
     <div class="drawer-cta">
       <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:100%;">Teste grátis</a>
@@ -322,39 +990,170 @@ R$ 30 mil em equipe.</p>
     if (!('IntersectionObserver' in window)) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return;
-    var nodes = document.querySelectorAll('.nav-inner > *, .sol-hero > *, .hero-grid > *, .step-row > *, .pq-grid > *, .team-block > *, .faq-list > *, .footer-cta-left > *, .footer-cta-right > *, .footer-bottom > *');
+    var nodes = document.querySelectorAll('.nav-inner > *, .h2-hero-text > *, .h2-hero-img, .sb2-fade, .footer-cta-left > *, .footer-cta-right > *, .footer-bottom > *');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     nodes.forEach(function (n, i) { n.style.transitionDelay = Math.min((i % 6) * 90, 540) + 'ms'; io.observe(n); });
   })();
 
-  // Timeline (5 passos) — linha vertical que se preenche conforme o scroll.
-  // Para cada .step-row, mede a altura disponível do segmento e define
-  // --tl-progress entre 0 e essa altura, baseado em quanto da linha já
-  // passou pelo "ponto-gatilho" no viewport (centro inferior).
+  // Metodologia (estilo home: autoplay com barra de progresso, pausa no hover,
+  // hover/click troca o step, scroll horizontal sincronizado no mobile)
   (function () {
-    var rows = Array.prototype.slice.call(document.querySelectorAll('.step-row'));
-    if (!rows.length) return;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var root = document.getElementById('h2-method');
+    if (!root) return;
+    var steps = root.querySelectorAll('.h2-step');
+    var panel = document.getElementById('h2-method-panel');
+    if (!steps.length || !panel) return;
+    var panels;
+    try { panels = JSON.parse(panel.getAttribute('data-panels')); } catch (e) { return; }
+
+    var active = 0;
+    var paused = false;
+    var DUR = 5000;
+    var raf, lastT = null, elapsed = 0;
+
+    function renderPanel(i) {
+      var p = panels[i];
+      panel.querySelector('.h2-method-panel-eyebrow').textContent = 'Passo ' + p.step;
+      panel.querySelector('h3').textContent = p.title;
+      panel.querySelector('p').textContent = p.desc;
+      panel.querySelector('.h2-method-panel-img').textContent = p.img;
+    }
+    function scrollActiveIntoView(i) {
+      var list = steps[i].parentElement;
+      if (!list || list.scrollWidth <= list.clientWidth) return;
+      var step = steps[i];
+      var target = step.offsetLeft - (list.clientWidth - step.offsetWidth) / 2;
+      list.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }
+    function setActive(i) {
+      active = i;
+      steps.forEach(function (s, k) {
+        s.classList.toggle('active', k === i);
+        var fill = s.querySelector('.h2-step-progress-fill');
+        if (fill) fill.style.width = '0%';
+      });
+      renderPanel(i);
+      scrollActiveIntoView(i);
+      elapsed = 0; lastT = null;
+    }
+    function tick(t) {
+      if (lastT === null) lastT = t;
+      var dt = t - lastT; lastT = t;
+      if (!paused) {
+        elapsed += dt;
+        var p = Math.min(1, elapsed / DUR);
+        var fill = steps[active].querySelector('.h2-step-progress-fill');
+        if (fill) fill.style.width = (p * 100) + '%';
+        if (p >= 1) { setActive((active + 1) % steps.length); }
+      }
+      raf = requestAnimationFrame(tick);
+    }
+
+    var hoverCapable = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+    steps.forEach(function (s, i) {
+      if (hoverCapable) s.addEventListener('mouseenter', function () { setActive(i); });
+      s.addEventListener('click', function () { setActive(i); });
+    });
+    if (hoverCapable) {
+      root.addEventListener('mouseenter', function () { paused = true; });
+      root.addEventListener('mouseleave', function () { paused = false; });
+    } else {
+      var list = steps[0].parentElement;
+      if (list) {
+        var resumeTimer;
+        list.addEventListener('touchstart', function () {
+          paused = true; clearTimeout(resumeTimer);
+        }, { passive: true });
+        list.addEventListener('touchend', function () {
+          resumeTimer = setTimeout(function () { paused = false; }, 800);
+        }, { passive: true });
+      }
+    }
+
+    setActive(0);
+    raf = requestAnimationFrame(tick);
+  })();
+
+  // Compare mobile carousel — snap-scroll com dots + init na Com Easy (espelho da home)
+  (function () {
+    var compare = document.querySelector('.h2-compare');
+    var dots = document.querySelectorAll('.h2-compare-dot');
+    if (!compare || !dots.length) return;
+    function isMobile() { return window.matchMedia('(max-width: 640px)').matches; }
+    // DOM idx: 0 = neg (Sem), 1 = pos (Com)  →  Dot idx: 0 = pos, 1 = neg
+    function activeDotIdx() {
+      if (!isMobile()) return -1;
+      var cols = compare.querySelectorAll('.h2-compare-col');
+      var center = compare.scrollLeft + compare.clientWidth / 2;
+      var closestDom = 0, closestDist = Infinity;
+      cols.forEach(function (c, i) {
+        var cc = c.offsetLeft + c.offsetWidth / 2;
+        var d = Math.abs(cc - center);
+        if (d < closestDist) { closestDist = d; closestDom = i; }
+      });
+      return closestDom === 1 ? 0 : 1;
+    }
+    function updateDots() {
+      var idx = activeDotIdx();
+      if (idx < 0) return;
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+    }
+    function initScroll() {
+      if (!isMobile()) { compare.scrollLeft = 0; return; }
+      var pos = compare.querySelector('.h2-compare-col--pos');
+      if (pos) {
+        compare.scrollLeft = pos.offsetLeft - 24;
+        updateDots();
+      }
+    }
+    var to;
+    compare.addEventListener('scroll', function () {
+      clearTimeout(to);
+      to = setTimeout(updateDots, 50);
+    }, { passive: true });
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () {
+        if (!isMobile()) return;
+        var sel = i === 0 ? '.h2-compare-col--pos' : '.h2-compare-col--neg';
+        var card = compare.querySelector(sel);
+        if (card) compare.scrollTo({ left: card.offsetLeft - 24, behavior: 'smooth' });
+      });
+    });
+    setTimeout(initScroll, 50);
+    window.addEventListener('resize', function () {
+      clearTimeout(to);
+      to = setTimeout(initScroll, 100);
+    });
+  })();
+
+  // Funcionalidades sticky-scroll — troca o visual da coluna direita pelo bloco
+  // cujo centro está mais próximo do centro do viewport
+  (function () {
+    var blocks = Array.prototype.slice.call(document.querySelectorAll('[data-func-idx]'));
+    var visuals = document.querySelectorAll('[data-visual-idx]');
+    if (!blocks.length || !visuals.length) return;
+
+    var currentIdx = null;
+    function setActive(idx) {
+      if (idx === currentIdx) return;
+      currentIdx = idx;
+      visuals.forEach(function (v) {
+        v.classList.toggle('is-active', v.getAttribute('data-visual-idx') === String(idx));
+      });
+    }
 
     function update() {
-      var triggerY = window.innerHeight * 0.62; // ponto onde a linha "chega" no viewport
-      rows.forEach(function (row) {
-        var seg = row.querySelector('.tl-seg');
-        if (!seg) return;
-        var rect = seg.getBoundingClientRect();
-        if (rect.height <= 0) return;
-        var filled;
-        if (reduce) {
-          // sem animação: linha cheia se já passou
-          filled = (rect.top < triggerY) ? rect.height : 0;
-        } else {
-          var offset = triggerY - rect.top;
-          filled = Math.max(0, Math.min(rect.height, offset));
-        }
-        row.style.setProperty('--tl-progress', filled.toFixed(1) + 'px');
+      var vhCenter = window.innerHeight / 2;
+      var best = null, bestDist = Infinity;
+      blocks.forEach(function (b) {
+        var r = b.getBoundingClientRect();
+        var center = r.top + r.height / 2;
+        var dist = Math.abs(center - vhCenter);
+        if (dist < bestDist) { bestDist = dist; best = b; }
       });
+      if (best) setActive(best.getAttribute('data-func-idx'));
     }
 
     var ticking = false;
@@ -366,6 +1165,45 @@ R$ 30 mil em equipe.</p>
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
+  })();
+
+  // H2 char-by-char animation (sb2-sechead h2)
+  (function () {
+    var targets = document.querySelectorAll('[data-char-anim]');
+    if (!targets.length) return;
+    targets.forEach(function (h) {
+      // Wrap each character (preserving inline tags like <em>) — splits text nodes only
+      function wrapTextNodes(node) {
+        Array.from(node.childNodes).forEach(function (child) {
+          if (child.nodeType === Node.TEXT_NODE) {
+            var frag = document.createDocumentFragment();
+            Array.from(child.textContent).forEach(function (ch) {
+              if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+              var s = document.createElement('span');
+              s.className = 'char';
+              s.textContent = ch;
+              frag.appendChild(s);
+            });
+            child.parentNode.replaceChild(frag, child);
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            wrapTextNodes(child);
+          }
+        });
+      }
+      wrapTextNodes(h);
+
+      var chars = h.querySelectorAll('.char');
+      chars.forEach(function (c, i) { c.style.transitionDelay = (i * 25) + 'ms'; });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            chars.forEach(function (c) { c.classList.add('is-in'); });
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      io.observe(h);
+    });
   })();
 
   // Nav scroll shadow
@@ -442,15 +1280,11 @@ R$ 30 mil em equipe.</p>
     var backdrop = document.querySelector('[data-drawer-backdrop]');
     var closeBtn = drawer && drawer.querySelector('.drawer-close');
     var logoSlot = drawer && drawer.querySelector('[data-drawer-logo]');
-    var navLogo = document.querySelector('.nav-logo svg');
 
-    // Clone the nav logo into the drawer head (smaller).
-    if (logoSlot && navLogo) {
-      var clone = navLogo.cloneNode(true);
-      clone.setAttribute('width', '120');
-      clone.setAttribute('height', '16');
-      clone.removeAttribute('aria-label');
-      logoSlot.appendChild(clone);
+    // Drawer mobile: texto "Menu" no lugar da logo (padrão sandbox v2)
+    if (logoSlot) {
+      logoSlot.textContent = 'Menu';
+      logoSlot.setAttribute('aria-label', 'Menu');
     }
 
     if (!burger || !drawer || !backdrop) return;

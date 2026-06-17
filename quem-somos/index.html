@@ -3,16 +3,644 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Easy Salon — Quem somos</title>
+<title>Easy Salon — Quem somos (sandbox)</title>
 <link rel="icon" type="image/png" href="/assets/fav.png">
 
 <!-- Sistema de design (mestre). Fontes, tokens, .nav, .btn, .pill, footer-bleed. -->
 <link rel="stylesheet" href="/design-system.css">
 
 <style>
-  /* Página /quem-somos — todas as regras vivem em design-system.css
-     (seção "Páginas: Quem somos"). Este bloco é mantido vazio para enforce
-     a herança 100% via CSS canônico. */
+  /* Quem Somos 2 (sandbox) — redesign baseado no wireframe (Bento Aceternity)
+     Reaproveita tokens do design-system: fontes (--ff-display Gyst, --ff-text Manrope),
+     cores (--c-accent, --c-text, --c-tan-veil) e componentes (.pill, .btn).
+     Regras escopadas para [data-screen-label="Quem somos"] — não vazam pra outras páginas. */
+
+  [data-screen-label="Quem somos"] .qs2-wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav: mesma estrutura do home — logo esquerda · menu centro · CTAs direita */
+  [data-screen-label="Quem somos"] .nav-inner { grid-template-columns: auto 1fr auto; }
+  [data-screen-label="Quem somos"] .nav-logo { order: -1; justify-self: start; }
+  [data-screen-label="Quem somos"] .nav-links { order: 0; justify-self: center; gap: 20px; }
+  [data-screen-label="Quem somos"] .nav-cta { order: 1; justify-self: end; }
+
+  /* BlurFade inicial */
+  [data-screen-label="Quem somos"] .qs2-manifesto > *,
+  [data-screen-label="Quem somos"] .qs2-section-head > *,
+  [data-screen-label="Quem somos"] .qs2-row > *,
+  [data-screen-label="Quem somos"] .qs2-nascemos-box,
+  [data-screen-label="Quem somos"] .qs2-tile,
+  [data-screen-label="Quem somos"] .qs2-channel,
+  [data-screen-label="Quem somos"] .qs2-form,
+  [data-screen-label="Quem somos"] .qs2-cta-box > * {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(18px);
+    transition:
+      opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, filter, transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-screen-label="Quem somos"] .qs2-manifesto > *,
+    [data-screen-label="Quem somos"] .qs2-section-head > *,
+    [data-screen-label="Quem somos"] .qs2-row > *,
+    [data-screen-label="Quem somos"] .qs2-nascemos-box,
+    [data-screen-label="Quem somos"] .qs2-tile,
+    [data-screen-label="Quem somos"] .qs2-channel,
+    [data-screen-label="Quem somos"] .qs2-form,
+    [data-screen-label="Quem somos"] .qs2-cta-box > * {
+      opacity: 1; filter: none; transform: none; transition: none;
+    }
+  }
+  [data-screen-label="Quem somos"] .is-in {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  /* Section base */
+  [data-screen-label="Quem somos"] .qs2-section {
+    max-width: 1200px; margin: 0 auto; padding: 80px 24px;
+  }
+  [data-screen-label="Quem somos"] .qs2-section-head {
+    text-align: center; margin: 0 auto 48px; max-width: 760px;
+  }
+  [data-screen-label="Quem somos"] .qs2-section-head .pill {
+    margin-bottom: 20px;
+  }
+  [data-screen-label="Quem somos"] .qs2-section-head h2 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 30px;
+    line-height: 1.15; color: var(--c-text); margin: 0 0 16px;
+  }
+  [data-screen-label="Quem somos"] .qs2-section-head h2 em {
+    font-style: normal; color: var(--c-text);
+  }
+  [data-screen-label="Quem somos"] .qs2-section-head p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
+    color: var(--c-text); opacity: 0.75; margin: 0;
+  }
+  [data-screen-label="Quem somos"] .qs2-eyebrow {
+    display: inline-block;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 14px;
+  }
+
+  /* 0 · Manifesto (centralizado, sem imagem) */
+  [data-screen-label="Quem somos"] .qs2-manifesto {
+    max-width: 920px; margin: 0 auto; padding: 130px 24px 100px;
+    text-align: center;
+  }
+  [data-screen-label="Quem somos"] .qs2-manifesto .pill {
+    margin-bottom: 24px;
+  }
+  [data-screen-label="Quem somos"] .qs2-manifesto h1 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 56px;
+    line-height: 1.05; color: var(--c-text); margin: 0 0 28px;
+  }
+  [data-screen-label="Quem somos"] .qs2-manifesto h1 em {
+    font-style: normal; color: var(--c-accent);
+  }
+  [data-screen-label="Quem somos"] .qs2-manifesto p {
+    font-family: var(--ff-text); font-size: 18px; line-height: 1.55;
+    color: var(--c-text); opacity: 0.8; margin: 0 auto; max-width: 620px;
+  }
+
+  /* 1 · Por que existimos / 4 · Metodologia — 2 colunas (texto + imagem) */
+  [data-screen-label="Quem somos"] .qs2-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center;
+  }
+  [data-screen-label="Quem somos"] .qs2-row--reverse > .qs2-col { order: 2; }
+  [data-screen-label="Quem somos"] .qs2-row--reverse > .qs2-img { order: 1; }
+  [data-screen-label="Quem somos"] .qs2-col h2 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 50px;
+    line-height: 1.1; color: var(--c-text); margin: 0 0 20px;
+  }
+  /* Default: desktop usa <br class="qs2-br-desktop"> e esconde o mobile */
+  [data-screen-label="Quem somos"] .qs2-br-mobile { display: none; }
+  [data-screen-label="Quem somos"] .qs2-col h2 em {
+    font-style: normal; color: var(--c-text);
+  }
+  [data-screen-label="Quem somos"] .qs2-col .qs2-lead {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
+    color: var(--c-text); margin: 0 0 18px;
+  }
+  [data-screen-label="Quem somos"] .qs2-col p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
+    color: var(--c-text); opacity: 0.85; margin: 0 0 14px;
+  }
+  [data-screen-label="Quem somos"] .qs2-img {
+    background: var(--c-card, #faf6ed);
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    display: flex; align-items: center; justify-content: center;
+  }
+  [data-screen-label="Quem somos"] .qs2-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  [data-screen-label="Quem somos"] .qs2-img:not(:has(img)) {
+    color: var(--c-text); opacity: 0.4; font-family: var(--ff-text); font-size: 13px;
+    text-align: center; padding: 24px;
+  }
+
+  /* 2 · Como nascemos — head + 4 marcos dentro do box */
+  [data-screen-label="Quem somos"] .qs2-nascemos-box {
+    background: var(--c-card, #faf6ed);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 0;
+  }
+  [data-screen-label="Quem somos"] .qs2-nascemos-box .qs2-section-head {
+    margin-bottom: 32px;
+    padding: 0;
+    max-width: none;
+  }
+  [data-screen-label="Quem somos"] .qs2-nascemos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  [data-screen-label="Quem somos"] .qs2-nascemos-cell {
+    padding: 16px 28px;
+    border-left: 1px solid rgba(115, 42, 29, 0.08);
+    display: flex; flex-direction: column;
+  }
+  [data-screen-label="Quem somos"] .qs2-nascemos-cell:first-child {
+    border-left: none;
+  }
+  [data-screen-label="Quem somos"] .qs2-nascemos-cell h3 {
+    font-family: var(--ff-display); font-weight: 700; font-size: 16px;
+    line-height: 1.3; color: var(--c-text); margin: 0 0 10px;
+  }
+  [data-screen-label="Quem somos"] .qs2-nascemos-cell p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text); opacity: 0.75; margin: 0;
+  }
+
+  /* 3 · O que nos move — Bento Aceternity (1 grande + 2 small + 1 wide) */
+  [data-screen-label="Quem somos"] .qs2-bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  [data-screen-label="Quem somos"] .qs2-tile {
+    background: var(--c-card, #faf6ed);
+    border: none;
+    border-radius: 20px;
+    padding: 24px;
+    display: flex; flex-direction: column;
+  }
+  [data-screen-label="Quem somos"] .qs2-tile--big {
+    grid-column: span 2; grid-row: span 2;
+    padding: 28px;
+  }
+  [data-screen-label="Quem somos"] .qs2-tile--wide {
+    grid-column: span 3;
+  }
+  [data-screen-label="Quem somos"] .qs2-tile--big .qs2-tile-img {
+    background: var(--c-tan-veil);
+    border-radius: 14px;
+    flex: 1; min-height: 200px;
+    margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-text); font-size: 12px;
+    color: var(--c-text); opacity: 0.4;
+  }
+  [data-screen-label="Quem somos"] .qs2-tile .qs2-num {
+    font-family: var(--ff-display); font-weight: 700; font-size: 22px;
+    color: var(--c-accent); opacity: 0.65; margin-bottom: 12px;
+    display: block;
+  }
+  [data-screen-label="Quem somos"] .qs2-tile h3 {
+    font-family: var(--ff-display); font-weight: 700; font-size: 16px;
+    line-height: 1.3; color: var(--c-text); margin: 0 0 10px;
+  }
+  [data-screen-label="Quem somos"] .qs2-tile p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.55;
+    color: var(--c-text); opacity: 0.75; margin: 0;
+  }
+
+  /* 5 · Fale com a gente — 4 cards à esquerda + form à direita */
+  [data-screen-label="Quem somos"] .qs2-contato-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 20px; align-items: stretch;
+    margin-top: 24px;
+  }
+  [data-screen-label="Quem somos"] .qs2-channels {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  [data-screen-label="Quem somos"] .qs2-channel {
+    background: var(--c-card, #faf6ed);
+    border: none;
+    border-radius: 16px;
+    padding: 20px 24px;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center; gap: 10px;
+  }
+  [data-screen-label="Quem somos"] .qs2-channel-head {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+  }
+  [data-screen-label="Quem somos"] .qs2-channel-icon {
+    width: 24px; height: 24px;
+    background: transparent;
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--c-accent); flex: 0 0 auto;
+    padding: 0;
+  }
+  [data-screen-label="Quem somos"] .qs2-channel-icon svg { width: 24px; height: 24px; }
+  [data-screen-label="Quem somos"] .qs2-channel-title {
+    font-family: var(--ff-display); font-weight: 700; font-size: 15px;
+    color: var(--c-text);
+  }
+  [data-screen-label="Quem somos"] .qs2-channel-value {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text); opacity: 0.75;
+    margin-left: 0;
+  }
+
+  [data-screen-label="Quem somos"] .qs2-form {
+    background: var(--c-card, #faf6ed);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  [data-screen-label="Quem somos"] .qs2-form-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  [data-screen-label="Quem somos"] .qs2-field {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  [data-screen-label="Quem somos"] .qs2-field label {
+    font-family: var(--ff-text); font-size: 12px; font-weight: 600;
+    color: var(--c-text); opacity: 0.7;
+  }
+  [data-screen-label="Quem somos"] .qs2-req {
+    color: var(--c-accent); opacity: 1; margin-left: 2px;
+  }
+  /* Inline error state */
+  [data-screen-label="Quem somos"] .qs2-error {
+    font-family: var(--ff-text); font-size: 12px; line-height: 1.4;
+    color: var(--c-accent);
+    margin-top: 4px;
+    display: none;
+  }
+  [data-screen-label="Quem somos"] .qs2-field.is-error label,
+  [data-screen-label="Quem somos"] .qs2-field.is-error > label {
+    color: var(--c-accent); opacity: 1;
+  }
+  [data-screen-label="Quem somos"] .qs2-field.is-error input,
+  [data-screen-label="Quem somos"] .qs2-field.is-error textarea {
+    border-color: var(--c-accent);
+  }
+  [data-screen-label="Quem somos"] .qs2-field.is-error .qs2-error { display: block; }
+  [data-screen-label="Quem somos"] .qs2-field input,
+  [data-screen-label="Quem somos"] .qs2-field select,
+  [data-screen-label="Quem somos"] .qs2-field textarea {
+    background: #fff;
+    border: 1px solid rgba(115, 42, 29, 0.12);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: var(--ff-text); font-size: 14px; color: var(--c-text);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  [data-screen-label="Quem somos"] .qs2-label {
+    font-family: var(--ff-text); font-size: 12px; font-weight: 600;
+    color: var(--c-text); opacity: 0.7; margin-bottom: 6px; display: block;
+  }
+  /* Custom dropdown */
+  [data-screen-label="Quem somos"] .qs2-dropdown { position: relative; }
+  [data-screen-label="Quem somos"] .qs2-dropdown-trigger {
+    width: 100%;
+    background: #fff;
+    border: 1px solid rgba(115, 42, 29, 0.12);
+    border-radius: 10px;
+    padding: 12px 40px 12px 14px;
+    font-family: var(--ff-text); font-size: 14px; color: var(--c-text);
+    text-align: left;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: border-color 0.2s ease;
+  }
+  [data-screen-label="Quem somos"] .qs2-dropdown-trigger:hover,
+  [data-screen-label="Quem somos"] .qs2-dropdown-trigger:focus-visible {
+    border-color: var(--c-accent);
+    outline: none;
+  }
+  [data-screen-label="Quem somos"] .qs2-dropdown-chev {
+    color: var(--c-accent);
+    flex: 0 0 auto;
+    transition: transform 0.2s ease;
+  }
+  [data-screen-label="Quem somos"] .qs2-dropdown[data-state="open"] .qs2-dropdown-chev {
+    transform: rotate(180deg);
+  }
+  [data-screen-label="Quem somos"] .qs2-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px); left: 0; right: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(115, 42, 29, 0.12);
+    padding: 6px;
+    list-style: none;
+    margin: 0;
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+    z-index: 20;
+  }
+  [data-screen-label="Quem somos"] .qs2-dropdown[data-state="open"] .qs2-dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s;
+  }
+  [data-screen-label="Quem somos"] .qs2-dropdown-menu li {
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--ff-text); font-size: 14px; color: var(--c-text);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  [data-screen-label="Quem somos"] .qs2-dropdown-menu li:hover {
+    background: var(--c-tan-veil);
+    color: var(--c-accent);
+  }
+  [data-screen-label="Quem somos"] .qs2-dropdown-menu li.is-selected {
+    color: var(--c-accent); font-weight: 600;
+  }
+  [data-screen-label="Quem somos"] .qs2-field input:focus,
+  [data-screen-label="Quem somos"] .qs2-field select:focus,
+  [data-screen-label="Quem somos"] .qs2-field textarea:focus {
+    border-color: var(--c-accent);
+  }
+  [data-screen-label="Quem somos"] .qs2-field textarea {
+    min-height: 96px; resize: vertical;
+  }
+  [data-screen-label="Quem somos"] .qs2-form .btn {
+    width: 100%; margin-top: 6px;
+  }
+  [data-screen-label="Quem somos"] .qs2-form-disclaimer {
+    font-family: var(--ff-text); font-size: 12px; line-height: 1.5;
+    color: var(--c-text); opacity: 0.6; margin: 8px 0 0;
+  }
+
+  /* 6 · CTA Final (dark box centralizado) */
+  [data-screen-label="Quem somos"] .qs2-cta-final {
+    padding: 80px 24px;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-box {
+    background: #2a1816;
+    color: #fff; border-radius: 20px;
+    padding: 64px 40px;
+    text-align: center;
+    max-width: 920px; margin: 0 auto;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-tag {
+    font-family: var(--ff-text); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255, 255, 255, 0.55);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-tag::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-box h2 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 44px;
+    line-height: 1.1; color: #fff; margin: 18px auto 0; max-width: 620px;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-box p {
+    font-family: var(--ff-text); font-size: 16px; line-height: 1.55;
+    color: rgba(255, 255, 255, 0.85); margin: 16px auto 28px; max-width: 520px;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-buttons {
+    display: flex; gap: 14px; justify-content: center; margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-buttons .btn-light {
+    background: #fff; color: var(--c-text); border-color: #fff;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-buttons .btn-outline-light {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+  }
+  [data-screen-label="Quem somos"] .qs2-cta-micro {
+    font-family: var(--ff-text); font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 440px; margin: 18px auto 0;
+  }
+
+  /* Section ordering / spacing */
+  [data-screen-label="Quem somos"] section.qs2-section + section.qs2-section {
+    padding-top: 60px;
+  }
+  /* Fale com a Gente — padding top 60 + bottom 80 */
+  [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-contato-grid) {
+    padding-top: 80px !important; padding-bottom: 80px !important;
+  }
+  /* Metodologia — sem padding top/bottom */
+  [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-row--reverse) {
+    padding-top: 0 !important; padding-bottom: 0 !important;
+  }
+  /* Por que existimos (primeira section) — padding top 20, bottom 0, sem laterais */
+  [data-screen-label="Quem somos"] section.qs2-section:first-of-type {
+    padding-top: 20px !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  /* Como Nascemos — padding top/bottom 60, sem laterais, sem border */
+  [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-nascemos-box) {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-top: none;
+  }
+  /* O Que Nos Move — sem padding top, bottom 60 */
+  [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-bento) {
+    padding-top: 0 !important;
+    padding-bottom: 80px !important;
+  }
+  /* Heads alinhados à esquerda sem margens laterais */
+  [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-contato-grid) .qs2-section-head,
+  [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-nascemos-box) .qs2-section-head,
+  [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-bento) .qs2-section-head {
+    text-align: left;
+    margin: 0 0 32px;
+    max-width: none;
+  }
+  /* Footer cola direto na última section (sem margin-top do DS) */
+  [data-screen-label="Quem somos"] footer.footer-bleed { margin-top: 0; }
+
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE — Tablet + Mobile (max-width: 1024px)
+     Espelha o padrão de responsividade do home: tudo
+     colapsa para 1 coluna, nav vira burger ≤1024px.
+     ═══════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    /* ── Nav: burger em tablet+mobile (override DS) ── */
+    [data-screen-label="Quem somos"] .nav-links { display: none; }
+    [data-screen-label="Quem somos"] .nav-cta { display: none; }
+    [data-screen-label="Quem somos"] .nav-burger {
+      display: inline-flex; justify-self: end; order: 2;
+    }
+
+    /* ── Section base + heads ── */
+    [data-screen-label="Quem somos"] .qs2-section { padding: 60px 0 !important; }
+    [data-screen-label="Quem somos"] section.qs2-section:first-of-type {
+      padding-top: 24px !important; padding-bottom: 0 !important;
+    }
+    [data-screen-label="Quem somos"] .qs2-section-head { padding: 0 24px; }
+    [data-screen-label="Quem somos"] .qs2-section-head h2 { font-size: 28px; }
+
+    /* ── 1. Por que existimos · 4. Metodologia (2-col → 1-col) ── */
+    [data-screen-label="Quem somos"] .qs2-row,
+    [data-screen-label="Quem somos"] .qs2-row--reverse {
+      grid-template-columns: 1fr; gap: 32px;
+      padding: 0 24px;
+    }
+    [data-screen-label="Quem somos"] .qs2-row--reverse > .qs2-col { order: 0; }
+    [data-screen-label="Quem somos"] .qs2-row--reverse > .qs2-img { order: 0; }
+    [data-screen-label="Quem somos"] .qs2-col h2 { font-size: 40px; }
+
+    /* ── 2. Como Nascemos (4-col → 2-col em tablet) ── */
+    [data-screen-label="Quem somos"] .qs2-nascemos-box {
+      margin: 0 24px; padding: 32px;
+    }
+    [data-screen-label="Quem somos"] .qs2-nascemos-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    [data-screen-label="Quem somos"] .qs2-nascemos-cell {
+      border-left: none;
+      border-top: 1px solid rgba(115, 42, 29, 0.08);
+      padding: 18px 12px;
+    }
+    [data-screen-label="Quem somos"] .qs2-nascemos-cell:nth-child(-n+2) {
+      border-top: none;
+    }
+    [data-screen-label="Quem somos"] .qs2-nascemos-cell:nth-child(odd) {
+      padding-left: 0;
+    }
+    [data-screen-label="Quem somos"] .qs2-nascemos-cell:nth-child(even) {
+      border-left: 1px solid rgba(115, 42, 29, 0.08);
+    }
+
+    /* ── 3. Bento → 1 col ── */
+    [data-screen-label="Quem somos"] .qs2-bento {
+      grid-template-columns: 1fr; padding: 0 24px;
+    }
+    [data-screen-label="Quem somos"] .qs2-tile--big,
+    [data-screen-label="Quem somos"] .qs2-tile--wide {
+      grid-column: span 1; grid-row: span 1;
+    }
+    [data-screen-label="Quem somos"] .qs2-tile--big .qs2-tile-img { min-height: 160px; }
+
+    /* ── 5. Fale com a Gente (2-col → 1-col) ── */
+    [data-screen-label="Quem somos"] .qs2-contato-grid {
+      grid-template-columns: 1fr; padding: 0 24px;
+    }
+    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-contato-grid) .qs2-section-head {
+      padding: 0 24px;
+    }
+
+    /* ── Footer ── */
+    [data-screen-label="Quem somos"] .footer-inner {
+      max-width: 100%; padding: 60px 24px;
+    }
+    [data-screen-label="Quem somos"] .footer-cta-grid {
+      grid-template-columns: 1fr; gap: 32px;
+    }
+    [data-screen-label="Quem somos"] .footer-cta-left h2 { font-size: 32px; }
+    [data-screen-label="Quem somos"] .footer-cta-left p {
+      font-size: 14px; line-height: 22px; max-width: 100%;
+    }
+    [data-screen-label="Quem somos"] .footer-cta-right { max-width: 100%; }
+    [data-screen-label="Quem somos"] .footer-bottom {
+      flex-direction: column; align-items: flex-start; gap: 20px;
+    }
+    [data-screen-label="Quem somos"] .footer-nav {
+      text-align: left !important; flex-wrap: wrap; gap: 12px 18px;
+    }
+    [data-screen-label="Quem somos"] .footer-copy-row {
+      flex-direction: column; align-items: flex-start; gap: 16px;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════
+     MOBILE REFINEMENTS — @media (max-width: 640px)
+     Refinos de tamanhos sobre o bloco 1024.
+     ═══════════════════════════════════════════════ */
+  @media (max-width: 640px) {
+    /* Tipografia mobile — padronizada com home hero h1 (32px) */
+    [data-screen-label="Quem somos"] .qs2-col h2 { font-size: 32px; line-height: 1.05; }
+    /* Mobile: quebra DEPOIS de "uma" — "sistema, uma" / "metodologia" */
+    [data-screen-label="Quem somos"] .qs2-br-desktop { display: none; }
+    [data-screen-label="Quem somos"] .qs2-br-mobile { display: inline; }
+    [data-screen-label="Quem somos"] .qs2-section-head h2 { font-size: 24px; }
+    [data-screen-label="Quem somos"] .qs2-tile h3 { font-size: 16px; }
+
+    /* Nascemos: 1 col em mobile */
+    [data-screen-label="Quem somos"] .qs2-nascemos-box { padding: 24px; }
+    [data-screen-label="Quem somos"] .qs2-nascemos-grid {
+      grid-template-columns: 1fr;
+    }
+    [data-screen-label="Quem somos"] .qs2-nascemos-cell {
+      border-left: none !important;
+      border-top: 1px solid rgba(115, 42, 29, 0.08);
+      padding: 16px 0;
+    }
+    [data-screen-label="Quem somos"] .qs2-nascemos-cell:first-child {
+      border-top: none; padding-top: 0;
+    }
+
+    /* Form */
+    [data-screen-label="Quem somos"] .qs2-form { padding: 24px; }
+    [data-screen-label="Quem somos"] .qs2-form-row { grid-template-columns: 1fr; }
+
+    /* Footer-bleed: zerar padding (igual home) */
+    [data-screen-label="Quem somos"] footer.footer-bleed {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    [data-screen-label="Quem somos"] .footer-inner { padding: 20px 24px; }
+    [data-screen-label="Quem somos"] .footer-cta-left h2 { font-size: 26px !important; }
+    [data-screen-label="Quem somos"] .footer-cta-left .btn-cta-row {
+      flex-direction: column;
+    }
+    [data-screen-label="Quem somos"] .footer-cta-left .btn-cta-row .btn {
+      width: 100% !important;
+    }
+    [data-screen-label="Quem somos"] .footer-nav {
+      flex-direction: column; flex-wrap: nowrap; gap: 12px;
+      align-items: flex-start;
+    }
+
+    /* Drawer "Menu" text styling (logo trocada via JS) */
+    [data-screen-label="Quem somos"] .drawer-logo {
+      font-family: var(--ff-display);
+      font-weight: 500; font-size: 18px;
+      color: var(--c-text);
+    }
+
+    /* Team-section margin override (DS sobrescrevia) */
+    [data-screen-label="Quem somos"] .team-section { margin-bottom: 60px !important; }
+
+    /* Padding mobile-only — regra geral: onde desktop é 80, mobile é 60 */
+    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-nascemos-box) {
+      padding-top: 60px !important;
+      padding-bottom: 60px !important;
+    }
+    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-bento) {
+      padding-bottom: 60px !important;
+    }
+    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-contato-grid) {
+      padding-top: 60px !important;
+      padding-bottom: 60px !important;
+    }
+  }
 </style>
 </head>
 <body class="has-nav">
@@ -24,7 +652,7 @@
       <div class="nav-links">
         <div class="dropdown" data-state="closed">
           <button type="button" class="dropdown-trigger" aria-haspopup="menu" aria-expanded="false">
-            Soluções
+            Negócios
             <svg class="chev" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
@@ -35,8 +663,10 @@
             <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a href="/quem-somos">Quem somos</a>
+        <a href="/funcionalidades">Funcionalidades</a>
         <a href="/planos">Planos</a>
+        <a href="/quem-somos">Quem somos</a>
+        <a href="/blog">Blog</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -55,102 +685,193 @@
     </div>
   </nav>
 
-  <!-- ─────────────── HERO (Seção 1) ─────────────── -->
-  <section class="plans-hero plans-hero--flush-bottom" style="background:none;">
-    <div class="pill pill-accent pill-glow" style="margin: 0 0 20px">Quem somos</div>
-    <h1>Nossa missão é <em>simplificar o mercado da beleza</em></h1>
-    <p class="plans-hero-sub" style="margin-bottom:0;">A Easy nasceu para ajudar salões, barbearias e estúdios de beleza a terem uma operação organizada, previsível e leve. Começando pela agenda e evoluindo para a gestão completa.</p>
-  </section>
-
-  <!-- ─────────────── SEÇÃO 2: Criada com quem vive a rotina ─────────────── -->
-  <section class="team-section team-section--mirror" style="margin: 60px auto 30px">
-    <div class="team-block team-block--story">
-      <div class="team-text">
-        <h2 style="font-size:32px;">Criada com quem vive a rotina <br>da beleza todos os dias</h2>
-        <p class="body">A Easy surgiu de uma verdade simples: <strong>A gestão do dia a dia nos salões, barbearias e estúdios é caótica.</strong></p>
-        <p class="body">Agenda confusa, equipe desorganizada, repasses sem clareza, WhatsApp explodindo e falta de previsibilidade no caixa.</p>
-        <p class="body">Ao lado de donos de salão, barbeiros, esteticistas e líderes do mercado, construímos uma plataforma simples e inteligente que resolve tudo isso na prática — sem complicar o que já é difícil.</p>
-        <p class="body">A Easy é tecnologia feita para a vida real.</p>
-        <p class="body">Simples, acessível e pensada para equipes que precisam de clareza para crescer.</p>
+  <!-- ─────────────── SECTION 1 · POR QUE EXISTIMOS ─────────────── -->
+  <section class="qs2-section">
+    <div class="qs2-row">
+      <div class="qs2-col">
+        <span class="pill pill-accent pill-glow" style="margin-bottom: 18px; display: inline-flex; align-items: center; justify-content: center;">Quem somos</span>
+        <h2>O setor de beleza<br>merecia <em>mais</em></h2>
+        <p class="qs2-lead">O salão de beleza, a barbearia e o estúdio sempre foram tratados como negócios pequenos demais para uma tecnologia de verdade. Sobraram planilhas adaptadas, cadernos no caixa e sistemas genéricos que nunca entenderam o dia a dia desse mercado.</p>
+        <p>O Easy Salon nasceu para mudar isso. Construímos uma plataforma feita exclusivamente para quem trabalha com beleza — com o cuidado, o detalhe e a simplicidade que esse setor sempre mereceu.</p>
       </div>
-      <div class="team-photo team-photo--edge" aria-label="Equipe Easy"></div>
+      <div class="qs2-img">FOTO · dono(a) do salão em ambiente real, com o sistema numa tela próxima</div>
     </div>
   </section>
 
-  <!-- ─────────────── SEÇÃO 3: Organizar o presente ─────────────── -->
-  <section class="section-card" style="margin: 30px auto 30px">
-    <h2>Organizar o presente. <span style="color:var(--c-accent);">Preparar o futuro.</span></h2>
-    <div class="grid-organize grid-organize--cols-3">
-      <div class="org-item">
-        <span class="num">01</span>
-        <h3 class="sub">Simplicidade como valor</h3>
-        <p class="copy">Coisas simples funcionam todos os dias. Por isso, a Easy foi criada para ser rápida, intuitiva e fácil de aprender.</p>
+  <!-- ─────────────── SECTION 2 · COMO NASCEMOS (head + 4 marcos dentro do box) ─────────────── -->
+  <section class="qs2-section">
+    <div class="qs2-nascemos-box">
+      <div class="qs2-section-head">
+        <h2>Tudo começou dentro de <em>salões reais</em></h2>
+        <p>O Easy Salon não foi pensado em escritório de tecnologia. Nasceu da escuta, da observação e da prática.</p>
       </div>
-      <div class="org-item">
-        <span class="num">02</span>
-        <h3 class="sub">Organização como base</h3>
-        <p class="copy">A agenda é o coração do negócio. Organizando ela, todo o resto começa a fluir naturalmente.</p>
-      </div>
-      <div class="org-item">
-        <span class="num">03</span>
-        <h3 class="sub">Inteligência aplicada ao dia a dia</h3>
-        <p class="copy">Automação e IA só fazem sentido quando resolvem problemas reais — e esse é o foco da Easy.</p>
+      <div class="qs2-nascemos-grid">
+        <div class="qs2-nascemos-cell">
+          <span class="qs2-eyebrow">01 · O ponto de partida</span>
+          <h3>As primeiras conversas</h3>
+          <p>Visitamos salões reais. Conversamos com donos, profissionais e gerentes. Cada dor virou um item da nossa lista.</p>
+        </div>
+        <div class="qs2-nascemos-cell">
+          <span class="qs2-eyebrow">02 · O primeiro produto</span>
+          <h3>A primeira versão, na prática</h3>
+          <p>Construímos um MVP e colocamos nas mãos de salões parceiros antes mesmo de ter site. Ajustamos no campo.</p>
+        </div>
+        <div class="qs2-nascemos-cell">
+          <span class="qs2-eyebrow">03 · O crescimento</span>
+          <h3>A chegada dos primeiros parceiros</h3>
+          <p>De salão em salão, crescemos no boca a boca. Cada nova parceria trouxe uma nova funcionalidade.</p>
+        </div>
+        <div class="qs2-nascemos-cell">
+          <span class="qs2-eyebrow">04 · O presente</span>
+          <h3>Hoje, mantendo a essência</h3>
+          <p>Atendemos salões em todo o Brasil. Cada nova feature ainda começa com a mesma pergunta: "isso resolve um problema real?".</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── SEÇÃO 4: Ajudar profissionais ─────────────── -->
-  <section class="team-section team-section--mirror" style="margin: 30px auto 30px">
-    <div class="team-block" style="grid-template-columns: 470px 1fr;">
-      <div class="team-text">
-        <h2>Ajudar profissionais da <br>beleza a crescer com <br>clareza e tranquilidade</h2>
-        <p class="body">Um negócio da beleza não deveria depender de planilhas, agendas improvisadas e mensagens perdidas no WhatsApp.</p>
-        <p class="body">Ele merece previsibilidade, organização e uma operação que funcione sozinha.</p>
-        <p class="body accent"><strong>A Easy existe para isso:</strong></p>
-        <p class="body" style="margin-top:-16px;">Para transformar rotina em crescimento, dia após dia.</p>
+  <!-- ─────────────── SECTION 3 · O QUE NOS MOVE (Bento Aceternity) ─────────────── -->
+  <section class="qs2-section">
+    <div class="qs2-section-head">
+      <h2>O que nos move <em>todos os dias</em></h2>
+      <p>Quatro princípios que guiam cada linha de código, cada conversa com cliente e cada decisão de produto.</p>
+    </div>
+    <div class="qs2-bento">
+      <div class="qs2-tile qs2-tile--big">
+        <div class="qs2-tile-img">Ilustração · simplicidade</div>
+        <h3>Simplicidade radical</h3>
+        <p>Sistema que o profissional aprende em uma tarde. Se precisar de manual grosso, fizemos errado.</p>
       </div>
-      <div class="chat" style="justify-self: end; width: 530px;">
-        <div class="chat-header">
-          <div class="chat-avatar">
-            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 18px; height: 18px">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.78968 12.2787C10.5006 12.2787 11.8761 13.6542 11.8761 15.3652V16.64C11.2387 16.3045 10.6684 15.8684 10.1987 15.3316C9.79613 14.8955 9.49419 14.3923 9.25935 13.889C9.02451 13.3858 8.85678 12.849 8.78968 12.2787ZM7.34709 13.889C7.11226 14.3923 6.81032 14.8955 6.40774 15.3316C5.93806 15.8684 5.36774 16.3045 4.73032 16.64V15.3652C4.73032 13.6542 6.10581 12.2787 7.81678 12.2787C7.74968 12.849 7.58193 13.3858 7.34709 13.889ZM12.2787 7.85032C12.2787 6.13935 13.6542 4.76387 15.3652 4.76387H16.64C16.3045 5.40129 15.8684 5.97161 15.2981 6.44129C14.8619 6.84387 14.3923 7.14581 13.889 7.38064C13.3523 7.61548 12.8155 7.78322 12.2787 7.85032ZM13.889 9.2929C14.3923 9.52774 14.8619 9.82968 15.2981 10.2323C15.8684 10.7019 16.3045 11.2723 16.64 11.9097H15.3652C13.6542 11.9097 12.2787 10.5342 12.2787 8.82323C12.8155 8.89032 13.3523 9.05806 13.889 9.2929ZM7.85032 4.36129C6.13935 4.36129 4.76387 2.98581 4.76387 1.27484V0C5.36774 0.335484 5.97161 0.771613 6.44129 1.34194C6.81032 1.77806 7.11226 2.24774 7.34709 2.75097C7.58193 3.28774 7.74967 3.82452 7.85032 4.36129ZM9.2929 2.75097C9.52774 2.24774 9.82967 1.77806 10.1987 1.34194C10.7019 0.771613 11.2723 0.335484 11.9097 0V1.27484C11.9097 2.98581 10.5342 4.36129 8.82323 4.36129C8.89032 3.82452 9.05807 3.28774 9.2929 2.75097ZM4.36129 8.78967C4.36129 10.5006 2.98581 11.8761 1.27484 11.8761H0C0.335484 11.2723 0.771614 10.6684 1.30839 10.1987C1.74452 9.82967 2.24774 9.52774 2.75097 9.2929C3.25419 9.05806 3.79097 8.89032 4.36129 8.78967ZM2.75097 7.34709C2.24774 7.11225 1.74452 6.81032 1.30839 6.44129C0.771614 5.93806 0.335484 5.36774 0 4.73032H1.27484C2.98581 4.73032 4.36129 6.10581 4.36129 7.81677C3.79097 7.74968 3.25419 7.58193 2.75097 7.34709ZM7.78322 8.85677C7.58193 10.8026 6.03871 12.3458 4.09291 12.5471C4.2942 10.6013 5.83742 9.05806 7.78322 8.85677ZM8.82323 8.85677C10.769 9.09161 12.3123 10.6013 12.5471 12.5471V12.5806L12.5136 12.5471C10.5677 12.3458 9.05807 10.8026 8.82323 8.85677ZM8.85677 7.81677C8.85677 7.81677 8.84559 7.81677 8.82323 7.81677H8.85677C9.05806 5.87097 10.6013 4.32774 12.5471 4.12645V4.0929C12.5471 4.11527 12.5471 4.12645 12.5471 4.12645C12.3123 6.07226 10.8026 7.61548 8.85677 7.81677ZM7.81678 7.81677C7.79441 7.81677 7.78322 7.81677 7.78322 7.81677C5.83742 7.58194 4.32774 6.03871 4.09291 4.0929C6.03871 4.32774 7.58193 5.83742 7.78322 7.78322L7.81678 7.81677Z" fill="#F2EFE6"></path>
-            </svg>
+      <div class="qs2-tile">
+        <h3>Próximo do dia a dia</h3>
+        <p>Construímos junto com salões reais, ouvindo o que falta e o que sobra. Nada é inventado em laboratório.</p>
+      </div>
+      <div class="qs2-tile">
+        <h3>Sem letra miúda</h3>
+        <p>Preço claro, contrato sem pegadinha, sem fidelidade obrigatória. Você fica com a gente porque quer.</p>
+      </div>
+      <div class="qs2-tile qs2-tile--wide">
+        <h3>Evolução contínua</h3>
+        <p>Atualizações constantes baseadas no feedback de quem usa. O produto de hoje não é o mesmo de seis meses atrás.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── SECTION 4 · METODOLOGIA (2 cols, image left) ─────────────── -->
+  <section class="qs2-section">
+    <div class="qs2-row qs2-row--reverse">
+      <div class="qs2-col">
+        <span class="pill pill-accent pill-glow" style="margin-bottom: 18px; display: inline-flex; align-items: center; justify-content: center;">Mais que um sistema</span>
+        <h2><span style="color: var(--c-accent);">Mais do que um sistema</span>,<br class="qs2-br-desktop"> uma<br class="qs2-br-mobile"> <em>metodologia</em></h2>
+        <p class="qs2-lead">Não vendemos software. Entregamos um jeito de organizar o salão.</p>
+        <p>Cada cliente do Easy Salon não recebe apenas uma plataforma — recebe um caminho. Cinco passos que vão da organização da agenda até o aumento do ticket médio, com a tecnologia apoiando cada decisão.</p>
+        <p>É por isso que dizemos: o Easy não é uma ferramenta que você usa sozinho. É um time que caminha junto com o seu salão.</p>
+      </div>
+      <div class="qs2-img">FOTO · profissional Easy orientando dono(a) de salão sobre o sistema</div>
+    </div>
+  </section>
+
+  <!-- ─────────────── SECTION 5 · FALE COM A GENTE (cards + formulário) ─────────────── -->
+  <section class="qs2-section">
+    <div class="qs2-section-head">
+      <h2>Fale com a <em>gente</em></h2>
+      <p>Tem uma dúvida, sugestão ou só quer entender se o Easy Salon serve para o seu negócio? Estamos aqui.</p>
+    </div>
+    <div class="qs2-contato-grid">
+      <div class="qs2-channels">
+        <div class="qs2-channel">
+          <div class="qs2-channel-head">
+            <span class="qs2-channel-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <span class="qs2-channel-title">Localização</span>
           </div>
-          <div class="chat-id">
-            <div class="name">Recepcionista Easy</div>
-            <div class="status"><span class="status-dot"></span>Online · Responde em segundos</div>
+          <div class="qs2-channel-value">Av. Exemplo, 123 · Sala 4 · São Paulo, SP</div>
+        </div>
+        <div class="qs2-channel">
+          <div class="qs2-channel-head">
+            <span class="qs2-channel-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+            </span>
+            <span class="qs2-channel-title">Telefone</span>
+          </div>
+          <div class="qs2-channel-value">+55 (41) 99104-4112</div>
+        </div>
+        <div class="qs2-channel">
+          <div class="qs2-channel-head">
+            <span class="qs2-channel-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </span>
+            <span class="qs2-channel-title">E-mail</span>
+          </div>
+          <div class="qs2-channel-value">contato@easysalon.com.br</div>
+        </div>
+        <div class="qs2-channel">
+          <div class="qs2-channel-head">
+            <span class="qs2-channel-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock" aria-hidden="true"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+            </span>
+            <span class="qs2-channel-title">Atendimento</span>
+          </div>
+          <div class="qs2-channel-value">Segunda a sexta, das 9h às 18h</div>
+        </div>
+      </div>
+      <form class="qs2-form" novalidate>
+        <div class="qs2-form-row">
+          <div class="qs2-field">
+            <label for="qs2-nome">Nome<span class="qs2-req">*</span></label>
+            <input id="qs2-nome" type="text" name="nome" required data-error="Por favor, informe seu nome.">
+            <span class="qs2-error" aria-live="polite"></span>
+          </div>
+          <div class="qs2-field">
+            <label for="qs2-sobrenome">Sobrenome<span class="qs2-req">*</span></label>
+            <input id="qs2-sobrenome" type="text" name="sobrenome" required data-error="Por favor, informe seu sobrenome.">
+            <span class="qs2-error" aria-live="polite"></span>
           </div>
         </div>
-        <div class="chat-feed" id="chat-feed" aria-live="polite"></div>
-      </div>
+        <div class="qs2-field">
+          <label for="qs2-email">E-mail<span class="qs2-req">*</span></label>
+          <input id="qs2-email" type="email" name="email" required data-error="Por favor, informe um e-mail válido.">
+          <span class="qs2-error" aria-live="polite"></span>
+        </div>
+        <div class="qs2-field">
+          <span class="qs2-label">Assunto</span>
+          <div class="qs2-dropdown" data-state="closed">
+            <button type="button" class="qs2-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+              <span class="qs2-dropdown-value">Quero conhecer o sistema</span>
+              <svg class="qs2-dropdown-chev" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <ul class="qs2-dropdown-menu" role="listbox">
+              <li role="option" data-value="Quero conhecer o sistema" class="is-selected">Quero conhecer o sistema</li>
+              <li role="option" data-value="Suporte técnico">Suporte técnico</li>
+              <li role="option" data-value="Parceria comercial">Parceria comercial</li>
+              <li role="option" data-value="Imprensa">Imprensa</li>
+              <li role="option" data-value="Outro">Outro</li>
+            </ul>
+            <input type="hidden" name="assunto" value="Quero conhecer o sistema">
+          </div>
+        </div>
+        <div class="qs2-field">
+          <label for="qs2-mensagem">Mensagem<span class="qs2-req">*</span></label>
+          <textarea id="qs2-mensagem" name="mensagem" required data-error="Por favor, escreva sua mensagem."></textarea>
+          <span class="qs2-error" aria-live="polite"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+        <p class="qs2-form-disclaimer">Ao enviar, você concorda com nossa Política de Privacidade. Seus dados são tratados conforme a LGPD.</p>
+      </form>
     </div>
   </section>
 
-  <!-- ─────────────── SEÇÃO 5: Veja a Easy (partial reutilizado) ─────────────── -->
-  <div data-include="/partials/section-veja.html"></div>
-
-  <!-- ─────────────── SEÇÃO 6: Imprensa e Contato ─────────────── -->
-  <section class="team-section team-section--mirror" style="margin: 30px auto 80px">
-    <div class="team-block">
-      <div class="team-text">
-        <h2>Imprensa e <br>Contato Profissional</h2>
-        <p class="body">A Easy está disponível para entrevistas, matérias e participações sobre tecnologia aplicada ao mercado da beleza, organização operacional, automações, IA para WhatsApp e gestão de salões, barbearias e estúdios.</p>
-        <p class="body"><strong>Material institucional Solicitações específicas:</strong></p>
-        <p class="body">Eventos, entrevistas, podcasts e estudos sobre o setor podem ser solicitados pelo e-mail acima.</p>
-        <p class="body"><strong style="color:var(--c-accent);">Assessoria de Imprensa:</strong><br>marketing@easysalon.com.br</p>
-      </div>
-      <div class="team-photo team-photo--flor" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- ─────────────── FOOTER CTA + FOOTER ─────────────── -->
+  <!-- ─────────────── FOOTER ─────────────── -->
   <footer class="footer-bleed">
     <div class="footer-inner">
       <div class="footer-cta-grid">
         <div class="footer-cta-left">
           <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 30 dias</span>
-          <h2>Pronto para Profissionalizar<br>o seu negócio da beleza com<br>a Easy Salon?</h2>
-          <p>A Easy Salon ajuda donos de salão, barbearia e estúdios de beleza a organizarem sua agenda e evoluírem para uma gestão simples e inteligente.</p>
+          <h2>Faça parte dessa história</h2>
+          <p>Mais salões organizando a gestão todos os meses.<br>Você pode ser o próximo — e começa de graça.</p>
           <div class="btn-cta-row" style="justify-content:flex-start;">
             <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:177px;">Comece grátis</a>
             <a class="btn btn-outline-cream" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
@@ -174,8 +895,10 @@
           <a href="/salao-de-beleza">Salão de beleza</a>
           <a href="/barbearia">Barbearia</a>
           <a href="/estudio-de-beleza">Estúdio de beleza</a>
+          <a href="/funcionalidades">Funcionalidades</a>
           <a href="/planos">Planos</a>
           <a href="/quem-somos">Quem somos</a>
+          <a href="/blog">Blog</a>
           <a href="/termos-de-uso">Termos de uso</a>
         </nav>
       </div>
@@ -203,8 +926,10 @@
       <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
       <a class="drawer-link" href="/barbearia">Barbearia</a>
       <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
-      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/funcionalidades">Funcionalidades</a>
       <a class="drawer-link" href="/planos">Planos</a>
+      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/blog">Blog</a>
     </nav>
     <div class="drawer-cta">
       <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:100%;">Teste grátis</a>
@@ -215,48 +940,37 @@
 </div>
 
 <script>
-  // Include processor — fetches /partials/*.html and replaces [data-include] placeholders.
-  (function () {
-    var includes = document.querySelectorAll('[data-include]');
-    includes.forEach(function (placeholder) {
-      var url = placeholder.getAttribute('data-include');
-      var xhr = new XMLHttpRequest();
-      var bust = url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + Date.now();
-      xhr.open('GET', bust, false);
-      xhr.setRequestHeader('Cache-Control', 'no-cache');
-      try {
-        xhr.send();
-        if (xhr.status >= 200 && xhr.status < 300) {
-          var temp = document.createElement('div');
-          temp.innerHTML = xhr.responseText;
-          while (temp.firstChild) {
-            placeholder.parentNode.insertBefore(temp.firstChild, placeholder);
-          }
-          placeholder.parentNode.removeChild(placeholder);
-        }
-      } catch (e) {
-        console.error('include failed:', url, e);
-      }
-    });
-  })();
-</script>
-
-<script>
-  // BlurFade observer
+  // BlurFade observer — scroll-in para seções Quem somos
   (function () {
     if (!('IntersectionObserver' in window)) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return;
-    var nodes = document.querySelectorAll('.nav-inner > *, .plans-hero > *, .team-block > *, .section-card h2, .section-card .org-item, .section-veja .pill, .section-veja .veja-sub, .section-veja .btn-cta-row, .veja-card, .footer-cta-left > *, .footer-cta-right > *, .footer-bottom > *');
+    var selectors = [
+      '.nav-inner > *',
+      '.qs2-manifesto > *',
+      '.qs2-section-head > *',
+      '.qs2-row > *',
+      '.qs2-nascemos-box',
+      '.qs2-tile',
+      '.qs2-channel',
+      '.qs2-form',
+      '.qs2-cta-box > *',
+      '.footer-cta-left > *',
+      '.footer-cta-right > *',
+      '.footer-bottom > *'
+    ];
+    var nodes = document.querySelectorAll(selectors.join(','));
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     nodes.forEach(function (n, i) { n.style.transitionDelay = Math.min((i % 6) * 90, 540) + 'ms'; io.observe(n); });
 
-    // Reveal above-the-fold immediately (nav + hero), sem esperar scroll
+    // Reveal above-the-fold immediately (nav + manifesto)
     var aboveFold = [];
     nodes.forEach(function (el) {
-      if (el.matches('.nav-inner > *, .plans-hero > *')) aboveFold.push(el);
+      if (el.matches('.nav-inner > *, .qs2-manifesto > *')) aboveFold.push(el);
     });
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
@@ -274,7 +988,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   })();
 
-  // Nav active link (Planos / Quem somos)
+  // Nav active link
   (function () {
     function setActive() {
       var path = location.pathname.replace(/\/$/, '');
@@ -318,6 +1032,92 @@
     });
   })();
 
+  // Drawer mobile: texto "Menu" no lugar da logo (igual home)
+  (function () {
+    var logoSlot = document.querySelector('#mobile-drawer [data-drawer-logo]');
+    if (logoSlot) {
+      logoSlot.textContent = 'Menu';
+      logoSlot.setAttribute('aria-label', 'Menu');
+    }
+  })();
+
+  // Form validação customizada (Fale com a gente)
+  (function () {
+    var form = document.querySelector('.qs2-form');
+    if (!form) return;
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function setError(field, message) {
+      field.classList.add('is-error');
+      var err = field.querySelector('.qs2-error');
+      if (err && message) err.textContent = message;
+    }
+    function clearError(field) {
+      field.classList.remove('is-error');
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var valid = true;
+      form.querySelectorAll('[required]').forEach(function (input) {
+        var field = input.closest('.qs2-field');
+        if (!field) return;
+        var val = (input.value || '').trim();
+        if (!val) {
+          setError(field, input.getAttribute('data-error') || 'Campo obrigatório.');
+          valid = false;
+        } else if (input.type === 'email' && !EMAIL_RE.test(val)) {
+          setError(field, 'Por favor, informe um e-mail válido.');
+          valid = false;
+        } else {
+          clearError(field);
+        }
+      });
+      if (valid) {
+        // Aqui entraria o envio real (fetch, etc.). Por enquanto só feedback visual.
+        // form.submit();
+      }
+    });
+    form.querySelectorAll('input, textarea').forEach(function (input) {
+      input.addEventListener('input', function () {
+        var field = input.closest('.qs2-field');
+        if (field && field.classList.contains('is-error')) clearError(field);
+      });
+    });
+  })();
+
+  // Custom dropdown (Assunto)
+  (function () {
+    document.querySelectorAll('.qs2-dropdown').forEach(function (dd) {
+      var trigger = dd.querySelector('.qs2-dropdown-trigger');
+      var valueEl = dd.querySelector('.qs2-dropdown-value');
+      var hidden = dd.querySelector('input[type="hidden"]');
+      var items = dd.querySelectorAll('[role="option"]');
+      function setOpen(open) {
+        dd.setAttribute('data-state', open ? 'open' : 'closed');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      function selectItem(item) {
+        var val = item.getAttribute('data-value');
+        if (valueEl) valueEl.textContent = val;
+        if (hidden) hidden.value = val;
+        items.forEach(function (i) { i.classList.toggle('is-selected', i === item); });
+        setOpen(false);
+      }
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setOpen(dd.getAttribute('data-state') === 'closed');
+      });
+      items.forEach(function (item) {
+        item.addEventListener('click', function () { selectItem(item); });
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    });
+  })();
+
   // Mobile drawer
   (function () {
     var burger = document.querySelector('.nav-burger');
@@ -339,233 +1139,6 @@
     drawer.querySelectorAll('.drawer-link, .drawer-cta a').forEach(function (link) {
       link.addEventListener('click', function () { setOpen(false); });
     });
-  })();
-
-  // Interactive chat with typewriter effect (reaproveitado de /)
-  (function () {
-    var feed = document.getElementById('chat-feed');
-    if (!feed) return;
-
-    var scripts = [
-      [
-        { side: 'out', author: 'Charles M.',  html: 'Oi! Quero marcar <strong>corte e barba</strong> pra sábado de manhã 😊' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Claro! Achei <strong>sábado às 10h</strong> com o Lucas. Confirmo pra você?' },
-        { side: 'out', author: 'Charles M.',  html: 'Pode confirmar 👍' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1300 },
-        { side: 'in',  author: 'Easy IA',     html: 'Pronto! Tudo certo, Charles.' },
-        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
-            title: 'Agendamento confirmado',
-            rows: [
-              ['Serviço',     'Corte + Barba'],
-              ['Profissional', 'Lucas'],
-              ['Quando',      'Sáb · 10:00 — 10:50'],
-              ['Total',       'R$ 85,00'],
-            ]
-        }},
-        { side: 'out', author: 'Charles M.',  html: 'Show, obrigado!' },
-        { side: 'in',  author: 'Easy IA',     html: 'Disponha! Te lembro 1h antes 🔔' },
-      ],
-      [
-        { side: 'out', author: 'Marina A.',   html: 'Oi, dá pra fazer <strong>escova progressiva</strong> nessa semana?' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Claro, Marina! Tenho <strong>quinta às 14h</strong> ou <strong>sexta às 16h</strong> com a Júlia. Qual prefere?' },
-        { side: 'out', author: 'Marina A.',   html: 'Sexta 16h é perfeito 💇‍♀️' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1300 },
-        { side: 'in',  author: 'Easy IA',     html: 'Anotado! Reservei 2h pra você.' },
-        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
-            title: 'Agendamento confirmado',
-            rows: [
-              ['Serviço',     'Escova Progressiva'],
-              ['Profissional', 'Júlia'],
-              ['Quando',      'Sex · 16:00 — 18:00'],
-              ['Total',       'R$ 320,00'],
-            ]
-        }},
-        { side: 'out', author: 'Marina A.',   html: 'Maravilha, obrigada!' },
-        { side: 'in',  author: 'Easy IA',     html: 'Até sexta! Mando lembrete na quinta 💌' },
-      ],
-      [
-        { side: 'out', author: 'Bianca R.',   html: 'Boa tarde! Queria agendar <strong>design de sobrancelhas</strong> 🌿' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Oi Bianca! Tenho <strong>terça às 11h</strong> com a Renata, pode ser?' },
-        { side: 'out', author: 'Bianca R.',   html: 'Pode sim 🙌' },
-        { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1200 },
-        { side: 'in',  author: 'Easy IA',     html: 'Fechado! Reservado pra você.' },
-        { side: 'in',  author: 'Easy IA',     type: 'card', card: {
-            title: 'Agendamento confirmado',
-            rows: [
-              ['Serviço',     'Design de Sobrancelhas'],
-              ['Profissional', 'Renata'],
-              ['Quando',      'Ter · 11:00 — 11:40'],
-              ['Total',       'R$ 65,00'],
-            ]
-        }},
-        { side: 'out', author: 'Bianca R.',   html: 'Combinado!' },
-        { side: 'in',  author: 'Easy IA',     html: 'Até terça! Lembrete chega na véspera ⏰' },
-      ],
-    ];
-
-    function makeMsg(side, author) {
-      var wrap = document.createElement('div');
-      wrap.className = 'msg msg-' + (side === 'out' ? 'outgoing' : 'incoming');
-      if (author) {
-        var a = document.createElement('span');
-        a.className = 'author';
-        if (side === 'in') a.innerHTML = '<span style="color: rgb(206, 72, 54);">' + author + '</span>';
-        else a.textContent = author;
-        wrap.appendChild(a);
-      }
-      return wrap;
-    }
-    function makeBubble(side) {
-      var b = document.createElement('div');
-      b.className = 'bubble';
-      if (side === 'in') b.style.backgroundColor = 'rgb(243, 228, 221)';
-      return b;
-    }
-    function makeTyping() {
-      var t = document.createElement('div');
-      t.className = 'typing';
-      t.style.backgroundColor = 'rgb(243, 228, 221)';
-      t.innerHTML = '<span></span><span></span><span></span>';
-      return t;
-    }
-    function makeCard(c) {
-      var card = document.createElement('div');
-      card.className = 'confirm-card';
-      var head = document.createElement('div');
-      head.className = 'confirm-head';
-      head.innerHTML = '<span class="confirm-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6 L5 8.5 L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' + c.title;
-      card.appendChild(head);
-      var rows = document.createElement('div');
-      rows.className = 'confirm-rows';
-      c.rows.forEach(function (r) {
-        var k = document.createElement('span'); k.className = 'k'; k.textContent = r[0];
-        var v = document.createElement('span'); v.className = 'v'; v.textContent = r[1];
-        rows.appendChild(k); rows.appendChild(v);
-      });
-      card.appendChild(rows);
-      return card;
-    }
-
-    function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
-
-    function pruneOverflow() {
-      while (feed.scrollHeight > feed.clientHeight + 1 && feed.children.length > 1) {
-        var first = feed.firstElementChild;
-        first.classList.add('is-fading');
-        feed.removeChild(first);
-      }
-    }
-
-    async function typeInto(el, html, speed) {
-      var tmp = document.createElement('div');
-      tmp.innerHTML = html;
-      (function walk(parent, dest) {
-        parent.childNodes.forEach(function (n) {
-          if (n.nodeType === 3) {
-          } else if (n.nodeType === 1) {
-            var clone = n.cloneNode(false);
-            dest.appendChild(clone);
-            walk(n, clone);
-          }
-        });
-      })(tmp, el);
-
-      el.innerHTML = '';
-      var struct = [];
-      (function rebuild(parent, dest) {
-        parent.childNodes.forEach(function (n) {
-          if (n.nodeType === 3) {
-            var t = document.createTextNode('');
-            dest.appendChild(t);
-            struct.push({ node: t, text: n.nodeValue });
-          } else if (n.nodeType === 1) {
-            var c = n.cloneNode(false);
-            dest.appendChild(c);
-            rebuild(n, c);
-          }
-        });
-      })(tmp, el);
-
-      var cursor = document.createElement('span');
-      cursor.className = 'tw-cursor';
-      el.appendChild(cursor);
-
-      for (var i = 0; i < struct.length; i++) {
-        var seg = struct[i];
-        var chars = Array.from(seg.text);
-        for (var j = 0; j < chars.length; j++) {
-          var ch = chars[j];
-          seg.node.nodeValue += ch;
-          el.appendChild(cursor);
-          pruneOverflow();
-          var base = speed + (Math.random() * 30 - 10);
-          if (ch === ',' || ch === ';') base += 120;
-          else if (ch === '.' || ch === '!' || ch === '?') base += 180;
-          else if (ch === ' ') base += 20;
-          await sleep(Math.max(20, base));
-        }
-      }
-      cursor.remove();
-    }
-
-    async function showStep(step) {
-      var msg = makeMsg(step.side, step.author);
-      var content;
-      if (step.type === 'typing') {
-        content = makeTyping();
-        msg.appendChild(content);
-        feed.appendChild(msg);
-        requestAnimationFrame(function () { msg.classList.add('is-visible'); });
-        pruneOverflow();
-        await sleep(step.dur || 800);
-        msg.classList.add('is-fading');
-        await sleep(300);
-        msg.remove();
-        return;
-      }
-      if (step.type === 'card') {
-        content = makeCard(step.card);
-        msg.appendChild(content);
-        feed.appendChild(msg);
-        requestAnimationFrame(function () { msg.classList.add('is-visible'); });
-        pruneOverflow();
-        return;
-      }
-      content = makeBubble(step.side);
-      msg.appendChild(content);
-      feed.appendChild(msg);
-      requestAnimationFrame(function () { msg.classList.add('is-visible'); });
-      pruneOverflow();
-      await typeInto(content, step.html, step.side === 'out' ? 55 : 45);
-    }
-
-    async function run() {
-      var visible = false;
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { visible = e.isIntersecting; });
-      }, { threshold: 0.25 });
-      io.observe(feed);
-
-      var convoIdx = 0;
-      while (true) {
-        var script = scripts[convoIdx];
-        for (var i = 0; i < script.length; i++) {
-          while (!visible) await sleep(300);
-          await showStep(script[i]);
-          await sleep(script[i].type === 'typing' ? 300 : (script[i].type === 'card' ? 2400 : 1800));
-        }
-        await sleep(1200);
-        Array.from(feed.children).forEach(function (m) { m.classList.add('is-fading'); });
-        await sleep(500);
-        feed.innerHTML = '';
-        convoIdx = (convoIdx + 1) % scripts.length;
-      }
-    }
-
-    run();
   })();
 </script>
 

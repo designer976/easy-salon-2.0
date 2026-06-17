@@ -1,14 +1,762 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
+<!DOCTYPE html><html lang="pt-BR" data-screen-label="Home"><head>
 
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Easy Salon — Sua recepção 24h para salões de beleza</title>
+<title>Easy Salon — Home (sandbox)</title>
 <link rel="icon" type="image/png" href="/assets/fav.png">
 <link rel="stylesheet" href="/design-system.css">
 <style>
-  /* Página /home.html — todas as regras vivem em design-system.css
-     (seção "Páginas: Home"). Bloco mantido vazio para enforce herança. */
+  /* Home (sandbox) — wireframe Easy Salon v2 (bento)
+     Reaproveita tokens do design-system: fontes (--ff-display Gyst,
+     --ff-text Manrope), cores (--c-accent, --c-text, --c-tan-veil)
+     e componentes (.pill, .btn). Regras abaixo escopadas para
+     [data-screen-label="Home"] — não vazam pra outras páginas. */
+
+  [data-screen-label="Home"] .h2-wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* BlurFade inicial — necessário para o efeito scroll-in funcionar nos seletores .h2-* */
+  [data-screen-label="Home"] .h2-hero-text > *,
+  [data-screen-label="Home"] .h2-hero-img,
+  [data-screen-label="Home"] .h2-section-head > *,
+  [data-screen-label="Home"] .h2-card,
+  [data-screen-label="Home"] .h2-gallery,
+  [data-screen-label="Home"] .h2-step,
+  [data-screen-label="Home"] .h2-method-panel,
+  [data-screen-label="Home"] .h2-section:has(.h2-compare),
+  [data-screen-label="Home"] .h2-compare,
+  [data-screen-label="Home"] .h2-compare-cta,
+  [data-screen-label="Home"] .h2-neg-card,
+  [data-screen-label="Home"] .h2-ia-card,
+  [data-screen-label="Home"] .h2-cta-final-box > * {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(18px);
+    transition:
+      opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, filter, transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-screen-label="Home"] .h2-hero-text > *,
+    [data-screen-label="Home"] .h2-hero-img,
+    [data-screen-label="Home"] .h2-section-head > *,
+    [data-screen-label="Home"] .h2-card,
+    [data-screen-label="Home"] .h2-gallery,
+    [data-screen-label="Home"] .h2-step,
+    [data-screen-label="Home"] .h2-method-panel,
+    [data-screen-label="Home"] .h2-section:has(.h2-compare),
+    [data-screen-label="Home"] .h2-compare,
+    [data-screen-label="Home"] .h2-compare-cta,
+    [data-screen-label="Home"] .h2-neg-card,
+    [data-screen-label="Home"] .h2-ia-card,
+    [data-screen-label="Home"] .h2-cta-final-box > * {
+      opacity: 1; filter: none; transform: none; transition: none;
+    }
+  }
+
+  /* Section base */
+  [data-screen-label="Home"] .h2-section { max-width: 1200px; margin: 0 auto; padding: 50px 0; }
+  [data-screen-label="Home"] .h2-section:has(.h2-section-head--left) { padding-top: 100px; padding-bottom: 0; }
+  [data-screen-label="Home"] #h2-method-section { padding-top: 80px; padding-bottom: 20px; }
+  [data-screen-label="Home"] .h2-section:has(.h2-grid-3) { padding-top: 80px; padding-bottom: 0; }
+  [data-screen-label="Home"] .h2-section:has(.h2-grid-4) { padding-top: 80px; padding-bottom: 0; }
+  [data-screen-label="Home"] footer.footer-bleed { margin-top: 0; }
+  [data-screen-label="Home"] .nav-links { gap: 20px; }
+  /* Swap: logo na esquerda, menu no centro, CTA na direita — colunas auto 1fr auto (gap visual igual) */
+  [data-screen-label="Home"] .nav-inner { grid-template-columns: auto 1fr auto; }
+  [data-screen-label="Home"] .nav-logo { order: -1; justify-self: start; }
+  [data-screen-label="Home"] .nav-links { order: 0; justify-self: center; }
+  [data-screen-label="Home"] .nav-cta { order: 1; justify-self: end; }
+  [data-screen-label="Home"] .h2-section-head {
+    text-align: center; margin: 0 auto 30px; max-width: 760px; padding: 0 24px;
+  }
+  [data-screen-label="Home"] .h2-section-head--left {
+    text-align: left; margin: 0 0 40px; max-width: none; padding: 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  [data-screen-label="Home"] .h2-section-head--left h2 { flex: 1; }
+  [data-screen-label="Home"] .h2-head-link {
+    display: inline-flex; align-items: center; gap: 2px;
+    font-family: var(--ff-text); font-size: 13px; font-weight: 700;
+    color: var(--c-accent); text-decoration: none; white-space: nowrap;
+    transition: opacity .2s ease;
+  }
+  [data-screen-label="Home"] .h2-head-link:hover { opacity: .75; }
+  [data-screen-label="Home"] .h2-head-link svg { flex-shrink: 0; }
+  [data-screen-label="Home"] .h2-section-head h2 {
+    font-family: var(--ff-display); font-weight: 500; font-size: 30px;
+    line-height: 1.2; color: var(--c-text); margin: 0 0 20px;
+    white-space: nowrap;
+  }
+  [data-screen-label="Home"] .h2-section-head p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
+    color: var(--c-text); margin: 0 auto; max-width: none;
+  }
+  [data-screen-label="Home"] .h2-section-head .btn-cta-row {
+    justify-content: center !important; margin-top: 24px !important;
+  }
+
+  /* Hero (split 45/55) */
+  [data-screen-label="Home"] .h2-hero {
+    position: relative;
+    width: 100vw; margin-left: calc(50% - 50vw);
+    padding: 20px 0 0;
+  }
+  [data-screen-label="Home"] .h2-hero > * {
+    max-width: 1200px; margin: 0 auto; padding: 0;
+  }
+  [data-screen-label="Home"] .h2-hero-grid {
+    display: grid; grid-template-columns: 1fr 702px; gap: 40px; align-items: center;
+  }
+  [data-screen-label="Home"] .h2-hero-text { height: fit-content; }
+  [data-screen-label="Home"] .h2-hero-text h1 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 50px;
+    line-height: 1.05; color: var(--c-text); margin: 30px 0 30px;
+    white-space: nowrap;
+  }
+  [data-screen-label="Home"] .h2-hero-text h1 em {
+    font-style: normal; color: var(--c-accent);
+  }
+  [data-screen-label="Home"] .h2-hero-text p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
+    color: var(--c-text); margin: 0 0 30px; max-width: 480px;
+  }
+  [data-screen-label="Home"] .h2-cta-row { display: flex; gap: 14px; margin-bottom: 30px; flex-wrap: wrap; }
+  [data-screen-label="Home"] .h2-hero-text .plans-hero-bullets { justify-content: flex-start; }
+  [data-screen-label="Home"] .h2-micro-row {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    font-family: var(--ff-text); font-size: 13px; color: var(--c-text); opacity: 0.75;
+  }
+  [data-screen-label="Home"] .h2-hero-img {
+    width: 702px; height: 420px;
+    background: transparent; border-radius: 14px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  [data-screen-label="Home"] .h2-hero-img:not(:has(img)) {
+    color: var(--c-text); opacity: 0.4; font-family: var(--ff-text); font-size: 13px;
+    text-align: center; padding: 24px;
+  }
+  [data-screen-label="Home"] .h2-hero-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  /* Gallery (carousel estilo Apple Highlights) — viewport 100vw */
+  [data-screen-label="Home"] .h2-gallery {
+    margin-top: 40px;
+    width: 100vw; margin-left: calc(50% - 50vw);
+  }
+  [data-screen-label="Home"] .h2-gallery-viewport { overflow: hidden; }
+  [data-screen-label="Home"] .h2-gallery-track {
+    display: flex; gap: 18px;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-screen-label="Home"] .h2-gallery-cap,
+  [data-screen-label="Home"] .h2-gallery-cap strong,
+  [data-screen-label="Home"] .h2-gallery-cap span,
+  [data-screen-label="Home"] .btn,
+  [data-screen-label="Home"] .btn span {
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: geometricPrecision;
+  }
+  /* Remove will-change/transform dos botões — elimina GPU layer que borra texto */
+  [data-screen-label="Home"] .btn {
+    will-change: auto;
+    transform: none;
+  }
+  [data-screen-label="Home"] .h2-gallery-card {
+    flex: 0 0 1200px; height: 586px;
+    background: var(--c-card, #faf6ed); border-radius: 20px;
+    padding: 0 0 0 40px; display: flex; flex-direction: row-reverse; gap: 32px;
+    box-shadow: 0 1px 2px rgba(115, 42, 29, 0.04);
+    transition: opacity 0.4s ease;
+  }
+  [data-screen-label="Home"] .h2-gallery-img-wrap {
+    flex: 0 0 802px; padding-top: 15px;
+  }
+  [data-screen-label="Home"] .h2-gallery-img {
+    width: 100%; height: 100%;
+    background: #E8E2D3; border-radius: 20px 0 20px 0;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; overflow: hidden;
+  }
+  [data-screen-label="Home"] .h2-gallery-img:not(:has(img)) {
+    font-family: var(--ff-text); font-size: 12px; color: var(--c-text);
+    opacity: 0.4; padding: 16px;
+  }
+  [data-screen-label="Home"] .h2-gallery-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  [data-screen-label="Home"] .h2-gallery-cap {
+    flex: 0 0 300px;
+    padding: 248px 0;
+    font-family: var(--ff-display); font-size: 20px; font-weight: 400;
+    color: var(--c-text);
+  }
+  [data-screen-label="Home"] .h2-gallery-cap:has(.h2-cap-3l) { padding: 233px 0; }
+  [data-screen-label="Home"] .h2-gallery-cap strong {
+    color: var(--c-accent); font-weight: 700; display: block; height: 29px;
+  }
+  [data-screen-label="Home"] .h2-gallery-cap span {
+    display: block; line-height: 30px; height: 58px;
+  }
+  [data-screen-label="Home"] .h2-gallery-cap span.h2-cap-3l { height: 86px; }
+
+  /* Controls (play/pause + dotnav) */
+  [data-screen-label="Home"] .h2-gallery-controls {
+    display: flex; gap: 8px; justify-content: center; align-items: center;
+    margin-top: 28px;
+  }
+  [data-screen-label="Home"] .h2-gallery-playpause {
+    width: 56px; height: 56px; border-radius: 999px;
+    background: var(--c-tan-veil); border: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--c-text); cursor: pointer; padding: 0;
+  }
+  [data-screen-label="Home"] .h2-gallery-playpause svg { width: auto; height: auto; }
+  [data-screen-label="Home"] .h2-gallery-playpause:hover { background: rgba(209, 191, 160, 0.3); }
+  [data-screen-label="Home"] .h2-gallery-dots {
+    display: inline-flex; gap: 12px; padding: 0;
+    width: 220px; height: 56px;
+    align-items: center; justify-content: center;
+    background: var(--c-tan-veil); border-radius: 999px;
+  }
+  [data-screen-label="Home"] .h2-gallery-dot {
+    width: 6px; height: 6px; border-radius: 3px;
+    background: rgba(115, 42, 29, 0.15); border: none; padding: 0;
+    position: relative; overflow: hidden; cursor: pointer;
+    transition: width 0.3s ease;
+  }
+  [data-screen-label="Home"] .h2-gallery-dot:hover { background: rgba(115, 42, 29, 0.25); }
+  [data-screen-label="Home"] .h2-gallery-dot.active { width: 70px; background: rgba(115, 42, 29, 0.1); }
+  [data-screen-label="Home"] .h2-gallery-dot-fill {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+    background: var(--c-accent); border-radius: 3px;
+  }
+  [data-screen-label="Home"] .h2-gallery-dot.active .h2-gallery-dot-fill { width: var(--progress, 0%); }
+
+  /* Bento de funcionalidades (2x3) — legado, mantido caso outras refs apareçam */
+  [data-screen-label="Home"] .h2-bento { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
+  [data-screen-label="Home"] .h2-card {
+    background: var(--c-card, #faf6ed);
+    border-radius: 12px; padding: 32px;
+    display: flex; flex-direction: column; min-height: 340px;
+  }
+  [data-screen-label="Home"] .h2-card-lead {
+    margin-bottom: 18px; font-family: var(--ff-display);
+    font-size: 20px; line-height: 1.3;
+  }
+  [data-screen-label="Home"] .h2-card-lead-bold { font-weight: 700; color: var(--c-text); }
+  [data-screen-label="Home"] .h2-card-lead-light {
+    display: block; margin-top: 6px;
+    font-family: var(--ff-text); font-weight: 400; font-size: 14px;
+    line-height: 1.5; color: var(--c-text-2);
+  }
+  [data-screen-label="Home"] .h2-card-img {
+    flex: 1; background: var(--c-tan-veil); border-radius: 10px;
+    min-height: 200px; margin-top: auto; display: flex; align-items: center;
+    justify-content: center; font-family: var(--ff-text); font-size: 12px;
+    color: var(--c-text); opacity: 0.4; text-align: center; padding: 16px;
+  }
+  [data-screen-label="Home"] .h2-card-chips { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+  [data-screen-label="Home"] .h2-card-chip {
+    background: var(--c-tan-veil); border: 1px solid rgba(115, 42, 29, 0.08);
+    border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+    font-family: var(--ff-text); font-size: 14px; color: var(--c-text);
+  }
+  [data-screen-label="Home"] .h2-card-chip-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--c-card, #faf6ed); border: 1px solid rgba(115, 42, 29, 0.15); flex: 0 0 auto;
+  }
+
+  /* Metodologia (5 steps interactive) — layout horizontal */
+  [data-screen-label="Home"] .h2-method {
+    display: flex; flex-direction: column; gap: 12px; margin-top: 40px;
+  }
+  [data-screen-label="Home"] .h2-method-list { display: flex; flex-direction: row; gap: 12px; }
+  [data-screen-label="Home"] .h2-step {
+    flex: 0 0 225px;
+    cursor: pointer; position: relative; overflow: hidden;
+    display: grid; grid-template-areas: "num title" "progress progress";
+    grid-template-columns: auto auto; grid-template-rows: 1fr auto;
+    column-gap: 8px; row-gap: 3px;
+    align-items: center; justify-content: center; padding: 18px 24px 9px;
+    border-radius: 14px;
+    background: var(--c-card, #faf6ed);
+    transition: background .15s;
+  }
+  [data-screen-label="Home"] .h2-step[data-step="3"] { flex: 0 0 251px; }
+  [data-screen-label="Home"] .h2-step.active { background: var(--c-tan-veil); }
+  [data-screen-label="Home"] .h2-step-num {
+    grid-area: num;
+    font-family: var(--ff-display); font-weight: 700; font-size: 24px;
+    color: var(--c-text); opacity: 0.55;
+  }
+  [data-screen-label="Home"] .h2-step.active .h2-step-num { color: var(--c-accent); opacity: 1; }
+  [data-screen-label="Home"] .h2-step-title {
+    grid-area: title; justify-self: start; width: max-content;
+    font-family: var(--ff-display); font-size: 14px; font-weight: 700;
+    color: var(--c-text); opacity: 0.65; white-space: nowrap;
+  }
+  [data-screen-label="Home"] .h2-step.active .h2-step-title { opacity: 1; color: var(--c-accent); }
+  [data-screen-label="Home"] .h2-step-progress {
+    grid-area: progress; position: relative;
+    height: 3px; border-radius: 3px;
+    background: rgba(115, 42, 29, 0.1); overflow: hidden;
+    visibility: hidden;
+  }
+  [data-screen-label="Home"] .h2-step.active .h2-step-progress { visibility: visible; }
+  [data-screen-label="Home"] .h2-step-progress-fill {
+    height: 100%; background: var(--c-accent); width: 0; border-radius: 3px;
+  }
+  [data-screen-label="Home"] .h2-method-panel {
+    position: relative;
+    display: grid; grid-template-columns: 385px 1fr; gap: 32px;
+    background: var(--c-card, #faf6ed); border-radius: 20px; padding: 0;
+    min-height: 420px;
+  }
+  [data-screen-label="Home"] .h2-method-panel-text {
+    display: flex; flex-direction: column; justify-content: center;
+    margin-left: 50px;
+  }
+  [data-screen-label="Home"] .h2-method-panel-eyebrow {
+    position: absolute; top: 20px; left: 20px;
+    font-family: var(--ff-display); font-size: 13px; font-weight: 700;
+    color: var(--c-text); opacity: 0.55;
+  }
+  [data-screen-label="Home"] .h2-method-panel h3 {
+    font-family: var(--ff-display); font-weight: 700; font-size: 20px;
+    line-height: 1.15; color: var(--c-accent); margin: 0 0 8px;
+  }
+  [data-screen-label="Home"] .h2-method-panel p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text); margin: 0;
+  }
+  [data-screen-label="Home"] .h2-method-panel-img-wrap {
+    padding-top: 15px;
+  }
+  [data-screen-label="Home"] .h2-method-panel-img {
+    width: 100%; height: 100%;
+    background: #E8E2D3; border-radius: 20px 0 20px 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-text); font-size: 12px;
+    color: rgba(115, 42, 29, 0.4); text-align: center; padding: 16px;
+  }
+
+  /* Antes/Depois — 2 colunas com divisor central */
+  [data-screen-label="Home"] .h2-section:has(.h2-compare) {
+    background: var(--c-card, #faf6ed); border-radius: 20px; padding: 50px 40px;
+  }
+  [data-screen-label="Home"] .h2-compare {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 60px; margin-top: 40px;
+  }
+  [data-screen-label="Home"] .h2-compare-col { width: fit-content; }
+  [data-screen-label="Home"] .h2-compare-col--neg { justify-self: end; }
+  [data-screen-label="Home"] .h2-compare-col--pos { justify-self: start; }
+  [data-screen-label="Home"] .h2-compare-col h3 {
+    font-family: var(--ff-display); font-weight: 700; font-size: 20px;
+    color: var(--c-text); margin: 0 0 32px;
+  }
+  [data-screen-label="Home"] .h2-compare-col--pos h3 { color: var(--c-accent); }
+  [data-screen-label="Home"] .h2-compare-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 18px;
+    width: fit-content;
+  }
+  [data-screen-label="Home"] .h2-compare-list li {
+    display: flex; align-items: center; gap: 14px;
+    width: fit-content;
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.4; font-weight: 600;
+    color: var(--c-text);
+  }
+  [data-screen-label="Home"] .h2-compare-col--neg .h2-compare-list li { opacity: 0.5; }
+  [data-screen-label="Home"] .h2-compare-icon {
+    width: 22px; height: 22px; flex-shrink: 0;
+    border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 700;
+  }
+  [data-screen-label="Home"] .h2-compare-icon {
+    width: 16px; height: 16px; background: transparent; border: none;
+  }
+  [data-screen-label="Home"] .h2-compare-icon svg { width: 16px; height: 16px; display: block; }
+  [data-screen-label="Home"] .h2-compare-divider {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; padding-top: 60px;
+  }
+  [data-screen-label="Home"] .h2-compare-divider::before,
+  [data-screen-label="Home"] .h2-compare-divider::after {
+    content: ''; width: 1px; height: 40px; background: rgba(206, 72, 54, 0.4);
+  }
+  [data-screen-label="Home"] .h2-compare-divider svg { width: 16px; height: 16px; display: block; }
+  [data-screen-label="Home"] .h2-compare-cta {
+    display: flex; justify-content: center; gap: 12px; margin-top: 50px;
+  }
+  /* Dots only visível em mobile (≤640) — escondidos por default */
+  [data-screen-label="Home"] .h2-compare-dots { display: none; }
+
+  /* Negócios atendidos (3 cards) */
+  [data-screen-label="Home"] .h2-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+  [data-screen-label="Home"] .h2-neg-card {
+    background: var(--c-card, #faf6ed); border: none;
+    border-radius: 20px; padding: 24px; display: flex; flex-direction: column;
+    height: 446px;
+  }
+  [data-screen-label="Home"] .h2-neg-img {
+    height: 250px; background-color: var(--c-tan-veil); border-radius: 16px; margin-bottom: 18px;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+  }
+  [data-screen-label="Home"] .h2-neg-card h3 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 20px;
+    color: var(--c-text); margin: 0 0 10px;
+  }
+  [data-screen-label="Home"] .h2-neg-card p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text); opacity: 0.7; margin: 0 0 18px; flex: 1;
+  }
+  [data-screen-label="Home"] .h2-neg-link {
+    font-family: var(--ff-text); font-size: 13px; font-weight: 700;
+    color: var(--c-accent); align-self: flex-start; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: opacity .2s ease;
+  }
+  [data-screen-label="Home"] .h2-neg-link:hover { opacity: .75; }
+  [data-screen-label="Home"] .h2-neg-link svg { width: 16px; height: 16px; }
+
+  /* IA (4 cards) */
+  [data-screen-label="Home"] .h2-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; }
+  [data-screen-label="Home"] .h2-ia-card {
+    background: var(--c-card, #faf6ed); border: none;
+    border-radius: 20px; padding: 32px 28px; display: flex; flex-direction: column; min-height: 280px;
+  }
+  [data-screen-label="Home"] .h2-ia-icon {
+    width: 28px; height: 28px; color: var(--c-accent); margin-bottom: 40px;
+  }
+  [data-screen-label="Home"] .h2-ia-icon svg { width: 100%; height: 100%; display: block; }
+  [data-screen-label="Home"] .h2-ia-cta {
+    display: flex; justify-content: center; gap: 12px; margin-top: 40px;
+  }
+  [data-screen-label="Home"] .h2-ia-card h3 {
+    font-family: var(--ff-display); font-weight: 700; font-size: 16px;
+    line-height: 1.3; color: var(--c-text); margin: 0 0 10px;
+  }
+  [data-screen-label="Home"] .h2-ia-card p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text); opacity: 0.7; margin: 0;
+  }
+
+  /* CTA Final (dark) */
+  [data-screen-label="Home"] .h2-cta-final { max-width: 1200px; margin: 0 auto; padding: 60px 24px 80px; }
+  [data-screen-label="Home"] .h2-cta-final-box {
+    background: #2a1816; color: #fff; border-radius: 18px;
+    padding: 64px 40px; text-align: center;
+  }
+  [data-screen-label="Home"] .h2-cta-final-tag {
+    font-family: var(--ff-text); font-size: 12px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255, 255, 255, 0.55);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  [data-screen-label="Home"] .h2-cta-final-tag::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff;
+  }
+  [data-screen-label="Home"] .h2-cta-final-box h2 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 44px;
+    line-height: 1.05; color: #fff; margin: 18px auto 0; max-width: 680px;
+  }
+  [data-screen-label="Home"] .h2-cta-final-box p {
+    font-family: var(--ff-text); font-size: 16px; line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85); margin: 16px auto 28px; max-width: 520px;
+  }
+  [data-screen-label="Home"] .h2-cta-final-box .h2-cta-row { justify-content: center; }
+  [data-screen-label="Home"] .h2-cta-final-box .btn-tan-soft {
+    background: transparent; border: 1px solid rgba(255, 255, 255, 0.6); color: #fff;
+  }
+  [data-screen-label="Home"] .h2-cta-final-micro {
+    font-family: var(--ff-text); font-size: 12px; color: rgba(255, 255, 255, 0.6);
+    max-width: 440px; margin: 18px auto 0;
+  }
+
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE — Tablet + Mobile (max-width: 1024px)
+     Opção A: tudo colapsa para 1 coluna (lógica única).
+     Refinos finos pra mobile virão em @media (max-width: 640px).
+     ═══════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    /* ── Nav: burger em tablet+mobile (override DS) ── */
+    [data-screen-label="Home"] .nav-links { display: none; }
+    [data-screen-label="Home"] .nav-cta { display: none; }
+    [data-screen-label="Home"] .nav-burger {
+      display: inline-flex; justify-self: end; order: 2;
+    }
+
+    /* ── Section base + heads ── */
+    [data-screen-label="Home"] .h2-section { padding: 60px 0; }
+    [data-screen-label="Home"] #h2-method-section,
+    [data-screen-label="Home"] .h2-section:has(.h2-grid-3),
+    [data-screen-label="Home"] .h2-section:has(.h2-grid-4) { padding-top: 60px; padding-bottom: 0; }
+    [data-screen-label="Home"] .h2-section:has(.h2-section-head--left) { padding-top: 60px; padding-bottom: 0; }
+    [data-screen-label="Home"] .h2-section-head { padding: 0 24px; }
+    [data-screen-label="Home"] .h2-section-head h2 {
+      font-size: 28px; white-space: normal;
+    }
+    [data-screen-label="Home"] .h2-section-head--left {
+      flex-direction: column; align-items: flex-start; gap: 12px;
+      padding: 0 24px; margin: 0 0 32px;
+    }
+
+    /* ── 1. HERO ── */
+    [data-screen-label="Home"] .h2-hero { padding: 20px 24px 60px; }
+    [data-screen-label="Home"] .h2-hero-grid {
+      grid-template-columns: 1fr; gap: 32px;
+    }
+    [data-screen-label="Home"] .h2-hero-text h1 {
+      font-size: 40px; white-space: normal;
+    }
+    [data-screen-label="Home"] .h2-hero-text p { max-width: 100%; }
+    [data-screen-label="Home"] .h2-hero-img {
+      width: 100%; height: auto; aspect-ratio: 702 / 420;
+    }
+
+    /* ── 2. GALLERY / CAROUSEL ── */
+    [data-screen-label="Home"] .h2-gallery-card {
+      flex: 0 0 calc(100vw - 48px); height: auto;
+      padding: 24px; flex-direction: column; gap: 24px;
+      border-radius: 16px;
+    }
+    [data-screen-label="Home"] .h2-gallery-img-wrap {
+      flex: none; padding-top: 0; aspect-ratio: 16 / 10;
+    }
+    [data-screen-label="Home"] .h2-gallery-img { border-radius: 12px; }
+    [data-screen-label="Home"] .h2-gallery-cap,
+    [data-screen-label="Home"] .h2-gallery-cap:has(.h2-cap-3l) {
+      flex: none; padding: 0; font-size: 18px;
+    }
+    [data-screen-label="Home"] .h2-gallery-cap strong,
+    [data-screen-label="Home"] .h2-gallery-cap span,
+    [data-screen-label="Home"] .h2-gallery-cap span.h2-cap-3l {
+      height: auto; line-height: 1.4;
+    }
+
+    /* ── 3. METHOD ── */
+    [data-screen-label="Home"] .h2-method { padding: 0; }
+    [data-screen-label="Home"] .h2-method-list {
+      overflow-x: auto;
+      padding: 0 24px 8px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    [data-screen-label="Home"] .h2-method-list::-webkit-scrollbar { display: none; }
+    [data-screen-label="Home"] .h2-step,
+    [data-screen-label="Home"] .h2-step[data-step="3"] { flex: 0 0 auto; }
+    [data-screen-label="Home"] .h2-method-panel {
+      grid-template-columns: 1fr; gap: 0;
+      min-height: auto;
+      margin: 0 24px;
+    }
+    [data-screen-label="Home"] .h2-method-panel-text {
+      margin-left: 0; padding: 56px 24px 24px;
+    }
+    [data-screen-label="Home"] .h2-method-panel h3 { font-size: 22px; }
+    [data-screen-label="Home"] .h2-method-panel-img-wrap {
+      padding: 0; aspect-ratio: 16 / 9;
+    }
+    [data-screen-label="Home"] .h2-method-panel-img {
+      border-radius: 0 0 20px 20px;
+    }
+
+    /* ── 4. COMPARE ── */
+    [data-screen-label="Home"] .h2-section:has(.h2-compare) {
+      margin: 32px 24px 0; padding: 40px 24px;
+    }
+    [data-screen-label="Home"] .h2-compare {
+      grid-template-columns: 1fr; gap: 28px;
+    }
+    [data-screen-label="Home"] .h2-compare-col,
+    [data-screen-label="Home"] .h2-compare-col--neg,
+    [data-screen-label="Home"] .h2-compare-col--pos {
+      justify-self: stretch; width: 100%;
+    }
+    [data-screen-label="Home"] .h2-compare-col h3 { margin-bottom: 18px; }
+    [data-screen-label="Home"] .h2-compare-divider {
+      flex-direction: row; padding: 0; gap: 8px; width: 100%;
+    }
+    [data-screen-label="Home"] .h2-compare-divider::before,
+    [data-screen-label="Home"] .h2-compare-divider::after {
+      width: 100%; height: 1px;
+    }
+    [data-screen-label="Home"] .h2-compare-cta { margin-top: 32px; }
+
+    /* ── 5. NEGÓCIOS ── */
+    [data-screen-label="Home"] .h2-grid-3 {
+      grid-template-columns: 1fr; gap: 16px; padding: 0 24px;
+    }
+    [data-screen-label="Home"] .h2-neg-card { height: auto; min-height: 380px; }
+
+    /* ── 6. IA ── */
+    [data-screen-label="Home"] .h2-grid-4 {
+      grid-template-columns: 1fr; gap: 16px; padding: 0 24px;
+    }
+    [data-screen-label="Home"] .h2-ia-card {
+      min-height: auto; padding: 24px;
+    }
+    [data-screen-label="Home"] .h2-ia-icon { margin-bottom: 20px; }
+
+    /* ── 7. TEAM ── */
+    [data-screen-label="Home"] .team-section { margin: 18px 24px 60px; }
+    [data-screen-label="Home"] .team-block { grid-template-columns: 1fr; gap: 20px; }
+    [data-screen-label="Home"] .team-photo { width: 100%; height: 280px; }
+
+    /* ── Legacy bento (caso reapareça) ── */
+    [data-screen-label="Home"] .h2-bento { grid-template-columns: 1fr; }
+    [data-screen-label="Home"] .h2-card { padding: 22px; min-height: 280px; }
+
+    /* ── CTA Final ── */
+    [data-screen-label="Home"] .h2-cta-final-box h2 { font-size: 28px; }
+    [data-screen-label="Home"] .h2-cta-final-box { padding: 40px 24px; }
+
+    /* ── 8. FOOTER ── */
+    [data-screen-label="Home"] .footer-inner {
+      max-width: 100%; padding: 60px 24px;
+    }
+    [data-screen-label="Home"] .footer-cta-grid {
+      grid-template-columns: 1fr; gap: 32px;
+    }
+    [data-screen-label="Home"] .footer-cta-left h2 { font-size: 32px; }
+    [data-screen-label="Home"] .footer-cta-left p {
+      font-size: 14px; line-height: 22px; max-width: 100%;
+    }
+    [data-screen-label="Home"] .footer-cta-right {
+      max-width: 100%;
+    }
+    [data-screen-label="Home"] .footer-bottom {
+      flex-direction: column; align-items: flex-start; gap: 20px;
+    }
+    [data-screen-label="Home"] .footer-nav {
+      text-align: left !important;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    [data-screen-label="Home"] .footer-copy-row {
+      flex-direction: column; align-items: flex-start; gap: 16px;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════
+     MOBILE REFINEMENTS — @media (max-width: 640px)
+     Refinos finos sobre o bloco 1024px (escalas / proporções).
+     Estrutura (1 coluna) já herdada do bloco anterior.
+     ═══════════════════════════════════════════════ */
+  @media (max-width: 640px) {
+    /* A · Hero H1: 40 → 32 + padding-top 30 + padding-bottom 0 */
+    [data-screen-label="Home"] .h2-hero { padding-top: 30px; padding-bottom: 0; }
+    [data-screen-label="Home"] .h2-hero-text h1 { font-size: 32px; }
+
+    /* B · CTAs Hero: width 100% (cada um) */
+    [data-screen-label="Home"] .h2-hero-text .h2-cta-row { flex-direction: column; }
+    [data-screen-label="Home"] .h2-hero-text .h2-cta-row .btn { width: 100% !important; }
+
+    /* C · Section heads h2: 28 → 24 */
+    [data-screen-label="Home"] .h2-section-head h2 { font-size: 24px; }
+
+    /* D · Carousel card: padding 24 → 16, aspect 16/10 → 4/3 */
+    [data-screen-label="Home"] .h2-gallery-card { padding: 16px; gap: 16px; }
+    [data-screen-label="Home"] .h2-gallery-img-wrap { aspect-ratio: 4 / 3; }
+    [data-screen-label="Home"] .h2-gallery-cap { font-size: 17px; }
+
+    /* E · Method steps: mask-fade nas duas bordas (afordância de scroll + breathing) */
+    [data-screen-label="Home"] .h2-method-list {
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    }
+
+    /* F · Negócios cards: img 250 → 200, card height adjust */
+    [data-screen-label="Home"] .h2-neg-img { height: 200px; }
+    [data-screen-label="Home"] .h2-neg-card { min-height: auto; height: auto; }
+
+    /* G · Team photo: 280 → 240 */
+    [data-screen-label="Home"] .team-photo { height: 240px; }
+
+    /* H · Footer h2: 32 → 26 */
+    [data-screen-label="Home"] .footer-cta-left h2 { font-size: 26px !important; }
+
+    /* I · Compare items font: 15 → 14 */
+    [data-screen-label="Home"] .h2-compare-list li { font-size: 14px; }
+
+    /* K · Team-section margin-bottom override (DS sobrescrevia com 24px) */
+    [data-screen-label="Home"] .team-section { margin-bottom: 60px !important; }
+
+    /* L · Footer-bleed: zerar padding top/bottom (DS aplicava 40/24) */
+    [data-screen-label="Home"] footer.footer-bleed {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    [data-screen-label="Home"] .footer-inner { padding: 20px 24px; }
+
+    /* M · Drawer header: "Menu" texto no lugar da logo */
+    [data-screen-label="Home"] .drawer-logo {
+      font-family: var(--ff-display);
+      font-weight: 500;
+      font-size: 18px;
+      color: var(--c-text);
+    }
+
+    /* J · Compare → carousel horizontal 2 cards (Com Easy default + Sem Easy) */
+    [data-screen-label="Home"] .h2-section:has(.h2-compare) {
+      background: transparent; padding: 0; margin: 32px 0 0; border-radius: 0;
+    }
+    [data-screen-label="Home"] .h2-section:has(.h2-compare) .h2-section-head {
+      padding: 0 24px;
+    }
+    [data-screen-label="Home"] .h2-compare {
+      display: flex; flex-direction: row;
+      grid-template-columns: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 12px;
+      padding: 0 24px;
+      scroll-padding: 0 24px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 28px;
+    }
+    [data-screen-label="Home"] .h2-compare::-webkit-scrollbar { display: none; }
+    [data-screen-label="Home"] .h2-compare-col {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      background: var(--c-card, #faf6ed);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin: 0; width: auto;
+      justify-self: stretch;
+      box-sizing: border-box;
+    }
+    [data-screen-label="Home"] .h2-compare-col h3 { margin-bottom: 20px; }
+    [data-screen-label="Home"] .h2-compare-divider { display: none; }
+    [data-screen-label="Home"] .h2-compare-cta {
+      padding: 0 24px; margin-top: 24px;
+      flex-direction: column;
+    }
+    [data-screen-label="Home"] .h2-compare-cta .btn { width: 100% !important; }
+    [data-screen-label="Home"] .h2-compare-dots {
+      display: flex; justify-content: center; gap: 8px;
+      margin: 16px 0 0; padding: 0;
+    }
+    [data-screen-label="Home"] .h2-compare-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(115, 42, 29, 0.2); border: none;
+      padding: 0; cursor: pointer;
+      transition: width 0.25s ease, background 0.25s ease, border-radius 0.25s ease;
+    }
+    [data-screen-label="Home"] .h2-compare-dot.active {
+      width: 24px; height: 8px; border-radius: 4px;
+      background: var(--c-accent);
+    }
+  }
 </style>
 </head>
 <body style="">
@@ -20,7 +768,7 @@
       <div class="nav-links">
         <div class="dropdown" data-state="closed">
           <button type="button" class="dropdown-trigger" aria-haspopup="menu" aria-expanded="false">
-            Soluções
+            Negócios
             <svg class="chev" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
@@ -31,8 +779,10 @@
             <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a href="/quem-somos">Quem somos</a>
+        <a href="/funcionalidades">Funcionalidades</a>
         <a href="/planos">Planos</a>
+        <a href="/quem-somos">Quem somos</a>
+        <a href="/blog">Blog</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -51,156 +801,269 @@
     </div>
   </nav>
 
-  <!-- ─────────────── HERO ─────────────── -->
-  <section class="hero">
-    <div class="hero-bleed" style="border-radius: 0px;">
-      <!-- Floating leaves cluster (top-right of hero bleed, like Figma) -->
-      <div class="leaves" aria-hidden="true">
-        <div class="leaf" style="top: 30px;  right: 40px;  width: 84px;  height: 112px; --r: -10deg; animation-delay: 0s;     animation-duration: 7s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
+  <!-- ─────────────── SECTION 0 · HERO (split 45/55) ─────────────── -->
+  <section class="h2-hero">
+    <div class="h2-hero-grid">
+      <div class="h2-hero-text">
+        <span class="pill pill-accent pill-glow">Gestão para Salão · Barbearia · Estúdio</span>
+        <h1>Sua recepção 24h para<br><span class="cycle-word" aria-live="polite"><span class="cycle-word__inner" data-cycle='["salões de beleza","barbearias","estúdios de beleza"]'>salões de beleza</span></span></h1>
+        <p>Organize agenda, equipe, financeiro e estoque em uma plataforma feita para o ritmo do salão de beleza, da barbearia e do estúdio de estética.</p>
+        <div class="h2-cta-row">
+          <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:180px;">Teste grátis</a>
+          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:200px;">Agendar demonstração</a>
         </div>
-        <div class="leaf" style="top: 70px;  right: 160px; width: 60px;  height: 80px;  --r: 35deg;  animation-delay: -1.2s; animation-duration: 9s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 140px; right: 280px; width: 100px; height: 134px; --r: 165deg; animation-delay: -2.4s; animation-duration: 8s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 200px; right: 60px;  width: 72px;  height: 96px;  --r: -55deg; animation-delay: -3.6s; animation-duration: 10s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 320px; right: 200px; width: 90px;  height: 120px; --r: 90deg;  animation-delay: -0.8s; animation-duration: 11s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 380px; right: 40px;  width: 56px;  height: 75px;  --r: -135deg; animation-delay: -2s;   animation-duration: 8.5s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 60px;  left: 60px;   width: 78px;  height: 104px; --r: 200deg; animation-delay: -3.2s; animation-duration: 9.5s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 220px; left: 30px;   width: 110px; height: 147px; --r: 280deg; animation-delay: -1.6s; animation-duration: 10.5s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 400px; left: 140px;  width: 64px;  height: 86px;  --r: 60deg;  animation-delay: -4s;   animation-duration: 8s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 540px; left: 320px;  width: 96px;  height: 128px; --r: 220deg; animation-delay: -2.8s; animation-duration: 9s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 600px; right: 380px; width: 70px;  height: 94px;  --r: 145deg; animation-delay: -0.4s; animation-duration: 10s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
-        </div>
-        <div class="leaf" style="top: 720px; left: 80px;   width: 82px;  height: 110px; --r: -25deg; animation-delay: -3s;   animation-duration: 11s;">
-          <svg viewBox="0 0 21 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.19566 10.3385C4.79348 13.5692 6.8478 16.5846 9.35867 19.3846C12.7826 23.0462 16.663 25.8462 21 28V19.8154C21 8.83076 11.6413 0 0 0C0.456522 3.44615 1.59783 6.89231 3.19566 10.3385Z" fill="#CE4836" fill-opacity="0.05"></path></svg>
+        <div class="plans-hero-bullets">
+          <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Sem cartão de crédito</span>
+          <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cancele quando quiser</span>
         </div>
       </div>
+      <div class="h2-hero-img"><img src="/assets/hero-h.png" alt="Profissional usando o sistema Easy Salon"></div>
+    </div>
+  </section>
 
-      <div class="hero-inner">
-        <div class="hero-top" style="gap: 32px; padding: 0px 0px 50px">
-          <div class="pill pill-accent pill-glow" style="">Recepcionista virtual com IA</div>
-          <h1 class="hero-title" style="margin: -24px 0px 0px; line-height: 1.05">Sua recepção 24h para<br><span class="cycle-word" aria-live="polite"><span class="cycle-word__inner" data-cycle='["salões de beleza","barbearias","estúdios de beleza"]'>salões de beleza</span></span></h1>
-          <p class="hero-sub" style="line-height: 1.7;">Teste grátis por 30 dias a atendente virtual humanizada que responde seus clientes, agenda horários e organiza sua rotina automaticamente.</p>
-          <div class="hero-divider" style="gap: 4px">
-            <span class="line"></span>
-            <svg class="star" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.45162 11.8065C10.0968 11.8065 11.4194 13.129 11.4194 14.7742V16C10.8065 15.6774 10.2581 15.2581 9.80645 14.7419C9.41935 14.3226 9.12903 13.8387 8.90322 13.3548C8.67742 12.871 8.51613 12.3548 8.45162 11.8065ZM7.06451 13.3548C6.83871 13.8387 6.54838 14.3226 6.16129 14.7419C5.70967 15.2581 5.16129 15.6774 4.54839 16V14.7742C4.54839 13.129 5.87097 11.8065 7.51613 11.8065C7.45162 12.3548 7.29032 12.871 7.06451 13.3548ZM11.8064 7.54838C11.8064 5.90322 13.129 4.58064 14.7742 4.58064H16C15.6774 5.19355 15.2581 5.74193 14.7097 6.19355C14.2903 6.58064 13.8387 6.87097 13.3548 7.09677C12.8387 7.32258 12.3226 7.48387 11.8064 7.54838ZM13.3548 8.93548C13.8387 9.16129 14.2903 9.45161 14.7097 9.83871C15.2581 10.2903 15.6774 10.8387 16 11.4516H14.7742C13.129 11.4516 11.8064 10.129 11.8064 8.48387C12.3226 8.54839 12.8387 8.70967 13.3548 8.93548ZM7.54838 4.19355C5.90322 4.19355 4.58065 2.87097 4.58065 1.22581V0C5.16129 0.322581 5.74194 0.741935 6.19355 1.29032C6.54839 1.70968 6.83871 2.16129 7.06451 2.64516C7.29032 3.16129 7.45161 3.67742 7.54838 4.19355ZM8.93549 2.64516C9.16129 2.16129 9.45161 1.70968 9.80645 1.29032C10.2903 0.741935 10.8387 0.322581 11.4516 0V1.22581C11.4516 2.87097 10.129 4.19355 8.48387 4.19355C8.54839 3.67742 8.70968 3.16129 8.93549 2.64516ZM4.19355 8.45161C4.19355 10.0968 2.87097 11.4194 1.22581 11.4194H0C0.322581 10.8387 0.741937 10.2581 1.25807 9.80645C1.67742 9.45161 2.16129 9.16129 2.64516 8.93548C3.12903 8.70967 3.64516 8.54838 4.19355 8.45161ZM2.64516 7.06451C2.16129 6.83871 1.67742 6.54839 1.25807 6.19355C0.741937 5.70968 0.322581 5.16129 0 4.54839H1.22581C2.87097 4.54839 4.19355 5.87097 4.19355 7.51613C3.64516 7.45161 3.12903 7.29032 2.64516 7.06451ZM7.48387 8.51613C7.29032 10.3871 5.80645 11.871 3.93549 12.0645C4.12903 10.1935 5.6129 8.70967 7.48387 8.51613ZM8.48387 8.51613C10.3548 8.74193 11.8387 10.1935 12.0645 12.0645V12.0968L12.0323 12.0645C10.1613 11.871 8.70968 10.3871 8.48387 8.51613ZM8.51613 7.51613C8.51613 7.51613 8.50538 7.51613 8.48387 7.51613H8.51613C8.70967 5.64516 10.1935 4.16129 12.0645 3.96774V3.93548C12.0645 3.95699 12.0645 3.96774 12.0645 3.96774C11.8387 5.83871 10.3871 7.32258 8.51613 7.51613ZM7.51613 7.51613C7.49463 7.51613 7.48387 7.51613 7.48387 7.51613C5.6129 7.29032 4.16129 5.80645 3.93549 3.93548C5.80645 4.16129 7.29032 5.6129 7.48387 7.48387L7.51613 7.51613Z" fill="#CE4836"></path>
-            </svg>
-            <span class="line"></span>
-          </div>
-          <p class="hero-claim" style="">Sempre online, sem confusão e sem clientes perdidos.</p>
-          <div class="btn-cta-row" style="margin: 10px 0px 0px;">
-            <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width: 180px">Comece grátis</a>
-            <a class="btn btn-tan" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width: 180px">Agendar demonstração</a>
-          </div>
+  <!-- ─────────────── SECTION 1 · FUNCIONALIDADES (bento 2x3) ─────────────── -->
+  <section class="h2-section">
+    <div class="h2-section-head h2-section-head--left">
+      <h2>Tudo que seu salão precisa, em um único sistema</h2>
+      <a class="h2-head-link" href="https://app.easysalon.com.br/register?utm_source=site">
+        Comece grátis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.3335 11.3333V4.66663H4.66683" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4.66683 11.3333L11.3335 4.66663" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="h2-gallery" id="h2-gallery">
+      <div class="h2-gallery-viewport">
+        <div class="h2-gallery-track" id="h2-gallery-track">
+          <article class="h2-gallery-card">
+            <div class="h2-gallery-img-wrap"><div class="h2-gallery-img"><img src="/assets/agenda-h.png" alt="Agenda · grade visual semanal"></div></div>
+            <div class="h2-gallery-cap"><strong>Agenda inteligente.</strong><span>Toda a equipe em um único painel, sem sobreposição.</span></div>
+          </article>
+          <article class="h2-gallery-card">
+            <div class="h2-gallery-img-wrap"><div class="h2-gallery-img">Dashboard financeiro</div></div>
+            <div class="h2-gallery-cap"><strong>Controle financeiro.</strong><span>Caixa, repasses e comissões no automático.</span></div>
+          </article>
+          <article class="h2-gallery-card">
+            <div class="h2-gallery-img-wrap"><div class="h2-gallery-img">Mockup · app no celular</div></div>
+            <div class="h2-gallery-cap"><strong>App do profissional.</strong><span>Cada um com a agenda na palma da mão.</span></div>
+          </article>
+          <article class="h2-gallery-card">
+            <div class="h2-gallery-img-wrap"><div class="h2-gallery-img">Controle de estoque</div></div>
+            <div class="h2-gallery-cap"><strong>Estoque sob controle.</strong><span>Saiba o que tem e o que está acabando.</span></div>
+          </article>
+          <article class="h2-gallery-card">
+            <div class="h2-gallery-img-wrap"><div class="h2-gallery-img">Gatilhos · aniversário / retorno / reativação</div></div>
+            <div class="h2-gallery-cap"><strong>Relacionamento com o cliente.</strong><span>Gatilhos automáticos para clientes ativos e inativos.</span></div>
+          </article>
+          <article class="h2-gallery-card">
+            <div class="h2-gallery-img-wrap"><div class="h2-gallery-img">Dashboard · leitura de dados com IA</div></div>
+            <div class="h2-gallery-cap"><strong>Inteligência de dados.</strong><span class="h2-cap-3l">Leitura do salão com IA — decisão baseada em dado, não em achismo.</span></div>
+          </article>
         </div>
+      </div>
+      <div class="h2-gallery-controls">
+        <div class="h2-gallery-dots" role="tablist">
+          <button type="button" class="h2-gallery-dot active" data-idx="0" role="tab" aria-label="Agenda inteligente"><span class="h2-gallery-dot-fill"></span></button>
+          <button type="button" class="h2-gallery-dot" data-idx="1" role="tab" aria-label="Controle financeiro"><span class="h2-gallery-dot-fill"></span></button>
+          <button type="button" class="h2-gallery-dot" data-idx="2" role="tab" aria-label="App do profissional"><span class="h2-gallery-dot-fill"></span></button>
+          <button type="button" class="h2-gallery-dot" data-idx="3" role="tab" aria-label="Estoque sob controle"><span class="h2-gallery-dot-fill"></span></button>
+          <button type="button" class="h2-gallery-dot" data-idx="4" role="tab" aria-label="Relacionamento com o cliente"><span class="h2-gallery-dot-fill"></span></button>
+          <button type="button" class="h2-gallery-dot" data-idx="5" role="tab" aria-label="Inteligência de dados"><span class="h2-gallery-dot-fill"></span></button>
+        </div>
+        <button type="button" class="h2-gallery-playpause" data-state="playing" aria-label="Pausar galeria">
+          <svg class="h2-icon-pause" width="10" height="14" viewBox="0 0 10 14" fill="none" aria-hidden="true">
+            <path d="M2.85714 0C3.25163 0 3.57143 0.348223 3.57143 0.777778V13.2222C3.57143 13.6518 3.25163 14 2.85714 14H0.714286C0.319797 14 0 13.6518 0 13.2222V0.777778C0 0.348223 0.319797 0 0.714286 0H2.85714ZM9.28571 0C9.6802 0 10 0.348223 10 0.777778V13.2222C10 13.6518 9.6802 14 9.28571 14H7.14286C6.74837 14 6.42857 13.6518 6.42857 13.2222V0.777778C6.42857 0.348223 6.74837 0 7.14286 0H9.28571Z" fill="#732A1D"/>
+          </svg>
+          <svg class="h2-icon-play" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" style="display:none;">
+            <path d="M6.58919e-08 1.55591C-7.815e-05 1.28223 0.0694786 1.01336 0.201647 0.776469C0.333816 0.539576 0.523917 0.343042 0.752755 0.206711C0.981593 0.0703804 1.24107 -0.000920119 1.50498 8.96498e-06C1.76888 0.000938049 2.02789 0.0740639 2.25583 0.212003L11.2529 5.65453C11.4799 5.79116 11.6684 5.9872 11.7995 6.22305C11.9307 6.45891 11.9998 6.72631 12 6.99855C12.0002 7.27079 11.9316 7.53832 11.8008 7.77441C11.6701 8.0105 11.482 8.20687 11.2551 8.34391L2.25583 13.788C2.02789 13.9259 1.76888 13.9991 1.50498 14C1.24107 14.0009 0.981593 13.9296 0.752755 13.7933C0.523917 13.657 0.333816 13.4604 0.201647 13.2235C0.0694786 12.9866 -7.815e-05 12.7178 6.58919e-08 12.4441V1.55591Z" fill="#732A1D"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
 
-        <!-- Demo card -->
-        <div class="demo-card" style="margin: 0px 0px -91px">
-          <div class="demo-left">
-            <span class="pill pill-green demo-pill">Atendimento via WhatsApp</span>
-            <h3 style="margin: 0px 0px 20px">A IA <span style="color:var(--c-accent);">Conversa</span>, agenda e<br>confirma sozinha.</h3>
-            <p class="lead" style="margin: 0px 0px 20px">Veja como o cliente chega, a IA entende e o agendamento já cai na sua agenda — sem você apertar nada.</p>
-            <div class="demo-rule" style="margin: 0px 0px 28px"></div>
-            <ul class="demo-list" style="gap: 20px">
-              <li>
-                <svg class="check-circle" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="stroke-width: 1px">
-                  <circle cx="8" cy="8" r="7" stroke="rgb(206,72,54)" stroke-width="1.5"></circle>
-                  <path d="M5 8.5 L7 10.5 L11 6" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                </svg>
-                Responde em segundos, 24/7
-              </li>
-              <li>
-                <svg class="check-circle" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <circle cx="8" cy="8" r="7" stroke="rgb(206,72,54)" stroke-width="1.5"></circle>
-                  <path d="M5 8.5 L7 10.5 L11 6" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                </svg>
-                Sugere horários disponíveis automaticamente.
-              </li>
-              <li>
-                <svg class="check-circle" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <circle cx="8" cy="8" r="7" stroke="rgb(206,72,54)" stroke-width="1.5"></circle>
-                  <path d="M5 8.5 L7 10.5 L11 6" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                </svg>
-                Confirma e envia lembretes pelo WhatsApp.
-              </li>
-            </ul>
-          </div>
+  <!-- ─────────────── SECTION 2 · METODOLOGIA (5 steps interactive) ─────────────── -->
+  <section class="h2-section" id="h2-method-section">
+    <div class="h2-section-head">
+      <h2>Como organizamos a gestão<br> do seu salão</h2>
+    </div>
+    <div class="h2-method" id="h2-method">
+      <div class="h2-method-list">
+        <div class="h2-step active" data-step="0">
+          <div class="h2-step-num">01</div>
+          <div class="h2-step-title">Organize sua agenda</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+        <div class="h2-step" data-step="1">
+          <div class="h2-step-num">02</div>
+          <div class="h2-step-title">Tenha visão financeira</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+        <div class="h2-step" data-step="2">
+          <div class="h2-step-num">03</div>
+          <div class="h2-step-title">Domine seu estoque</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+        <div class="h2-step" data-step="3">
+          <div class="h2-step-num">04</div>
+          <div class="h2-step-title">Faça promoções inteligentes</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+        <div class="h2-step" data-step="4">
+          <div class="h2-step-num">05</div>
+          <div class="h2-step-title">Cuide dos seus clientes</div>
+          <div class="h2-step-progress"><div class="h2-step-progress-fill"></div></div>
+        </div>
+      </div>
+      <div class="h2-method-panel" id="h2-method-panel"
+        data-panels='[
+          {"step":"01","title":"Organize sua agenda","desc":"Pare de perder cliente por agenda confusa. Comece pela visibilidade total dos seus horários e dos profissionais.","img":"FOTO · profissional organizando a agenda no painel"},
+          {"step":"02","title":"Tenha visão financeira","desc":"Faturamento, repasses e comissões em tempo real. Decisões baseadas em dado, não em achismo.","img":"PREVIEW · dashboard financeiro"},
+          {"step":"03","title":"Domine seu estoque","desc":"Saiba o que entra, o que sai e o que está prestes a acabar. Produto certo, na hora certa, sem prejuízo.","img":"PREVIEW · controle de estoque"},
+          {"step":"04","title":"Faça promoções inteligentes","desc":"Identifique horários ociosos, clientes inativos e oportunidades reais de venda. Promoção que faz sentido, não no chute.","img":"PREVIEW · promoções / oportunidades"},
+          {"step":"05","title":"Cuide dos seus clientes","desc":"Histórico completo, preferências e retornos automáticos. Cliente fiel não some — porque você está atento.","img":"FOTO · ficha e histórico do cliente"}
+        ]'>
+        <div class="h2-method-panel-text">
+          <div class="h2-method-panel-eyebrow">Passo 01</div>
+          <h3>Organize sua agenda</h3>
+          <p>Pare de perder cliente por agenda confusa. Comece pela visibilidade total dos seus horários e dos profissionais.</p>
+        </div>
+        <div class="h2-method-panel-img-wrap"><div class="h2-method-panel-img">FOTO · profissional organizando a agenda no painel</div></div>
+      </div>
+    </div>
+  </section>
 
-          <div class="chat">
-            <div class="chat-header">
-              <div class="chat-avatar">
-                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 18px; height: 18px">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.78968 12.2787C10.5006 12.2787 11.8761 13.6542 11.8761 15.3652V16.64C11.2387 16.3045 10.6684 15.8684 10.1987 15.3316C9.79613 14.8955 9.49419 14.3923 9.25935 13.889C9.02451 13.3858 8.85678 12.849 8.78968 12.2787ZM7.34709 13.889C7.11226 14.3923 6.81032 14.8955 6.40774 15.3316C5.93806 15.8684 5.36774 16.3045 4.73032 16.64V15.3652C4.73032 13.6542 6.10581 12.2787 7.81678 12.2787C7.74968 12.849 7.58193 13.3858 7.34709 13.889ZM12.2787 7.85032C12.2787 6.13935 13.6542 4.76387 15.3652 4.76387H16.64C16.3045 5.40129 15.8684 5.97161 15.2981 6.44129C14.8619 6.84387 14.3923 7.14581 13.889 7.38064C13.3523 7.61548 12.8155 7.78322 12.2787 7.85032ZM13.889 9.2929C14.3923 9.52774 14.8619 9.82968 15.2981 10.2323C15.8684 10.7019 16.3045 11.2723 16.64 11.9097H15.3652C13.6542 11.9097 12.2787 10.5342 12.2787 8.82323C12.8155 8.89032 13.3523 9.05806 13.889 9.2929ZM7.85032 4.36129C6.13935 4.36129 4.76387 2.98581 4.76387 1.27484V0C5.36774 0.335484 5.97161 0.771613 6.44129 1.34194C6.81032 1.77806 7.11226 2.24774 7.34709 2.75097C7.58193 3.28774 7.74967 3.82452 7.85032 4.36129ZM9.2929 2.75097C9.52774 2.24774 9.82967 1.77806 10.1987 1.34194C10.7019 0.771613 11.2723 0.335484 11.9097 0V1.27484C11.9097 2.98581 10.5342 4.36129 8.82323 4.36129C8.89032 3.82452 9.05807 3.28774 9.2929 2.75097ZM4.36129 8.78967C4.36129 10.5006 2.98581 11.8761 1.27484 11.8761H0C0.335484 11.2723 0.771614 10.6684 1.30839 10.1987C1.74452 9.82967 2.24774 9.52774 2.75097 9.2929C3.25419 9.05806 3.79097 8.89032 4.36129 8.78967ZM2.75097 7.34709C2.24774 7.11225 1.74452 6.81032 1.30839 6.44129C0.771614 5.93806 0.335484 5.36774 0 4.73032H1.27484C2.98581 4.73032 4.36129 6.10581 4.36129 7.81677C3.79097 7.74968 3.25419 7.58193 2.75097 7.34709ZM7.78322 8.85677C7.58193 10.8026 6.03871 12.3458 4.09291 12.5471C4.2942 10.6013 5.83742 9.05806 7.78322 8.85677ZM8.82323 8.85677C10.769 9.09161 12.3123 10.6013 12.5471 12.5471V12.5806L12.5136 12.5471C10.5677 12.3458 9.05807 10.8026 8.82323 8.85677ZM8.85677 7.81677C8.85677 7.81677 8.84559 7.81677 8.82323 7.81677H8.85677C9.05806 5.87097 10.6013 4.32774 12.5471 4.12645V4.0929C12.5471 4.11527 12.5471 4.12645 12.5471 4.12645C12.3123 6.07226 10.8026 7.61548 8.85677 7.81677ZM7.81678 7.81677C7.79441 7.81677 7.78322 7.81677 7.78322 7.81677C5.83742 7.58194 4.32774 6.03871 4.09291 4.0929C6.03871 4.32774 7.58193 5.83742 7.78322 7.78322L7.81678 7.81677Z" fill="#F2EFE6"></path>
-                </svg>
-              </div>
-              <div class="chat-id">
-                <div class="name">Recepcionista Easy</div>
-                <div class="status"><span class="status-dot"></span>Online · Responde em segundos</div>
-              </div>
-            </div>
+  <!-- ─────────────── SECTION 3 · ANTES E DEPOIS ─────────────── -->
+  <section class="h2-section">
+    <div class="h2-section-head">
+      <h2>Como muda o salão com o Easy</h2>
+      <p>O dia a dia que você vive hoje,<br class="br-m"> lado a lado com o que você vai viver depois<br class="br-m"> de implantar o sistema.</p>
+    </div>
+    <div class="h2-compare">
+      <div class="h2-compare-col h2-compare-col--neg">
+        <h3>Sem Easy</h3>
+        <ul class="h2-compare-list">
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Agenda no papel ou no WhatsApp.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Comissão calculada na calculadora.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Estoque controlado pelo olho.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Sem visão de quanto entrou no mês.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Cliente que some e ninguém percebe.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Profissional sem visibilidade da agenda.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" stroke="#732A1D" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.29086 5.29275C9.68133 4.9024 10.3154 4.90243 10.7059 5.29275C11.0961 5.68318 11.096 6.31633 10.7059 6.70681L9.41293 7.9988L10.7059 9.29079C11.0964 9.68128 11.0963 10.3153 10.7059 10.7058C10.3154 11.0964 9.68138 11.0964 9.29086 10.7058L7.99886 9.41286L6.70687 10.7058C6.3164 11.0961 5.68328 11.0961 5.29281 10.7058C4.90245 10.3153 4.90234 9.68126 5.29281 9.29079L6.58382 7.9988L5.29281 6.70681C4.90245 6.31627 4.90234 5.68322 5.29281 5.29275C5.68329 4.9024 6.31637 4.90243 6.70687 5.29275L7.99886 6.58376L9.29086 5.29275Z" fill="#732A1D" fill-opacity="0.3"/></svg></span><span>Sem saber quais serviços vendem mais.</span></li>
+        </ul>
+      </div>
+      <div class="h2-compare-divider"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.45162 11.8065C10.0968 11.8065 11.4194 13.129 11.4194 14.7742V16C10.8065 15.6774 10.2581 15.2581 9.80645 14.7419C9.41935 14.3226 9.12903 13.8387 8.90322 13.3548C8.67742 12.871 8.51613 12.3548 8.45162 11.8065ZM7.06451 13.3548C6.83871 13.8387 6.54838 14.3226 6.16129 14.7419C5.70967 15.2581 5.16129 15.6774 4.54839 16V14.7742C4.54839 13.129 5.87097 11.8065 7.51613 11.8065C7.45162 12.3548 7.29032 12.871 7.06451 13.3548ZM11.8064 7.54838C11.8064 5.90322 13.129 4.58064 14.7742 4.58064H16C15.6774 5.19355 15.2581 5.74193 14.7097 6.19355C14.2903 6.58064 13.8387 6.87097 13.3548 7.09677C12.8387 7.32258 12.3226 7.48387 11.8064 7.54838ZM13.3548 8.93548C13.8387 9.16129 14.2903 9.45161 14.7097 9.83871C15.2581 10.2903 15.6774 10.8387 16 11.4516H14.7742C13.129 11.4516 11.8064 10.129 11.8064 8.48387C12.3226 8.54839 12.8387 8.70968 13.3548 8.93548ZM7.54838 4.19355C5.90322 4.19355 4.58064 2.87097 4.58064 1.22581V0C5.16129 0.322581 5.74194 0.741935 6.19355 1.29032C6.54839 1.70968 6.83871 2.16129 7.06451 2.64516C7.29032 3.16129 7.45161 3.67742 7.54838 4.19355ZM8.93549 2.64516C9.16129 2.16129 9.45161 1.70968 9.80645 1.29032C10.2903 0.741935 10.8387 0.322581 11.4516 0V1.22581C11.4516 2.87097 10.129 4.19355 8.48387 4.19355C8.54839 3.67742 8.70968 3.16129 8.93549 2.64516ZM4.19355 8.45161C4.19355 10.0968 2.87097 11.4194 1.22581 11.4194H0C0.322581 10.8387 0.741937 10.2581 1.25807 9.80645C1.67742 9.45161 2.16129 9.16129 2.64516 8.93548C3.12903 8.70968 3.64516 8.54839 4.19355 8.45161ZM2.64516 7.06451C2.16129 6.83871 1.67742 6.54839 1.25807 6.19355C0.741937 5.70968 0.322581 5.16129 0 4.54839H1.22581C2.87097 4.54839 4.19355 5.87097 4.19355 7.51613C3.64516 7.45161 3.12903 7.29032 2.64516 7.06451ZM7.48387 8.51613C7.29032 10.3871 5.80645 11.871 3.93549 12.0645C4.12903 10.1935 5.6129 8.70967 7.48387 8.51613ZM8.48387 8.51613C10.3548 8.74193 11.8387 10.1935 12.0645 12.0645V12.0968L12.0323 12.0645C10.1613 11.871 8.70968 10.3871 8.48387 8.51613ZM8.51613 7.51613C8.51613 7.51613 8.50538 7.51613 8.48387 7.51613H8.51613C8.70967 5.64516 10.1935 4.16129 12.0645 3.96774V3.93548C12.0645 3.95699 12.0645 3.96774 12.0645 3.96774C11.8387 5.83871 10.3871 7.32258 8.51613 7.51613ZM7.51613 7.51613C7.49463 7.51613 7.48387 7.51613 7.48387 7.51613C5.6129 7.29032 4.16129 5.80645 3.93549 3.93548C5.80645 4.16129 7.29032 5.6129 7.48387 7.48387L7.51613 7.51613Z" fill="#CE4836"/></svg></div>
+      <div class="h2-compare-col h2-compare-col--pos">
+        <h3>Com Easy</h3>
+        <ul class="h2-compare-list">
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Agenda centralizada e automática.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Comissão calculada pelo sistema.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Alerta automático de estoque baixo.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Faturamento em tempo real.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Histórico completo de cada cliente.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>App do profissional na palma da mão.</span></li>
+          <li><span class="h2-compare-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00016 14.6666C11.6821 14.6666 14.6668 11.6818 14.6668 7.99992C14.6668 4.31802 11.6821 1.33325 8.00016 1.33325C4.31826 1.33325 1.3335 4.31802 1.3335 7.99992C1.3335 11.6818 4.31826 14.6666 8.00016 14.6666Z" fill="#CE4836" stroke="#CE4836" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8.00008L7.33333 9.33341L10 6.66675" stroke="#F2EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Relatórios de serviços mais rentáveis.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="h2-compare-dots" aria-hidden="true">
+      <button type="button" class="h2-compare-dot active" data-idx="0" aria-label="Mostrar Com Easy"></button>
+      <button type="button" class="h2-compare-dot" data-idx="1" aria-label="Mostrar Sem Easy"></button>
+    </div>
+    <div class="h2-compare-cta">
+      <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:180px;">Comece grátis</a>
+      <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&amp;text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon." style="width:220px;">Agendar demonstração</a>
+    </div>
+  </section>
 
-            <div class="chat-feed" id="chat-feed" aria-live="polite"></div>
-          </div>
+  <!-- ─────────────── SECTION 4 · NEGÓCIOS ATENDIDOS (3 cards) ─────────────── -->
+  <section class="h2-section">
+    <div class="h2-section-head">
+      <h2>Feito para cada tipo de negócio</h2>
+    </div>
+    <div class="h2-grid-3">
+      <div class="h2-neg-card">
+        <div class="h2-neg-img" style="background-image:url('/assets/salao.png');"></div>
+        <h3>Salão de Beleza</h3>
+        <p>Gestão completa para salões com múltiplos profissionais e serviços.</p>
+        <a class="h2-neg-link" href="/salao-de-beleza">Conhecer
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3335 11.3333V4.66663H4.66683" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.66683 11.3333L11.3335 4.66663" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="h2-neg-card">
+        <div class="h2-neg-img" style="background-image:url('/assets/barbearia.png');"></div>
+        <h3>Barbearia</h3>
+        <p>Agenda otimizada para barbearias modernas com fila e clientes recorrentes.</p>
+        <a class="h2-neg-link" href="/barbearia">Conhecer
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3335 11.3333V4.66663H4.66683" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.66683 11.3333L11.3335 4.66663" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="h2-neg-card">
+        <div class="h2-neg-img" style="background-image:url('/assets/estudio.png');"></div>
+        <h3>Estúdio de Beleza</h3>
+        <p>Para estúdios menores que precisam de eficiência e identidade premium.</p>
+        <a class="h2-neg-link" href="/estudio-de-beleza">Conhecer
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3335 11.3333V4.66663H4.66683" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.66683 11.3333L11.3335 4.66663" stroke="#CE4836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── SECTION 5 · IA PARA ACELERAR (4 cards) ─────────────── -->
+  <section class="h2-section">
+    <div class="h2-section-head">
+      <h2>E ainda tem IA para acelerar sua operação</h2>
+    </div>
+    <div class="h2-grid-4">
+      <div class="h2-ia-card">
+        <div class="h2-ia-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot-message-square" aria-hidden="true"><path d="M12 6V2H8"/><path d="m8 18-4 4V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z"/><path d="M2 12h2"/><path d="M9 11v2"/><path d="M15 11v2"/><path d="M20 12h2"/></svg>
+        </div>
+        <h3>Recepcionista virtual no WhatsApp</h3>
+        <p>A IA responde clientes, confirma agendamentos e organiza a agenda automaticamente — mesmo fora do horário comercial.</p>
+      </div>
+      <div class="h2-ia-card">
+        <div class="h2-ia-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+        </div>
+        <h3>Sugere os melhores horários</h3>
+        <p>Identifica horários ociosos e sugere encaixes inteligentes para maximizar a ocupação da sua agenda.</p>
+      </div>
+      <div class="h2-ia-card">
+        <div class="h2-ia-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+        </div>
+        <h3>Cria promoções com base no comportamento</h3>
+        <p>Analisa o histórico dos seus clientes e sugere promoções certas para os clientes certos, no momento certo.</p>
+      </div>
+      <div class="h2-ia-card">
+        <div class="h2-ia-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-pie" aria-hidden="true"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/></svg>
+        </div>
+        <h3>Analisa o desempenho do seu salão</h3>
+        <p>Mostra quais serviços e profissionais geram mais resultado, quais clientes estão inativos e onde está a oportunidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── SECTION · POR TRÁS DA EASY (team) ─────────────── -->
+  <section class="team-section" style="margin: 18px auto 80px; border-radius: 20px;">
+    <div class="team-block">
+      <div class="team-photo" aria-label="Equipe Easy" style="background-image: url('/assets/equipe.png');"></div>
+      <div class="team-text">
+        <div class="pill-row"><span class="pill" style="background:var(--c-accent-soft);color:var(--c-accent);">Por trás da Easy</span></div>
+        <h2>Nascida dentro de<br><span style="color:var(--c-accent);">salões reais!</span></h2>
+        <p class="quote">A Easy é a parceria que transforma o caos da agenda em uma<br>operação previsível e profissional nos meus salões, barbearias e<br>estúdios de beleza.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/quem-somos" style="width:177px;">Saiba mais</a>
+          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&amp;text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── SECTION: COMO ORGANIZAMOS ─────────────── -->
-  <section class="section-card">
-    <h2>Como organizamos <span style="color:var(--c-accent);">negócios da beleza</span></h2>
-    <div class="grid-organize">
-      <div class="org-item">
-        <span class="num" style="margin: 0px">01</span>
-        <p class="copy"><strong style="color: rgb(206, 72, 54);">Tudo começa pela agenda:</strong> Sua assistente virtual responde clientes de forma humanizada, evita furos e organiza seus horários automaticamente.</p>
-      </div>
-      <div class="org-item">
-        <span class="num" style="margin: 0px">02</span>
-        <p class="copy">Sua recepcionista virtual <strong style="color: rgb(206, 72, 54);">responde na hora</strong> de maneira inteligente, agendando clientes e mantendo seu WhatsApp sempre em dia, <strong style="color: rgb(206, 72, 54);">sem você precisar parar o atendimento.</strong></p>
-      </div>
-      <div class="org-item">
-        <span class="num" style="margin: 0px">03</span>
-        <p class="copy">Você continua atendendo normalmente enquanto a <strong style="color: rgb(206, 72, 54);">assistente virtual cuida da agenda,</strong> dos encaixes e da organização do salão. Tudo isso com a mais alta e recente tecnologia em IA (Inteligência Artificial).</p>
-      </div>
-      <div class="org-item">
-        <span class="num" style="margin: 0px">04</span>
-        <p class="copy">No final, você ganha tempo, mais organização e atende mais clientes, sem precisar aumentar a equipe.<br><strong style="color: rgb(206, 72, 54);">E ainda pode economizar mais de R$ 30 mil por ano.</strong></p>
-      </div>
-    </div>
-    <div class="btn-cta-row">
-      <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width: 180px">Comece grátis</a>
-      <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width: 180px">Agendar demonstração</a>
-    </div>
-  </section>
-
-  <!-- ─────────────── SECTION: VEJA A EASY ─────────────── -->
-  <!-- Conteúdo compartilhado via /partials/section-veja.html (também usado em /planos/) -->
-  <div data-include="/partials/section-veja.html"></div>
-
-  <!-- ─────────────── SECTION: POR TRÁS DA EASY ─────────────── -->
-  <!-- Conteúdo compartilhado via /partials/section-team.html (também usado em /planos/) -->
-  <div data-include="/partials/section-team.html"></div>
-
-  <!-- ─────────────── FOOTER ─────────────── -->
+  <!-- ─────────────── FOOTER (já contém CTA final via footer-cta-grid, como no home original) ─────────────── -->
   <footer class="footer-bleed">
     <div class="leaves" aria-hidden="true">
       <div class="leaf dark" style="top: 30px;  right: 40px;  width: 90px;  height: 120px; --r: -15deg; animation-delay: 0s;     animation-duration: 9s;">
@@ -285,8 +1148,10 @@
           <a href="/salao-de-beleza">Salão de beleza</a>
           <a href="/barbearia">Barbearia</a>
           <a href="/estudio-de-beleza">Estúdio de beleza</a>
+          <a href="/funcionalidades">Funcionalidades</a>
           <a href="/planos">Planos</a>
           <a href="/quem-somos">Quem somos</a>
+          <a href="/blog">Blog</a>
           <a href="/termos-de-uso">Termos de uso</a>
         </nav>
       </div>
@@ -334,8 +1199,10 @@
       <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
       <a class="drawer-link" href="/barbearia">Barbearia</a>
       <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
-      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/funcionalidades">Funcionalidades</a>
       <a class="drawer-link" href="/planos">Planos</a>
+      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/blog">Blog</a>
     </nav>
     <div class="drawer-cta">
       <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:100%;">Teste grátis</a>
@@ -375,6 +1242,302 @@
 </script>
 
 <script>
+  // Home · Hero rotator (cycle-word do DS · blur por letra)
+  (function () {
+    var STEP_IN = 0.04, STEP_OUT = 0.025, IN_DUR = 550, OUT_DUR = 350;
+    function renderChars(el, text) {
+      el.innerHTML = '';
+      Array.from(text).forEach(function (ch, i) {
+        var s = document.createElement('span');
+        s.className = 'cycle-word__char';
+        s.style.setProperty('--cw-delay', (i * STEP_IN) + 's');
+        s.style.setProperty('--cw-delay-out', (i * STEP_OUT) + 's');
+        s.textContent = ch === ' ' ? ' ' : ch;
+        el.appendChild(s);
+      });
+    }
+    document.querySelectorAll('.h2-hero-text .cycle-word__inner').forEach(function (el) {
+      var words;
+      try { words = JSON.parse(el.getAttribute('data-cycle') || '[]'); } catch (e) { words = []; }
+      if (!Array.isArray(words) || words.length < 2) return;
+      var initial = el.textContent.trim();
+      var i = Math.max(0, words.indexOf(initial));
+      renderChars(el, words[i]);
+      function next() {
+        var len = el.children.length;
+        var outTotal = (len - 1) * STEP_OUT * 1000 + OUT_DUR;
+        el.classList.add('is-out');
+        setTimeout(function () {
+          i = (i + 1) % words.length;
+          el.classList.remove('is-out');
+          renderChars(el, words[i]);
+        }, outTotal);
+      }
+      var inTotal = (words[i].length - 1) * STEP_IN * 1000 + IN_DUR;
+      setInterval(next, inTotal + 2200);
+    });
+  })();
+
+  // Home · Hero · full-bleed sync (mesma lógica da gallery — usa
+  // documentElement.clientWidth p/ excluir scrollbar real do Chrome Windows
+  // e evitar overflow horizontal de 100vw quando o scrollbar rouba pixels)
+  (function () {
+    var hero = document.querySelector('.h2-hero');
+    if (!hero) return;
+    function sync() {
+      var docW = document.documentElement.clientWidth;
+      hero.style.width = docW + 'px';
+      hero.style.marginLeft = 'calc(50% - ' + (docW / 2) + 'px)';
+    }
+    sync();
+    window.addEventListener('resize', sync);
+  })();
+
+  // Home · Gallery (carousel estilo Apple Highlights — autoplay + dotnav + progress)
+  (function () {
+    var root = document.getElementById('h2-gallery');
+    if (!root) return;
+    var track = root.querySelector('.h2-gallery-track');
+    var cards = root.querySelectorAll('.h2-gallery-card');
+    var dots = root.querySelectorAll('.h2-gallery-dot');
+    var btn = root.querySelector('.h2-gallery-playpause');
+    var iconPlay = btn.querySelector('.h2-icon-play');
+    var iconPause = btn.querySelector('.h2-icon-pause');
+    if (!track || !cards.length) return;
+
+    // Garante full-bleed sem subpixel: usa documentElement.clientWidth (sem scrollbar)
+    // em vez de 100vw, evitando margem fracionária que borra o texto na GPU layer
+    function syncFullBleed() {
+      var docW = document.documentElement.clientWidth;
+      root.style.width = docW + 'px';
+      root.style.marginLeft = 'calc(50% - ' + (docW / 2) + 'px)';
+    }
+    syncFullBleed();
+    window.addEventListener('resize', syncFullBleed);
+
+    var idx = 0;
+    var DUR = 5000;
+    var raf, lastT = null, elapsed = 0, paused = false, playing = true;
+
+    function clamp(i) {
+      var max = cards.length - 1;
+      return Math.max(0, Math.min(max, i));
+    }
+    function setActive(newIdx) {
+      idx = clamp(newIdx);
+      // Centraliza o card ativo na viewport (peek do prev/next nas laterais)
+      var viewport = root.querySelector('.h2-gallery-viewport');
+      var card = cards[idx];
+      var vpRect = viewport.getBoundingClientRect();
+      var targetCardLeft = Math.round(vpRect.left + (vpRect.width - card.offsetWidth) / 2);
+      var translate = targetCardLeft - vpRect.left - card.offsetLeft;
+      track.style.transform = 'translateX(' + translate + 'px)';
+      dots.forEach(function (d, i2) {
+        d.classList.toggle('active', i2 === idx);
+        var fill = d.querySelector('.h2-gallery-dot-fill');
+        if (fill) fill.style.setProperty('--progress', i2 === idx ? '0%' : '0%');
+      });
+      cards.forEach(function (c) { c.style.opacity = '1'; });
+      elapsed = 0; lastT = null;
+    }
+    function tick(t) {
+      if (lastT === null) lastT = t;
+      var dt = t - lastT; lastT = t;
+      if (!paused && playing) {
+        elapsed += dt;
+        var p = Math.min(1, elapsed / DUR);
+        var fill = dots[idx] && dots[idx].querySelector('.h2-gallery-dot-fill');
+        if (fill) fill.style.setProperty('--progress', (p * 100) + '%');
+        if (p >= 1) { setActive((idx + 1) % cards.length); }
+      }
+      raf = requestAnimationFrame(tick);
+    }
+    function setPlaying(state) {
+      playing = state;
+      btn.dataset.state = state ? 'playing' : 'paused';
+      iconPlay.style.display = state ? 'none' : 'block';
+      iconPause.style.display = state ? 'block' : 'none';
+      btn.setAttribute('aria-label', state ? 'Pausar galeria' : 'Reproduzir galeria');
+    }
+
+    btn.addEventListener('click', function () { setPlaying(!playing); });
+    dots.forEach(function (d, i2) {
+      d.addEventListener('click', function () { setActive(i2); });
+    });
+    // Pause-on-hover só em hover-capable (desktop). Mobile usa play/pause button explícito.
+    var hoverCapable = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+    if (hoverCapable) {
+      root.addEventListener('mouseenter', function () { paused = true; });
+      root.addEventListener('mouseleave', function () { paused = false; });
+    }
+
+    window.addEventListener('resize', function () { setActive(idx); });
+
+    // só roda quando visível
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (!raf) raf = requestAnimationFrame(tick);
+        } else {
+          if (raf) { cancelAnimationFrame(raf); raf = null; }
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(root);
+
+    // posiciona inicial
+    setActive(0);
+  })();
+
+  // Home · Metodologia (autoplay + barra de progresso, pausa no hover)
+  (function () {
+    var root = document.getElementById('h2-method');
+    if (!root) return;
+    var steps = root.querySelectorAll('.h2-step');
+    var panel = document.getElementById('h2-method-panel');
+    if (!steps.length || !panel) return;
+    var panels;
+    try { panels = JSON.parse(panel.getAttribute('data-panels')); } catch (e) { return; }
+
+    var active = 0;
+    var paused = false;
+    var DUR = 5000;
+    var raf, lastT = null, elapsed = 0;
+
+    function renderPanel(i) {
+      var p = panels[i];
+      panel.querySelector('.h2-method-panel-eyebrow').textContent = 'Passo ' + p.step;
+      panel.querySelector('h3').textContent = p.title;
+      panel.querySelector('p').textContent = p.desc;
+      panel.querySelector('.h2-method-panel-img').textContent = p.img;
+    }
+    function scrollActiveIntoView(i) {
+      var list = steps[i].parentElement;
+      if (!list || list.scrollWidth <= list.clientWidth) return;
+      var step = steps[i];
+      var target = step.offsetLeft - (list.clientWidth - step.offsetWidth) / 2;
+      list.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }
+    function setActive(i) {
+      active = i;
+      steps.forEach(function (s, k) {
+        s.classList.toggle('active', k === i);
+        s.querySelector('.h2-step-progress-fill').style.width = '0%';
+      });
+      renderPanel(i);
+      scrollActiveIntoView(i);
+      elapsed = 0; lastT = null;
+    }
+    function tick(t) {
+      if (lastT === null) lastT = t;
+      var dt = t - lastT; lastT = t;
+      if (!paused) {
+        elapsed += dt;
+        var p = Math.min(1, elapsed / DUR);
+        var fill = steps[active].querySelector('.h2-step-progress-fill');
+        if (fill) fill.style.width = (p * 100) + '%';
+        if (p >= 1) { setActive((active + 1) % steps.length); }
+      }
+      raf = requestAnimationFrame(tick);
+    }
+
+    // Mobile não tem hover — só click/tap/drag. Hover-activate só em hover-capable
+    // devices p/ evitar setActive disparar enquanto o dedo arrasta os steps.
+    var hoverCapable = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+    steps.forEach(function (s, i) {
+      if (hoverCapable) {
+        s.addEventListener('mouseenter', function () { setActive(i); });
+      }
+      s.addEventListener('click', function () { setActive(i); });
+    });
+    if (hoverCapable) {
+      root.addEventListener('mouseenter', function () { paused = true; });
+      root.addEventListener('mouseleave', function () { paused = false; });
+    } else {
+      // Touch: pausa autoplay enquanto o usuário arrasta a lista (evita briga
+      // entre scrollIntoView do autoplay e o gesto manual). Resume 800ms após soltar.
+      var list = steps[0].parentElement;
+      if (list) {
+        var resumeTimer;
+        list.addEventListener('touchstart', function () {
+          paused = true; clearTimeout(resumeTimer);
+        }, { passive: true });
+        list.addEventListener('touchend', function () {
+          clearTimeout(resumeTimer);
+          resumeTimer = setTimeout(function () { paused = false; }, 800);
+        }, { passive: true });
+      }
+    }
+
+    // só roda quando está visível
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (!raf) raf = requestAnimationFrame(tick);
+        } else {
+          if (raf) { cancelAnimationFrame(raf); raf = null; }
+        }
+      });
+    }, { threshold: 0.25 });
+    io.observe(root);
+  })();
+
+  // Home · Compare mobile carousel — snap-scroll com dots + init na Com Easy
+  (function () {
+    var compare = document.querySelector('.h2-compare');
+    var dots = document.querySelectorAll('.h2-compare-dot');
+    if (!compare || !dots.length) return;
+    function isMobile() { return window.matchMedia('(max-width: 640px)').matches; }
+    // DOM idx: 0 = neg (Sem), 1 = pos (Com)  →  Dot idx: 0 = pos, 1 = neg
+    function activeDotIdx() {
+      if (!isMobile()) return -1;
+      var cols = compare.querySelectorAll('.h2-compare-col');
+      var center = compare.scrollLeft + compare.clientWidth / 2;
+      var closestDom = 0, closestDist = Infinity;
+      cols.forEach(function (c, i) {
+        var cc = c.offsetLeft + c.offsetWidth / 2;
+        var d = Math.abs(cc - center);
+        if (d < closestDist) { closestDist = d; closestDom = i; }
+      });
+      return closestDom === 1 ? 0 : 1;
+    }
+    function updateDots() {
+      var idx = activeDotIdx();
+      if (idx < 0) return;
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+    }
+    function initScroll() {
+      if (!isMobile()) { compare.scrollLeft = 0; return; }
+      var pos = compare.querySelector('.h2-compare-col--pos');
+      if (pos) {
+        // Sem smooth no init — direto na Com Easy
+        compare.scrollLeft = pos.offsetLeft - 24;
+        updateDots();
+      }
+    }
+    var to;
+    compare.addEventListener('scroll', function () {
+      clearTimeout(to);
+      to = setTimeout(updateDots, 50);
+    }, { passive: true });
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () {
+        if (!isMobile()) return;
+        var sel = i === 0 ? '.h2-compare-col--pos' : '.h2-compare-col--neg';
+        var card = compare.querySelector(sel);
+        if (card) compare.scrollTo({ left: card.offsetLeft - 24, behavior: 'smooth' });
+      });
+    });
+    // Init após layout settle
+    setTimeout(initScroll, 50);
+    window.addEventListener('resize', function () {
+      clearTimeout(to);
+      to = setTimeout(initScroll, 100);
+    });
+  })();
+</script>
+
+<script>
   // BlurFade scroll-in: auto-tag main content blocks + observe
   (function () {
     if (!('IntersectionObserver' in window)) return;
@@ -384,17 +1547,23 @@
     // Selectors of elements to fade in. Intentionally specific to avoid blurring chat/runtime UI.
     var selectors = [
       '.nav-inner > *',
-      '.hero-top > *',
-      '.demo-card',
-      '.section-card h2',
-      '.section-card .org-item',
-      '.section-card .btn-cta-row',
-      '.section-veja .pill',
-      '.section-veja .veja-title',
-      '.section-veja .veja-sub',
-      '.section-veja .btn-cta-row',
-      '.veja-card',
-      '.team-block > *',
+      // Home (sandbox wireframe)
+      '.h2-hero-text > *',
+      '.h2-hero-img',
+      '.h2-section-head > *',
+      '.h2-card',
+      '.h2-gallery',
+      '.h2-step',
+      '.h2-method-panel',
+      '.h2-section:has(.h2-compare)',
+      '.h2-compare',
+      '.h2-compare-cta',
+      '.h2-neg-card',
+      '.team-photo',
+      '.team-text',
+      '.h2-ia-card',
+      '.h2-cta-final-box > *',
+      // Footer (compartilhado)
       '.footer-cta-left > *',
       '.footer-cta-right > *',
       '.footer-bullets > *',
@@ -436,10 +1605,9 @@
     nodes.forEach(function (el) { io.observe(el); });
 
     // Initial reveal: above-the-fold elements (nav + hero) animate in on load.
-    var aboveFoldSelectors = '.nav-inner > *, .hero-top > *, .hero-bleed *';
     var aboveFold = [];
     nodes.forEach(function (el) {
-      if (el.matches('.nav-inner > *, .hero-top > *') || el.closest('.hero-bleed')) {
+      if (el.matches('.nav-inner > *') || el.closest('.h2-hero')) {
         aboveFold.push(el);
       }
     });
@@ -817,15 +1985,11 @@
     var backdrop = document.querySelector('[data-drawer-backdrop]');
     var closeBtn = drawer && drawer.querySelector('.drawer-close');
     var logoSlot = drawer && drawer.querySelector('[data-drawer-logo]');
-    var navLogo = document.querySelector('.nav-logo svg');
 
-    // Clone the nav logo into the drawer head (smaller).
-    if (logoSlot && navLogo) {
-      var clone = navLogo.cloneNode(true);
-      clone.setAttribute('width', '120');
-      clone.setAttribute('height', '16');
-      clone.removeAttribute('aria-label');
-      logoSlot.appendChild(clone);
+    // Home mobile drawer: usa o texto "Menu" no lugar da logo
+    if (logoSlot) {
+      logoSlot.textContent = 'Menu';
+      logoSlot.setAttribute('aria-label', 'Menu');
     }
 
     if (!burger || !drawer || !backdrop) return;

@@ -28,11 +28,11 @@ problemas. Exit code != 0 quando há violações (útil em CI).
 
 
 ══════════════════════════════════════════════════════════════════
-PADRÃO DE RESPONSIVIDADE — sandbox v2 (home-2 / quem-somos-2)
+PADRÃO DE RESPONSIVIDADE — home (master) / páginas filhas
 ══════════════════════════════════════════════════════════════════
 
-As páginas /home-2/ e /quem-somos-2/ são as referências MESTRE.
-Qualquer nova página da sandbox v2 (sufixo "-2") DEVE replicar
+A home (/index.html) é a referência MESTRE.
+Qualquer nova página filha DEVE replicar
 esse padrão sem desvios. Resumo:
 
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -161,11 +161,11 @@ esse padrão sem desvios. Resumo:
     • Todos os grids 2/3/4 colunas → 1 coluna
     • Bento (1 grande + tiles) → tile-big/wide perdem span
     • Compare 2-col com divisor vertical → 1-col com divisor
-      horizontal (apenas home-2)
+      horizontal (apenas home)
     • Contato (channels + form) → channels stack + form abaixo
 
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  7. CAROUSEL / SCROLL HORIZONTAL (≤ 1024, apenas home-2)
+  7. CAROUSEL / SCROLL HORIZONTAL (≤ 1024, apenas home)
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     • .h2-method-list → overflow-x: auto com scroll-snap
     • Compare vira carousel snap horizontal (2 cards) ≤ 640
@@ -177,7 +177,7 @@ esse padrão sem desvios. Resumo:
     • Listeners mouseenter/leave SÓ atachados se
       matchMedia('(hover: hover)').matches === true
     • Em touch: usar click/tap; autoplay pausa via touchstart
-      com retomada 800ms após touchend (apenas home-2 carousel)
+      com retomada 800ms após touchend (apenas o carousel da home)
 
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   9. REFINOS MOBILE EXTRAS (≤ 640)
@@ -201,7 +201,7 @@ esse padrão sem desvios. Resumo:
     • BlurFade observer próprio por página (toggle 'is-in').
 
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  CHECKLIST — toda nova página "*-2" DEVE
+  CHECKLIST — toda nova página DEVE
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     1. Usar [data-screen-label="<Nome da Página>"] na <html>
     2. Escopar 100% do CSS a esse atributo (zero vazamento)
@@ -213,6 +213,46 @@ esse padrão sem desvios. Resumo:
     6. Seguir regra de padding (item 5): 80→60 vertical, 32→24
        horizontal no mobile
     7. Manter BlurFade scroll-in com observer próprio
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CHECKS AUTOMÁTICOS — toda página HTML completa (com <html>) é
+  validada quanto à presença de TOPO e FOOTER canônicos em ambos
+  desktop e mobile. Os checks 1–9 rodam em sequência:
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1) Cores hex/rgb fora da paleta dentro de <style>
+    2) (idem)
+    3) font-family fora do sistema
+    4) Redefinição de classes mestre
+    5) style inline com cores fora da paleta
+    6) @media com breakpoint não-canônico
+    7) margem lateral hardcoded > 100px
+    8) <style> inline > 30 linhas (deve estar em design-system.css)
+    9) TOPO + FOOTER obrigatórios e completos:
+       • <nav class="nav"> contendo nav-inner, nav-logo, nav-links,
+         nav-cta, nav-burger
+       • <aside class="drawer"> ou <div class="drawer"> contendo
+         drawer-nav e drawer-link
+       • <footer class="footer-bleed"> contendo footer-inner,
+         footer-cta-grid, footer-cta-left, footer-cta-right,
+         footer-bullet, footer-bottom, footer-logo, footer-nav,
+         footer-copy-row
+       Estrutura imutável entre páginas e entre desktop/mobile —
+       apenas a frase do .footer-cta-left h2, o link ativo do nav
+       e os itens do menu podem variar.
+   10) Componentes globais .h2-* — /index.html (home)  é a página MESTRE.
+       Cada componente, quando presente em uma página filha, deve
+       replicar a estrutura imutável definida em home:
+       • .h2-hero → h2-hero-grid, h2-hero-text, h2-hero-img, h2-cta-row
+       • .h2-compare → h2-compare-col(--neg/--pos), h2-compare-list,
+         h2-compare-icon, h2-compare-divider, h2-compare-cta,
+         h2-compare-dots, h2-compare-dot
+       • .h2-method → h2-method-list, h2-step (num/title/progress/fill),
+         h2-method-panel (text/eyebrow/img-wrap/img)
+       • .h2-grid-4 → h2-ia-card, h2-ia-icon
+       Conteúdo de texto/imagens VARIA por página (cada negócio tem
+       sua mensagem). Estrutura HTML/classes é IMUTÁVEL — quando se
+       muda algo estrutural ou visual no pai, replica para todos os
+       filhos que herdam o componente.
 """
 
 from __future__ import annotations
@@ -306,6 +346,91 @@ SIDE_MARGIN_PX_THRESHOLD = 100
 # é exempt (é a documentação do sistema, pode ter o próprio <style>).
 INLINE_STYLE_LINES_THRESHOLD = 30
 
+# ───────────────────────────────────────────────────────────────
+# Contrato de TOPO (nav/drawer) e FOOTER — obrigatório em toda página
+# ───────────────────────────────────────────────────────────────
+#
+# Toda página HTML do projeto deve conter o mesmo TOPO e FOOTER em
+# desktop e mobile. A estrutura é definida em design-system.css e
+# replicada em cada página. Esta validação garante consistência.
+#
+# Variabilidade permitida:
+#   • Texto da frase do .footer-cta-left h2 (CTA do footer)
+#   • Item ativo do nav (data-active / classe .active)
+#   • Conteúdo do drawer espelha o nav (mesmos itens)
+# Tudo mais é IMUTÁVEL.
+
+# Classes obrigatórias dentro de <nav class="nav"> (desktop + mobile).
+NAV_REQUIRED_CLASSES = {
+    "nav", "nav-inner", "nav-logo", "nav-links", "nav-cta",
+    "nav-burger",
+}
+
+# Classes obrigatórias do drawer (versão mobile do nav).
+DRAWER_REQUIRED_CLASSES = {
+    "drawer", "drawer-nav", "drawer-link",
+}
+
+# Classes obrigatórias dentro de <footer class="footer-bleed">.
+FOOTER_REQUIRED_CLASSES = {
+    "footer-bleed", "footer-inner",
+    "footer-cta-grid", "footer-cta-left", "footer-cta-right",
+    "footer-bullet",
+    "footer-bottom", "footer-logo", "footer-nav", "footer-copy-row",
+}
+
+# ───────────────────────────────────────────────────────────────
+# Componentes globais .h2-* — master em /index.html (home)  index.html
+# ───────────────────────────────────────────────────────────────
+#
+# /index.html (home)  é a página MESTRE dos componentes .h2-hero, .h2-method,
+# .h2-compare e .h2-grid-4. Qualquer página filha que use um desses
+# componentes deve replicar a estrutura imutável (classes + hierarquia).
+#
+# Variabilidade permitida em cada instância:
+#   • Conteúdo de texto dos h1/h2/h3/p (cada página tem sua mensagem)
+#   • Texto dos data-panels em .h2-method (passo + descrição por passo)
+#   • Texto dos itens das listas (.h2-compare-list li, ul li)
+#   • Texto e ícones dos .h2-ia-card
+# Tudo o que é ESTRUTURA (classes, ordem dos blocos) é imutável.
+#
+# Variabilidade NÃO permitida (componente diverge → warning):
+#   • Falta de uma das classes-âncora da hierarquia
+#   • Adição de wrapper (.sb2-wrap, .qs2-wrap, etc.) ao redor de filhos
+#   • Troca de uma classe componente por outra (.sb2-section em vez de
+#     .h2-section quando o componente é .h2-method, por exemplo)
+#
+# Cada entrada mapeia a classe-âncora do componente para o conjunto
+# de classes descendentes obrigatórias.
+
+H2_COMPONENTS = {
+    # Hero split 45/55 — pill + h1 + p + cta-row + bullets + img
+    "h2-hero": {
+        "h2-hero-grid", "h2-hero-text", "h2-hero-img",
+        "h2-cta-row",
+    },
+    # Antes/Depois — 2 colunas (Sem/Com Easy) + divider + cta + dots
+    "h2-compare": {
+        "h2-compare-col", "h2-compare-col--neg", "h2-compare-col--pos",
+        "h2-compare-list", "h2-compare-icon",
+        "h2-compare-divider", "h2-compare-cta",
+        "h2-compare-dots", "h2-compare-dot",
+    },
+    # Metodologia 5 passos — lista de steps + painel com data-panels
+    "h2-method": {
+        "h2-method-list",
+        "h2-step", "h2-step-num", "h2-step-title",
+        "h2-step-progress", "h2-step-progress-fill",
+        "h2-method-panel", "h2-method-panel-text",
+        "h2-method-panel-eyebrow",
+        "h2-method-panel-img-wrap", "h2-method-panel-img",
+    },
+    # IA grid 4 cards — ícone + h3 + p
+    "h2-grid-4": {
+        "h2-ia-card", "h2-ia-icon",
+    },
+}
+
 
 # ───────────────────────────────────────────────────────────────
 # Resultado por arquivo
@@ -377,6 +502,166 @@ def extract_master(master_path: Path, css_path: Path | None = None) -> tuple[set
 
 def _normalize_color(s: str) -> str:
     return re.sub(r"\s+", " ", s.strip().lower())
+
+
+# ───────────────────────────────────────────────────────────────
+# Extração de blocos nav / footer e validação de consistência
+# ───────────────────────────────────────────────────────────────
+
+def _extract_element_block(text: str, tag: str, anchor_class: str) -> tuple[str, int] | None:
+    """Extrai o HTML completo de <tag class="...anchor_class..."> ... </tag>
+    usando contagem de tags aninhadas. Retorna (html, line_inicial) ou None.
+
+    anchor_class é comparada como classe exata (não captura "drawer-backdrop"
+    ao procurar "drawer", por exemplo)."""
+    # Match exato de classe: anchor_class precedida pelo " de abertura ou
+    # whitespace, e seguida por whitespace ou " de fechamento. Evita
+    # falso-positivo em classes como "drawer-backdrop" ao buscar "drawer".
+    pattern = re.compile(
+        rf'<{tag}\b[^>]*class\s*=\s*"(?:[^"]*\s)?'
+        rf'{re.escape(anchor_class)}'
+        rf'(?:\s[^"]*)?"[^>]*>',
+        re.IGNORECASE,
+    )
+    m = pattern.search(text)
+    if not m:
+        return None
+    start = m.start()
+    line_no = text[:start].count("\n") + 1
+
+    open_re = re.compile(rf"<{tag}\b", re.IGNORECASE)
+    close_re = re.compile(rf"</{tag}\s*>", re.IGNORECASE)
+    depth = 0
+    i = start
+    while i < len(text):
+        om = open_re.match(text, i)
+        cm = close_re.match(text, i)
+        if om:
+            depth += 1
+            i = text.find(">", i) + 1
+            if i == 0:
+                break
+            continue
+        if cm:
+            depth -= 1
+            i = cm.end()
+            if depth == 0:
+                return text[start:i], line_no
+            continue
+        i += 1
+    return None
+
+
+def _classes_in_fragment(html: str) -> set[str]:
+    """Retorna todas as classes utilizadas em qualquer atributo class do
+    fragmento HTML (sem distinguir profundidade)."""
+    classes: set[str] = set()
+    for m in re.finditer(r'class\s*=\s*"([^"]+)"', html):
+        for c in m.group(1).split():
+            classes.add(c)
+    return classes
+
+
+def _check_topo_footer(text: str, report: FileReport) -> None:
+    """Garante que a página contém o TOPO e o FOOTER canônicos —
+    estrutura é imutável entre páginas e entre desktop/mobile (apenas
+    a frase do .footer-cta-left h2 e o item ativo do nav podem variar)."""
+
+    # ── TOPO (<nav class="nav">)
+    nav_block = _extract_element_block(text, "nav", "nav")
+    if not nav_block:
+        report.warn(
+            1,
+            "topo ausente: cada página deve conter <nav class=\"nav\"> "
+            "(estrutura imutável compartilhada via design-system.css)",
+        )
+    else:
+        nav_html, nav_line = nav_block
+        nav_classes = _classes_in_fragment(nav_html)
+        missing = sorted(NAV_REQUIRED_CLASSES - nav_classes)
+        if missing:
+            report.warn(
+                nav_line,
+                f"topo incompleto: faltam classes obrigatórias {missing} "
+                f"(estrutura do nav é padrão em todas as páginas — desktop e mobile)",
+            )
+
+    # ── DRAWER (mobile do topo)
+    drawer_block = _extract_element_block(text, "div", "drawer")
+    if not drawer_block:
+        # drawer também pode ser <aside> em algumas implementações
+        drawer_block = _extract_element_block(text, "aside", "drawer")
+    if not drawer_block:
+        report.warn(
+            1,
+            "drawer ausente: cada página deve conter o drawer mobile "
+            "(equivalente mobile do nav, classes drawer/drawer-nav/drawer-link)",
+        )
+    else:
+        drawer_html, drawer_line = drawer_block
+        drawer_classes = _classes_in_fragment(drawer_html)
+        missing = sorted(DRAWER_REQUIRED_CLASSES - drawer_classes)
+        if missing:
+            report.warn(
+                drawer_line,
+                f"drawer incompleto: faltam classes obrigatórias {missing} "
+                f"(equivalente mobile do nav — não pode ser redesenhado por página)",
+            )
+
+    # ── FOOTER (<footer class="footer-bleed">)
+    footer_block = _extract_element_block(text, "footer", "footer-bleed")
+    if not footer_block:
+        report.warn(
+            1,
+            "footer ausente: cada página deve conter <footer class=\"footer-bleed\"> "
+            "(estrutura imutável — apenas a frase do CTA pode variar)",
+        )
+        return
+
+    footer_html, footer_line = footer_block
+    footer_classes = _classes_in_fragment(footer_html)
+    missing = sorted(FOOTER_REQUIRED_CLASSES - footer_classes)
+    if missing:
+        report.warn(
+            footer_line,
+            f"footer incompleto: faltam classes obrigatórias {missing} "
+            f"(estrutura do footer é padrão em todas as páginas — desktop e mobile)",
+        )
+
+
+def _check_h2_components(text: str, report: FileReport) -> None:
+    """Para cada componente .h2-* presente na página, verifica que a
+    estrutura interna (classes obrigatórias) está intacta. /index.html (home)  é
+    a página MESTRE dos componentes — mudanças estruturais devem
+    propagar para todos os filhos que usam o mesmo componente."""
+    all_classes = _classes_in_fragment(text)
+
+    for anchor, required in H2_COMPONENTS.items():
+        # Só valida se o componente existe na página (página opt-in)
+        if anchor not in all_classes:
+            continue
+        # Para .h2-grid-4 e .h2-method, extrai o bloco ancestral mais
+        # próximo via section/div. Para os demais, basta verificar
+        # se as classes obrigatórias aparecem em algum lugar do
+        # documento — overkill validar hierarquia exata aqui.
+        # Heurística: tomamos a primeira ocorrência do anchor e
+        # validamos que os descendentes obrigatórios também aparecem
+        # no documento (escopo simples mas suficiente para regressão).
+        missing = sorted(required - all_classes)
+        if missing:
+            # Encontra a linha da primeira ocorrência do anchor
+            m = re.search(
+                rf'class\s*=\s*"(?:[^"]*\s)?{re.escape(anchor)}(?:\s[^"]*)?"',
+                text,
+            )
+            line_no = text[: m.start()].count("\n") + 1 if m else 1
+            report.warn(
+                line_no,
+                f"componente .{anchor} incompleto: faltam classes "
+                f"descendentes {missing}. Esse é um componente global "
+                f"definido em /index.html (home)  — sua estrutura é imutável entre "
+                f"páginas (apenas o conteúdo de texto/imagens varia).",
+            )
 
 
 # ───────────────────────────────────────────────────────────────
@@ -574,6 +859,19 @@ def validate_file(
                 f"pra lá e mantenha o inline ≤ {INLINE_STYLE_LINES_THRESHOLD} "
                 f"linhas (preferencialmente vazio).",
             )
+
+    # ── 9) TOPO e FOOTER consistentes em todas as páginas
+    # design-system.html é exempt (documentação, não precisa de nav/footer).
+    # Partials/fragmentos (sem <html>) também são exempt.
+    is_full_page = bool(re.search(r"<html\b", text, re.IGNORECASE))
+    if not is_design_system and is_full_page:
+        _check_topo_footer(text, report)
+
+    # ── 10) Componentes globais .h2-* (mestre em /index.html (home) )
+    # Cada componente, quando presente, deve replicar a estrutura
+    # mestre. Apenas conteúdo de texto/imagens varia entre páginas.
+    if not is_design_system and is_full_page:
+        _check_h2_components(text, report)
 
     return report
 

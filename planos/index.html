@@ -10,9 +10,334 @@
 <link rel="stylesheet" href="/design-system.css">
 
 <style>
-  /* Página /planos — todas as regras vivem em design-system.css
-     (seção "Páginas: Planos"). Este bloco é mantido vazio para enforce
-     a herança 100% via CSS canônico. */
+  /* ═══════════════════════════════════════════════════════════════
+     PÁGINA /planos — grid do wireframe Claude Design
+     Tudo escopado a [data-screen-label="Planos"] (zero vazamento)
+     Responsivo segue padrão sandbox v2: 1024 (estrutura) · 640 (refino)
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Nav espelha home: logo esq · menu centro · CTAs dir */
+  [data-screen-label="Planos"] .nav-inner { grid-template-columns: auto 1fr auto; }
+  [data-screen-label="Planos"] .nav-logo { order: -1; justify-self: start; }
+  [data-screen-label="Planos"] .nav-links { order: 0; justify-self: center; gap: 20px; }
+  [data-screen-label="Planos"] .nav-cta { order: 1; justify-self: end; }
+
+  /* ── Layout-shell ── */
+  [data-screen-label="Planos"] .pl2-section {
+    padding: 80px 32px;
+    border-top: 1px solid var(--c-line, rgba(115,42,29,.12));
+  }
+  [data-screen-label="Planos"] .pl2-section.first { border-top: none; padding-top: 56px; padding-bottom: 56px; }
+  [data-screen-label="Planos"] .pl2-wrap { max-width: 1200px; margin: 0 auto; }
+
+  /* ── SecHead (eyebrow + número · título · sub) ── */
+  [data-screen-label="Planos"] .pl2-sechead { text-align: center; margin-bottom: 40px; }
+  [data-screen-label="Planos"] .pl2-sechead .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 14px;
+  }
+  [data-screen-label="Planos"] .pl2-sechead .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent);
+  }
+  [data-screen-label="Planos"] .pl2-sechead h2 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 36px; line-height: 1.1; color: var(--c-text);
+    margin: 0 0 12px; max-width: 760px; margin-left: auto; margin-right: auto;
+  }
+  [data-screen-label="Planos"] .pl2-sechead h2 em {
+    font-style: italic; color: var(--c-accent);
+  }
+  [data-screen-label="Planos"] .pl2-sechead p {
+    font-family: var(--ff-text); font-size: 16px; line-height: 1.5;
+    color: var(--c-text-soft, rgba(115,42,29,.7));
+    margin: 0 auto; max-width: 620px;
+  }
+
+  /* ═══════════════════ HERO (split 50/50) ═══════════════════ */
+  [data-screen-label="Planos"] .pl2-hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    align-items: stretch; margin-top: 16px;
+  }
+  [data-screen-label="Planos"] .pl2-hero-left {
+    display: flex; flex-direction: column; padding-right: 12px;
+  }
+  [data-screen-label="Planos"] .pl2-hero-left .eyebrow {
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--c-accent); margin-bottom: 16px;
+  }
+  [data-screen-label="Planos"] .pl2-hero-left h1 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 48px; line-height: 1.05; color: var(--c-text); margin: 0;
+  }
+  [data-screen-label="Planos"] .pl2-hero-left h1 em {
+    font-style: italic; color: var(--c-accent);
+  }
+  [data-screen-label="Planos"] .pl2-hero-lead {
+    font-family: var(--ff-text); font-size: 17px; line-height: 1.5;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+    margin: 20px 0 28px; max-width: 480px;
+  }
+  [data-screen-label="Planos"] .pl2-hero-right {
+    border-radius: 24px; overflow: hidden;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    min-height: 360px;
+    background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  [data-screen-label="Planos"] .pl2-hero-right::after {
+    content: 'Dono(a) do salão usando o sistema';
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.6));
+    letter-spacing: 0.04em;
+  }
+
+  /* ── BillingToggle (mensal / anual) ── */
+  [data-screen-label="Planos"] .pl2-billing {
+    display: inline-flex; gap: 4px; padding: 4px;
+    border-radius: 999px; background: rgba(115,42,29,.06);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    margin-top: auto;
+  }
+  [data-screen-label="Planos"] .pl2-billing button {
+    cursor: pointer; border: none; border-radius: 999px;
+    padding: 9px 20px; font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    background: transparent; color: var(--c-text-soft, rgba(115,42,29,.7));
+    transition: background .15s ease, color .15s ease;
+  }
+  [data-screen-label="Planos"] .pl2-billing button[aria-pressed="true"] {
+    background: var(--c-text); color: rgb(244,241,234);
+  }
+  [data-screen-label="Planos"] .pl2-billing button .save {
+    margin-left: 6px; font-size: 11px; opacity: .7;
+  }
+
+  /* ═══════════════════ SECTION 01 — FAIXAS ═══════════════════ */
+  [data-screen-label="Planos"] .pl2-pricing-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+  [data-screen-label="Planos"] .pl2-pcard {
+    display: flex; flex-direction: column;
+    padding: 24px;
+    background: rgb(251,251,251);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-radius: 20px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  [data-screen-label="Planos"] .pl2-pcard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -16px rgba(115,42,29,.18);
+  }
+  [data-screen-label="Planos"] .pl2-pcard .tier {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 28px; line-height: 1; color: var(--c-text); margin: 0;
+  }
+  [data-screen-label="Planos"] .pl2-pcard .who {
+    font-family: var(--ff-text); font-size: 12px;
+    color: var(--c-text-soft, rgba(115,42,29,.7)); margin: 4px 0 16px;
+    text-transform: lowercase;
+  }
+  [data-screen-label="Planos"] .pl2-pcard .price {
+    display: flex; align-items: baseline; gap: 4px;
+    margin-bottom: 14px;
+  }
+  [data-screen-label="Planos"] .pl2-pcard .price .big {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 28px; line-height: 1; color: var(--c-text);
+  }
+  [data-screen-label="Planos"] .pl2-pcard .price .small {
+    font-family: var(--ff-text); font-size: 12px;
+    color: var(--c-text-soft, rgba(115,42,29,.7));
+  }
+  [data-screen-label="Planos"] .pl2-pcard .desc {
+    font-family: var(--ff-text); font-size: 13px; line-height: 1.5;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+    margin: 0 0 22px; flex: 1;
+  }
+  [data-screen-label="Planos"] .pl2-pcard .btn { width: 100%; }
+
+  /* ═══════════════════ SECTION 02 — TUDO INCLUSO ═══════════════════ */
+  [data-screen-label="Planos"] .pl2-incluso-bento {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  [data-screen-label="Planos"] .pl2-tile {
+    background: rgb(251,251,251);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-radius: 20px;
+    padding: 22px;
+    display: flex; flex-direction: column;
+  }
+  [data-screen-label="Planos"] .pl2-tile.span-3 { grid-column: span 3; }
+  [data-screen-label="Planos"] .pl2-tile h3 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 22px; line-height: 1.1; color: var(--c-text);
+    margin: 0 0 14px;
+  }
+  [data-screen-label="Planos"] .pl2-tile .check-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  [data-screen-label="Planos"] .pl2-tile.span-3 .check-list {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px;
+  }
+  [data-screen-label="Planos"] .pl2-tile .check-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.45;
+    color: var(--c-text);
+  }
+  [data-screen-label="Planos"] .pl2-tile .check-list li .ck {
+    flex-shrink: 0; width: 16px; height: 16px;
+    border-radius: 50%; background: rgba(206,72,54,.12);
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  [data-screen-label="Planos"] .pl2-tile .check-list li .ck svg { display: block; }
+
+  /* ═══════════════════ SECTION 03 — ADICIONAIS ═══════════════════ */
+  [data-screen-label="Planos"] .pl2-add-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  [data-screen-label="Planos"] .pl2-acard {
+    background: rgb(251,251,251);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-radius: 20px;
+    padding: 28px;
+    display: flex; flex-direction: column;
+  }
+  [data-screen-label="Planos"] .pl2-acard .ico {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(206,72,54,.10);
+    color: var(--c-accent);
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  [data-screen-label="Planos"] .pl2-acard h3 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 22px; line-height: 1.15; color: var(--c-text);
+    margin: 0 0 10px;
+  }
+  [data-screen-label="Planos"] .pl2-acard p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+    margin: 0 0 18px; flex: 1;
+  }
+  [data-screen-label="Planos"] .pl2-acard .chip {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(115,42,29,.06);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+  }
+
+  /* ═══════════════════ SECTION 04 — CONTRATAÇÃO ═══════════════════ */
+  [data-screen-label="Planos"] .pl2-contrato-card {
+    background: rgb(251,251,251);
+    border: 1px solid var(--c-line, rgba(115,42,29,.12));
+    border-radius: 20px;
+    padding: 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    overflow: hidden;
+  }
+  [data-screen-label="Planos"] .pl2-contrato-item {
+    padding: 22px 24px;
+  }
+  [data-screen-label="Planos"] .pl2-contrato-item.col-mid,
+  [data-screen-label="Planos"] .pl2-contrato-item.col-right {
+    border-left: 1px solid var(--c-line, rgba(115,42,29,.12));
+  }
+  [data-screen-label="Planos"] .pl2-contrato-item.row-bot {
+    border-top: 1px solid var(--c-line, rgba(115,42,29,.12));
+  }
+  [data-screen-label="Planos"] .pl2-contrato-item .head {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  [data-screen-label="Planos"] .pl2-contrato-item .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--c-accent); color: rgb(244,241,234);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  [data-screen-label="Planos"] .pl2-contrato-item h4 {
+    font-family: var(--ff-display); font-weight: 400;
+    font-size: 16px; line-height: 1.2; color: var(--c-text);
+    margin: 0;
+  }
+  [data-screen-label="Planos"] .pl2-contrato-item p {
+    font-family: var(--ff-text); font-size: 13px; line-height: 1.45;
+    color: var(--c-text-soft, rgba(115,42,29,.75));
+    margin: 0;
+  }
+
+  /* ── Responsive 1024 (estrutural — tablet + mobile) ─────────────── */
+  @media (max-width: 1024px) {
+    [data-screen-label="Planos"] .nav-links { display: none; }
+    [data-screen-label="Planos"] .nav-cta    { display: none; }
+    [data-screen-label="Planos"] .nav-burger { display: inline-flex; justify-self: end; order: 2; }
+
+    [data-screen-label="Planos"] .pl2-section { padding: 64px 24px; }
+    [data-screen-label="Planos"] .pl2-section.first { padding: 56px 24px; }
+
+    [data-screen-label="Planos"] .pl2-hero-grid { grid-template-columns: 1fr; gap: 24px; }
+    [data-screen-label="Planos"] .pl2-hero-left { padding-right: 0; }
+    [data-screen-label="Planos"] .pl2-hero-right { min-height: 280px; order: -1; }
+
+    [data-screen-label="Planos"] .pl2-pricing-grid { grid-template-columns: 1fr; gap: 14px; }
+    [data-screen-label="Planos"] .pl2-incluso-bento { grid-template-columns: 1fr; }
+    [data-screen-label="Planos"] .pl2-tile.span-3 { grid-column: span 1; }
+    [data-screen-label="Planos"] .pl2-tile.span-3 .check-list { grid-template-columns: 1fr; }
+    [data-screen-label="Planos"] .pl2-add-grid { grid-template-columns: 1fr; }
+
+    [data-screen-label="Planos"] .pl2-contrato-card { grid-template-columns: 1fr; }
+    [data-screen-label="Planos"] .pl2-contrato-item.col-mid,
+    [data-screen-label="Planos"] .pl2-contrato-item.col-right { border-left: none; }
+    [data-screen-label="Planos"] .pl2-contrato-item + .pl2-contrato-item { border-top: 1px solid var(--c-line, rgba(115,42,29,.12)); }
+    [data-screen-label="Planos"] .pl2-contrato-item.row-bot { border-top: 1px solid var(--c-line, rgba(115,42,29,.12)); }
+
+    /* Footer responsivo (mesma lógica home / QS) */
+    [data-screen-label="Planos"] .footer-inner { max-width: 100%; padding: 60px 24px; }
+    [data-screen-label="Planos"] .footer-cta-grid { grid-template-columns: 1fr; gap: 32px; }
+    [data-screen-label="Planos"] .footer-cta-left h2 { font-size: 32px; }
+    [data-screen-label="Planos"] .footer-bottom { flex-direction: column; align-items: flex-start; }
+    [data-screen-label="Planos"] .footer-nav { text-align: left; flex-wrap: wrap; gap: 12px 18px; }
+    [data-screen-label="Planos"] .footer-copy-row { flex-direction: column; gap: 16px; }
+  }
+
+  /* ── Mobile refino 640 (escala de fonte/padding) ─────────────── */
+  @media (max-width: 640px) {
+    [data-screen-label="Planos"] .pl2-section { padding: 60px 24px; }
+    [data-screen-label="Planos"] .pl2-section.first { padding: 48px 24px; }
+
+    [data-screen-label="Planos"] .pl2-hero-left h1 { font-size: 32px; }
+    [data-screen-label="Planos"] .pl2-hero-lead { font-size: 14px; }
+    [data-screen-label="Planos"] .pl2-sechead h2 { font-size: 24px; line-height: 1.1; }
+    [data-screen-label="Planos"] .pl2-sechead p { font-size: 14px; }
+    [data-screen-label="Planos"] .pl2-pcard .tier { font-size: 24px; }
+    [data-screen-label="Planos"] .pl2-pcard .price .big { font-size: 26px; }
+    [data-screen-label="Planos"] .pl2-pcard .desc { font-size: 13px; }
+    [data-screen-label="Planos"] .pl2-tile h3 { font-size: 20px; }
+    [data-screen-label="Planos"] .pl2-acard h3 { font-size: 20px; }
+    [data-screen-label="Planos"] .pl2-acard p { font-size: 14px; }
+
+    [data-screen-label="Planos"] footer.footer-bleed { padding-top: 0; padding-bottom: 0; }
+    [data-screen-label="Planos"] .footer-inner { padding: 20px 24px; }
+    [data-screen-label="Planos"] .footer-nav { flex-direction: column; }
+  }
+
+  /* BlurFade scroll-in */
+  [data-screen-label="Planos"] .pl2-fade {
+    opacity: 0; transform: translateY(8px) scale(.995); filter: blur(4px);
+    transition: opacity .65s ease, transform .65s ease, filter .65s ease;
+  }
+  [data-screen-label="Planos"] .pl2-fade.is-in {
+    opacity: 1; transform: none; filter: none;
+  }
 </style>
 </head>
 <body class="has-nav">
@@ -24,7 +349,7 @@
       <div class="nav-links">
         <div class="dropdown" data-state="closed">
           <button type="button" class="dropdown-trigger" aria-haspopup="menu" aria-expanded="false">
-            Soluções
+            Negócios
             <svg class="chev" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
@@ -35,8 +360,10 @@
             <a class="dropdown-item" role="menuitem" href="/estudio-de-beleza">Estúdio de beleza</a>
           </div>
         </div>
-        <a href="/quem-somos">Quem somos</a>
+        <a href="/funcionalidades">Funcionalidades</a>
         <a href="/planos">Planos</a>
+        <a href="/quem-somos">Quem somos</a>
+        <a href="/blog">Blog</a>
       </div>
       <button type="button" class="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -55,367 +382,226 @@
     </div>
   </nav>
 
-  <!-- ─────────────── HERO ─────────────── -->
-  <section class="plans-hero">
-    <div class="pill pill-accent pill-glow" style="margin: 0 0 20px">Nossos planos</div>
-    <h1>Escolha o plano ideal para ter sua recepcionista virtual <em>humanizada</em></h1>
-    <p class="plans-hero-sub">Teste grátis por 30 dias com acesso completo à sua recepcionista virtual com mensagens ilimitadas.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:200px;">Comece grátis por 30 dias</a>
-      <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
-    </div>
-    <div class="plans-hero-bullets">
-      <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Sem cartão de crédito</span>
-      <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Sem fidelidade</span>
-      <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cancele quando quiser</span>
-    </div>
-  </section>
-
-  <!-- ─────────────── PRICING ─────────────── -->
-  <section class="pricing-section">
-    <h2 class="pricing-title">Escolha o plano ideal para <em>você</em></h2>
-
-    <div class="pricing-grid">
-      <!-- Plano: Full (em breve) -->
-      <div class="pricing-card soon">
-        <h3 class="pricing-name">Full</h3>
-        <p class="pricing-desc">Uma solução cada vez mais<br>completa para você.</p>
-        <div class="hero-divider" aria-hidden="true">
-          <span class="line"></span>
-          <svg class="star" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.45162 11.8065C10.0968 11.8065 11.4194 13.129 11.4194 14.7742V16C10.8065 15.6774 10.2581 15.2581 9.80645 14.7419C9.41935 14.3226 9.12903 13.8387 8.90322 13.3548C8.67742 12.871 8.51613 12.3548 8.45162 11.8065ZM7.06451 13.3548C6.83871 13.8387 6.54838 14.3226 6.16129 14.7419C5.70967 15.2581 5.16129 15.6774 4.54839 16V14.7742C4.54839 13.129 5.87097 11.8065 7.51613 11.8065C7.45162 12.3548 7.29032 12.871 7.06451 13.3548ZM11.8064 7.54838C11.8064 5.90322 13.129 4.58064 14.7742 4.58064H16C15.6774 5.19355 15.2581 5.74193 14.7097 6.19355C14.2903 6.58064 13.8387 6.87097 13.3548 7.09677C12.8387 7.32258 12.3226 7.48387 11.8064 7.54838ZM13.3548 8.93548C13.8387 9.16129 14.2903 9.45161 14.7097 9.83871C15.2581 10.2903 15.6774 10.8387 16 11.4516H14.7742C13.129 11.4516 11.8064 10.129 11.8064 8.48387C12.3226 8.54839 12.8387 8.70967 13.3548 8.93548ZM7.54838 4.19355C5.90322 4.19355 4.58065 2.87097 4.58065 1.22581V0C5.16129 0.322581 5.74194 0.741935 6.19355 1.29032C6.54839 1.70968 6.83871 2.16129 7.06451 2.64516C7.29032 3.16129 7.45161 3.67742 7.54838 4.19355ZM8.93549 2.64516C9.16129 2.16129 9.45161 1.70968 9.80645 1.29032C10.2903 0.741935 10.8387 0.322581 11.4516 0V1.22581C11.4516 2.87097 10.129 4.19355 8.48387 4.19355C8.54839 3.67742 8.70968 3.16129 8.93549 2.64516ZM4.19355 8.45161C4.19355 10.0968 2.87097 11.4194 1.22581 11.4194H0C0.322581 10.8387 0.741937 10.2581 1.25807 9.80645C1.67742 9.45161 2.16129 9.16129 2.64516 8.93548C3.12903 8.70967 3.64516 8.54838 4.19355 8.45161ZM2.64516 7.06451C2.16129 6.83871 1.67742 6.54839 1.25807 6.19355C0.741937 5.70968 0.322581 5.16129 0 4.54839H1.22581C2.87097 4.54839 4.19355 5.87097 4.19355 7.51613C3.64516 7.45161 3.12903 7.29032 2.64516 7.06451ZM7.48387 8.51613C7.29032 10.3871 5.80645 11.871 3.93549 12.0645C4.12903 10.1935 5.6129 8.70967 7.48387 8.51613ZM8.48387 8.51613C10.3548 8.74193 11.8387 10.1935 12.0645 12.0645V12.0968L12.0323 12.0645C10.1613 11.871 8.70968 10.3871 8.48387 8.51613ZM8.51613 7.51613C8.51613 7.51613 8.50538 7.51613 8.48387 7.51613H8.51613C8.70967 5.64516 10.1935 4.16129 12.0645 3.96774V3.93548C12.0645 3.95699 12.0645 3.96774 12.0645 3.96774C11.8387 5.83871 10.3871 7.32258 8.51613 7.51613ZM7.51613 7.51613C7.49463 7.51613 7.48387 7.51613 7.48387 7.51613C5.6129 7.29032 4.16129 5.80645 3.93549 3.93548C5.80645 4.16129 7.29032 5.6129 7.48387 7.48387L7.51613 7.51613Z" fill="#CE4836"></path></svg>
-          <span class="line"></span>
+  <!-- ═══════════════ HERO (split 50/50 + BillingToggle) ═══════════════ -->
+  <section class="pl2-section first">
+    <div class="pl2-wrap">
+      <div class="pl2-hero-grid">
+        <div class="pl2-hero-left pl2-fade">
+          <span class="eyebrow">Planos · por tamanho de operação</span>
+          <h1>Escolha o <em>tamanho</em> da sua operação</h1>
+          <p class="pl2-hero-lead">Você paga apenas pela quantidade de profissionais do seu salão. Todas as funcionalidades estão liberadas para todos.</p>
+          <div class="pl2-billing" role="group" aria-label="Periodicidade de cobrança">
+            <button type="button" data-billing="mensal" aria-pressed="true">Mensal</button>
+            <button type="button" data-billing="anual" aria-pressed="false">Anual<span class="save">−20%</span></button>
+          </div>
         </div>
-        <div class="pricing-price">
-          <span class="num">Em breve</span>
-        </div>
-        <button class="btn btn-tan-soft pricing-cta">Assinar</button>
-      </div>
-
-      <!-- Plano: Recepção Easy (featured) -->
-      <div class="pricing-card featured">
-        <span class="pricing-badge">Recomendado</span>
-        <h3 class="pricing-name">Recepção Easy</h3>
-        <p class="pricing-desc">Ideal para quem quer organizar agenda, responder clientes e parar de perder horários no WhatsApp. <strong style="font-weight:700;">Mensagens ilimitadas.</strong></p>
-        <div class="hero-divider" aria-hidden="true">
-          <span class="line"></span>
-          <svg class="star" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.45162 11.8065C10.0968 11.8065 11.4194 13.129 11.4194 14.7742V16C10.8065 15.6774 10.2581 15.2581 9.80645 14.7419C9.41935 14.3226 9.12903 13.8387 8.90322 13.3548C8.67742 12.871 8.51613 12.3548 8.45162 11.8065ZM7.06451 13.3548C6.83871 13.8387 6.54838 14.3226 6.16129 14.7419C5.70967 15.2581 5.16129 15.6774 4.54839 16V14.7742C4.54839 13.129 5.87097 11.8065 7.51613 11.8065C7.45162 12.3548 7.29032 12.871 7.06451 13.3548ZM11.8064 7.54838C11.8064 5.90322 13.129 4.58064 14.7742 4.58064H16C15.6774 5.19355 15.2581 5.74193 14.7097 6.19355C14.2903 6.58064 13.8387 6.87097 13.3548 7.09677C12.8387 7.32258 12.3226 7.48387 11.8064 7.54838ZM13.3548 8.93548C13.8387 9.16129 14.2903 9.45161 14.7097 9.83871C15.2581 10.2903 15.6774 10.8387 16 11.4516H14.7742C13.129 11.4516 11.8064 10.129 11.8064 8.48387C12.3226 8.54839 12.8387 8.70967 13.3548 8.93548ZM7.54838 4.19355C5.90322 4.19355 4.58065 2.87097 4.58065 1.22581V0C5.16129 0.322581 5.74194 0.741935 6.19355 1.29032C6.54839 1.70968 6.83871 2.16129 7.06451 2.64516C7.29032 3.16129 7.45161 3.67742 7.54838 4.19355ZM8.93549 2.64516C9.16129 2.16129 9.45161 1.70968 9.80645 1.29032C10.2903 0.741935 10.8387 0.322581 11.4516 0V1.22581C11.4516 2.87097 10.129 4.19355 8.48387 4.19355C8.54839 3.67742 8.70968 3.16129 8.93549 2.64516ZM4.19355 8.45161C4.19355 10.0968 2.87097 11.4194 1.22581 11.4194H0C0.322581 10.8387 0.741937 10.2581 1.25807 9.80645C1.67742 9.45161 2.16129 9.16129 2.64516 8.93548C3.12903 8.70967 3.64516 8.54838 4.19355 8.45161ZM2.64516 7.06451C2.16129 6.83871 1.67742 6.54839 1.25807 6.19355C0.741937 5.70968 0.322581 5.16129 0 4.54839H1.22581C2.87097 4.54839 4.19355 5.87097 4.19355 7.51613C3.64516 7.45161 3.12903 7.29032 2.64516 7.06451ZM7.48387 8.51613C7.29032 10.3871 5.80645 11.871 3.93549 12.0645C4.12903 10.1935 5.6129 8.70967 7.48387 8.51613ZM8.48387 8.51613C10.3548 8.74193 11.8387 10.1935 12.0645 12.0645V12.0968L12.0323 12.0645C10.1613 11.871 8.70968 10.3871 8.48387 8.51613ZM8.51613 7.51613C8.51613 7.51613 8.50538 7.51613 8.48387 7.51613H8.51613C8.70967 5.64516 10.1935 4.16129 12.0645 3.96774V3.93548C12.0645 3.95699 12.0645 3.96774 12.0645 3.96774C11.8387 5.83871 10.3871 7.32258 8.51613 7.51613ZM7.51613 7.51613C7.49463 7.51613 7.48387 7.51613 7.48387 7.51613C5.6129 7.29032 4.16129 5.80645 3.93549 3.93548C5.80645 4.16129 7.29032 5.6129 7.48387 7.48387L7.51613 7.51613Z" fill="#CE4836"></path></svg>
-          <span class="line"></span>
-        </div>
-        <div class="pricing-price">
-          <span class="num">Grátis</span>
-        </div>
-        <div class="pricing-price-note">por 30 dias / depois R$ 199,00/mês</div>
-        <div class="pricing-annual-note">Plano anual: para um salão com até 10 profissionais</div>
-        <a class="btn btn-primary pricing-cta" href="https://app.easysalon.com.br/register?utm_source=site"><span class="cta-label cta-label-desktop">Iniciar teste grátis por 30 dias</span><span class="cta-label cta-label-mobile">Teste grátis por 30 dias</span></a>
-      </div>
-
-      <!-- Plano: Enterprise -->
-      <div class="pricing-card">
-        <h3 class="pricing-name">Enterprise</h3>
-        <p class="pricing-desc">Para operações maiores, com mais<br>de um salão ou franquias.</p>
-        <div class="hero-divider" aria-hidden="true">
-          <span class="line"></span>
-          <svg class="star" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.45162 11.8065C10.0968 11.8065 11.4194 13.129 11.4194 14.7742V16C10.8065 15.6774 10.2581 15.2581 9.80645 14.7419C9.41935 14.3226 9.12903 13.8387 8.90322 13.3548C8.67742 12.871 8.51613 12.3548 8.45162 11.8065ZM7.06451 13.3548C6.83871 13.8387 6.54838 14.3226 6.16129 14.7419C5.70967 15.2581 5.16129 15.6774 4.54839 16V14.7742C4.54839 13.129 5.87097 11.8065 7.51613 11.8065C7.45162 12.3548 7.29032 12.871 7.06451 13.3548ZM11.8064 7.54838C11.8064 5.90322 13.129 4.58064 14.7742 4.58064H16C15.6774 5.19355 15.2581 5.74193 14.7097 6.19355C14.2903 6.58064 13.8387 6.87097 13.3548 7.09677C12.8387 7.32258 12.3226 7.48387 11.8064 7.54838ZM13.3548 8.93548C13.8387 9.16129 14.2903 9.45161 14.7097 9.83871C15.2581 10.2903 15.6774 10.8387 16 11.4516H14.7742C13.129 11.4516 11.8064 10.129 11.8064 8.48387C12.3226 8.54839 12.8387 8.70967 13.3548 8.93548ZM7.54838 4.19355C5.90322 4.19355 4.58065 2.87097 4.58065 1.22581V0C5.16129 0.322581 5.74194 0.741935 6.19355 1.29032C6.54839 1.70968 6.83871 2.16129 7.06451 2.64516C7.29032 3.16129 7.45161 3.67742 7.54838 4.19355ZM8.93549 2.64516C9.16129 2.16129 9.45161 1.70968 9.80645 1.29032C10.2903 0.741935 10.8387 0.322581 11.4516 0V1.22581C11.4516 2.87097 10.129 4.19355 8.48387 4.19355C8.54839 3.67742 8.70968 3.16129 8.93549 2.64516ZM4.19355 8.45161C4.19355 10.0968 2.87097 11.4194 1.22581 11.4194H0C0.322581 10.8387 0.741937 10.2581 1.25807 9.80645C1.67742 9.45161 2.16129 9.16129 2.64516 8.93548C3.12903 8.70967 3.64516 8.54838 4.19355 8.45161ZM2.64516 7.06451C2.16129 6.83871 1.67742 6.54839 1.25807 6.19355C0.741937 5.70968 0.322581 5.16129 0 4.54839H1.22581C2.87097 4.54839 4.19355 5.87097 4.19355 7.51613C3.64516 7.45161 3.12903 7.29032 2.64516 7.06451ZM7.48387 8.51613C7.29032 10.3871 5.80645 11.871 3.93549 12.0645C4.12903 10.1935 5.6129 8.70967 7.48387 8.51613ZM8.48387 8.51613C10.3548 8.74193 11.8387 10.1935 12.0645 12.0645V12.0968L12.0323 12.0645C10.1613 11.871 8.70968 10.3871 8.48387 8.51613ZM8.51613 7.51613C8.51613 7.51613 8.50538 7.51613 8.48387 7.51613H8.51613C8.70967 5.64516 10.1935 4.16129 12.0645 3.96774V3.93548C12.0645 3.95699 12.0645 3.96774 12.0645 3.96774C11.8387 5.83871 10.3871 7.32258 8.51613 7.51613ZM7.51613 7.51613C7.49463 7.51613 7.48387 7.51613 7.48387 7.51613C5.6129 7.29032 4.16129 5.80645 3.93549 3.93548C5.80645 4.16129 7.29032 5.6129 7.48387 7.48387L7.51613 7.51613Z" fill="#CE4836"></path></svg>
-          <span class="line"></span>
-        </div>
-        <div class="pricing-price">
-          <span class="num">Sob Consulta</span>
-        </div>
-        <a class="btn btn-outline pricing-cta" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+falar+com+um+consultar+sobre+o+Plano+Enterprise+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener">Falar com consultor</a>
+        <div class="pl2-hero-right pl2-fade" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── COMPARADOR ─────────────── -->
-  <section class="compare-section">
-    <div class="compare-table-wrap">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Funcionalidades</th>
-            <th>Recepção Easy</th>
-            <th>Full</th>
-            <th>Enterprise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Recepcionista virtual humanizada sempre ativa.</strong></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td><strong>Resposta para seus clientes no WhatsApp ou chat.</strong></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Agenda organizada automaticamente, sem conflitos.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Link para seus clientes agendarem sozinhos.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Agenda personalizada por profissional e por serviço.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Integração oficial com o WhatsApp.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>App para acompanhar atendimentos.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Agenda com a identidade do seu salão (logo e cores).</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Gestão completa de clientes, serviços e especialidades.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Controle de horários e disponibilidade da equipe.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Cadastro de usuários com diferentes níveis de acesso.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Painel simples para acompanhar sua operação.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Agenda integrada com comandas do salão.</td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Módulo financeiro.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Relatórios.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Integração de máquina de cartão via Cielo.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Gestão de Franquias.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Split de pagamento com profissionais.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Lembretes de agendamento para clientes.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Pesquisa de satisfação.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Suporte dedicado.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Treinamento da equipe.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Integração com sistemas.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-          <tr>
-            <td>Parametrização especial.</td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-empty"></span></td>
-            <td><span class="compare-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>Contrate agora</td>
-            <td><a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site"><span class="cta-label cta-label-desktop">Iniciar teste grátis por 30 dias</span><span class="cta-label cta-label-mobile">Teste grátis por 30 dias</span></a></td>
-            <td><button class="btn btn-tan-soft" disabled style="opacity:0.5;cursor:not-allowed;">Assinar</button></td>
-            <td><a class="btn btn-outline" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+falar+com+um+consultar+sobre+o+Plano+Enterprise+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener">Falar com consultor</a></td>
-          </tr>
-        </tfoot>
-      </table>
+  <!-- ═══════════════ SEÇÃO 01 — FAIXAS DE PRECIFICAÇÃO ═══════════════ -->
+  <section class="pl2-section" style="border-top:none;padding-top:0;">
+    <div class="pl2-wrap">
+      <div class="pl2-pricing-grid">
+        <!-- Faixa 1 — 1 a 2 -->
+        <div class="pl2-pcard pl2-fade">
+          <div class="tier">1 a 2</div>
+          <div class="who">profissionais</div>
+          <div class="price"><span class="big" data-price data-monthly="89" data-yearly="71">R$ 89</span><span class="small" data-suffix>/mês</span></div>
+          <p class="desc">Para o profissional solo ou a dupla que está começando a organizar a rotina.</p>
+          <a class="btn btn-tan-soft" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
+        </div>
+        <!-- Faixa 2 — 3 a 5 -->
+        <div class="pl2-pcard pl2-fade">
+          <div class="tier">3 a 5</div>
+          <div class="who">profissionais</div>
+          <div class="price"><span class="big" data-price data-monthly="149" data-yearly="119">R$ 149</span><span class="small" data-suffix>/mês</span></div>
+          <p class="desc">Para o salão com time já consolidado e operação em ritmo crescente.</p>
+          <a class="btn btn-tan-soft" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
+        </div>
+        <!-- Faixa 3 — 6 a 10 -->
+        <div class="pl2-pcard pl2-fade">
+          <div class="tier">6 a 10</div>
+          <div class="who">profissionais</div>
+          <div class="price"><span class="big" data-price data-monthly="249" data-yearly="199">R$ 249</span><span class="small" data-suffix>/mês</span></div>
+          <p class="desc">Para o salão em crescimento que precisa de controle completo da operação.</p>
+          <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
+        </div>
+        <!-- Faixa 4 — 11 a 20 -->
+        <div class="pl2-pcard pl2-fade">
+          <div class="tier">11 a 20</div>
+          <div class="who">profissionais</div>
+          <div class="price"><span class="big" data-price data-monthly="399" data-yearly="319">R$ 399</span><span class="small" data-suffix>/mês</span></div>
+          <p class="desc">Para salões consolidados com time grande e operação complexa.</p>
+          <a class="btn btn-tan-soft" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
+        </div>
+        <!-- Faixa 5 — 21+ -->
+        <div class="pl2-pcard pl2-fade">
+          <div class="tier">21+</div>
+          <div class="who">profissionais ou multi-unidades</div>
+          <div class="price"><span class="big">Sob consulta</span></div>
+          <p class="desc">Para redes e operações com múltiplas unidades. Atendimento personalizado.</p>
+          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=5541991044112&amp;text=Quero+falar+com+vendas+sobre+a+faixa+21%2B+da+Easy+Salon.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">Falar com vendas</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ─────────────── 5 PASSOS ─────────────── -->
-  <section class="steps-section" data-screen-label="5 passos Easy" style="margin: 0 auto 80px; padding: 80px 80px 30px">
-    <h2>Turbine seu dia a dia com <em>funcionalidades pensadas</em><br>para quem trabalha com beleza</h2>
-    <div class="steps-cta-top" style="margin: 0 0 60px; text-align: center;">
-      <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:240px;">Experimente grátis por 30 dias</a>
-    </div>
-
-    <div class="step-row">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">01</span>
-      <div class="body">
-        <p class="step-cat">Recepcionista virtual humanizada</p>
-        <h3 style="margin: 20px 0px">Atendimento sempre online em qualquer momento.</h3>
-        <ul style="margin: 0; gap: 14px">
-          <li><span><strong>Não perca clientes:</strong> Evite erros, horários sobrepostos e sobrecarga.</span></li>
-          <li><span>Organize e visualize o dia e a semana de cada profissional do salão.</span></li>
-          <li><span>Organize clientes fixos e recorrentes.</span></li>
-          <li><span>Tenha previsibilidade de ocupação do salão.</span></li>
-          <li><span>Economize até R$ 30 mil por ano em equipe.</span></li>
-        </ul>
+  <!-- ═══════════════ SEÇÃO 02 — TUDO INCLUSO (bento) ═══════════════ -->
+  <section class="pl2-section">
+    <div class="pl2-wrap">
+      <div class="pl2-sechead pl2-fade">
+        <span class="eyebrow"><span class="dot"></span>02 · Tudo Que Está Incluso</span>
+        <h2>Todas as funcionalidades em <em>todos os planos</em></h2>
+        <p>Não importa o tamanho do seu salão — você tem acesso ao sistema completo.</p>
       </div>
-      <div class="photo" style="background-image:url('/assets/passos/passo-1-planos.png')"></div>
-    </div>
-
-    <div class="step-row reverse">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <div class="photo" style="background-image:url('/assets/passos/passo-2-planos.png')"></div>
-      <div class="body">
-        <p class="step-cat">Automações e Chatbots</p>
-        <h3 style="margin: 20px 0px">Automatize tarefas e ganhe tempo todos os dia.</h3>
-        <ul style="margin: 0; gap: 14px">
-          <li><span>Mensagens automáticas de confirmação e lembrete.</span></li>
-          <li><span>Comunicação personalizada com base no histórico.</span></li>
-          <li><span>Reativação de clientes inativos.</span></li>
-          <li><span>Campanhas de recorrência e fidelização.</span></li>
-          <li><span>Fluxos automatizados de pós-venda.</span></li>
-        </ul>
+      <div class="pl2-incluso-bento">
+        <!-- Agenda -->
+        <div class="pl2-tile pl2-fade">
+          <h3>Agenda</h3>
+          <ul class="check-list">
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Agenda multi-profissional</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Bloqueio automático de conflitos</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Booking online com link</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Confirmação automática</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Lista de espera ativa</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Visões semanal, diária e por profissional</li>
+          </ul>
+        </div>
+        <!-- Clientes -->
+        <div class="pl2-tile pl2-fade">
+          <h3>Clientes</h3>
+          <ul class="check-list">
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cadastro ilimitado de clientes</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Histórico completo de atendimento</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Ficha de anamnese</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cartão presente · Convênio · Cortesia</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Pacote de serviços</li>
+          </ul>
+        </div>
+        <!-- Financeiro -->
+        <div class="pl2-tile pl2-fade">
+          <h3>Financeiro</h3>
+          <ul class="check-list">
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Caixa diário</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Comissões automatizadas</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Repasses por profissional</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Dashboard de faturamento</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Pagamento em massa</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Exportação para contabilidade</li>
+          </ul>
+        </div>
+        <!-- Estoque -->
+        <div class="pl2-tile pl2-fade">
+          <h3>Estoque</h3>
+          <ul class="check-list">
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cadastro ilimitado de produtos</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Alerta de estoque mínimo</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Consumo por serviço</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Inventário</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Histórico de movimentação</li>
+          </ul>
+        </div>
+        <!-- Marketing -->
+        <div class="pl2-tile pl2-fade">
+          <h3>Marketing e Fidelização</h3>
+          <ul class="check-list">
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Promoções</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Programa de fidelidade digital</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Combos de serviços</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Histórico de compras</li>
+          </ul>
+        </div>
+        <!-- Equipe -->
+        <div class="pl2-tile pl2-fade">
+          <h3>Equipe e Suporte</h3>
+          <ul class="check-list">
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>App do Profissional (iOS e Android)</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cadastro ilimitado de profissionais</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Suporte online</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Atualizações constantes</li>
+          </ul>
+        </div>
+        <!-- IA — faixa larga (span 3) -->
+        <div class="pl2-tile span-3 pl2-fade">
+          <h3>Inteligência Artificial</h3>
+          <ul class="check-list">
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Recepcionista virtual no WhatsApp</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Sugestão de horários</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Análise de desempenho da equipe</li>
+            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Previsão de demanda</li>
+          </ul>
+        </div>
       </div>
-      <span class="num">02</span>
-    </div>
-
-    <div class="step-row">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">03</span>
-      <div class="body">
-        <p class="step-cat">Controle dos percentuais de profissionais</p>
-        <h3 style="margin: 20px 0px">Transparência e confiança na relação com a equipe.</h3>
-        <ul style="margin: 0; gap: 14px">
-          <li><span>Cálculo automático por serviço, profissional e data.</span></li>
-          <li><span>Relatórios individuais para cada colaborador.</span></li>
-          <li><span>Integração com o caixa e o financeiro.</span></li>
-          <li><span>Redução de erros e divergências.</span></li>
-          <li><span>Transparência e clareza nos repasses no painel do parceiro.</span></li>
-        </ul>
-      </div>
-      <div class="photo" style="background-image:url('/assets/passos/passo-3-planos.png')"></div>
-    </div>
-
-    <div class="step-row reverse">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <div class="photo" style="background-image:url('/assets/passos/passo-4-planos.png')"></div>
-      <div class="body">
-        <p class="step-cat">Controle Financeiro</p>
-        <h3 style="margin: 20px 0px">Controle o caixa e saiba exatamente quanto ganha.</h3>
-        <ul style="margin: 0; gap: 14px">
-          <li><span>Controle completo de entradas, saídas e percentuais.</span></li>
-          <li><span>Relatórios de lucro e rentabilidade.</span></li>
-          <li><span>Acompanhamento diário e mensal do caixa.</span></li>
-          <li><span>Categorização automática por tipo de serviço.</span></li>
-          <li><span>Previsão financeira e metas por profissional.</span></li>
-        </ul>
-      </div>
-      <span class="num">04</span>
-    </div>
-
-    <div class="step-row tl-last">
-      <span class="tl-seg" aria-hidden="true"></span>
-      <span class="num">05</span>
-      <div class="body">
-        <p class="step-cat">Relatórios e Indicadores</p>
-        <h3 style="margin: 20px 0px">Decisões guiadas por dados, não por achismos.</h3>
-        <ul style="margin: 0; gap: 14px">
-          <li><span>Relatórios em tempo real.</span></li>
-          <li><span>Indicadores por profissional, serviço e unidade.</span></li>
-          <li><span>Comparativos de desempenho e ocupação.</span></li>
-          <li><span>Exportação simples para Excel ou PDF.</span></li>
-          <li><span>Base para decisões de crescimento.</span></li>
-        </ul>
-      </div>
-      <div class="photo" style="background-image:url('/assets/passos/passo-5-planos.png')"></div>
     </div>
   </section>
 
-  <!-- ─────────────── VEJA A EASY ─────────────── -->
-  <!-- Conteúdo compartilhado com a home via /partials/section-veja.html -->
-  <div data-include="/partials/section-veja.html"></div>
+  <!-- ═══════════════ SEÇÃO 03 — RECURSOS ADICIONAIS ═══════════════ -->
+  <section class="pl2-section">
+    <div class="pl2-wrap">
+      <div class="pl2-sechead pl2-fade">
+        <span class="eyebrow"><span class="dot"></span>03 · Recursos Adicionais</span>
+        <h2>Quer ir além? <em>Contrate por fora</em></h2>
+        <p>Recursos opcionais que se contratam separadamente, conforme a necessidade do seu salão.</p>
+      </div>
+      <div class="pl2-add-grid">
+        <div class="pl2-acard pl2-fade">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2.5"></rect><path d="M12 18h.01"></path></svg></span>
+          <h3>Aplicativo exclusivo do salão</h3>
+          <p>Seu próprio app de agendamento com a identidade visual do salão. Disponível na App Store e Google Play sob a sua marca.</p>
+          <span class="chip">Contratação opcional</span>
+        </div>
+        <div class="pl2-acard pl2-fade">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"></path><path d="M12 8v4l2.5 2.5"></path></svg></span>
+          <h3>Clube de assinatura</h3>
+          <p>Crie planos de fidelidade recorrentes para os seus clientes. Receita previsível mês a mês.</p>
+          <span class="chip">Contratação opcional</span>
+        </div>
+        <div class="pl2-acard pl2-fade">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></span>
+          <h3>Rotina de mensageria</h3>
+          <p>Disparo automatizado de mensagens para clientes inativos, aniversariantes e campanhas sazonais.</p>
+          <span class="chip">Contratação opcional</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- ─────────────── POR TRÁS DA EASY ─────────────── -->
-  <!-- Conteúdo compartilhado com a home via /partials/section-team.html -->
-  <div data-include="/partials/section-team.html"></div>
-
-  <!-- ─────────────── FAQ ─────────────── -->
-  <section class="faq-section">
-    <h2>Ficou com <em>dúvida</em>?</h2>
-    <div class="faq-list">
-      <details class="faq-item"><summary>O Plano IA é realmente grátis?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Sim, você pode utilizar gratuitamente por 60 dias o Plano IA. Apenas após esse período será necessário realizar o pagamento. O valor é de R$ 299/mês por salão (incluindo 10 profissionais).</div></div></div></details>
-      <details class="faq-item"><summary>Preciso cadastrar cartão de crédito para usar a versão gratuita?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Não. Você pode usar a Easy por 60 dias sem cartão, sem compromisso e sem risco de cobrança automática.</div></div></div></details>
-      <details class="faq-item"><summary>Quanto custa usar a Easy depois do período gratuito?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Após o período de testes, o valor do plano Easy IA R$ 299,00/mês por salão. Incluindo até 10 profissionais por salão.</div></div></div></details>
-      <details class="faq-item"><summary>Como funciona a cobrança por profissional?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">No Plano Easy IA, o valor inclui até 10 profissionais. Você só paga pelos profissionais que realmente usam o sistema.</div></div></div></details>
-      <details class="faq-item"><summary>Posso mudar de plano quando quiser?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Sim. Você pode fazer upgrade ou downgrade a qualquer momento e o valor é ajustado proporcionalmente.</div></div></div></details>
-      <details class="faq-item"><summary>O plano gratuito tem todas as funcionalidades?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Durante os 60 dias, sim. Você tem acesso completo à agenda e às principais funcionalidades para testar tudo antes de decidir.</div></div></div></details>
-      <details class="faq-item"><summary>Qual plano é melhor para meu salão, barbearia ou estúdio?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Recomendamos iniciar com o Plano Easy IA, depois considerar o Plano Full, e o Plano Enterprise para grandes operações.</div></div></div></details>
-      <details class="faq-item"><summary>Como funciona o plano para grandes estabelecimentos e grandes equipes?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">O Plano Enterprise é personalizado para operações maiores. Inclui onboarding dedicado, parametrização da operação e condições especiais por volume.</div></div></div></details>
-      <details class="faq-item"><summary>A Easy cobra taxa por agendamento ou por atendimento?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Não. Você paga apenas pela assinatura mensal, sem taxas extras por atendimento.</div></div></div></details>
-      <details class="faq-item"><summary>Posso usar a Easy mesmo com pouco movimento?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Sim. A Easy funciona para negócios pequenos, médios e grandes. E ajuda você a crescer com organização e previsibilidade.</div></div></div></details>
-      <details class="faq-item"><summary>Meus dados e dos meus clientes ficam seguros?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Sim. A Easy usa infraestrutura segura, criptografia e boas práticas de proteção de dados.</div></div></div></details>
-      <details class="faq-item"><summary>O que acontece se eu cancelar o plano?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Nada é apagado imediatamente. Você pode exportar seus dados e voltar quando quiser.</div></div></div></details>
-      <details class="faq-item"><summary>A Easy funciona em qualquer cidade do Brasil?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Sim. Basta ter acesso à internet. A plataforma é usada por salões, barbearias e estúdios em todo o país.</div></div></div></details>
-      <details class="faq-item"><summary>A Easy substitui minha agenda física?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Sim. A plataforma organiza horários, envia lembretes automáticos e centraliza tudo em um só lugar.</div></div></div></details>
-      <details class="faq-item"><summary>Existe suporte para dúvidas?<span class="marker" aria-hidden="true"></span></summary><div class="answer-wrap"><div class="answer-inner"><div class="answer">Sim. Todos os planos pagos incluem guias de uso e suporte. O Plano Enterprise inclui onboarding dedicado.</div></div></div></details>
+  <!-- ═══════════════ SEÇÃO 04 — INFORMAÇÕES DE CONTRATAÇÃO ═══════════════ -->
+  <section class="pl2-section">
+    <div class="pl2-wrap">
+      <div class="pl2-sechead pl2-fade">
+        <span class="eyebrow"><span class="dot"></span>04 · Informações de Contratação</span>
+        <h2>Sem <em>letra miúda</em></h2>
+        <p>O que você precisa saber antes de contratar — direto, sem rodeio.</p>
+      </div>
+      <div class="pl2-contrato-card pl2-fade">
+        <div class="pl2-contrato-item">
+          <div class="head"><span class="check">✓</span><h4>14 dias grátis</h4></div>
+          <p>Você testa todas as funcionalidades sem informar cartão de crédito.</p>
+        </div>
+        <div class="pl2-contrato-item col-mid">
+          <div class="head"><span class="check">✓</span><h4>Sem taxa de adesão</h4></div>
+          <p>Não cobramos para você começar a usar. Sem taxa de setup.</p>
+        </div>
+        <div class="pl2-contrato-item col-right">
+          <div class="head"><span class="check">✓</span><h4>Sem fidelidade</h4></div>
+          <p>Cancele a qualquer momento, sem multa, sem burocracia.</p>
+        </div>
+        <div class="pl2-contrato-item row-bot">
+          <div class="head"><span class="check">✓</span><h4>Pagamento flexível</h4></div>
+          <p>Boleto, cartão de crédito ou PIX. Mensal ou anual.</p>
+        </div>
+        <div class="pl2-contrato-item col-mid row-bot">
+          <div class="head"><span class="check">✓</span><h4>Anual sem travar seu cartão</h4></div>
+          <p>O valor do plano anual é cobrado mês a mês, sem alocar o limite do cartão.</p>
+        </div>
+        <div class="pl2-contrato-item col-right row-bot">
+          <div class="head"><span class="check">✓</span><h4>Migração sem dor</h4></div>
+          <p>Nossa equipe ajuda a trazer seus dados de outro sistema ou planilha. Sem custo.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -425,8 +611,8 @@
       <div class="footer-cta-grid">
         <div class="footer-cta-left">
           <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 30 dias</span>
-          <h2>Pronto para Profissionalizar<br>o seu negócio da beleza com<br>a Easy Salon?</h2>
-          <p>A Easy Salon ajuda donos de salão, barbearia e estúdios de beleza a organizarem sua agenda e evoluírem para uma gestão simples e inteligente.</p>
+          <h2>Comece grátis hoje.<br>Decida <em>quando quiser</em>.</h2>
+          <p>Teste o sistema completo sem cartão. Quando gostar, escolhe a faixa de profissionais do seu salão — sem fidelidade, sem letra miúda.</p>
           <div class="btn-cta-row" style="justify-content:flex-start;">
             <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:177px;">Comece grátis</a>
             <a class="btn btn-outline-cream" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width:180px;">Agendar demonstração</a>
@@ -479,8 +665,10 @@
       <a class="drawer-link" href="/salao-de-beleza">Salão de beleza</a>
       <a class="drawer-link" href="/barbearia">Barbearia</a>
       <a class="drawer-link" href="/estudio-de-beleza">Estúdio de beleza</a>
-      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/funcionalidades">Funcionalidades</a>
       <a class="drawer-link" href="/planos">Planos</a>
+      <a class="drawer-link" href="/quem-somos">Quem somos</a>
+      <a class="drawer-link" href="/blog">Blog</a>
     </nav>
     <div class="drawer-cta">
       <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:100%;">Teste grátis</a>
@@ -524,46 +712,37 @@
     if (!('IntersectionObserver' in window)) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return;
-    var nodes = document.querySelectorAll('.nav-inner > *, .plans-hero > *, .pricing-grid > *, .compare-table tbody tr, .step-row > *, .section-veja .pill, .section-veja .veja-sub, .section-veja .btn-cta-row, .veja-card, .team-block > *, .faq-list > *, .footer-cta-left > *, .footer-cta-right > *, .footer-bottom > *');
+    var nodes = document.querySelectorAll('.nav-inner > *, .pl2-fade, .footer-cta-left > *, .footer-cta-right > *, .footer-bottom > *');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     nodes.forEach(function (n, i) { n.style.transitionDelay = Math.min((i % 6) * 90, 540) + 'ms'; io.observe(n); });
   })();
 
-  // Timeline (5 passos) — linha vertical que se preenche conforme o scroll.
+  // BillingToggle — alterna preços mensal ↔ anual nos cards
   (function () {
-    var rows = Array.prototype.slice.call(document.querySelectorAll('.step-row'));
-    if (!rows.length) return;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var toggle = document.querySelector('.pl2-billing');
+    if (!toggle) return;
+    var btns = toggle.querySelectorAll('button[data-billing]');
+    var prices = document.querySelectorAll('[data-price]');
+    var suffixes = document.querySelectorAll('[data-suffix]');
 
-    function update() {
-      var triggerY = window.innerHeight * 0.62;
-      rows.forEach(function (row) {
-        var seg = row.querySelector('.tl-seg');
-        if (!seg) return;
-        var rect = seg.getBoundingClientRect();
-        if (rect.height <= 0) return;
-        var filled;
-        if (reduce) {
-          filled = (rect.top < triggerY) ? rect.height : 0;
-        } else {
-          var offset = triggerY - rect.top;
-          filled = Math.max(0, Math.min(rect.height, offset));
-        }
-        row.style.setProperty('--tl-progress', filled.toFixed(1) + 'px');
+    function setBilling(mode) {
+      btns.forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-billing') === mode ? 'true' : 'false');
+      });
+      prices.forEach(function (p) {
+        var v = mode === 'anual' ? p.getAttribute('data-yearly') : p.getAttribute('data-monthly');
+        if (v) p.textContent = 'R$ ' + v;
+      });
+      suffixes.forEach(function (s) {
+        s.textContent = '/mês' + (mode === 'anual' ? ' · no anual' : '');
       });
     }
 
-    var ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () { update(); ticking = false; });
-    }
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () { setBilling(b.getAttribute('data-billing')); });
+    });
   })();
 
   // Nav scroll shadow
