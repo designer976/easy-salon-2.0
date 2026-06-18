@@ -12,7 +12,8 @@
   var NAME = 'Raissa';
   var GREETING = 'Oi, tudo bem 👋 ? ' + NAME + ' da Easy Salon aqui!';
   var DEFAULT_MSG = 'Oi! Vim pelo site da Easy Salon, quero saber mais.';
-  var AUTO_POPUP_DELAY = 5000;
+  var DELAY_AFTER_GESTURE = 3000;   // mostra 3s depois do 1º clique/scroll/tecla
+  var FALLBACK_DELAY = 12000;       // se ninguém interagir, mostra (sem som) em 12s
   var TOAST_COOLDOWN_MS = 6 * 60 * 60 * 1000; // 6h — não repete se já mostrou
   var STORAGE_KEY = 'wa-widget-toast-next';
   var SOUND_URL = '/assets/wpp.mp3';
@@ -132,7 +133,40 @@
       input.value = '';
     });
 
-    setTimeout(showToast, AUTO_POPUP_DELAY);
+    // Auto-popup respeitando a política de autoplay: aguarda o 1º gesto
+    // do usuário, libera o áudio com um play+pause silencioso e mostra
+    // o toast 3s depois. Fallback: 12s sem gesto, mostra sem som.
+    (function () {
+      var armed = false;
+      var events = ['pointerdown', 'touchstart', 'keydown', 'mousemove', 'wheel'];
+      var fallback = setTimeout(function () {
+        if (armed) return;
+        armed = true; cleanup();
+        showToast();
+      }, FALLBACK_DELAY);
+      function cleanup() {
+        events.forEach(function (e) {
+          window.removeEventListener(e, onGesture, true);
+        });
+      }
+      function onGesture() {
+        if (armed) return;
+        armed = true; cleanup(); clearTimeout(fallback);
+        // Unlock audio com play+pause silencioso (browser libera porque o
+        // gesto está no stack atual)
+        if (audio) {
+          var p = audio.play();
+          if (p && p.then) {
+            p.then(function () { audio.pause(); audio.currentTime = 0; })
+             .catch(function () { /* deu ruim, segue sem som */ });
+          }
+        }
+        setTimeout(showToast, DELAY_AFTER_GESTURE);
+      }
+      events.forEach(function (e) {
+        window.addEventListener(e, onGesture, { capture: true, passive: true });
+      });
+    })();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
