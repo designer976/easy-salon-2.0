@@ -175,6 +175,13 @@
   }
   /* Hover lift/glow só em dispositivos com hover real (evita ficar "preso" em touch) */
   @media (hover: hover) {
+    /* Suprime hover quando o chip foi recém-clicado (até o cursor sair) */
+    [data-screen-label="Funcionalidades"] .fn-chip.is-clicked:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    [data-screen-label="Funcionalidades"] .fn-chip.is-clicked:hover::before,
+    [data-screen-label="Funcionalidades"] .fn-chip.is-clicked:hover::after { opacity: 0; }
     [data-screen-label="Funcionalidades"] .fn-chip:hover {
       transform: translateY(-3px);
       background: var(--c-accent); color: rgb(244,241,234);
@@ -859,6 +866,13 @@
         history.replaceState(null, '', '#' + id);
         // remove o foco do chip pra não manter o hover/focus visual após o clique
         a.blur();
+        // Suprime o hover lift até o cursor sair do chip (desktop)
+        a.classList.add('is-clicked');
+        var onLeave = function () {
+          a.classList.remove('is-clicked');
+          a.removeEventListener('mouseleave', onLeave);
+        };
+        a.addEventListener('mouseleave', onLeave);
       });
     });
   })();
