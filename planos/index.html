@@ -147,9 +147,11 @@
     transform: translateX(100%);
   }
   [data-screen-label="Planos"] .pl2-billing button {
-    position: relative; z-index: 1; flex: 1;
+    position: relative; z-index: 1;
+    flex: 1 1 0; min-width: 0; /* força larguras iguais (sem respeitar content-size) */
     cursor: pointer; border: none; border-radius: 999px;
     padding: 9px 20px; font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    text-align: center;
     background: transparent; color: var(--c-text); opacity: .7;
     transition: color .25s ease, opacity .25s ease;
     white-space: nowrap;
