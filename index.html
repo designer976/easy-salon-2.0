@@ -984,8 +984,8 @@
       </div>
     </div>
     <div class="h2-compare-dots" aria-hidden="true">
-      <button type="button" class="h2-compare-dot active" data-idx="0" aria-label="Mostrar Com Easy"></button>
-      <button type="button" class="h2-compare-dot" data-idx="1" aria-label="Mostrar Sem Easy"></button>
+      <button type="button" class="h2-compare-dot" data-idx="0" aria-label="Mostrar Sem Easy"></button>
+      <button type="button" class="h2-compare-dot active" data-idx="1" aria-label="Mostrar Com Easy"></button>
     </div>
     <div class="h2-compare-cta">
       <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width:180px;">Comece grátis</a>
@@ -1555,7 +1555,7 @@
     var dots = document.querySelectorAll('.h2-compare-dot');
     if (!compare || !dots.length) return;
     function isMobile() { return window.matchMedia('(max-width: 640px)').matches; }
-    // DOM idx: 0 = neg (Sem), 1 = pos (Com)  →  Dot idx: 0 = pos, 1 = neg
+    // DOM idx === Dot idx (0 = Sem/neg, 1 = Com/pos)
     function activeDotIdx() {
       if (!isMobile()) return -1;
       var cols = compare.querySelectorAll('.h2-compare-col');
@@ -1566,7 +1566,7 @@
         var d = Math.abs(cc - center);
         if (d < closestDist) { closestDist = d; closestDom = i; }
       });
-      return closestDom === 1 ? 0 : 1;
+      return closestDom;
     }
     function updateDots() {
       var idx = activeDotIdx();
@@ -1590,7 +1590,7 @@
     dots.forEach(function (d, i) {
       d.addEventListener('click', function () {
         if (!isMobile()) return;
-        var sel = i === 0 ? '.h2-compare-col--pos' : '.h2-compare-col--neg';
+        var sel = i === 0 ? '.h2-compare-col--neg' : '.h2-compare-col--pos';
         var card = compare.querySelector(sel);
         if (card) compare.scrollTo({ left: card.offsetLeft - 24, behavior: 'smooth' });
       });
