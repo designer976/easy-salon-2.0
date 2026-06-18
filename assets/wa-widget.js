@@ -16,7 +16,8 @@
   var DEFAULT_MSG = 'Oi! Vim pelo site da Easy Salon, quero saber mais.';
   var DELAY_AFTER_GESTURE = 3000;   // mostra 3s depois do 1º clique/scroll/tecla
   var FALLBACK_DELAY = 12000;       // se ninguém interagir, mostra (sem som) em 12s
-  var STORAGE_KEY = 'wa-widget-toast-shown'; // sessionStorage: 1× por aba/sessão
+  var STORAGE_KEY = 'wa-widget-toast-shown';  // sessionStorage: toast 1× por aba/sessão
+  var BADGE_KEY = 'wa-widget-badge-on';       // sessionStorage: badge "1" persiste entre páginas
   var SOUND_URL = '/assets/wpp.mp3';
   var AVATAR_URL = '/assets/raissa.jpg';
 
@@ -118,7 +119,13 @@
       if (!badge) badge = root.querySelector('.wa-fab-badge');
       if (!badge) return;
       badge.hidden = !visible;
+      try {
+        if (visible) sessionStorage.setItem(BADGE_KEY, '1');
+        else sessionStorage.removeItem(BADGE_KEY);
+      } catch (e) {}
     }
+    // Restaura badge se o usuário trocou de página com a notificação ainda ativa
+    try { if (sessionStorage.getItem(BADGE_KEY)) setBadge(true); } catch (e) {}
     function openModal() {
       hideToast(true);
       setBadge(false);
