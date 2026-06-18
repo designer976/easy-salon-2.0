@@ -1598,6 +1598,31 @@
       to = setTimeout(initScroll, 100);
     });
   })();
+
+  // Home · Mobile: move .h2-compare-cta para depois do grid de IA
+  (function () {
+    var cta = document.querySelector('.h2-compare-cta');
+    if (!cta) return;
+    var originalParent = cta.parentNode;
+    var originalNext = cta.nextSibling;
+    var mq = window.matchMedia('(max-width: 1024px)');
+    function apply() {
+      var grid = document.querySelector('.h2-grid-4');
+      if (!grid) return;
+      if (mq.matches) {
+        if (cta.nextElementSibling !== null || cta.parentNode !== grid.parentNode) {
+          grid.parentNode.insertBefore(cta, grid.nextSibling);
+        }
+      } else {
+        if (cta.parentNode !== originalParent) {
+          originalParent.insertBefore(cta, originalNext);
+        }
+      }
+    }
+    if (mq.addEventListener) mq.addEventListener('change', apply);
+    else mq.addListener(apply);
+    apply();
+  })();
 </script>
 
 <script>
