@@ -9,7 +9,7 @@
   'use strict';
 
   var PHONE = '5541991044112';
-  var NAME = 'Raissa';
+  var NAME = 'Dani';
   var GREETING = 'Oi, tudo bem 👋 ? ' + NAME + ' da Easy Salon aqui!';
   var SECOND_MSG = 'Procurando um sistema de gestão para o seu <strong>salão de beleza</strong>, <strong>barbearia</strong> ou <strong>estúdio</strong>?';
   var SECOND_MSG_DELAY = 2500;      // delay do "digitando" até a 2ª mensagem
@@ -34,7 +34,7 @@
   function avatar(small) {
     var cls = 'wa-avatar' + (small ? ' wa-avatar--sm' : '');
     return '<div class="' + cls + '">' +
-      '<span class="wa-avatar-fallback">R</span>' +
+      '<span class="wa-avatar-fallback">' + NAME.charAt(0).toUpperCase() + '</span>' +
       '<img src="' + AVATAR_URL + '" alt="" onerror="this.remove()">' +
       '</div>';
   }

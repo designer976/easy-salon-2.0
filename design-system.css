@@ -4233,7 +4233,7 @@ br.br-d { display: inline; }
   gap: 10px;
 }
 .wa-modal-id { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.wa-modal-id > div:not(.wa-avatar) { display: flex; flex-direction: column; gap: 4px; }
+.wa-modal-id > div:not(.wa-avatar) { display: flex; flex-direction: column; gap: 0; }
 .wa-modal-id strong {
   display: block;
   font-size: 14px; font-weight: 600;
