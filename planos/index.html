@@ -53,11 +53,11 @@
     max-width: 1200px; margin: 0 auto; padding: 0;
   }
   [data-screen-label="Planos"] .h2-hero-grid {
-    display: grid; grid-template-columns: 1fr 702px; gap: 40px; align-items: center;
+    display: grid; grid-template-columns: 1fr 702px; gap: 40px; align-items: stretch;
   }
   [data-screen-label="Planos"] .h2-hero-text {
     display: flex; flex-direction: column;
-    height: fit-content;
+    /* sem height: fit-content para esticar até a altura do .h2-hero-img */
   }
   [data-screen-label="Planos"] .h2-hero-text .pill { margin-bottom: 0; align-self: flex-start; }
   [data-screen-label="Planos"] .h2-hero-text h1 {
