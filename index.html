@@ -1347,7 +1347,9 @@
       var viewport = root.querySelector('.h2-gallery-viewport');
       var card = cards[idx];
       if (isMobile()) {
-        // Mobile: scroll nativo da viewport, snap centraliza o card
+        // Mobile: scroll nativo da viewport, snap centraliza o card.
+        // Limpa transform residual do desktop (CSS já força none mas inline pode interferir)
+        track.style.transform = '';
         var target = card.offsetLeft - (viewport.clientWidth - card.offsetWidth) / 2;
         viewport.scrollTo({ left: target, behavior: 'smooth' });
       } else {
@@ -1429,7 +1431,10 @@
       }, { passive: true });
     })();
 
-    window.addEventListener('resize', function () { setActive(idx); });
+    // Resize: re-centraliza só no desktop. Mobile = scroll nativo, não mexer.
+    window.addEventListener('resize', function () {
+      if (!isMobile()) setActive(idx);
+    });
 
     // só roda quando visível
     var io = new IntersectionObserver(function (entries) {
@@ -1445,6 +1450,10 @@
 
     // posiciona inicial
     setActive(0);
+
+    // Mobile: começa com autoplay pausado pra não brigar com o swipe do usuário.
+    // Quem quiser autoplay aperta o play.
+    if (isMobile()) setPlaying(false);
   })();
 
   // Home · Metodologia (autoplay + barra de progresso, pausa no hover)
