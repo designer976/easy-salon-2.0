@@ -123,8 +123,8 @@
         else sessionStorage.removeItem(BADGE_KEY);
       } catch (e) {}
     }
-    // Restaura badge se o usuário trocou de página com a notificação ainda ativa
-    try { if (sessionStorage.getItem(BADGE_KEY)) setBadge(true); } catch (e) {}
+    // Badge não aparece sozinho no init — sempre acompanha o toast (showToast)
+    // para evitar "1" piscando antes da notificação chegar.
     function openModal() {
       hideToast(true);
       setBadge(false);
