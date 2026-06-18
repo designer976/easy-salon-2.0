@@ -12,8 +12,9 @@
   var NAME = 'Raissa';
   var GREETING = 'Oi, tudo bem 👋 ? ' + NAME + ' da Easy Salon aqui!';
   var DEFAULT_MSG = 'Oi! Vim pelo site da Easy Salon, quero saber mais.';
-  var AUTO_POPUP_DELAY = 8000;
-  var STORAGE_KEY = 'wa-widget-toast-shown';
+  var AUTO_POPUP_DELAY = 5000;
+  var TOAST_COOLDOWN_MS = 6 * 60 * 60 * 1000; // 6h — não repete se já mostrou
+  var STORAGE_KEY = 'wa-widget-toast-next';
   var SOUND_URL = '/assets/notification.mp3';
   var AVATAR_URL = '/assets/raissa.jpg';
 
@@ -99,8 +100,11 @@
       setTimeout(function () { modal.hidden = true; }, 260);
     }
     function showToast() {
-      try { if (sessionStorage.getItem(STORAGE_KEY)) return; } catch (e) {}
-      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+      try {
+        var nextAt = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+        if (Date.now() < nextAt) return;
+      } catch (e) {}
+      try { localStorage.setItem(STORAGE_KEY, String(Date.now() + TOAST_COOLDOWN_MS)); } catch (e) {}
       toast.hidden = false;
       requestAnimationFrame(function () { toast.classList.add('is-open'); });
       if (audio) audio.play().catch(function () { /* navegador bloqueou autoplay; ok */ });
