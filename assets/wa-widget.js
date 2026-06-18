@@ -16,8 +16,7 @@
   var DEFAULT_MSG = 'Oi! Vim pelo site da Easy Salon, quero saber mais.';
   var DELAY_AFTER_GESTURE = 3000;   // mostra 3s depois do 1º clique/scroll/tecla
   var FALLBACK_DELAY = 12000;       // se ninguém interagir, mostra (sem som) em 12s
-  var TOAST_COOLDOWN_MS = 6 * 60 * 60 * 1000; // 6h — não repete se já mostrou
-  var STORAGE_KEY = 'wa-widget-toast-next';
+  var STORAGE_KEY = 'wa-widget-toast-shown'; // sessionStorage: 1× por aba/sessão
   var SOUND_URL = '/assets/wpp.mp3';
   var AVATAR_URL = '/assets/raissa.jpg';
 
@@ -124,11 +123,8 @@
       setTimeout(function () { modal.hidden = true; }, 260);
     }
     function showToast() {
-      try {
-        var nextAt = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-        if (Date.now() < nextAt) return;
-      } catch (e) {}
-      try { localStorage.setItem(STORAGE_KEY, String(Date.now() + TOAST_COOLDOWN_MS)); } catch (e) {}
+      try { if (sessionStorage.getItem(STORAGE_KEY)) return; } catch (e) {}
+      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
       toast.hidden = false;
       requestAnimationFrame(function () { toast.classList.add('is-open'); });
       if (audio) audio.play().catch(function () { /* navegador bloqueou autoplay; ok */ });
