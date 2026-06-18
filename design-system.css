@@ -4185,12 +4185,15 @@ br.br-d { display: inline; }
 .wa-toast.is-open { opacity: 1; transform: translateY(0); }
 .wa-toast-close {
   position: absolute; top: 6px; right: 8px;
-  width: 24px; height: 24px;
+  width: 26px; height: 26px;
   border: none; background: transparent;
-  font-size: 18px; line-height: 1; cursor: pointer;
-  color: #b8b8b8;
+  cursor: pointer; color: #b8b8b8;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  transition: background .15s ease, color .15s ease;
 }
-.wa-toast-close:hover { color: #555; }
+.wa-toast-close svg { width: 16px; height: 16px; }
+.wa-toast-close:hover { color: rgb(85, 85, 85); background: rgba(0, 0, 0, 0.06); }
 .wa-toast-row { display: flex; gap: 12px; align-items: flex-start; }
 .wa-toast-body { min-width: 0; }
 .wa-toast-body strong {
@@ -4246,13 +4249,14 @@ br.br-d { display: inline; }
 }
 .wa-modal-close {
   border: none; background: transparent; color: #fff;
-  font-size: 22px; line-height: 1; cursor: pointer;
-  width: 28px; height: 28px;
+  cursor: pointer;
+  width: 30px; height: 30px;
   display: flex; align-items: center; justify-content: center;
   border-radius: 50%;
   transition: background .15s ease;
 }
-.wa-modal-close:hover { background: rgba(255, 255, 255, 0.12); }
+.wa-modal-close svg { width: 18px; height: 18px; }
+.wa-modal-close:hover { background: rgba(255, 255, 255, 0.14); }
 
 .wa-modal-body {
   flex: 1; min-height: 140px;
@@ -4336,7 +4340,7 @@ br.br-d { display: inline; }
   transition: background .15s ease, transform .15s ease;
 }
 .wa-modal-input button:hover { background: #1ec257; transform: scale(1.05); }
-.wa-modal-input button svg { width: 16px; height: 16px; }
+.wa-modal-input button svg { width: 18px; height: 18px; }
 
 /* Mobile responsivo */
 @media (max-width: 640px) {
