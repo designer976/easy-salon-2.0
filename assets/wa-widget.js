@@ -154,16 +154,18 @@
       if (modal.classList.contains('is-open')) closeModal();
       else openModal();
     });
-    // Listener direto no botão de fechar — mais robusto que delegate
-    toast.querySelector('.wa-toast-close').addEventListener('click', function (e) {
+    // Close: listener direto, com pointerdown E click pra cobrir touch + mouse
+    var toastCloseBtn = toast.querySelector('.wa-toast-close');
+    function handleClose(e) {
+      e.preventDefault();
       e.stopPropagation();
       hideToast();
-    });
-    // Clique em qualquer outra área do toast = abre a conversa
-    toast.addEventListener('click', function (e) {
-      if (e.target.closest('.wa-toast-close')) return;
-      openModal();
-    });
+    }
+    toastCloseBtn.addEventListener('click', handleClose);
+    toastCloseBtn.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+    // Click no corpo do toast (avatar, nome, mensagem) abre a conversa
+    var toastRow = toast.querySelector('.wa-toast-row');
+    if (toastRow) toastRow.addEventListener('click', function () { openModal(); });
     modal.querySelector('.wa-modal-close').addEventListener('click', closeModal);
     modal.querySelector('form').addEventListener('submit', function (e) {
       e.preventDefault();
