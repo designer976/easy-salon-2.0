@@ -16,8 +16,8 @@
   var DEFAULT_MSG = 'Oi! Vim pelo site da Easy Salon, quero saber mais.';
   var DELAY_AFTER_GESTURE = 3000;   // mostra 3s depois do 1º clique/scroll/tecla
   var FALLBACK_DELAY = 12000;       // se ninguém interagir, mostra (sem som) em 12s
-  var STORAGE_KEY = 'wa-widget-toast-shown';  // sessionStorage: toast 1× por aba/sessão
   var BADGE_KEY = 'wa-widget-badge-on';       // sessionStorage: badge "1" persiste entre páginas
+  var MODAL_OPENED_KEY = 'wa-widget-modal-opened'; // sessionStorage: usuário já abriu o modal nesta sessão
   var SOUND_URL = '/assets/wpp.mp3';
   var AVATAR_URL = '/assets/raissa.jpg';
 
@@ -129,6 +129,7 @@
     function openModal() {
       hideToast(true);
       setBadge(false);
+      try { sessionStorage.setItem(MODAL_OPENED_KEY, '1'); } catch (e) {}
       modal.hidden = false;
       requestAnimationFrame(function () { modal.classList.add('is-open'); });
       setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (e) {} }, 280);
@@ -139,8 +140,8 @@
       setTimeout(function () { modal.hidden = true; }, 260);
     }
     function showToast() {
-      try { if (sessionStorage.getItem(STORAGE_KEY)) return; } catch (e) {}
-      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+      // Não interrompe quem já entrou em conversa nesta sessão
+      try { if (sessionStorage.getItem(MODAL_OPENED_KEY)) return; } catch (e) {}
       toast.hidden = false;
       requestAnimationFrame(function () { toast.classList.add('is-open'); });
       setBadge(true);
