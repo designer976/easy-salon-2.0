@@ -109,7 +109,6 @@
   /* ═══════════════ SEÇÃO 01 — NAV RÁPIDA (chips âncora) ═══════════════ */
   [data-screen-label="Funcionalidades"] .fn-chips-card {
     background: rgb(251,251,251);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
     border-radius: 20px;
     padding: 24px 28px;
     box-sizing: border-box;
@@ -144,8 +143,8 @@
     position: relative; overflow: hidden; isolation: isolate;
     display: flex; align-items: center; justify-content: center;
     padding: 10px 16px; border-radius: 999px;
-    background: rgba(115,42,29,.04);
-    border: 1px solid var(--c-line, rgba(115,42,29,.14));
+    background: rgba(209, 191, 160, 0.15);
+    border: 1px solid transparent;
     font-family: var(--ff-text); font-size: 13px; font-weight: 500;
     color: var(--c-text);
     text-decoration: none;
@@ -162,17 +161,17 @@
   /* Chip da seção visível: mesmo estado do hover, válido em touch também */
   [data-screen-label="Funcionalidades"] .fn-chip.is-active {
     transform: translateY(-3px);
-    background: var(--c-accent); color: rgb(244,241,234);
-    border-color: var(--c-accent);
+    background: var(--c-text); color: rgb(244,241,234);
+    border-color: transparent;
     box-shadow:
-      0 22px 36px -12px rgba(206, 72, 54, 0.55),
-      0 14px 22px -10px rgba(206, 72, 54, 0.4);
+      0 22px 36px -12px rgba(115, 42, 29, 0.55),
+      0 14px 22px -10px rgba(115, 42, 29, 0.4);
   }
   [data-screen-label="Funcionalidades"] .fn-chip.is-active::before { opacity: 1; }
   [data-screen-label="Funcionalidades"] .fn-chip.is-active::after { opacity: 1; }
   [data-screen-label="Funcionalidades"] .fn-chip::before {
     content: ""; position: absolute; inset: -40%;
-    background: radial-gradient(closest-side, rgba(206, 72, 54, 0.55), transparent 70%);
+    background: radial-gradient(closest-side, rgba(115, 42, 29, 0.55), transparent 70%);
     filter: blur(14px); opacity: 0; z-index: -1; pointer-events: none;
     transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -180,30 +179,15 @@
     content: ""; position: absolute; inset: 0;
     background:
       radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 35%, transparent 70%),
-      linear-gradient(180deg, rgb(214, 84, 64) 0%, rgb(186, 60, 44) 100%);
+      linear-gradient(180deg, rgb(135, 58, 42) 0%, rgb(95, 30, 19) 100%);
     opacity: 0; z-index: -1; border-radius: inherit; pointer-events: none;
     transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  /* Hover lift/glow só em dispositivos com hover real (evita ficar "preso" em touch) */
+  /* Hover sutil: apenas intensifica o fundo (is-active continua sendo o destaque escuro com gradient) */
   @media (hover: hover) {
-    /* Suprime hover quando o chip foi recém-clicado (até o cursor sair) */
-    [data-screen-label="Funcionalidades"] .fn-chip.is-clicked:hover {
-      transform: none;
-      box-shadow: none;
+    [data-screen-label="Funcionalidades"] .fn-chip:not(.is-active):hover {
+      background: rgba(209, 191, 160, 0.3);
     }
-    [data-screen-label="Funcionalidades"] .fn-chip.is-clicked:hover::before,
-    [data-screen-label="Funcionalidades"] .fn-chip.is-clicked:hover::after { opacity: 0; }
-    [data-screen-label="Funcionalidades"] .fn-chip:hover {
-      transform: translateY(-3px);
-      background: var(--c-accent); color: rgb(244,241,234);
-      border-color: var(--c-accent);
-      box-shadow:
-        0 22px 36px -12px rgba(206, 72, 54, 0.55),
-        0 14px 22px -10px rgba(206, 72, 54, 0.4);
-    }
-    [data-screen-label="Funcionalidades"] .fn-chip:hover::before { opacity: 1; }
-    [data-screen-label="Funcionalidades"] .fn-chip:hover::after { opacity: 1; }
-    [data-screen-label="Funcionalidades"] .fn-chip:active { transform: translateY(0); }
   }
 
   /* ═══════════════ SEÇÕES 02-07 — CATEGORIAS (bento) ═══════════════ */
@@ -222,7 +206,6 @@
   [data-screen-label="Funcionalidades"] .fn-cat-header {
     grid-column: span 2;
     background: rgb(251,251,251);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
     border-radius: 20px;
     padding: 32px;
     display: flex; flex-direction: column; justify-content: center;
@@ -251,7 +234,6 @@
     grid-row: span 2;
     border-radius: 20px; overflow: hidden;
     background: var(--c-tan-veil, rgba(206,72,54,.06));
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
     background-image: linear-gradient(135deg, rgba(206,72,54,.10) 0%, rgba(206,72,54,.02) 60%);
     display: flex; align-items: center; justify-content: center;
     padding: 20px; text-align: center;
@@ -274,7 +256,6 @@
   [data-screen-label="Funcionalidades"] .fn-cat-items {
     grid-column: span 2;
     background: rgb(251,251,251);
-    border: 1px solid var(--c-line, rgba(115,42,29,.12));
     border-radius: 20px;
     padding: 28px 32px;
   }
@@ -703,10 +684,10 @@
         <div class="footer-cta-left">
           <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 30 dias</span>
           <h2 style="margin: 24px 0px">Pronto para Profissionalizar<br>o seu negócio da beleza com<br>a Easy Salon?</h2>
-          <p>A Easy Salon ajuda donos de salão, barbearia e estúdios de beleza a organizarem sua agenda e evoluírem para uma gestão simples e inteligente.</p>
+          <p>A Easy ajuda donos de salão, barbearia e estúdio a saírem da bagunça do dia a dia para um sistema de gestão simples — com a gente do seu lado.</p>
           <div class="btn-cta-row" style="justify-content:flex-start;">
             <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width: 180px">Comece grátis</a>
-            <a class="btn btn-outline-cream" href="https://api.whatsapp.com/send/?phone=5541991044112&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width: 180px">Agendar demonstração</a>
+            <a class="btn btn-outline-cream" href="https://api.whatsapp.com/send/?phone=554123913300&text=Quero+agendar+uma+demonstra%C3%A7%C3%A3o+da+Easy+Salon.&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="width: 180px">Agendar demonstração</a>
           </div>
         </div>
         <div class="footer-cta-right">

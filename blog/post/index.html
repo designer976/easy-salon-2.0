@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="pt-BR" data-screen-label="Planos">
+<html lang="pt-BR" data-screen-label="Blog">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Easy Salon — Planos</title>
+<title>Easy Salon — Blog</title>
 <link rel="icon" type="image/png" href="/assets/fav.png">
 
 <!-- Sistema de design (mestre). Fontes, tokens, .nav, .btn, .pill (com pill-glow), footer-bleed. -->
@@ -11,72 +11,74 @@
 
 <style>
   /* ═══════════════════════════════════════════════════════════════
-     PÁGINA /planos — grid do wireframe Claude Design
-     Tudo escopado a [data-screen-label="Planos"] (zero vazamento)
+     PÁGINA /blog — grid do wireframe Claude Design
+     Tudo escopado a [data-screen-label="Blog"] (zero vazamento)
      Responsivo segue padrão sandbox v2: 1024 (estrutura) · 640 (refino)
      ═══════════════════════════════════════════════════════════════ */
 
   /* Nav espelha home: logo esq · menu centro · CTAs dir */
-  [data-screen-label="Planos"] .nav-inner { grid-template-columns: auto 1fr auto; }
-  [data-screen-label="Planos"] .nav-logo { order: -1; justify-self: start; }
-  [data-screen-label="Planos"] .nav-links { order: 0; justify-self: center; gap: 20px; }
-  [data-screen-label="Planos"] .nav-cta { order: 1; justify-self: end; }
+  [data-screen-label="Blog"] .nav-inner { grid-template-columns: auto 1fr auto; }
+  [data-screen-label="Blog"] .nav-logo { order: -1; justify-self: start; }
+  [data-screen-label="Blog"] .nav-links { order: 0; justify-self: center; gap: 20px; }
+  [data-screen-label="Blog"] .nav-cta { order: 1; justify-self: end; }
 
   /* ── Footer master (herda da home) ── */
-  [data-screen-label="Planos"] footer.footer-bleed { margin-top: 0; }
+  [data-screen-label="Blog"] footer.footer-bleed { margin-top: 0; }
 
   /* ── Layout-shell ── */
-  [data-screen-label="Planos"] .pl2-section { padding: 80px 32px; }
-  [data-screen-label="Planos"] .pl2-section.first { padding-top: 56px; padding-bottom: 56px; }
-  [data-screen-label="Planos"] .pl2-section:has(.pl2-incluso-bento),
-  [data-screen-label="Planos"] .pl2-section:has(.pl2-add-grid) { padding-top: 80px; padding-bottom: 0; }
-  [data-screen-label="Planos"] .pl2-section:has(.pl2-letra-box) { padding-top: 80px; padding-bottom: 80px; }
-  [data-screen-label="Planos"] .pl2-wrap { max-width: 1200px; margin: 0 auto; }
+  [data-screen-label="Blog"] .pl2-section { padding: 80px 32px; }
+  [data-screen-label="Blog"] .pl2-section.first { padding-top: 56px; padding-bottom: 56px; }
+  [data-screen-label="Blog"] .pl2-section:has(.pl2-incluso-bento),
+  [data-screen-label="Blog"] .pl2-section:has(.pl2-add-grid) { padding-top: 80px; padding-bottom: 0; }
+  [data-screen-label="Blog"] .pl2-section:has(.pl2-letra-box) { padding-top: 80px; padding-bottom: 80px; }
+  /* Sem hero: o grid de posts ganha mais respiro no topo (compensa o nav fixo) */
+  [data-screen-label="Blog"] .pl2-section:has(.bl2-grid) { padding-top: 130px; padding-bottom: 100px; }
+  [data-screen-label="Blog"] .pl2-wrap { max-width: 1200px; margin: 0 auto; }
 
   /* ── SecHead (título · sub) — espelha .h2-section-head da home ── */
-  [data-screen-label="Planos"] .pl2-sechead { text-align: center; margin-bottom: 40px; }
-  [data-screen-label="Planos"] .pl2-sechead h2 {
+  [data-screen-label="Blog"] .pl2-sechead { text-align: center; margin-bottom: 40px; }
+  [data-screen-label="Blog"] .pl2-sechead h2 {
     font-family: var(--ff-display); font-weight: 500;
     font-size: 30px; line-height: 1.2; color: var(--c-text);
     margin: 0 0 12px; max-width: 760px; margin-left: auto; margin-right: auto;
   }
-  [data-screen-label="Planos"] .pl2-sechead h2 em {
+  [data-screen-label="Blog"] .pl2-sechead h2 em {
     font-style: italic; color: var(--c-accent);
   }
-  [data-screen-label="Planos"] .pl2-sechead p {
+  [data-screen-label="Blog"] .pl2-sechead p {
     font-family: var(--ff-text); font-size: 15px; line-height: 1.55;
     color: var(--c-text); opacity: .7;
     margin: 0 auto; max-width: 620px;
   }
 
   /* ═══════════════════ HERO (componente .h2-hero — mesma estrutura da home) ═══════════════════ */
-  [data-screen-label="Planos"] .h2-hero {
+  [data-screen-label="Blog"] .h2-hero {
     position: relative;
     width: 100vw; margin-left: calc(50% - 50vw);
     padding: 20px 0 0;
   }
-  [data-screen-label="Planos"] .h2-hero > * {
+  [data-screen-label="Blog"] .h2-hero > * {
     max-width: 1200px; margin: 0 auto; padding: 0;
   }
-  [data-screen-label="Planos"] .h2-hero-grid {
+  [data-screen-label="Blog"] .h2-hero-grid {
     display: grid; grid-template-columns: 1fr 702px; gap: 40px; align-items: stretch;
   }
-  [data-screen-label="Planos"] .h2-hero-text {
+  [data-screen-label="Blog"] .h2-hero-text {
     display: flex; flex-direction: column;
     padding-top: 20px;
     /* sem height: fit-content para esticar até a altura do .h2-hero-img */
   }
-  [data-screen-label="Planos"] .h2-hero-text .plans-hero-bullets { justify-content: flex-start; }
-  [data-screen-label="Planos"] .h2-hero-text .pill { margin-bottom: 0; align-self: flex-start; }
-  [data-screen-label="Planos"] .h2-hero-text h1 {
+  [data-screen-label="Blog"] .h2-hero-text .plans-hero-bullets { justify-content: flex-start; }
+  [data-screen-label="Blog"] .h2-hero-text .pill { margin-bottom: 0; align-self: flex-start; }
+  [data-screen-label="Blog"] .h2-hero-text h1 {
     font-family: var(--ff-display); font-weight: 400; font-size: 50px;
     line-height: 1.05; color: var(--c-text); margin: 30px 0 30px;
   }
-  [data-screen-label="Planos"] .h2-hero-text p {
+  [data-screen-label="Blog"] .h2-hero-text p {
     font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
     color: var(--c-text); margin: 0 0 30px; max-width: 480px;
   }
-  [data-screen-label="Planos"] .h2-hero-img {
+  [data-screen-label="Blog"] .h2-hero-img {
     width: 702px; height: 420px;
     background: var(--c-tan-veil, rgba(206,72,54,.06));
     border: 1px solid var(--c-text-3);
@@ -85,38 +87,38 @@
     display: flex; align-items: center; justify-content: center;
     text-align: center; padding: 24px;
   }
-  [data-screen-label="Planos"] .h2-hero-img .placeholder {
+  [data-screen-label="Blog"] .h2-hero-img .placeholder {
     font-family: var(--ff-text); font-size: 13px; font-weight: 500;
     color: var(--c-text); opacity: .6;
     letter-spacing: 0.04em;
   }
 
   /* ═══════════════════ HERO LEGACY (split 50/50) — mantido temporariamente ═══════════════════ */
-  [data-screen-label="Planos"] .pl2-hero-grid {
+  [data-screen-label="Blog"] .pl2-hero-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
     align-items: stretch; margin-top: 16px;
   }
-  [data-screen-label="Planos"] .pl2-hero-left {
+  [data-screen-label="Blog"] .pl2-hero-left {
     display: flex; flex-direction: column; padding-right: 12px;
   }
-  [data-screen-label="Planos"] .pl2-hero-left .eyebrow {
+  [data-screen-label="Blog"] .pl2-hero-left .eyebrow {
     font-family: var(--ff-text); font-size: 13px; font-weight: 500;
     letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--c-accent); margin-bottom: 16px;
   }
-  [data-screen-label="Planos"] .pl2-hero-left h1 {
+  [data-screen-label="Blog"] .pl2-hero-left h1 {
     font-family: var(--ff-display); font-weight: 400;
     font-size: 50px; line-height: 1.05; color: var(--c-text); margin: 0;
   }
-  [data-screen-label="Planos"] .pl2-hero-left h1 em {
+  [data-screen-label="Blog"] .pl2-hero-left h1 em {
     font-style: italic; color: var(--c-accent);
   }
-  [data-screen-label="Planos"] .pl2-hero-lead {
+  [data-screen-label="Blog"] .pl2-hero-lead {
     font-family: var(--ff-text); font-size: 17px; line-height: 1.5;
     color: var(--c-text); opacity: .75;
     margin: 20px 0 28px; max-width: 480px;
   }
-  [data-screen-label="Planos"] .pl2-hero-right {
+  [data-screen-label="Blog"] .pl2-hero-right {
     border-radius: 24px; overflow: hidden;
     background: var(--c-accent-soft);
     border: 1px solid var(--c-text-3);
@@ -125,7 +127,7 @@
     display: flex; align-items: center; justify-content: center;
     position: relative;
   }
-  [data-screen-label="Planos"] .pl2-hero-right::after {
+  [data-screen-label="Blog"] .pl2-hero-right::after {
     content: 'Dono(a) do salão usando o sistema';
     font-family: var(--ff-text); font-size: 13px; font-weight: 500;
     color: var(--c-text); opacity: .6;
@@ -133,7 +135,7 @@
   }
 
   /* ── BillingToggle (mensal / anual) — pill deslizante ── */
-  [data-screen-label="Planos"] .pl2-billing {
+  [data-screen-label="Blog"] .pl2-billing {
     position: relative;
     display: inline-flex; gap: 0; padding: 4px;
     border-radius: 999px; background: var(--c-accent-soft);
@@ -141,7 +143,7 @@
     margin-top: auto;
     align-self: flex-start; /* dentro do .h2-hero-text não estica em flex column */
   }
-  [data-screen-label="Planos"] .pl2-billing::before {
+  [data-screen-label="Blog"] .pl2-billing::before {
     content: '';
     position: absolute;
     top: 4px; left: 4px; bottom: 4px;
@@ -151,10 +153,10 @@
     transition: transform .35s cubic-bezier(.22, 1, .36, 1);
     z-index: 0;
   }
-  [data-screen-label="Planos"] .pl2-billing:has(button[data-billing="anual"][aria-pressed="true"])::before {
+  [data-screen-label="Blog"] .pl2-billing:has(button[data-billing="anual"][aria-pressed="true"])::before {
     transform: translateX(100%);
   }
-  [data-screen-label="Planos"] .pl2-billing button {
+  [data-screen-label="Blog"] .pl2-billing button {
     position: relative; z-index: 1;
     flex: 1 1 0; min-width: 0; /* força larguras iguais (sem respeitar content-size) */
     cursor: pointer; border: none; border-radius: 999px;
@@ -164,18 +166,18 @@
     transition: color .25s ease, opacity .25s ease;
     white-space: nowrap;
   }
-  [data-screen-label="Planos"] .pl2-billing button[aria-pressed="true"] {
+  [data-screen-label="Blog"] .pl2-billing button[aria-pressed="true"] {
     color: rgb(244, 241, 234); opacity: 1;
   }
-  [data-screen-label="Planos"] .pl2-billing button .save {
+  [data-screen-label="Blog"] .pl2-billing button .save {
     margin-left: 6px; font-size: 11px; opacity: .7;
   }
 
   /* ═══════════════════ SECTION 01 — FAIXAS ═══════════════════ */
-  [data-screen-label="Planos"] .pl2-pricing-grid {
+  [data-screen-label="Blog"] .pl2-pricing-grid {
     display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
   }
-  [data-screen-label="Planos"] .pl2-pcard {
+  [data-screen-label="Blog"] .pl2-pcard {
     display: flex; flex-direction: column;
     padding: 24px;
     background: var(--c-card-2);
@@ -185,119 +187,119 @@
                 box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
   }
-  [data-screen-label="Planos"] .pl2-pcard:hover {
+  [data-screen-label="Blog"] .pl2-pcard:hover {
     transform: translateY(-1px);
     box-shadow:
       0 12px 24px -12px rgba(206, 72, 54, 0.10),
       0 4px 8px -6px rgba(206, 72, 54, 0.06);
   }
   /* Mouse no card → o botão também recebe o hover (transform + sombra original do btn-primary) */
-  [data-screen-label="Planos"] .pl2-pcard:hover .btn-primary {
+  [data-screen-label="Blog"] .pl2-pcard:hover .btn-primary {
     transform: translateY(-3px);
     box-shadow:
       0 22px 36px -12px rgba(206, 72, 54, 0.55),
       0 14px 22px -10px rgba(206, 72, 54, 0.4);
   }
-  [data-screen-label="Planos"] .pl2-pcard:hover .btn-primary::before,
-  [data-screen-label="Planos"] .pl2-pcard:hover .btn-primary::after { opacity: 1; }
-  [data-screen-label="Planos"] .pl2-pcard:hover .btn-tan-soft { transform: translateY(-1px); }
+  [data-screen-label="Blog"] .pl2-pcard:hover .btn-primary::before,
+  [data-screen-label="Blog"] .pl2-pcard:hover .btn-primary::after { opacity: 1; }
+  [data-screen-label="Blog"] .pl2-pcard:hover .btn-tan-soft { transform: translateY(-1px); }
   /* Mouse no botão → o card também recebe o hover (já acontece por containment, mas garante o estado) */
-  [data-screen-label="Planos"] .pl2-pcard:has(.btn:hover) {
+  [data-screen-label="Blog"] .pl2-pcard:has(.btn:hover) {
     transform: translateY(-1px);
     box-shadow:
       0 12px 24px -12px rgba(206, 72, 54, 0.10),
       0 4px 8px -6px rgba(206, 72, 54, 0.06);
   }
-  [data-screen-label="Planos"] .pl2-pcard .tier {
+  [data-screen-label="Blog"] .pl2-pcard .tier {
     font-family: var(--ff-display); font-weight: 400;
     font-size: 28px; line-height: 1; color: var(--c-text); margin: 0;
   }
-  [data-screen-label="Planos"] .pl2-pcard .who {
+  [data-screen-label="Blog"] .pl2-pcard .who {
     font-family: var(--ff-text); font-size: 12px;
     color: var(--c-text); opacity: .7; margin: 4px 0 16px;
     text-transform: lowercase;
   }
-  [data-screen-label="Planos"] .pl2-pcard .price {
+  [data-screen-label="Blog"] .pl2-pcard .price {
     display: flex; align-items: baseline; gap: 4px;
     margin-bottom: 14px;
   }
-  [data-screen-label="Planos"] .pl2-pcard .price .big {
+  [data-screen-label="Blog"] .pl2-pcard .price .big {
     font-family: var(--ff-display); font-weight: 400;
     font-size: 28px; line-height: 1; color: var(--c-text);
   }
-  [data-screen-label="Planos"] .pl2-pcard .price .small {
+  [data-screen-label="Blog"] .pl2-pcard .price .small {
     font-family: var(--ff-text); font-size: 12px;
     color: var(--c-text); opacity: .7;
   }
-  [data-screen-label="Planos"] .pl2-pcard .desc {
+  [data-screen-label="Blog"] .pl2-pcard .desc {
     font-family: var(--ff-text); font-size: 13px; line-height: 1.5;
     color: var(--c-text); opacity: .75;
     margin: 0 0 22px; flex: 1;
   }
-  [data-screen-label="Planos"] .pl2-pcard .btn { width: 100%; }
+  [data-screen-label="Blog"] .pl2-pcard .btn { width: 100%; }
 
   /* ═══════════════════ SECTION 02 — TUDO INCLUSO ═══════════════════ */
-  [data-screen-label="Planos"] .pl2-incluso-bento {
+  [data-screen-label="Blog"] .pl2-incluso-bento {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   }
-  [data-screen-label="Planos"] .pl2-tile {
+  [data-screen-label="Blog"] .pl2-tile {
     background: var(--c-card-2);
     border-radius: 20px;
     padding: 22px;
     display: flex; flex-direction: column;
   }
-  [data-screen-label="Planos"] .pl2-tile.span-3 { grid-column: span 3; }
-  [data-screen-label="Planos"] .pl2-tile h3 {
+  [data-screen-label="Blog"] .pl2-tile.span-3 { grid-column: span 3; }
+  [data-screen-label="Blog"] .pl2-tile h3 {
     font-family: var(--ff-display); font-weight: 400;
     font-size: 22px; line-height: 1.1; color: var(--c-text);
     margin: 0 0 14px;
   }
-  [data-screen-label="Planos"] .pl2-tile .check-list {
+  [data-screen-label="Blog"] .pl2-tile .check-list {
     list-style: none; padding: 0; margin: 0;
     display: flex; flex-direction: column; gap: 8px;
   }
-  [data-screen-label="Planos"] .pl2-tile.span-3 .check-list {
+  [data-screen-label="Blog"] .pl2-tile.span-3 .check-list {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px;
   }
-  [data-screen-label="Planos"] .pl2-tile .check-list li {
+  [data-screen-label="Blog"] .pl2-tile .check-list li {
     display: flex; align-items: flex-start; gap: 10px;
     font-family: var(--ff-text); font-size: 14px; line-height: 1.45;
     color: var(--c-text);
   }
-  [data-screen-label="Planos"] .pl2-tile .check-list li .ck {
+  [data-screen-label="Blog"] .pl2-tile .check-list li .ck {
     flex-shrink: 0; width: 16px; height: 16px;
     border-radius: 50%; background: var(--c-accent-soft-2);
     display: inline-flex; align-items: center; justify-content: center;
     margin-top: 2px;
   }
-  [data-screen-label="Planos"] .pl2-tile .check-list li .ck svg { display: block; }
+  [data-screen-label="Blog"] .pl2-tile .check-list li .ck svg { display: block; }
 
   /* ═══════════════════ SECTION 03 — ADICIONAIS ═══════════════════ */
-  [data-screen-label="Planos"] .pl2-add-grid {
+  [data-screen-label="Blog"] .pl2-add-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   }
-  [data-screen-label="Planos"] .pl2-acard {
+  [data-screen-label="Blog"] .pl2-acard {
     background: var(--c-card-2);
     border-radius: 20px;
     padding: 28px;
     display: flex; flex-direction: column;
   }
-  [data-screen-label="Planos"] .pl2-acard .ico {
+  [data-screen-label="Blog"] .pl2-acard .ico {
     color: var(--c-accent);
     display: inline-flex; align-self: flex-start;
     margin-bottom: 18px;
   }
-  [data-screen-label="Planos"] .pl2-acard h3 {
+  [data-screen-label="Blog"] .pl2-acard h3 {
     font-family: var(--ff-display); font-weight: 400;
     font-size: 22px; line-height: 1.15; color: var(--c-text);
     margin: 0 0 10px;
   }
-  [data-screen-label="Planos"] .pl2-acard p {
+  [data-screen-label="Blog"] .pl2-acard p {
     font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
     color: var(--c-text); opacity: .75;
     margin: 0 0 18px; flex: 1;
   }
-  [data-screen-label="Planos"] .pl2-acard .chip {
+  [data-screen-label="Blog"] .pl2-acard .chip {
     align-self: flex-start;
     display: inline-flex; align-items: center; gap: 6px;
     padding: 6px 12px; border-radius: 999px;
@@ -308,7 +310,7 @@
   }
 
   /* ═══════════════════ SECTION 04 — CONTRATAÇÃO ═══════════════════ */
-  [data-screen-label="Planos"] .pl2-contrato-card {
+  [data-screen-label="Blog"] .pl2-contrato-card {
     background: var(--c-card-2);
     border: 1px solid var(--c-text-3);
     border-radius: 20px;
@@ -316,202 +318,421 @@
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
     overflow: hidden;
   }
-  [data-screen-label="Planos"] .pl2-contrato-item {
+  [data-screen-label="Blog"] .pl2-contrato-item {
     padding: 22px 24px;
   }
-  [data-screen-label="Planos"] .pl2-contrato-item.col-mid,
-  [data-screen-label="Planos"] .pl2-contrato-item.col-right {
+  [data-screen-label="Blog"] .pl2-contrato-item.col-mid,
+  [data-screen-label="Blog"] .pl2-contrato-item.col-right {
     border-left: 1px solid var(--c-text-3);
   }
-  [data-screen-label="Planos"] .pl2-contrato-item.row-bot {
+  [data-screen-label="Blog"] .pl2-contrato-item.row-bot {
     border-top: 1px solid var(--c-text-3);
   }
-  [data-screen-label="Planos"] .pl2-contrato-item .head {
+  [data-screen-label="Blog"] .pl2-contrato-item .head {
     display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
   }
-  [data-screen-label="Planos"] .pl2-contrato-item .check {
+  [data-screen-label="Blog"] .pl2-contrato-item .check {
     width: 22px; height: 22px; border-radius: 50%;
     background: var(--c-accent); color: rgb(244,241,234);
     display: inline-flex; align-items: center; justify-content: center;
     font-size: 12px; font-weight: 600;
     flex-shrink: 0;
   }
-  [data-screen-label="Planos"] .pl2-contrato-item h4 {
+  [data-screen-label="Blog"] .pl2-contrato-item h4 {
     font-family: var(--ff-display); font-weight: 400;
     font-size: 16px; line-height: 1.2; color: var(--c-text);
     margin: 0;
   }
-  [data-screen-label="Planos"] .pl2-contrato-item p {
+  [data-screen-label="Blog"] .pl2-contrato-item p {
     font-family: var(--ff-text); font-size: 13px; line-height: 1.45;
     color: var(--c-text); opacity: .75;
     margin: 0;
   }
 
   /* ── Sem letra miúda — box + grid de células (espelho do qs2-nascemos-box em /quem-somos) ── */
-  [data-screen-label="Planos"] .pl2-letra-box {
+  [data-screen-label="Blog"] .pl2-letra-box {
     background: var(--c-card-2);
     border-radius: 20px;
     padding: 40px;
   }
-  [data-screen-label="Planos"] .pl2-letra-box .pl2-sechead {
+  [data-screen-label="Blog"] .pl2-letra-box .pl2-sechead {
     margin: 0 0 32px;
     text-align: left;
     max-width: none;
     padding: 0;
   }
-  [data-screen-label="Planos"] .pl2-letra-box .pl2-sechead h2,
-  [data-screen-label="Planos"] .pl2-letra-box .pl2-sechead p {
+  [data-screen-label="Blog"] .pl2-letra-box .pl2-sechead h2,
+  [data-screen-label="Blog"] .pl2-letra-box .pl2-sechead p {
     margin-left: 0; margin-right: 0; max-width: none;
   }
-  [data-screen-label="Planos"] .pl2-letra-grid {
+  [data-screen-label="Blog"] .pl2-letra-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
   }
-  [data-screen-label="Planos"] .pl2-letra-cell {
+  [data-screen-label="Blog"] .pl2-letra-cell {
     padding: 16px 28px;
     border-left: 1px solid rgba(115, 42, 29, 0.08);
     display: flex; flex-direction: column;
   }
-  [data-screen-label="Planos"] .pl2-letra-cell:nth-child(3n+1) {
+  [data-screen-label="Blog"] .pl2-letra-cell:nth-child(3n+1) {
     border-left: none;
   }
-  [data-screen-label="Planos"] .pl2-letra-eyebrow {
+  [data-screen-label="Blog"] .pl2-letra-eyebrow {
     display: inline-block;
     font-family: var(--ff-text); font-size: 12px; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--c-accent); margin-bottom: 14px;
   }
-  [data-screen-label="Planos"] .pl2-letra-cell h3 {
+  [data-screen-label="Blog"] .pl2-letra-cell h3 {
     font-family: var(--ff-display); font-weight: 700; font-size: 16px;
     line-height: 1.3; color: var(--c-text); margin: 0 0 10px;
   }
-  [data-screen-label="Planos"] .pl2-letra-cell p {
+  [data-screen-label="Blog"] .pl2-letra-cell p {
     font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
     color: var(--c-text); opacity: 0.75; margin: 0;
   }
 
+  /* ═══════════════ BLOG · Header + Grid de posts ═══════════════ */
+  [data-screen-label="Blog"] .bl2-list-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding: 0 4px;
+  }
+  [data-screen-label="Blog"] .bl2-list-head h2 {
+    font-family: var(--ff-display); font-weight: 500;
+    font-size: 18px; line-height: 1.2; color: var(--c-text);
+    margin: 0;
+  }
+  [data-screen-label="Blog"] .bl2-count {
+    font-family: var(--ff-text); font-size: 13px; line-height: 1.2;
+    color: var(--c-text); opacity: .6;
+  }
+  /* Grid 3 colunas no desktop */
+  [data-screen-label="Blog"] .bl2-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  /* Card */
+  [data-screen-label="Blog"] .bl2-card {
+    background: var(--c-card-2);
+    border: 3px solid rgba(115, 42, 29, var(--bl2-card-border-alpha, 0));
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  [data-screen-label="Blog"] .bl2-card-link {
+    display: flex; flex-direction: column; gap: 16px;
+    padding: 14px 14px 22px;
+    text-decoration: none; color: inherit;
+    height: 100%;
+  }
+  [data-screen-label="Blog"] .bl2-card-img {
+    aspect-ratio: 16 / 10;
+    border-radius: 14px;
+    background:
+      radial-gradient(120% 80% at 20% 0%, rgba(206, 72, 54, 0.10) 0%, rgba(206, 72, 54, 0.02) 50%, transparent 80%),
+      var(--c-tan-veil, rgba(206, 72, 54, .06));
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 16px;
+  }
+  [data-screen-label="Blog"] .bl2-card-img .placeholder {
+    font-family: var(--ff-text); font-size: 12px; font-weight: 500;
+    color: var(--c-text); opacity: 0.5; letter-spacing: 0.04em;
+    max-width: 220px;
+  }
+  [data-screen-label="Blog"] .bl2-card h3 {
+    font-family: var(--ff-display); font-weight: 500;
+    font-size: 18px; line-height: 1.25; color: var(--c-text);
+    margin: 0 6px;
+  }
+  [data-screen-label="Blog"] .bl2-card p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.5;
+    color: var(--c-text); opacity: .7;
+    margin: 0 6px;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  [data-screen-label="Blog"] .bl2-card-meta {
+    display: flex; flex-direction: column; gap: 6px;
+    margin: 4px 6px 0;
+  }
+  [data-screen-label="Blog"] .bl2-tag {
+    align-self: flex-start;
+    font-family: var(--ff-text); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--c-accent);
+    background: rgba(206, 72, 54, 0.08);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  [data-screen-label="Blog"] .bl2-date {
+    font-family: var(--ff-text); font-size: 12px;
+    color: var(--c-text); opacity: .55;
+  }
+  /* Hover do card (mesmo padrão dos pricing cards de /planos/) */
+  [data-screen-label="Blog"] .bl2-card:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 12px 24px -12px rgba(206, 72, 54, 0.10),
+      0 4px 8px -6px rgba(206, 72, 54, 0.06);
+  }
+  /* Botão "Carregar mais" centralizado */
+  [data-screen-label="Blog"] .bl2-load-wrap {
+    display: flex; justify-content: center;
+    margin-top: 48px;
+  }
+
+  /* ═══════════════ BLOG · Post interno (detalhe do post) ═══════════════ */
+  [data-screen-label="Blog"] .bl2-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--ff-text); font-size: 13px; font-weight: 600;
+    color: var(--c-accent); text-decoration: none;
+    margin-bottom: 28px;
+    transition: opacity .2s ease;
+  }
+  [data-screen-label="Blog"] .bl2-back:hover { opacity: .75; }
+
+  [data-screen-label="Blog"] .bl2-post {
+    max-width: 780px; margin: 0 auto;
+  }
+  [data-screen-label="Blog"] .bl2-post-head {
+    margin-bottom: 28px;
+  }
+  [data-screen-label="Blog"] .bl2-post-head h1 {
+    font-family: var(--ff-display); font-weight: 500;
+    font-size: 38px; line-height: 1.15; color: var(--c-text);
+    margin: 0 0 16px;
+  }
+  [data-screen-label="Blog"] .bl2-post-meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    font-family: var(--ff-text); font-size: 13px;
+    color: var(--c-text); opacity: .7;
+  }
+  [data-screen-label="Blog"] .bl2-post-date,
+  [data-screen-label="Blog"] .bl2-post-author { color: var(--c-text); }
+  [data-screen-label="Blog"] .bl2-post-cat {
+    color: var(--c-accent); text-decoration: none; font-weight: 600;
+  }
+  [data-screen-label="Blog"] .bl2-post-cat:hover { text-decoration: underline; }
+  [data-screen-label="Blog"] .bl2-post-sep { opacity: .5; }
+
+  [data-screen-label="Blog"] .bl2-post-cover {
+    aspect-ratio: 16 / 9;
+    border-radius: 18px;
+    background:
+      radial-gradient(120% 80% at 20% 0%, rgba(206, 72, 54, 0.10) 0%, rgba(206, 72, 54, 0.02) 50%, transparent 80%),
+      var(--c-tan-veil, rgba(206, 72, 54, .06));
+    margin: 0 0 36px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; text-align: center;
+  }
+  [data-screen-label="Blog"] .bl2-post-cover .placeholder {
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    color: var(--c-text); opacity: 0.5; letter-spacing: 0.04em;
+  }
+
+  [data-screen-label="Blog"] .bl2-post-body {
+    font-family: var(--ff-text); font-size: 16px; line-height: 1.7;
+    color: var(--c-text);
+  }
+  [data-screen-label="Blog"] .bl2-post-body .bl2-lead {
+    font-size: 17px; line-height: 1.65; color: var(--c-text);
+    margin: 0 0 20px;
+  }
+  [data-screen-label="Blog"] .bl2-post-body p { margin: 0 0 18px; opacity: .85; }
+  [data-screen-label="Blog"] .bl2-post-body a {
+    color: var(--c-accent); text-decoration: underline; text-underline-offset: 3px;
+  }
+  [data-screen-label="Blog"] .bl2-post-body a:hover { opacity: .8; }
+  [data-screen-label="Blog"] .bl2-post-body h2 {
+    font-family: var(--ff-display); font-weight: 500;
+    font-size: 24px; line-height: 1.2; color: var(--c-text);
+    margin: 36px 0 14px;
+  }
+  [data-screen-label="Blog"] .bl2-post-body h3 {
+    font-family: var(--ff-text); font-weight: 700;
+    font-size: 16px; line-height: 1.3; color: var(--c-text);
+    margin: 26px 0 10px;
+  }
+  [data-screen-label="Blog"] .bl2-post-body strong { color: var(--c-text); }
+  [data-screen-label="Blog"] .bl2-post-body em { font-style: normal; color: var(--c-accent); }
+  [data-screen-label="Blog"] .bl2-post-body ul,
+  [data-screen-label="Blog"] .bl2-post-body ol {
+    margin: 0 0 20px; padding-left: 22px;
+    opacity: .85;
+  }
+  [data-screen-label="Blog"] .bl2-post-body li { margin: 0 0 8px; }
+  [data-screen-label="Blog"] .bl2-post-body ul li::marker { color: var(--c-accent); }
+  [data-screen-label="Blog"] .bl2-post-body ol li::marker { color: var(--c-accent); font-weight: 700; }
+
+  /* Posts Relacionados */
+  [data-screen-label="Blog"] .bl2-related-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px;
+    margin: 80px 0 24px;
+    padding: 0 4px;
+  }
+  [data-screen-label="Blog"] .bl2-related-head h2 {
+    font-family: var(--ff-display); font-weight: 500;
+    font-size: 18px; line-height: 1.2; color: var(--c-text);
+    margin: 0;
+  }
+  [data-screen-label="Blog"] .bl2-related-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: var(--ff-text); font-size: 13px; font-weight: 600;
+    color: var(--c-accent); text-decoration: none;
+    transition: opacity .2s ease;
+  }
+  [data-screen-label="Blog"] .bl2-related-link:hover { opacity: .75; }
+  [data-screen-label="Blog"] .bl2-grid--related { gap: 20px; }
+
   /* ── Responsive 1024 (estrutural — tablet + mobile) ─────────────── */
   @media (max-width: 1024px) {
-    [data-screen-label="Planos"] .nav-links { display: none; }
-    [data-screen-label="Planos"] .nav-cta    { display: none; }
-    [data-screen-label="Planos"] .nav-burger { display: inline-flex; justify-self: end; order: 2; }
+    [data-screen-label="Blog"] .nav-links { display: none; }
+    [data-screen-label="Blog"] .nav-cta    { display: none; }
+    [data-screen-label="Blog"] .nav-burger { display: inline-flex; justify-self: end; order: 2; }
 
-    [data-screen-label="Planos"] .pl2-section { padding: 64px 24px; }
-    [data-screen-label="Planos"] .pl2-section.first { padding: 56px 24px; }
+    [data-screen-label="Blog"] .pl2-section { padding: 64px 24px; }
+    [data-screen-label="Blog"] .pl2-section.first { padding: 56px 24px; }
 
-    [data-screen-label="Planos"] .pl2-hero-grid { grid-template-columns: 1fr; gap: 24px; }
-    [data-screen-label="Planos"] .pl2-hero-left { padding-right: 0; }
-    [data-screen-label="Planos"] .pl2-hero-right { min-height: 280px; order: -1; }
+    /* Hero (.h2-hero) → 1 coluna no tablet */
+    [data-screen-label="Blog"] .h2-hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    [data-screen-label="Blog"] .h2-hero-img { width: 100%; height: 320px; order: -1; }
 
-    /* HERO (.h2-hero) — padrão da home no tablet+mobile */
-    [data-screen-label="Planos"] .h2-hero { padding: 20px 24px 60px; }
-    [data-screen-label="Planos"] .h2-hero-grid { grid-template-columns: 1fr; gap: 32px; }
-    [data-screen-label="Planos"] .h2-hero-text h1 { font-size: 40px; white-space: normal; }
-    [data-screen-label="Planos"] .h2-hero-text p { max-width: 100%; }
-    [data-screen-label="Planos"] .h2-hero-img { width: 100%; height: auto; aspect-ratio: 702 / 420; }
+    [data-screen-label="Blog"] .pl2-hero-grid { grid-template-columns: 1fr; gap: 24px; }
+    [data-screen-label="Blog"] .pl2-hero-left { padding-right: 0; }
+    [data-screen-label="Blog"] .pl2-hero-right { min-height: 280px; order: -1; }
 
-    [data-screen-label="Planos"] .pl2-pricing-grid { grid-template-columns: 1fr; gap: 14px; }
-    [data-screen-label="Planos"] .pl2-incluso-bento { grid-template-columns: 1fr; }
-    [data-screen-label="Planos"] .pl2-tile.span-3 { grid-column: span 1; }
-    [data-screen-label="Planos"] .pl2-tile.span-3 .check-list { grid-template-columns: 1fr; }
-    [data-screen-label="Planos"] .pl2-add-grid { grid-template-columns: 1fr; }
+    [data-screen-label="Blog"] .pl2-pricing-grid { grid-template-columns: 1fr; gap: 14px; }
+    [data-screen-label="Blog"] .pl2-incluso-bento { grid-template-columns: 1fr; }
+    [data-screen-label="Blog"] .pl2-tile.span-3 { grid-column: span 1; }
+    [data-screen-label="Blog"] .pl2-tile.span-3 .check-list { grid-template-columns: 1fr; }
+    [data-screen-label="Blog"] .pl2-add-grid { grid-template-columns: 1fr; }
 
-    [data-screen-label="Planos"] .pl2-contrato-card { grid-template-columns: 1fr; }
-    [data-screen-label="Planos"] .pl2-contrato-item.col-mid,
-    [data-screen-label="Planos"] .pl2-contrato-item.col-right { border-left: none; }
-    [data-screen-label="Planos"] .pl2-contrato-item + .pl2-contrato-item { border-top: 1px solid var(--c-text-3); }
-    [data-screen-label="Planos"] .pl2-contrato-item.row-bot { border-top: 1px solid var(--c-text-3); }
+    [data-screen-label="Blog"] .pl2-contrato-card { grid-template-columns: 1fr; }
+    [data-screen-label="Blog"] .pl2-contrato-item.col-mid,
+    [data-screen-label="Blog"] .pl2-contrato-item.col-right { border-left: none; }
+    [data-screen-label="Blog"] .pl2-contrato-item + .pl2-contrato-item { border-top: 1px solid var(--c-text-3); }
+    [data-screen-label="Blog"] .pl2-contrato-item.row-bot { border-top: 1px solid var(--c-text-3); }
 
     /* Sem letra miúda — tablet: 2 colunas com divisores reposicionados */
-    [data-screen-label="Planos"] .pl2-letra-box { padding: 32px; }
-    [data-screen-label="Planos"] .pl2-letra-grid { grid-template-columns: repeat(2, 1fr); }
-    [data-screen-label="Planos"] .pl2-letra-cell { border-left: none; }
-    [data-screen-label="Planos"] .pl2-letra-cell:nth-child(odd) { border-right: 1px solid rgba(115, 42, 29, 0.08); }
-    [data-screen-label="Planos"] .pl2-letra-cell:nth-child(n+3) { border-top: 1px solid rgba(115, 42, 29, 0.08); }
+    [data-screen-label="Blog"] .pl2-letra-box { padding: 32px; }
+    [data-screen-label="Blog"] .pl2-letra-grid { grid-template-columns: repeat(2, 1fr); }
+    [data-screen-label="Blog"] .pl2-letra-cell { border-left: none; }
+    [data-screen-label="Blog"] .pl2-letra-cell:nth-child(odd) { border-right: 1px solid rgba(115, 42, 29, 0.08); }
+    [data-screen-label="Blog"] .pl2-letra-cell:nth-child(n+3) { border-top: 1px solid rgba(115, 42, 29, 0.08); }
 
     /* ── 8. FOOTER (espelho do master /index.html) ── */
-    [data-screen-label="Planos"] .footer-inner {
+    [data-screen-label="Blog"] .footer-inner {
       max-width: 100%; padding: 60px 24px;
     }
-    [data-screen-label="Planos"] .footer-cta-grid {
+    [data-screen-label="Blog"] .footer-cta-grid {
       grid-template-columns: 1fr; gap: 32px;
     }
-    [data-screen-label="Planos"] .footer-cta-left h2 { font-size: 32px; }
-    [data-screen-label="Planos"] .footer-cta-left p {
+    [data-screen-label="Blog"] .footer-cta-left h2 { font-size: 32px; }
+    [data-screen-label="Blog"] .footer-cta-left p {
       font-size: 14px; line-height: 22px; max-width: 100%;
     }
-    [data-screen-label="Planos"] .footer-cta-right {
+    [data-screen-label="Blog"] .footer-cta-right {
       max-width: 100%;
     }
-    [data-screen-label="Planos"] .footer-bottom {
+    [data-screen-label="Blog"] .footer-bottom {
       flex-direction: column; align-items: flex-start; gap: 20px;
     }
-    [data-screen-label="Planos"] .footer-nav {
+    [data-screen-label="Blog"] .footer-nav {
       text-align: left !important;
       flex-direction: column;
       flex-wrap: nowrap;
       gap: 12px;
       align-items: flex-start;
     }
-    [data-screen-label="Planos"] .footer-copy-row {
+    [data-screen-label="Blog"] .footer-copy-row {
       flex-direction: column; align-items: flex-start; gap: 16px;
     }
+
+    /* Blog grid → 2 colunas no tablet */
+    [data-screen-label="Blog"] .bl2-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
   }
 
   /* ── Mobile refino 640 (escala de fonte/padding) ─────────────── */
   @media (max-width: 640px) {
-    [data-screen-label="Planos"] .pl2-section { padding: 60px 24px; }
-    [data-screen-label="Planos"] .pl2-section.first { padding: 48px 24px; }
-    [data-screen-label="Planos"] .pl2-section:has(.pl2-incluso-bento),
-    [data-screen-label="Planos"] .pl2-section:has(.pl2-add-grid) { padding-top: 60px; padding-bottom: 0; }
-    [data-screen-label="Planos"] .pl2-section:has(.pl2-letra-box) { padding-top: 60px; padding-bottom: 60px; }
+    [data-screen-label="Blog"] .pl2-section { padding: 40px 24px 60px; }
+    [data-screen-label="Blog"] .pl2-section.first { padding: 48px 24px; }
+    [data-screen-label="Blog"] .pl2-section:has(.pl2-incluso-bento),
+    [data-screen-label="Blog"] .pl2-section:has(.pl2-add-grid) { padding-top: 60px; padding-bottom: 0; }
+    [data-screen-label="Blog"] .pl2-section:has(.pl2-letra-box) { padding-top: 60px; padding-bottom: 60px; }
+    /* Sem hero no mobile: grid com respiro no topo (compensa nav fixo ~70px + folga) */
+    [data-screen-label="Blog"] .pl2-section:has(.bl2-grid) { padding-top: 100px; padding-bottom: 60px; }
 
-    /* HERO (.h2-hero) — refino mobile, padrão da home */
-    [data-screen-label="Planos"] .h2-hero { padding-top: 30px; padding-bottom: 0; }
-    [data-screen-label="Planos"] .h2-hero-grid { gap: 40px; }
-    [data-screen-label="Planos"] .h2-hero-text { padding-top: 0; }
-    [data-screen-label="Planos"] .h2-hero-text h1 { font-size: 32px; }
-    [data-screen-label="Planos"] .h2-hero-text p { font-size: 14px; }
-    [data-screen-label="Planos"] .h2-hero-text .h2-cta-row { flex-direction: column; }
-    [data-screen-label="Planos"] .h2-hero-text .h2-cta-row .btn { width: 100% !important; }
-    [data-screen-label="Planos"] .pl2-billing { width: 100%; }
+    /* Hero — padrão das telas de Negócios / Funcionalidades */
+    [data-screen-label="Blog"] .h2-hero { padding-top: 30px; padding-bottom: 0; }
+    [data-screen-label="Blog"] .h2-hero-grid { gap: 20px; padding: 0 24px; }
+    [data-screen-label="Blog"] .h2-hero-text { padding-top: 8px; }
+    [data-screen-label="Blog"] .h2-hero-text h1 { font-size: 32px; margin: 14px 0 16px; line-height: 1.05; }
+    [data-screen-label="Blog"] .h2-hero-text p { font-size: 14px; margin: 0 0 18px; }
+    [data-screen-label="Blog"] .h2-hero-img { height: 220px; }
 
     /* Sem letra miúda — mobile: 1 coluna com divisor horizontal */
-    [data-screen-label="Planos"] .pl2-letra-box { padding: 24px; }
-    [data-screen-label="Planos"] .pl2-letra-grid { grid-template-columns: 1fr; }
-    [data-screen-label="Planos"] .pl2-letra-cell { border: none; padding: 16px 0; }
-    [data-screen-label="Planos"] .pl2-letra-cell:nth-child(odd) { border-right: none; }
-    [data-screen-label="Planos"] .pl2-letra-cell:nth-child(n+2) { border-top: 1px solid rgba(115, 42, 29, 0.08); }
+    [data-screen-label="Blog"] .pl2-letra-box { padding: 24px; }
+    [data-screen-label="Blog"] .pl2-letra-grid { grid-template-columns: 1fr; }
+    [data-screen-label="Blog"] .pl2-letra-cell { border: none; padding: 16px 0; }
+    [data-screen-label="Blog"] .pl2-letra-cell:nth-child(odd) { border-right: none; }
+    [data-screen-label="Blog"] .pl2-letra-cell:nth-child(n+2) { border-top: 1px solid rgba(115, 42, 29, 0.08); }
 
-    [data-screen-label="Planos"] .pl2-hero-left h1 { font-size: 32px; }
-    [data-screen-label="Planos"] .pl2-hero-lead { font-size: 14px; }
-    [data-screen-label="Planos"] .pl2-sechead h2 { font-size: 24px; line-height: 1.1; }
-    [data-screen-label="Planos"] .pl2-sechead p { font-size: 14px; }
-    [data-screen-label="Planos"] .pl2-pcard .tier { font-size: 24px; }
-    [data-screen-label="Planos"] .pl2-pcard .price .big { font-size: 26px; }
-    [data-screen-label="Planos"] .pl2-pcard .desc { font-size: 13px; }
-    [data-screen-label="Planos"] .pl2-tile h3 { font-size: 20px; }
-    [data-screen-label="Planos"] .pl2-acard h3 { font-size: 20px; }
-    [data-screen-label="Planos"] .pl2-acard p { font-size: 14px; }
+    [data-screen-label="Blog"] .pl2-hero-left h1 { font-size: 32px; }
+    [data-screen-label="Blog"] .pl2-hero-lead { font-size: 14px; }
+    [data-screen-label="Blog"] .pl2-sechead h2 { font-size: 24px; line-height: 1.1; }
+    [data-screen-label="Blog"] .pl2-sechead p { font-size: 14px; }
+    [data-screen-label="Blog"] .pl2-pcard .tier { font-size: 24px; }
+    [data-screen-label="Blog"] .pl2-pcard .price .big { font-size: 26px; }
+    [data-screen-label="Blog"] .pl2-pcard .desc { font-size: 13px; }
+    [data-screen-label="Blog"] .pl2-tile h3 { font-size: 20px; }
+    [data-screen-label="Blog"] .pl2-acard h3 { font-size: 20px; }
+    [data-screen-label="Blog"] .pl2-acard p { font-size: 14px; }
 
     /* Footer h2: 32 → 26 */
-    [data-screen-label="Planos"] .footer-cta-left h2 { font-size: 26px !important; }
+    [data-screen-label="Blog"] .footer-cta-left h2 { font-size: 26px !important; }
 
     /* Footer-bleed: zerar padding top/bottom (DS aplicava 40/24) */
-    [data-screen-label="Planos"] footer.footer-bleed {
+    [data-screen-label="Blog"] footer.footer-bleed {
       padding-top: 0 !important;
       padding-bottom: 0 !important;
     }
-    [data-screen-label="Planos"] .footer-inner { padding: 20px 24px; }
+    [data-screen-label="Blog"] .footer-inner { padding: 20px 24px; }
+
+    /* Blog grid → 1 coluna no mobile */
+    [data-screen-label="Blog"] .bl2-grid { grid-template-columns: 1fr; gap: 16px; }
+    [data-screen-label="Blog"] .bl2-list-head { padding: 0; margin-bottom: 20px; }
+    [data-screen-label="Blog"] .bl2-list-head h2 { font-size: 16px; }
+    [data-screen-label="Blog"] .bl2-card h3 { font-size: 17px; }
+    [data-screen-label="Blog"] .bl2-card-img { aspect-ratio: 4 / 3; }
+    [data-screen-label="Blog"] .bl2-load-wrap { margin-top: 32px; }
+    [data-screen-label="Blog"] .bl2-load-wrap .btn { width: 100% !important; }
+
+    /* Post interno mobile — escala tipográfica */
+    [data-screen-label="Blog"] .bl2-back { margin-bottom: 20px; }
+    [data-screen-label="Blog"] .bl2-post-head h1 { font-size: 28px; line-height: 1.15; }
+    [data-screen-label="Blog"] .bl2-post-meta { font-size: 12px; gap: 6px; }
+    [data-screen-label="Blog"] .bl2-post-cover { aspect-ratio: 4 / 3; margin-bottom: 26px; }
+    [data-screen-label="Blog"] .bl2-post-body { font-size: 15px; line-height: 1.65; }
+    [data-screen-label="Blog"] .bl2-post-body .bl2-lead { font-size: 16px; }
+    [data-screen-label="Blog"] .bl2-post-body h2 { font-size: 20px; margin-top: 28px; }
+    [data-screen-label="Blog"] .bl2-post-body h3 { font-size: 15px; }
+    [data-screen-label="Blog"] .bl2-related-head { margin-top: 56px; padding: 0; }
+    [data-screen-label="Blog"] .bl2-related-head h2 { font-size: 16px; }
   }
 
   /* BlurFade scroll-in */
-  [data-screen-label="Planos"] .pl2-fade {
+  [data-screen-label="Blog"] .pl2-fade {
     opacity: 0; transform: translateY(8px) scale(.995); filter: blur(4px);
     transition: opacity .65s ease, transform .65s ease, filter .65s ease;
   }
-  [data-screen-label="Planos"] .pl2-fade.is-in {
+  [data-screen-label="Blog"] .pl2-fade.is-in {
     opacity: 1; transform: none; filter: none;
   }
 </style>
@@ -559,227 +780,115 @@
   </nav>
 
   <!-- ═══════════════ HERO (h2-hero component + BillingToggle) ═══════════════ -->
-  <section class="h2-hero">
-    <div class="h2-hero-grid">
-      <div class="h2-hero-text">
-        <span class="pill pill-accent pill-glow">Planos · por tamanho de operação</span>
-        <h1>Escolha o <span class="accent">tamanho</span> da sua operação</h1>
-        <p>Você paga apenas pela quantidade de profissionais do seu salão. Todas as funcionalidades estão liberadas para todos.</p>
-        <div class="plans-hero-bullets">
-          <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Sem cartão de crédito</span>
-          <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cancele quando quiser</span>
-        </div>
-        <div class="pl2-billing" role="group" aria-label="Periodicidade de cobrança">
-          <button type="button" data-billing="mensal" aria-pressed="true">Mensal</button>
-          <button type="button" data-billing="anual" aria-pressed="false">Anual<span class="save">−20%</span></button>
-        </div>
-      </div>
-      <div class="h2-hero-img" aria-hidden="true">
-        <span class="placeholder">Dono(a) do salão usando o sistema</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════ SEÇÃO 01 — FAIXAS DE PRECIFICAÇÃO ═══════════════ -->
-  <section class="pl2-section" style="border-top:none;padding-top:40px;padding-bottom:0;">
-    <div class="pl2-wrap">
-      <div class="pl2-pricing-grid">
-        <!-- Faixa 1 — 1 a 2 -->
-        <div class="pl2-pcard pl2-fade">
-          <div class="tier">1 a 2</div>
-          <div class="who">profissionais</div>
-          <div class="price"><span class="big" data-price data-monthly="89" data-yearly="71">R$ 89</span><span class="small" data-suffix>/mês</span></div>
-          <p class="desc">Para o profissional solo ou a dupla que está começando a organizar a rotina.</p>
-          <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
-        </div>
-        <!-- Faixa 2 — 3 a 5 -->
-        <div class="pl2-pcard pl2-fade">
-          <div class="tier">3 a 5</div>
-          <div class="who">profissionais</div>
-          <div class="price"><span class="big" data-price data-monthly="149" data-yearly="119">R$ 149</span><span class="small" data-suffix>/mês</span></div>
-          <p class="desc">Para o salão com time já consolidado e operação em ritmo crescente.</p>
-          <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
-        </div>
-        <!-- Faixa 3 — 6 a 10 -->
-        <div class="pl2-pcard pl2-fade">
-          <div class="tier">6 a 10</div>
-          <div class="who">profissionais</div>
-          <div class="price"><span class="big" data-price data-monthly="249" data-yearly="199">R$ 249</span><span class="small" data-suffix>/mês</span></div>
-          <p class="desc">Para o salão em crescimento que precisa de controle completo da operação.</p>
-          <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
-        </div>
-        <!-- Faixa 4 — 11 a 20 -->
-        <div class="pl2-pcard pl2-fade">
-          <div class="tier">11 a 20</div>
-          <div class="who">profissionais</div>
-          <div class="price"><span class="big" data-price data-monthly="399" data-yearly="319">R$ 399</span><span class="small" data-suffix>/mês</span></div>
-          <p class="desc">Para salões consolidados com time grande e operação complexa.</p>
-          <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site">Teste grátis</a>
-        </div>
-        <!-- Faixa 5 — 21+ -->
-        <div class="pl2-pcard pl2-fade">
-          <div class="tier">21+</div>
-          <div class="who">profissionais ou multi-unidades</div>
-          <div class="price"><span class="big">Sob consulta</span></div>
-          <p class="desc">Para redes e operações com múltiplas unidades. Atendimento personalizado.</p>
-          <a class="btn btn-tan-soft" href="https://api.whatsapp.com/send/?phone=554123913300&amp;text=Quero+falar+com+vendas+sobre+a+faixa+21%2B+da+Easy+Salon.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">Falar com vendas</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════ SEÇÃO 02 — TUDO INCLUSO (bento) ═══════════════ -->
+  <!-- ═══════════════ SEÇÃO — Post interno ═══════════════ -->
   <section class="pl2-section">
     <div class="pl2-wrap">
-      <div class="pl2-sechead pl2-fade">
-        
-        <h2>Todas as funcionalidades em <span class="accent">todos os planos</span></h2>
-      </div>
-      <div class="pl2-incluso-bento">
-        <!-- Agenda -->
-        <div class="pl2-tile pl2-fade">
-          <h3>Agenda</h3>
-          <ul class="check-list">
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Agenda multi-profissional</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Bloqueio automático de conflitos</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Booking online com link</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Confirmação automática</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Lista de espera ativa</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Visões semanal, diária e por profissional</li>
-          </ul>
-        </div>
-        <!-- Clientes -->
-        <div class="pl2-tile pl2-fade">
-          <h3>Clientes</h3>
-          <ul class="check-list">
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cadastro ilimitado de clientes</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Histórico completo de atendimento</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Ficha de anamnese</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cartão presente · Convênio · Cortesia</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Pacote de serviços</li>
-          </ul>
-        </div>
-        <!-- Financeiro -->
-        <div class="pl2-tile pl2-fade">
-          <h3>Financeiro</h3>
-          <ul class="check-list">
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Caixa diário</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Comissões automatizadas</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Repasses por profissional</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Dashboard de faturamento</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Pagamento em massa</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Exportação para contabilidade</li>
-          </ul>
-        </div>
-        <!-- Estoque -->
-        <div class="pl2-tile pl2-fade">
-          <h3>Estoque</h3>
-          <ul class="check-list">
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cadastro ilimitado de produtos</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Alerta de estoque mínimo</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Consumo por serviço</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Inventário</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Histórico de movimentação</li>
-          </ul>
-        </div>
-        <!-- Marketing -->
-        <div class="pl2-tile pl2-fade">
-          <h3>Marketing e Fidelização</h3>
-          <ul class="check-list">
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Promoções</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Programa de fidelidade digital</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Combos de serviços</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Histórico de compras</li>
-          </ul>
-        </div>
-        <!-- Equipe -->
-        <div class="pl2-tile pl2-fade">
-          <h3>Equipe e Suporte</h3>
-          <ul class="check-list">
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>App do Profissional (iOS e Android)</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Cadastro ilimitado de profissionais</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Suporte online</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Atualizações constantes</li>
-          </ul>
-        </div>
-        <!-- IA — faixa larga (span 3) -->
-        <div class="pl2-tile span-3 pl2-fade">
-          <h3>Inteligência Artificial</h3>
-          <ul class="check-list">
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Recepcionista virtual no WhatsApp</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Sugestão de horários</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Análise de desempenho da equipe</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Previsão de demanda</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+      <a class="bl2-back" href="/blog/">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Voltar ao Blog
+      </a>
 
-  <!-- ═══════════════ SEÇÃO 03 — RECURSOS ADICIONAIS ═══════════════ -->
-  <section class="pl2-section">
-    <div class="pl2-wrap">
-      <div class="pl2-sechead pl2-fade">
-        
-        <h2>Quer ir além? <span class="accent">Contrate por fora</span></h2>
-      </div>
-      <div class="pl2-add-grid">
-        <div class="pl2-acard pl2-fade">
-          <span class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></span>
-          <h3>Aplicativo exclusivo do salão</h3>
-          <p>Seu próprio app de agendamento com a identidade visual do salão. Disponível na App Store e Google Play sob a sua marca.</p>
-          <span class="chip">Contratação opcional</span>
-        </div>
-        <div class="pl2-acard pl2-fade">
-          <span class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span>
-          <h3>Clube de assinatura</h3>
-          <p>Crie planos de fidelidade recorrentes para os seus clientes. Receita previsível mês a mês.</p>
-          <span class="chip">Contratação opcional</span>
-        </div>
-        <div class="pl2-acard pl2-fade">
-          <span class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
-          <h3>Rotina de mensageria</h3>
-          <p>Disparo automatizado de mensagens para clientes inativos, aniversariantes e campanhas sazonais.</p>
-          <span class="chip">Contratação opcional</span>
-        </div>
-      </div>
-    </div>
-  </section>
+      <article class="bl2-post pl2-fade">
+        <header class="bl2-post-head">
+          <h1>Como organizar a agenda do salão sem perder horário</h1>
+          <div class="bl2-post-meta">
+            <span class="bl2-post-date">12 de junho de 2026</span>
+            <span class="bl2-post-sep" aria-hidden="true">|</span>
+            <span class="bl2-post-author">Equipe Easy Salon</span>
+            <span class="bl2-post-sep" aria-hidden="true">|</span>
+            <a class="bl2-post-cat" href="/blog/">Agenda</a>
+          </div>
+        </header>
 
-  <!-- ═══════════════ SEÇÃO 04 — INFORMAÇÕES DE CONTRATAÇÃO ═══════════════ -->
-  <section class="pl2-section">
-    <div class="pl2-wrap">
-      <div class="pl2-letra-box pl2-fade">
-        <div class="pl2-sechead">
-          <h2>Sem <span class="accent">letra miúda</span></h2>
-          <p>O que você precisa saber antes de contratar — direto, sem rodeio.</p>
+        <figure class="bl2-post-cover" aria-hidden="true">
+          <span class="placeholder">FOTO · profissional organizando a agenda no celular</span>
+        </figure>
+
+        <div class="bl2-post-body">
+          <p class="bl2-lead">A <a href="#">agenda do salão</a> é o coração da operação. Quando ela funciona, o dia rende. Quando trava, todo o resto trava junto — financeiro, estoque, equipe, cliente. Este guia reúne o que aprendemos visitando salões reais.</p>
+
+          <p>Neste artigo, você vai entender o que diferencia uma agenda no caderno de uma agenda integrada ao sistema, quais sinais indicam que está na hora de migrar e como começar sem travar a operação durante a transição.</p>
+
+          <h2>📅 O que é uma agenda integrada de salão</h2>
+          <p>Uma <strong>agenda integrada</strong> conecta três pontas: <strong>o salão</strong> (visão geral do dia), <strong>o profissional</strong> (visão da própria escala) e <strong>o cliente</strong> (link de agendamento online). Todas as três enxergam a mesma informação em tempo real — sem WhatsApp paralelo, sem caderno de bolso.</p>
+          <p>O ganho não está só em "ter sistema". Está em parar de perder horário por sobreposição, esquecer confirmação e bloquear a evolução do salão pra ficar gerenciando manualmente.</p>
+
+          <h2>🚀 Como começar em 3 passos</h2>
+          <p>Migrar pra uma agenda integrada parece grande, mas se quebra em etapas curtas. Aqui está a sequência que recomendamos:</p>
+          <ol>
+            <li><strong>Cadastre profissionais e serviços:</strong> defina quem atende, o que cada um faz e quanto tempo cada serviço leva.</li>
+            <li><strong>Importe os clientes recorrentes:</strong> traga sua base atual (planilha, caderno, contatos do celular) pro sistema. Nossa equipe ajuda nessa parte.</li>
+            <li><strong>Ative o link de booking:</strong> publique o link nas bio das redes sociais. Em uma semana, parte considerável dos agendamentos passa a entrar sozinho.</li>
+          </ol>
+
+          <h2>💡 Benefícios na prática</h2>
+          <p>Optar por uma <em>agenda integrada</em> não muda só o software — muda a rotina:</p>
+          <ul>
+            <li><strong>Sem sobreposição:</strong> o sistema bloqueia conflitos de horário antes que aconteçam.</li>
+            <li><strong>Confirmação automática:</strong> o cliente recebe lembrete e confirma — sua recepção para de ligar uma por uma.</li>
+            <li><strong>Lista de espera ativa:</strong> quando um horário cancela, o próximo da fila já é avisado.</li>
+            <li><strong>Visão por profissional:</strong> cada um acompanha a própria agenda pelo celular, sem precisar pedir à recepção.</li>
+          </ul>
+
+          <h2>🛠️ Boas práticas pra não bagunçar de novo</h2>
+          <p>Ter o sistema não basta — o time precisa usar o sistema do mesmo jeito. Algumas práticas que ajudam:</p>
+
+          <h3>📝 Padronize o tempo dos serviços</h3>
+          <p>Defina junto com cada profissional o tempo real de cada procedimento. Se "corte" varia entre 40 e 90 minutos dependendo de quem agendou, o cliente fica frustrado e a agenda incha.</p>
+
+          <h3>📞 Centralize os agendamentos via WhatsApp</h3>
+          <p>Mesmo o cliente que prefere mandar mensagem deve ser registrado na agenda imediatamente — não "depois". Isso evita que dois profissionais agendem o mesmo horário.</p>
+
+          <h3>🌍 Use o link de booking público</h3>
+          <p>Publicar o link de agendamento na bio das redes sociais reduz a carga de mensagens manuais. Quem agenda sozinho fica mais satisfeito — e o salão atende mais com a mesma equipe.</p>
+
+          <h2>✅ Conclusão</h2>
+          <p>Sair da <a href="/funcionalidades/">agenda no caderno</a> não é só modernizar — é recuperar tempo da equipe e dinheiro que estava escapando por sobreposição, no-show e horário vazio.</p>
+          <p>👋 📞 Se você está pronto para colocar a agenda em ordem, <a href="https://api.whatsapp.com/send/?phone=554123913300&amp;text=Quero+organizar+minha+agenda+com+a+Easy+Salon.">fale agora com um especialista</a> e descubra como a Easy Salon ajuda donos de salão a saírem da bagunça do dia a dia.</p>
         </div>
-        <div class="pl2-letra-grid">
-          <div class="pl2-letra-cell">
-            <h3>14 dias grátis</h3>
-            <p>Você testa todas as funcionalidades sem informar cartão de crédito.</p>
-          </div>
-          <div class="pl2-letra-cell">
-            <h3>Sem taxa de adesão</h3>
-            <p>Não cobramos para você começar a usar. Sem taxa de setup.</p>
-          </div>
-          <div class="pl2-letra-cell">
-            <h3>Sem fidelidade</h3>
-            <p>Cancele a qualquer momento, sem multa, sem burocracia.</p>
-          </div>
-          <div class="pl2-letra-cell">
-            <h3>Pagamento flexível</h3>
-            <p>Boleto, cartão de crédito ou PIX. Mensal ou anual.</p>
-          </div>
-          <div class="pl2-letra-cell">
-            <h3>Anual sem travar seu cartão</h3>
-            <p>O valor do plano anual é cobrado mês a mês, sem alocar o limite do cartão.</p>
-          </div>
-          <div class="pl2-letra-cell">
-            <h3>Migração sem dor</h3>
-            <p>Nossa equipe ajuda a trazer seus dados de outro sistema ou planilha. Sem custo.</p>
-          </div>
-        </div>
+      </article>
+
+      <!-- Posts Relacionados -->
+      <div class="bl2-related-head">
+        <h2>Posts Relacionados</h2>
+        <a class="bl2-related-link" href="/blog/">Acesse nosso blog
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+      <div class="bl2-grid bl2-grid--related">
+        <article class="bl2-card pl2-fade">
+          <a class="bl2-card-link" href="#">
+            <div class="bl2-card-img" aria-hidden="true"><span class="placeholder">PREVIEW · dashboard financeiro</span></div>
+            <h3>Comissão calculada na calculadora: por que isso custa caro</h3>
+            <p>O que muda no fim do mês quando comissão e repasse saem do achismo e passam a vir do sistema.</p>
+            <div class="bl2-card-meta">
+              <span class="bl2-tag">Financeiro</span>
+              <span class="bl2-date">5 de junho de 2026</span>
+            </div>
+          </a>
+        </article>
+        <article class="bl2-card pl2-fade">
+          <a class="bl2-card-link" href="#">
+            <div class="bl2-card-img" aria-hidden="true"><span class="placeholder">PREVIEW · controle de estoque</span></div>
+            <h3>Tintura acabando na hora H: como evitar a corrida ao fornecedor</h3>
+            <p>Alerta automático de estoque mínimo, consumo por serviço e o dinheiro que está parado na prateleira.</p>
+            <div class="bl2-card-meta">
+              <span class="bl2-tag">Estoque</span>
+              <span class="bl2-date">28 de maio de 2026</span>
+            </div>
+          </a>
+        </article>
+        <article class="bl2-card pl2-fade">
+          <a class="bl2-card-link" href="#">
+            <div class="bl2-card-img" aria-hidden="true"><span class="placeholder">FOTO · ficha de cliente fiel</span></div>
+            <h3>Cliente que some e ninguém percebe: o custo invisível do salão</h3>
+            <p>Como histórico de atendimento e disparos automáticos transformam atendimento avulso em cliente recorrente.</p>
+            <div class="bl2-card-meta">
+              <span class="bl2-tag">Clientes</span>
+              <span class="bl2-date">21 de maio de 2026</span>
+            </div>
+          </a>
+        </article>
       </div>
     </div>
   </section>
@@ -992,27 +1101,6 @@
     btns.forEach(function (b) {
       b.addEventListener('click', function () { setBilling(b.getAttribute('data-billing')); });
     });
-  })();
-
-  // Mobile (≤640px): mover o toggle Mensal/Anual para depois da imagem do hero
-  (function () {
-    var billing = document.querySelector('.h2-hero-text .pl2-billing');
-    var grid = document.querySelector('.h2-hero-grid');
-    if (!billing || !grid) return;
-    var placeholder = document.createComment('pl2-billing-anchor');
-    billing.parentNode.insertBefore(placeholder, billing);
-    var mq = window.matchMedia('(max-width: 640px)');
-    function reorder() {
-      if (mq.matches) {
-        if (billing.parentNode !== grid) grid.appendChild(billing);
-      } else {
-        if (billing.parentNode !== placeholder.parentNode) {
-          placeholder.parentNode.insertBefore(billing, placeholder);
-        }
-      }
-    }
-    reorder();
-    mq.addEventListener ? mq.addEventListener('change', reorder) : mq.addListener(reorder);
   })();
 
   // Borda hover dos cards de pricing — fade gradual via rAF (mais suave que CSS transition)
