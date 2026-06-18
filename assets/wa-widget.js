@@ -11,6 +11,8 @@
   var PHONE = '5541991044112';
   var NAME = 'Raissa';
   var GREETING = 'Oi, tudo bem 👋 ? ' + NAME + ' da Easy Salon aqui!';
+  var SECOND_MSG = 'Procurando um sistema de gestão para o seu <strong>salão de beleza</strong>, <strong>barbearia</strong> ou <strong>estúdio</strong>?';
+  var SECOND_MSG_DELAY = 2500;      // delay do "digitando" até a 2ª mensagem
   var DEFAULT_MSG = 'Oi! Vim pelo site da Easy Salon, quero saber mais.';
   var DELAY_AFTER_GESTURE = 3000;   // mostra 3s depois do 1º clique/scroll/tecla
   var FALLBACK_DELAY = 12000;       // se ninguém interagir, mostra (sem som) em 12s
@@ -72,6 +74,10 @@
             '<span class="wa-meta">Agora</span>' +
           '</div>' +
           '<div class="wa-typing" aria-hidden="true"><span></span><span></span><span></span></div>' +
+          '<div class="wa-msg wa-msg--late" hidden>' +
+            '<p>' + SECOND_MSG + '</p>' +
+            '<span class="wa-meta">Agora</span>' +
+          '</div>' +
         '</div>' +
         '<form class="wa-modal-input" novalidate>' +
           '<input type="text" placeholder="Digite uma mensagem..." aria-label="Mensagem para ' + NAME + '" autocomplete="off">' +
@@ -92,11 +98,26 @@
     try { audio = new Audio(SOUND_URL); audio.preload = 'auto'; audio.volume = 0.6; }
     catch (e) { /* sem áudio */ }
 
+    var secondShown = false;
+    function showSecondMessage() {
+      if (secondShown) return;
+      secondShown = true;
+      var typing = modal.querySelector('.wa-typing');
+      var late = modal.querySelector('.wa-msg--late');
+      if (typing) typing.hidden = true;
+      if (late) {
+        late.hidden = false;
+        requestAnimationFrame(function () { late.classList.add('is-in'); });
+      }
+      var body = modal.querySelector('.wa-modal-body');
+      if (body) body.scrollTop = body.scrollHeight;
+    }
     function openModal() {
       hideToast(true);
       modal.hidden = false;
       requestAnimationFrame(function () { modal.classList.add('is-open'); });
       setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (e) {} }, 280);
+      if (!secondShown) setTimeout(showSecondMessage, SECOND_MSG_DELAY);
     }
     function closeModal() {
       modal.classList.remove('is-open');
