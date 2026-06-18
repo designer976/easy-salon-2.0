@@ -43,7 +43,47 @@
     margin: 0 auto; max-width: 620px;
   }
 
-  /* ═══════════════════ HERO (split 50/50) ═══════════════════ */
+  /* ═══════════════════ HERO (componente .h2-hero — mesma estrutura da home) ═══════════════════ */
+  [data-screen-label="Planos"] .h2-hero {
+    position: relative;
+    width: 100vw; margin-left: calc(50% - 50vw);
+    padding: 20px 0 0;
+  }
+  [data-screen-label="Planos"] .h2-hero > * {
+    max-width: 1200px; margin: 0 auto; padding: 0;
+  }
+  [data-screen-label="Planos"] .h2-hero-grid {
+    display: grid; grid-template-columns: 1fr 702px; gap: 40px; align-items: center;
+  }
+  [data-screen-label="Planos"] .h2-hero-text {
+    display: flex; flex-direction: column;
+    height: fit-content;
+  }
+  [data-screen-label="Planos"] .h2-hero-text .pill { margin-bottom: 0; align-self: flex-start; }
+  [data-screen-label="Planos"] .h2-hero-text h1 {
+    font-family: var(--ff-display); font-weight: 400; font-size: 50px;
+    line-height: 1.05; color: var(--c-text); margin: 30px 0 30px;
+  }
+  [data-screen-label="Planos"] .h2-hero-text p {
+    font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
+    color: var(--c-text); margin: 0 0 30px; max-width: 480px;
+  }
+  [data-screen-label="Planos"] .h2-hero-img {
+    width: 702px; height: 420px;
+    background: var(--c-tan-veil, rgba(206,72,54,.06));
+    border: 1px solid var(--c-text-3);
+    background-image: linear-gradient(135deg, var(--c-accent-soft-2) 0%, transparent 60%);
+    border-radius: 14px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+  }
+  [data-screen-label="Planos"] .h2-hero-img .placeholder {
+    font-family: var(--ff-text); font-size: 13px; font-weight: 500;
+    color: var(--c-text); opacity: .6;
+    letter-spacing: 0.04em;
+  }
+
+  /* ═══════════════════ HERO LEGACY (split 50/50) — mantido temporariamente ═══════════════════ */
   [data-screen-label="Planos"] .pl2-hero-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
     align-items: stretch; margin-top: 16px;
@@ -370,20 +410,20 @@
     </div>
   </nav>
 
-  <!-- ═══════════════ HERO (split 50/50 + BillingToggle) ═══════════════ -->
-  <section class="pl2-section first">
-    <div class="pl2-wrap">
-      <div class="pl2-hero-grid">
-        <div class="pl2-hero-left pl2-fade">
-          <span class="eyebrow">Planos · por tamanho de operação</span>
-          <h1>Escolha o <span class="accent">tamanho</span> da sua operação</h1>
-          <p class="pl2-hero-lead">Você paga apenas pela quantidade de profissionais do seu salão. Todas as funcionalidades estão liberadas para todos.</p>
-          <div class="pl2-billing" role="group" aria-label="Periodicidade de cobrança">
-            <button type="button" data-billing="mensal" aria-pressed="true">Mensal</button>
-            <button type="button" data-billing="anual" aria-pressed="false">Anual<span class="save">−20%</span></button>
-          </div>
+  <!-- ═══════════════ HERO (h2-hero component + BillingToggle) ═══════════════ -->
+  <section class="h2-hero">
+    <div class="h2-hero-grid">
+      <div class="h2-hero-text">
+        <span class="pill pill-accent pill-glow">Planos · por tamanho de operação</span>
+        <h1>Escolha o <span class="accent">tamanho</span> da sua operação</h1>
+        <p>Você paga apenas pela quantidade de profissionais do seu salão. Todas as funcionalidades estão liberadas para todos.</p>
+        <div class="pl2-billing" role="group" aria-label="Periodicidade de cobrança">
+          <button type="button" data-billing="mensal" aria-pressed="true">Mensal</button>
+          <button type="button" data-billing="anual" aria-pressed="false">Anual<span class="save">−20%</span></button>
         </div>
-        <div class="pl2-hero-right pl2-fade" aria-hidden="true"></div>
+      </div>
+      <div class="h2-hero-img" aria-hidden="true">
+        <span class="placeholder">Dono(a) do salão usando o sistema</span>
       </div>
     </div>
   </section>
