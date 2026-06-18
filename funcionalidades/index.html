@@ -159,6 +159,17 @@
   /* Remove focus outline e impede que o estado :focus mantenha o estilo de hover após clique */
   [data-screen-label="Funcionalidades"] .fn-chip:focus { outline: none; }
   [data-screen-label="Funcionalidades"] .fn-chip:focus:not(:focus-visible) { outline: none; }
+  /* Chip da seção visível: mesmo estado do hover, válido em touch também */
+  [data-screen-label="Funcionalidades"] .fn-chip.is-active {
+    transform: translateY(-3px);
+    background: var(--c-accent); color: rgb(244,241,234);
+    border-color: var(--c-accent);
+    box-shadow:
+      0 22px 36px -12px rgba(206, 72, 54, 0.55),
+      0 14px 22px -10px rgba(206, 72, 54, 0.4);
+  }
+  [data-screen-label="Funcionalidades"] .fn-chip.is-active::before { opacity: 1; }
+  [data-screen-label="Funcionalidades"] .fn-chip.is-active::after { opacity: 1; }
   [data-screen-label="Funcionalidades"] .fn-chip::before {
     content: ""; position: absolute; inset: -40%;
     background: radial-gradient(closest-side, rgba(206, 72, 54, 0.55), transparent 70%);
@@ -884,6 +895,38 @@
     var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 8); };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // Funcionalidades: marca o chip da seção atualmente em vista
+  (function () {
+    var sections = document.querySelectorAll('.fn-section.fn-cat[id]');
+    if (!sections.length) return;
+    var chipFor = {};
+    document.querySelectorAll('.fn-chip[href^="#"]').forEach(function (a) {
+      chipFor[a.getAttribute('href').slice(1)] = a;
+    });
+    function setActive(id) {
+      Object.keys(chipFor).forEach(function (k) {
+        chipFor[k].classList.toggle('is-active', k === id);
+      });
+    }
+    var raf = null;
+    function update() {
+      raf = null;
+      var anchor = 140; // logo abaixo do nav + chips sticky
+      var bestId = null, bestDist = Infinity;
+      sections.forEach(function (s) {
+        var r = s.getBoundingClientRect();
+        if (r.bottom <= 0 || r.top >= window.innerHeight) return;
+        var dist = Math.abs(r.top - anchor);
+        if (dist < bestDist) { bestDist = dist; bestId = s.id; }
+      });
+      if (bestId) setActive(bestId);
+    }
+    function onScroll() { if (raf) return; raf = requestAnimationFrame(update); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
   })();
 
   // Nav active link (Planos / Quem somos)
