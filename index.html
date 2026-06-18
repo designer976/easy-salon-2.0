@@ -520,11 +520,27 @@
       width: 100%; height: auto; aspect-ratio: 702 / 420;
     }
 
-    /* ── 2. GALLERY / CAROUSEL ── */
+    /* ── 2. GALLERY / CAROUSEL — swipe nativo no mobile ── */
+    [data-screen-label="Home"] .h2-gallery-viewport {
+      overflow-x: auto; overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      touch-action: pan-x;
+      scrollbar-width: none;
+      padding: 0 24px;
+    }
+    [data-screen-label="Home"] .h2-gallery-viewport::-webkit-scrollbar { display: none; }
+    [data-screen-label="Home"] .h2-gallery-track {
+      transform: none !important;
+      transition: none !important;
+      gap: 12px; width: max-content;
+    }
     [data-screen-label="Home"] .h2-gallery-card {
       flex: 0 0 calc(100vw - 48px); height: auto;
       padding: 24px; flex-direction: column; gap: 24px;
       border-radius: 16px;
+      scroll-snap-align: center;
     }
     [data-screen-label="Home"] .h2-gallery-img-wrap {
       flex: none; padding-top: 0; aspect-ratio: 16 / 10;
@@ -1323,15 +1339,24 @@
       var max = cards.length - 1;
       return Math.max(0, Math.min(max, i));
     }
+    function isMobile() {
+      return window.matchMedia && window.matchMedia('(max-width: 1024px)').matches;
+    }
     function setActive(newIdx) {
       idx = clamp(newIdx);
-      // Centraliza o card ativo na viewport (peek do prev/next nas laterais)
       var viewport = root.querySelector('.h2-gallery-viewport');
       var card = cards[idx];
-      var vpRect = viewport.getBoundingClientRect();
-      var targetCardLeft = Math.round(vpRect.left + (vpRect.width - card.offsetWidth) / 2);
-      var translate = targetCardLeft - vpRect.left - card.offsetLeft;
-      track.style.transform = 'translateX(' + translate + 'px)';
+      if (isMobile()) {
+        // Mobile: scroll nativo da viewport, snap centraliza o card
+        var target = card.offsetLeft - (viewport.clientWidth - card.offsetWidth) / 2;
+        viewport.scrollTo({ left: target, behavior: 'smooth' });
+      } else {
+        // Desktop: transform na track (peek dos vizinhos nas laterais)
+        var vpRect = viewport.getBoundingClientRect();
+        var targetCardLeft = Math.round(vpRect.left + (vpRect.width - card.offsetWidth) / 2);
+        var translate = targetCardLeft - vpRect.left - card.offsetLeft;
+        track.style.transform = 'translateX(' + translate + 'px)';
+      }
       dots.forEach(function (d, i2) {
         d.classList.toggle('active', i2 === idx);
         var fill = d.querySelector('.h2-gallery-dot-fill');
@@ -1370,6 +1395,39 @@
       root.addEventListener('mouseenter', function () { paused = true; });
       root.addEventListener('mouseleave', function () { paused = false; });
     }
+
+    // Mobile: swipe → pausa autoplay durante o toque e sincroniza dot pelo scrollLeft
+    (function () {
+      var viewport = root.querySelector('.h2-gallery-viewport');
+      if (!viewport) return;
+      var resumeT, scrollT;
+      viewport.addEventListener('touchstart', function () {
+        paused = true;
+        if (resumeT) clearTimeout(resumeT);
+      }, { passive: true });
+      viewport.addEventListener('touchend', function () {
+        if (resumeT) clearTimeout(resumeT);
+        resumeT = setTimeout(function () { paused = false; elapsed = 0; lastT = null; }, 1500);
+      }, { passive: true });
+      viewport.addEventListener('scroll', function () {
+        if (!isMobile()) return;
+        if (scrollT) clearTimeout(scrollT);
+        scrollT = setTimeout(function () {
+          var center = viewport.scrollLeft + viewport.clientWidth / 2;
+          var best = 0, bestDist = Infinity;
+          cards.forEach(function (c, i2) {
+            var cc = c.offsetLeft + c.offsetWidth / 2;
+            var d = Math.abs(center - cc);
+            if (d < bestDist) { bestDist = d; best = i2; }
+          });
+          if (best !== idx) {
+            idx = best;
+            dots.forEach(function (d, i2) { d.classList.toggle('active', i2 === idx); });
+            elapsed = 0; lastT = null;
+          }
+        }, 120);
+      }, { passive: true });
+    })();
 
     window.addEventListener('resize', function () { setActive(idx); });
 
