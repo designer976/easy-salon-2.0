@@ -154,8 +154,14 @@
       if (modal.classList.contains('is-open')) closeModal();
       else openModal();
     });
+    // Listener direto no botão de fechar — mais robusto que delegate
+    toast.querySelector('.wa-toast-close').addEventListener('click', function (e) {
+      e.stopPropagation();
+      hideToast();
+    });
+    // Clique em qualquer outra área do toast = abre a conversa
     toast.addEventListener('click', function (e) {
-      if (e.target.closest('.wa-toast-close')) { hideToast(); return; }
+      if (e.target.closest('.wa-toast-close')) return;
       openModal();
     });
     modal.querySelector('.wa-modal-close').addEventListener('click', closeModal);

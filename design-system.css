@@ -4212,7 +4212,7 @@ br.br-d { display: inline; }
   border-radius: 50%;
   transition: background .15s ease, color .15s ease;
 }
-.wa-toast-close svg { width: 16px; height: 16px; }
+.wa-toast-close svg { width: 16px; height: 16px; pointer-events: none; }
 .wa-toast-close:hover { color: rgb(85, 85, 85); background: rgba(0, 0, 0, 0.06); }
 .wa-toast-row { display: flex; gap: 12px; align-items: flex-start; }
 .wa-toast-body { min-width: 0; }
