@@ -578,11 +578,15 @@
     [data-screen-label="Barbearia"] .footer-inner { padding: 20px 24px; }
   }
 
-  /* Footer sem margin-top — cola direto na seção anterior */
+  /* Footer sem margin-top — cola direto na seção anterior; padding zera só no mobile */
   [data-screen-label="Barbearia"] footer.footer-bleed {
     margin-top: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+  }
+  @media (max-width: 1024px) {
+    [data-screen-label="Barbearia"] footer.footer-bleed {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
   }
 
   /* BlurFade scroll-in */
