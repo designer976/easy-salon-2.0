@@ -4238,14 +4238,8 @@ br.br-d { display: inline; }
   font-size: 14px; font-weight: 600;
 }
 .wa-online {
-  display: inline-flex; align-items: center; gap: 5px;
+  display: inline-flex; align-items: center;
   font-size: 11px; opacity: .85;
-}
-.wa-online i {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #25D366;
-  display: inline-block;
 }
 .wa-modal-close {
   border: none; background: transparent; color: #fff;

@@ -61,7 +61,7 @@
             avatar(true) +
             '<div>' +
               '<strong>' + NAME + '</strong>' +
-              '<span class="wa-online"><i></i>Online</span>' +
+              '<span class="wa-online">Online</span>' +
             '</div>' +
           '</div>' +
           '<button class="wa-modal-close" type="button" aria-label="Fechar conversa">' + X_ICON + '</button>' +
