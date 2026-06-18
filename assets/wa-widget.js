@@ -84,7 +84,9 @@
         '</form>' +
       '</section>' +
 
-      '<button class="wa-fab" type="button" aria-label="Fale conosco pelo WhatsApp">' + WA_ICON + '</button>';
+      '<button class="wa-fab" type="button" aria-label="Fale conosco pelo WhatsApp">' + WA_ICON +
+        '<span class="wa-fab-badge" hidden>1</span>' +
+      '</button>';
 
     document.body.appendChild(root);
 
@@ -111,8 +113,15 @@
       var body = modal.querySelector('.wa-modal-body');
       if (body) body.scrollTop = body.scrollHeight;
     }
+    var badge = null; // setado depois que o root for criado
+    function setBadge(visible) {
+      if (!badge) badge = root.querySelector('.wa-fab-badge');
+      if (!badge) return;
+      badge.hidden = !visible;
+    }
     function openModal() {
       hideToast(true);
+      setBadge(false);
       modal.hidden = false;
       requestAnimationFrame(function () { modal.classList.add('is-open'); });
       setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (e) {} }, 280);
@@ -127,6 +136,7 @@
       try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
       toast.hidden = false;
       requestAnimationFrame(function () { toast.classList.add('is-open'); });
+      setBadge(true);
       if (audio) audio.play().catch(function () { /* navegador bloqueou autoplay; ok */ });
     }
     function hideToast(instant) {
