@@ -629,6 +629,63 @@ def _check_topo_footer(text: str, report: FileReport) -> None:
         )
 
 
+def _extract_master_footer(master_path: Path) -> str | None:
+    """Extrai o <footer class=\"footer-bleed\">...</footer> do master."""
+    try:
+        text = master_path.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    block = _extract_element_block(text, "footer", "footer-bleed")
+    return block[0] if block else None
+
+
+def _normalize_footer_for_comparison(footer_html: str) -> str:
+    """Mascara as partes variáveis (<h2> e <p> dentro de .footer-cta-left)
+    e normaliza whitespace pra comparação estrutural ignorar diferenças
+    de copy mas pegar qualquer divergência de markup."""
+    out = footer_html
+    # Mascarar <h2> dentro de .footer-cta-left
+    out = re.sub(
+        r'(<div\s+class\s*=\s*"footer-cta-left"[^>]*>[\s\S]*?)'
+        r'<h2\b[^>]*>[\s\S]*?</h2>',
+        r'\1<h2>__CTA_TITLE__</h2>',
+        out,
+        count=1,
+    )
+    # Mascarar <p> logo após o h2 mascarado
+    out = re.sub(
+        r'(<h2>__CTA_TITLE__</h2>\s*)<p\b[^>]*>[\s\S]*?</p>',
+        r'\1<p>__CTA_TEXT__</p>',
+        out,
+        count=1,
+    )
+    # Normaliza whitespace
+    out = re.sub(r'>\s+<', '><', out)
+    out = re.sub(r'\s+', ' ', out).strip()
+    return out
+
+
+def _check_footer_master(text: str, report: FileReport,
+                        master_footer_norm: str | None) -> None:
+    """Compara o footer da página com o master (/index.html). Apenas
+    <h2> e <p> dentro de .footer-cta-left podem divergir."""
+    if not master_footer_norm:
+        return
+    footer_block = _extract_element_block(text, "footer", "footer-bleed")
+    if not footer_block:
+        return  # ausência já é reportada por _check_topo_footer
+    footer_html, footer_line = footer_block
+    page_norm = _normalize_footer_for_comparison(footer_html)
+    if page_norm != master_footer_norm:
+        report.warn(
+            footer_line,
+            "footer diverge do master (/index.html). O footer é componente "
+            "compartilhado entre TODAS as páginas — só o <h2> (título) e o <p> "
+            "(texto de apoio) dentro de .footer-cta-left podem variar. "
+            "Atualize a estrutura pra coincidir exatamente com o footer da home.",
+        )
+
+
 def _check_h2_components(text: str, report: FileReport) -> None:
     """Para cada componente .h2-* presente na página, verifica que a
     estrutura interna (classes obrigatórias) está intacta. /index.html (home)  é
@@ -676,6 +733,7 @@ def validate_file(
     master_breakpoints: set[int],
     is_master: bool,
     is_design_system: bool,
+    master_footer_norm: str | None = None,
 ) -> FileReport:
     report = FileReport(path=str(path), is_master=is_master)
 
@@ -873,6 +931,10 @@ def validate_file(
     if not is_design_system and is_full_page:
         _check_h2_components(text, report)
 
+    # ── 11) Footer master: estrutura imutável, só h2/p de cta-left variam
+    if not is_design_system and is_full_page:
+        _check_footer_master(text, report, master_footer_norm)
+
     return report
 
 
@@ -917,6 +979,14 @@ def main(argv: list[str]) -> int:
     bps_note = ", ".join(f"{b}px" for b in sorted(breakpoints))
     print(dim(f"master: {MASTER_FILE}{css_note} · {len(tokens)} tokens · "
               f"{len(classes)} classes · breakpoints {bps_note}"))
+
+    # Extrai footer master pra comparação estrutural (check #11)
+    master_footer = _extract_master_footer(master)
+    master_footer_norm = (
+        _normalize_footer_for_comparison(master_footer) if master_footer else None
+    )
+    if master_footer_norm:
+        print(dim(f"footer master: {len(master_footer)} chars (normalizado: {len(master_footer_norm)})"))
     print()
 
     files = find_html_files(root)
@@ -932,7 +1002,11 @@ def main(argv: list[str]) -> int:
         is_master = (f.resolve() == master.resolve())
         is_design_system = (f.name == DESIGN_SYSTEM_FILE)
 
-        report = validate_file(f, tokens, values, classes, breakpoints, is_master, is_design_system)
+        report = validate_file(
+            f, tokens, values, classes, breakpoints,
+            is_master, is_design_system,
+            master_footer_norm=master_footer_norm,
+        )
 
         header = bold(f"━━━ {rel} ━━━")
         print(header)
