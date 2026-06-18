@@ -4107,6 +4107,12 @@ br.br-d { display: inline; }
   }
 
 /* ═════════════════════════════════════════════════════════════════
+   .accent — destaque de palavra em títulos (substitui <em>)
+   Mantém a cor de destaque sem o itálico.
+   ═════════════════════════════════════════════════════════════════ */
+.accent { color: var(--c-accent); font-style: normal; }
+
+/* ═════════════════════════════════════════════════════════════════
    WhatsApp widget — flutuante (global, todas as páginas)
    FAB verde + toast auto-popup + modal expandido com chat-like UI
    ═════════════════════════════════════════════════════════════════ */

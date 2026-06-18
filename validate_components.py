@@ -686,6 +686,54 @@ def _check_footer_master(text: str, report: FileReport,
         )
 
 
+def _check_no_italic_headings(text: str, report: FileReport) -> None:
+    """Nenhum h1/h2/h3 pode ter conteúdo em itálico — regra global.
+    Detecta: tags <em>/<i> dentro do título, font-style:italic inline
+    no próprio título ou em qualquer filho."""
+    italic_inline_re = re.compile(r'font-style\s*:\s*italic', re.IGNORECASE)
+    em_or_i_re = re.compile(r'<(em|i)\b', re.IGNORECASE)
+    for tag in ("h1", "h2", "h3"):
+        pattern = re.compile(
+            rf'<{tag}\b([^>]*)>([\s\S]*?)</{tag}\s*>',
+            re.IGNORECASE,
+        )
+        for m in pattern.finditer(text):
+            attrs = m.group(1) or ""
+            inner = m.group(2) or ""
+            line_no = text[: m.start()].count("\n") + 1
+
+            # 1) <em> ou <i> dentro do título
+            tag_match = em_or_i_re.search(inner)
+            if tag_match:
+                child = tag_match.group(1).lower()
+                report.warn(
+                    line_no,
+                    f"<{tag}> contém <{child}> — títulos não podem ter "
+                    f"itálico. Remova a tag ou troque por <span>.",
+                )
+                continue
+
+            # 2) font-style:italic no próprio título
+            style_m = re.search(r'style\s*=\s*"([^"]*)"', attrs, re.IGNORECASE)
+            if style_m and italic_inline_re.search(style_m.group(1)):
+                report.warn(
+                    line_no,
+                    f"<{tag}> tem font-style:italic inline — títulos "
+                    f"não podem ter itálico.",
+                )
+                continue
+
+            # 3) font-style:italic em algum filho do título
+            for sm in re.finditer(r'style\s*=\s*"([^"]*)"', inner):
+                if italic_inline_re.search(sm.group(1)):
+                    report.warn(
+                        line_no,
+                        f"<{tag}> tem filho com font-style:italic — "
+                        f"títulos não podem ter itálico.",
+                    )
+                    break
+
+
 def _check_h2_components(text: str, report: FileReport) -> None:
     """Para cada componente .h2-* presente na página, verifica que a
     estrutura interna (classes obrigatórias) está intacta. /index.html (home)  é
@@ -934,6 +982,10 @@ def validate_file(
     # ── 11) Footer master: estrutura imutável, só h2/p de cta-left variam
     if not is_design_system and is_full_page:
         _check_footer_master(text, report, master_footer_norm)
+
+    # ── 12) Nenhum título (h1/h2/h3) pode estar em itálico
+    if not is_design_system and is_full_page:
+        _check_no_italic_headings(text, report)
 
     return report
 
