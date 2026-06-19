@@ -121,6 +121,11 @@ html, body {
 html, body { overflow-x: hidden; }
 .page { width: 100%; margin: 0 auto; position: relative; }
 
+/* Tipografia: melhora o rag e ajuda a evitar "viúvas" (palavra sozinha na
+   última linha). O glue determinístico das 2 últimas palavras é feito por
+   assets/widow-buster.js (NBSP), que cobre mobile e desktop. */
+p, li { text-wrap: pretty; }
+
 
 /* ─── BlurFade scroll-in ────────────────────────────────────────────── */
 .blurfade {
