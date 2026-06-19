@@ -72,6 +72,8 @@
     font-family: var(--ff-display); font-weight: 400; font-size: 50px;
     line-height: 1.05; color: var(--c-text); margin: 30px 0 30px;
   }
+  /* Quebra de linha só-desktop (>1024px) — utility */
+  [data-screen-label="Planos"] .h2-br-desktop { display: inline; }
   [data-screen-label="Planos"] .h2-hero-text p {
     font-family: var(--ff-text); font-size: 14px; line-height: 1.6;
     color: var(--c-text); margin: 0 0 30px; max-width: 480px;
@@ -408,6 +410,7 @@
     [data-screen-label="Planos"] .h2-hero { padding: 20px 24px 60px; }
     [data-screen-label="Planos"] .h2-hero-grid { grid-template-columns: 1fr; gap: 32px; }
     [data-screen-label="Planos"] .h2-hero-text h1 { font-size: 40px; white-space: normal; }
+    [data-screen-label="Planos"] .h2-br-desktop { display: none; }
     [data-screen-label="Planos"] .h2-hero-text p { max-width: 100%; }
     [data-screen-label="Planos"] .h2-hero-img { width: 100%; height: auto; aspect-ratio: 702 / 420; }
 
@@ -563,7 +566,7 @@
     <div class="h2-hero-grid">
       <div class="h2-hero-text">
         <span class="pill pill-accent pill-glow">Planos sob medida</span>
-        <h1>Escolha o plano<br>de acordo com o <span class="accent">tamanho da sua equipe</span></h1>
+        <h1>Escolha o plano<br>de acordo com o <span class="accent">tamanho da <br class="h2-br-desktop">sua equipe</span></h1>
         <p>Você paga pela quantidade de profissionais que vão usar a agenda. Todas as funcionalidades já vêm liberadas, em qualquer plano.</p>
         <div class="plans-hero-bullets">
           <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>A gente organiza seu salão com você</span>
