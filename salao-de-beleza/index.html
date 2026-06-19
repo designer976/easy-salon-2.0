@@ -328,6 +328,9 @@
     color: rgba(115, 42, 29, 0.5); text-align: center; padding: 16px;
   }
 
+  /* Quebra de linha só-mobile (utility) */
+  [data-screen-label="Salão de Beleza"] .h2-br-mobile { display: none; }
+
   /* ═══════════════ SEÇÃO 03 — ANTES E DEPOIS (componente .h2-compare, espelho da home) ═══════════════ */
   [data-screen-label="Salão de Beleza"] .h2-section:has(.h2-compare) {
     background: var(--c-card, #faf6ed); border-radius: 20px; padding: 50px 40px;
@@ -520,6 +523,7 @@
     [data-screen-label="Salão de Beleza"] .h2-step-num { font-size: 22px; }
     [data-screen-label="Salão de Beleza"] .h2-compare-list li { font-size: 14px; }
     [data-screen-label="Salão de Beleza"] .h2-section-head h2 { font-size: 24px; }
+    [data-screen-label="Salão de Beleza"] .h2-br-mobile { display: inline; }
 
     /* Compare → carousel horizontal 2 cards (Com Easy default + Sem Easy) */
     [data-screen-label="Salão de Beleza"] .h2-section:has(.h2-compare) {
@@ -804,7 +808,7 @@
   <section class="h2-section">
     <div class="h2-section-head">
       <h2>Do difícil ao Easy</h2>
-      <p>O seu dia a dia antes e depois de pôr o salão em ordem.</p>
+      <p>O seu dia a dia antes e depois de pôr <br class="h2-br-mobile">o salão em ordem.</p>
     </div>
     <div class="h2-compare">
       <div class="h2-compare-col h2-compare-col--neg">
