@@ -8,23 +8,29 @@
  * <img src="..." alt="..." style="width:100%;display:block"> (ou um <a><img></a>).
  *
  * Comportamento:
+ *  - Vale em todas as páginas (script incluído no site todo).
  *  - Dispara só com mouse fino (desktop) — em touch não há "saída de mouse".
- *  - Aparece no máximo uma vez por sessão (sessionStorage).
- *  - Só arma depois de alguns segundos, evitando disparo acidental no load.
+ *  - Depois de aparecer uma vez, só volta a aparecer após 2h (localStorage,
+ *    compartilhado entre páginas e abas).
+ *  - Só arma alguns segundos após o load, evitando disparo acidental.
  *  - Fecha no X, no clique fora (backdrop) ou com Esc.
  */
 (function () {
   'use strict';
 
-  var SHOWN_KEY = 'exit-intent-shown';   // sessionStorage: já exibido nesta sessão
-  var ARM_DELAY = 4000;                   // só arma 4s após o load
-  var TOP_THRESHOLD = 8;                  // px: considera "saiu pelo topo" quando clientY <= isso
+  var STORE_KEY = 'exit-intent-last';     // localStorage: timestamp (ms) da última exibição
+  var COOLDOWN = 2 * 60 * 60 * 1000;      // 2 horas
+  var ARM_DELAY = 3000;                   // só arma 3s após o load
+  var TOP_THRESHOLD = 0;                  // saiu pelo topo quando clientY <= isso
 
-  function alreadyShown() {
-    try { return sessionStorage.getItem(SHOWN_KEY) === '1'; } catch (e) { return false; }
+  function recentlyShown() {
+    try {
+      var last = parseInt(localStorage.getItem(STORE_KEY) || '0', 10);
+      return last > 0 && (Date.now() - last) < COOLDOWN;
+    } catch (e) { return false; }
   }
   function markShown() {
-    try { sessionStorage.setItem(SHOWN_KEY, '1'); } catch (e) {}
+    try { localStorage.setItem(STORE_KEY, String(Date.now())); } catch (e) {}
   }
 
   function build() {
@@ -45,29 +51,26 @@
   }
 
   function init() {
-    if (alreadyShown()) return;
     // Só desktop com mouse fino
     if (window.matchMedia && !window.matchMedia('(pointer: fine)').matches) return;
+    if (recentlyShown()) return;
 
     var root = null, armed = false, open = false;
 
     function ensureRoot() {
       if (root) return root;
       root = build();
-      var backdrop = root.querySelector('.exit-backdrop');
-      var closeBtn = root.querySelector('.exit-modal-close');
-      backdrop.addEventListener('click', close);
-      closeBtn.addEventListener('click', close);
+      root.querySelector('.exit-backdrop').addEventListener('click', close);
+      root.querySelector('.exit-modal-close').addEventListener('click', close);
       return root;
     }
 
     function show() {
-      if (open || alreadyShown()) return;
+      if (open || recentlyShown()) return;
       open = true;
       markShown();
       ensureRoot();
-      // força reflow antes de animar
-      root.offsetHeight; // eslint-disable-line no-unused-expressions
+      root.offsetHeight; // reflow antes de animar
       root.classList.add('is-open');
       document.addEventListener('keydown', onKey);
     }
@@ -83,10 +86,10 @@
       if (e.key === 'Escape' || e.keyCode === 27) close();
     }
 
+    // Saída pelo topo da janela (intenção de fechar / ir pra barra do navegador)
     function onMouseOut(e) {
       if (!armed || open) return;
-      // saiu de fato da janela (sem destino dentro do doc) pelo topo
-      if (e.relatedTarget || e.toElement) return;
+      if (e.relatedTarget || e.toElement) return;   // foi para outro elemento, não saiu
       if ((e.clientY || 0) <= TOP_THRESHOLD) show();
     }
 
