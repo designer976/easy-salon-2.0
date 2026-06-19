@@ -245,7 +245,7 @@ p, li { text-wrap: pretty; }
        <div class="footer-inner">
          <div class="footer-cta-grid">
            <div class="footer-cta-left">
-             <span class="pill">Teste grátis por 30 dias</span>
+             <span class="pill">Teste grátis por 5 dias</span>
              <h2>…CTA principal…</h2>
              <p>…subtitle…</p>
              <div class="btn-cta-row">
@@ -2241,7 +2241,7 @@ br.br-d { display: inline; }
   line-height: 1.3;
 }
 
-/* Troca de texto do CTA "Iniciar teste grátis por 30 dias" → "Teste grátis por 30 dias" no mobile */
+/* Troca de texto do CTA "Iniciar teste grátis por 5 dias" → "Teste grátis por 5 dias" no mobile */
 .cta-label-mobile { display: none; }
 .cta-label-desktop { display: inline; }
 @media (max-width: 640px) {
