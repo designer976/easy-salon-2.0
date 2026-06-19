@@ -136,8 +136,8 @@ p, li { text-wrap: pretty; }
   opacity: 0; transition: opacity .28s ease;
 }
 #exit-intent .exit-modal {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -46%) scale(.96);
+  position: absolute; top: 50px; left: 50%;
+  transform: translateX(-50%) translateY(-12px) scale(.98);
   width: 500px; max-width: calc(100vw - 40px);
   background: var(--c-bg);
   border-radius: 20px; overflow: hidden;
@@ -146,7 +146,7 @@ p, li { text-wrap: pretty; }
 }
 #exit-intent.is-open { pointer-events: auto; }
 #exit-intent.is-open .exit-backdrop { opacity: 1; }
-#exit-intent.is-open .exit-modal { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+#exit-intent.is-open .exit-modal { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 #exit-intent .exit-modal-close {
   position: absolute; top: 12px; right: 12px; z-index: 2;
   width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer;
@@ -170,6 +170,7 @@ p, li { text-wrap: pretty; }
   letter-spacing: 0.04em; color: rgba(115, 42, 29, 0.6); max-width: 320px;
 }
 @media (max-width: 640px) {
+  #exit-intent .exit-modal { top: 20px; }
   #exit-intent .exit-modal-banner { min-height: 300px; }
 }
 
