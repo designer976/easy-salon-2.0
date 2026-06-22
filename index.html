@@ -1406,19 +1406,12 @@
       root.addEventListener('mouseleave', function () { paused = false; });
     }
 
-    // Mobile: swipe → pausa autoplay durante o toque e sincroniza dot pelo scrollLeft
+    // Mobile: NÃO pausa no toque (autoplay segue rodando normal ao scrollar).
+    // Só sincroniza o dot pelo scrollLeft quando o usuário arrasta o carrossel.
     (function () {
       var viewport = root.querySelector('.h2-gallery-viewport');
       if (!viewport) return;
-      var resumeT, scrollT;
-      viewport.addEventListener('touchstart', function () {
-        paused = true;
-        if (resumeT) clearTimeout(resumeT);
-      }, { passive: true });
-      viewport.addEventListener('touchend', function () {
-        if (resumeT) clearTimeout(resumeT);
-        resumeT = setTimeout(function () { paused = false; elapsed = 0; lastT = null; }, 1500);
-      }, { passive: true });
+      var scrollT;
       viewport.addEventListener('scroll', function () {
         if (!isMobile()) return;
         if (scrollT) clearTimeout(scrollT);
@@ -1529,21 +1522,8 @@
     if (hoverCapable) {
       root.addEventListener('mouseenter', function () { paused = true; });
       root.addEventListener('mouseleave', function () { paused = false; });
-    } else {
-      // Touch: pausa autoplay enquanto o usuário arrasta a lista (evita briga
-      // entre scrollIntoView do autoplay e o gesto manual). Resume 800ms após soltar.
-      var list = steps[0].parentElement;
-      if (list) {
-        var resumeTimer;
-        list.addEventListener('touchstart', function () {
-          paused = true; clearTimeout(resumeTimer);
-        }, { passive: true });
-        list.addEventListener('touchend', function () {
-          clearTimeout(resumeTimer);
-          resumeTimer = setTimeout(function () { paused = false; }, 800);
-        }, { passive: true });
-      }
     }
+    // Mobile/touch: NÃO pausa no toque — autoplay segue rodando normal ao scrollar.
 
     // só roda quando está visível
     var io = new IntersectionObserver(function (entries) {
