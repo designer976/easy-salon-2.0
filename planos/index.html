@@ -92,6 +92,14 @@
     color: var(--c-text); opacity: .6;
     letter-spacing: 0.04em;
   }
+  /* Imagem real: box abraça a imagem no tamanho nativo (672x367), sem corte/upscale */
+  [data-screen-label="Planos"] .h2-hero-img:has(img) {
+    width: 100%; max-width: 672px; height: auto; aspect-ratio: auto;
+    padding: 0; border: none; background: transparent; background-image: none;
+  }
+  [data-screen-label="Planos"] .h2-hero-img img {
+    width: 100%; height: auto; display: block;
+  }
 
   /* ═══════════════════ HERO LEGACY (split 50/50) — mantido temporariamente ═══════════════════ */
   [data-screen-label="Planos"] .pl2-hero-grid {
@@ -573,8 +581,8 @@
           <button type="button" data-billing="anual" aria-pressed="false">Anual<span class="save">· economize</span></button>
         </div>
       </div>
-      <div class="h2-hero-img" aria-hidden="true">
-        <span class="placeholder">Dono(a) do salão usando o sistema</span>
+      <div class="h2-hero-img">
+        <img src="/assets/plano/hero-plano.png?v=20260716" alt="Dono do salão usando o sistema Easy Salon">
       </div>
     </div>
   </section>
