@@ -225,13 +225,19 @@
   [data-screen-label="Quem somos"] .qs2-tile-img img {
     width: 100%; height: 100%; object-fit: cover; display: block;
   }
-  /* Bento ≥1200px: tira padding L/R da seção; big tile mantém ~763px, cards da direita alargam (~373→422) */
+  /* ≥1200px: tira padding L/R da seção; mantém a imagem, alarga só o lado direito */
   @media (min-width: 1200px) {
-    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-bento) {
+    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-bento),
+    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-row--reverse) {
       padding-left: 0; padding-right: 0;
     }
+    /* Bento: big tile mantém ~763px, cards da direita alargam (~373→422) */
     [data-screen-label="Quem somos"] .qs2-bento {
       grid-template-columns: 373px 373px 1fr;
+    }
+    /* Metodologia (reverse): imagem fixa 552px à esquerda, texto absorve o resto (552→600) */
+    [data-screen-label="Quem somos"] .qs2-row--reverse {
+      grid-template-columns: 552px 1fr;
     }
   }
   [data-screen-label="Quem somos"] .qs2-tile .qs2-num {
@@ -786,7 +792,7 @@
     <div class="qs2-row qs2-row--reverse">
       <div class="qs2-col">
         <span class="pill pill-accent pill-glow" style="margin-bottom: 18px; display: inline-flex; align-items: center; justify-content: center;">Mais que um sistema</span>
-        <h2><span style="color: var(--c-accent);">Mais do que um sistema</span>,<br class="qs2-br-desktop"> uma<br class="qs2-br-mobile"> <span class="accent">metodologia</span></h2>
+        <h2><span style="color: var(--c-accent);">Mais do que um sistema</span>,<br class="qs2-br-desktop"> uma<br class="qs2-br-mobile"> metodologia</h2>
         <p class="qs2-lead">Não vendemos software. Entregamos um jeito de organizar o salão.</p>
         <p>Cada cliente do Easy Salon não recebe apenas uma plataforma — recebe um caminho. Cinco passos que vão da organização da agenda até o aumento do ticket médio, com a tecnologia apoiando cada decisão.</p>
         <p>É por isso que dizemos: o Easy não é uma ferramenta que você usa sozinho. É um time que caminha junto com o seu salão.</p>
