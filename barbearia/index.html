@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="/assets/fav.png">
 
 <!-- Sistema de design (mestre). Fontes, tokens, .nav, .btn, .pill (com pill-glow), footer-bleed. -->
-<link rel="stylesheet" href="/design-system.css?v=20260709">
+<link rel="stylesheet" href="/design-system.css?v=20260710">
 
 <style>
   /* ═══════════════════════════════════════════════════════════════
@@ -664,9 +664,10 @@
           <span class="b"><span class="dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>A gente organiza sua barbearia com você</span>
         </div>
       </div>
-      <div class="h2-hero-img">
-        <span class="placeholder">FOTO · barbeiro / recepcionista usando a agenda em tablet, na barbearia (cadeiras, espelhos ao fundo)</span>
-      </div>
+      <div class="h2-hero-img"><picture>
+        <source media="(max-width: 640px)" srcset="/assets/negocios/hero/B-hero-mobile.png">
+        <img src="/assets/negocios/hero/B-hero-deskop.png" alt="Sistema de gestão para barbearia">
+      </picture></div>
     </div>
   </section>
 
@@ -690,7 +691,7 @@
               <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Confirmação e lembrete automáticos pro cliente</li>
               <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cada barbeiro com a própria agenda no celular</li>
             </ul>
-            <div class="sb2-func-visual-mobile"><span class="placeholder">FOTO · barbeiro consultando a agenda do dia em um tablet, na recepção</span></div>
+            <div class="sb2-func-visual-mobile"><img src="/assets/negocios/section-1/1.png" alt=""></div>
           </article>
           </div>
 
@@ -704,7 +705,7 @@
               <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Desconto de produtos e taxas já no cálculo</li>
               <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Relatório de comissão fechado, sem contestação</li>
             </ul>
-            <div class="sb2-func-visual-mobile"><span class="placeholder">FOTO · dono(a) da barbearia olhando o relatório de comissões em um notebook</span></div>
+            <div class="sb2-func-visual-mobile"><img src="/assets/negocios/section-1/2.png" alt=""></div>
           </article>
           </div>
 
@@ -718,7 +719,7 @@
               <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Resumo do mês explicado pela IA, em vez de planilha</li>
               <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tudo pronto na tela, sem fechar conta na mão</li>
             </ul>
-            <div class="sb2-func-visual-mobile"><span class="placeholder">FOTO · barbeiro verificando o estoque pelo sistema, com produtos visíveis</span></div>
+            <div class="sb2-func-visual-mobile"><img src="/assets/negocios/section-1/3.png" alt=""></div>
           </article>
           </div>
 
@@ -734,7 +735,7 @@
                 <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Aviso a cada novo agendamento</li>
                 <li><span class="ico"><svg width="11" height="11" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Marca serviço, muda status e registra ausência</li>
               </ul>
-              <div class="sb2-func-visual-mobile"><span class="placeholder">FOTO · barbeiro usando o app do profissional no celular, dentro da barbearia</span></div>
+              <div class="sb2-func-visual-mobile"><img src="/assets/negocios/section-1/4.png" alt=""></div>
             </article>
             <div class="sb2-func-runway" aria-hidden="true"></div>
           </div>
@@ -743,10 +744,10 @@
         <!-- Coluna direita: visual sticky que troca de conteúdo conforme scroll -->
         <div class="sb2-func-col-visual">
           <div class="sb2-func-sticky">
-            <div class="sb2-func-visual is-active" data-visual-idx="0"><span class="placeholder">FOTO · barbeiro consultando a agenda do dia em um tablet, na recepção</span></div>
-            <div class="sb2-func-visual" data-visual-idx="1"><span class="placeholder">FOTO · dono(a) da barbearia olhando o relatório de comissões em um notebook</span></div>
-            <div class="sb2-func-visual" data-visual-idx="2"><span class="placeholder">FOTO · barbeiro verificando o estoque pelo sistema, com produtos visíveis</span></div>
-            <div class="sb2-func-visual" data-visual-idx="3"><span class="placeholder">FOTO · barbeiro usando o app do profissional no celular, dentro da barbearia</span></div>
+            <div class="sb2-func-visual is-active" data-visual-idx="0"><img src="/assets/negocios/section-1/1.png" alt=""></div>
+            <div class="sb2-func-visual" data-visual-idx="1"><img src="/assets/negocios/section-1/2.png" alt=""></div>
+            <div class="sb2-func-visual" data-visual-idx="2"><img src="/assets/negocios/section-1/3.png" alt=""></div>
+            <div class="sb2-func-visual" data-visual-idx="3"><img src="/assets/negocios/section-1/4.png" alt=""></div>
           </div>
         </div>
       </div>
