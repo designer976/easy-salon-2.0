@@ -474,7 +474,16 @@
     font-family: var(--ff-text); font-size: 12px;
     color: var(--c-text); opacity: .55;
   }
-  /* Hover do card — suave: lift + sombra + leve zoom/fade da imagem */
+  /* Hover do card — suave, com fade (inclui a sombra) */
+  /* sombra base transparente p/ a box-shadow poder fazer fade */
+  [data-screen-label="Blog"] .bl2-card {
+    box-shadow: 0 16px 32px -16px rgba(206, 72, 54, 0), 0 6px 12px -8px rgba(206, 72, 54, 0);
+  }
+  /* transição (vence o .pl2-fade) incluindo box-shadow, sem quebrar a entrada */
+  [data-screen-label="Blog"] .bl2-card.pl2-fade {
+    transition: opacity 0.65s ease, transform 0.65s ease, filter 0.65s ease,
+                box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
   [data-screen-label="Blog"] .bl2-card-img {
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
   }
