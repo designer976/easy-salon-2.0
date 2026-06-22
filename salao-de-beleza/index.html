@@ -1110,18 +1110,8 @@
     if (hoverCapable) {
       root.addEventListener('mouseenter', function () { paused = true; });
       root.addEventListener('mouseleave', function () { paused = false; });
-    } else {
-      var list = steps[0].parentElement;
-      if (list) {
-        var resumeTimer;
-        list.addEventListener('touchstart', function () {
-          paused = true; clearTimeout(resumeTimer);
-        }, { passive: true });
-        list.addEventListener('touchend', function () {
-          resumeTimer = setTimeout(function () { paused = false; }, 800);
-        }, { passive: true });
-      }
     }
+    // Mobile/touch: NÃO pausa no toque — autoplay segue rodando normal ao scrollar.
 
     setActive(0);
     raf = requestAnimationFrame(tick);
