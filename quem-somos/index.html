@@ -228,7 +228,8 @@
   /* ≥1200px: tira padding L/R da seção; mantém a imagem, alarga só o lado direito */
   @media (min-width: 1200px) {
     [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-bento),
-    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-row--reverse) {
+    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-row--reverse),
+    [data-screen-label="Quem somos"] section.qs2-section:has(.qs2-contato-grid) {
       padding-left: 0; padding-right: 0;
     }
     /* Bento: big tile mantém ~763px, cards da direita alargam (~373→422) */
