@@ -474,12 +474,19 @@
     font-family: var(--ff-text); font-size: 12px;
     color: var(--c-text); opacity: .55;
   }
-  /* Hover do card (mesmo padrão dos pricing cards de /planos/) */
+  /* Hover do card — suave: lift + sombra + leve zoom/fade da imagem */
+  [data-screen-label="Blog"] .bl2-card-img {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+  }
   [data-screen-label="Blog"] .bl2-card:hover {
-    transform: translateY(-1px);
+    transform: translateY(-3px);
     box-shadow:
-      0 12px 24px -12px rgba(206, 72, 54, 0.10),
-      0 4px 8px -6px rgba(206, 72, 54, 0.06);
+      0 16px 32px -16px rgba(206, 72, 54, 0.14),
+      0 6px 12px -8px rgba(206, 72, 54, 0.07);
+  }
+  [data-screen-label="Blog"] .bl2-card:hover .bl2-card-img {
+    transform: scale(1.04);
+    filter: brightness(1.03);
   }
   /* Botão "Carregar mais" centralizado */
   [data-screen-label="Blog"] .bl2-load-wrap {
