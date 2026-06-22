@@ -946,18 +946,18 @@
       </div>
       <div class="h2-method-panel" id="h2-method-panel"
         data-panels='[
-          {"step":"01","title":"Organizamos sua agenda","desc":"A gente começa pela agenda, que alinha salão, profissional e cliente. Você ainda conta com uma IA copiloto que te ajuda a organizar o dia a dia, facilitando agendamentos e mantendo tudo em ordem.","img":"FOTO · profissional organizando a agenda no painel"},
-          {"step":"02","title":"Financeiro claro","desc":"Configuramos caixa, precificação e repasses pra serem calculados pelo sistema, e você passa a enxergar quanto entra, quanto sai e quanto sobra — sem calculadora e sem achismo.","img":"PREVIEW · dashboard financeiro"},
-          {"step":"03","title":"Estoque em ordem","desc":"Organizamos seus produtos com você pra enxergar quanto cada serviço consome, além de saber quanto de dinheiro está parado na prateleira.","img":"PREVIEW · controle de estoque"},
-          {"step":"04","title":"Promoções inteligentes","desc":"Com o histórico dos clientes em ordem, ajudamos você a oferecer a promoção certa, pro cliente certo, na hora certa — sem dar desconto à toa.","img":"PREVIEW · promoções / oportunidades"},
-          {"step":"05","title":"Cuidando dos clientes","desc":"O sistema passa a perceber quem está sumindo, e a gente te ajuda a chamar de volta — transformando atendimento avulso em cliente que volta sempre.","img":"FOTO · ficha e histórico do cliente"}
+          {"step":"01","title":"Organizamos sua agenda","desc":"A gente começa pela agenda, que alinha salão, profissional e cliente. Você ainda conta com uma IA copiloto que te ajuda a organizar o dia a dia, facilitando agendamentos e mantendo tudo em ordem.","img":"/assets/home/section-2/1.png"},
+          {"step":"02","title":"Financeiro claro","desc":"Configuramos caixa, precificação e repasses pra serem calculados pelo sistema, e você passa a enxergar quanto entra, quanto sai e quanto sobra — sem calculadora e sem achismo.","img":"/assets/home/section-2/2.png"},
+          {"step":"03","title":"Estoque em ordem","desc":"Organizamos seus produtos com você pra enxergar quanto cada serviço consome, além de saber quanto de dinheiro está parado na prateleira.","img":"/assets/home/section-2/3.png"},
+          {"step":"04","title":"Promoções inteligentes","desc":"Com o histórico dos clientes em ordem, ajudamos você a oferecer a promoção certa, pro cliente certo, na hora certa — sem dar desconto à toa.","img":"/assets/home/section-2/4.png"},
+          {"step":"05","title":"Cuidando dos clientes","desc":"O sistema passa a perceber quem está sumindo, e a gente te ajuda a chamar de volta — transformando atendimento avulso em cliente que volta sempre.","img":"/assets/home/section-2/5.png"}
         ]'>
         <div class="h2-method-panel-text">
           <div class="h2-method-panel-eyebrow">Passo 01</div>
           <h3>Organizamos sua agenda</h3>
           <p>A gente começa pela agenda, que alinha salão, profissional e cliente. Você ainda conta com uma IA copiloto que te ajuda a organizar o dia a dia, facilitando agendamentos e mantendo tudo em ordem.</p>
         </div>
-        <div class="h2-method-panel-img-wrap"><div class="h2-method-panel-img">FOTO · profissional organizando a agenda no painel</div></div>
+        <div class="h2-method-panel-img-wrap"><div class="h2-method-panel-img"><img src="/assets/home/section-2/1.png" alt="Organizamos sua agenda"></div></div>
       </div>
     </div>
   </section>
@@ -1480,7 +1480,12 @@
       panel.querySelector('.h2-method-panel-eyebrow').textContent = 'Passo ' + p.step;
       panel.querySelector('h3').textContent = p.title;
       panel.querySelector('p').textContent = p.desc;
-      panel.querySelector('.h2-method-panel-img').textContent = p.img;
+      var imgBox = panel.querySelector('.h2-method-panel-img');
+      if (/^\/|\.(png|jpe?g|webp|svg)$/i.test(p.img)) {
+        imgBox.innerHTML = '<img src="' + p.img + '" alt="' + (p.title || '') + '">';
+      } else {
+        imgBox.textContent = p.img;
+      }
     }
     function scrollActiveIntoView(i) {
       var list = steps[i].parentElement;
