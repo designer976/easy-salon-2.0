@@ -127,9 +127,13 @@ html, body { overflow-x: hidden; }
 p, li { text-wrap: pretty; }
 
 /* Metodologia (h2-method): quando o painel recebe uma imagem real, ela
-   preenche o quadro (sem o padding do placeholder de texto). */
-.h2-method-panel-img:has(img) { padding: 0 !important; overflow: hidden; }
-.h2-method-panel-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+   preenche o quadro (sem fundo nem padding do placeholder de texto) e
+   recebe o mesmo radius do box. */
+.h2-method-panel-img:has(img) { padding: 0 !important; background: transparent !important; overflow: hidden; }
+.h2-method-panel-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  border-radius: 20px 0 20px 0;
+}
 
 
 /* ─── Exit-intent modal (assets/exit-intent.js) ─────────────────────── */
