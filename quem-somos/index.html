@@ -145,6 +145,10 @@
     color: var(--c-text); opacity: 0.4; font-family: var(--ff-text); font-size: 13px;
     text-align: center; padding: 24px;
   }
+  /* Imagem real (PNG já recortado): box no aspecto da imagem, fundo transparente, sem corte */
+  [data-screen-label="Quem somos"] .qs2-img:has(img) {
+    aspect-ratio: 672 / 367; background: transparent;
+  }
 
   /* 2 · Como nascemos — head + 4 marcos dentro do box */
   [data-screen-label="Quem somos"] .qs2-nascemos-box {
@@ -694,7 +698,7 @@
         <p class="qs2-lead">O salão de beleza, a barbearia e o estúdio sempre foram tratados como negócios pequenos demais para uma tecnologia de verdade. Sobraram planilhas adaptadas, cadernos no caixa e sistemas genéricos que nunca entenderam o dia a dia desse mercado.</p>
         <p>O Easy Salon nasceu para mudar isso. Construímos uma plataforma feita exclusivamente para quem trabalha com beleza — com o cuidado, o detalhe e a simplicidade que esse setor sempre mereceu.</p>
       </div>
-      <div class="qs2-img">FOTO · dono(a) do salão em ambiente real, com o sistema numa tela próxima</div>
+      <div class="qs2-img"><img src="/assets/quem-somos/hero-quem-somos.png?v=20260716" alt="Dona de salão usando o Easy Salon no computador"></div>
     </div>
   </section>
 
