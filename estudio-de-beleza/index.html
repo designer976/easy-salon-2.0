@@ -299,6 +299,15 @@
     background: var(--c-card, #faf6ed); border-radius: 20px; padding: 0;
     min-height: 420px;
   }
+  /* Fade suave ao trocar de passo (conteúdo do painel) */
+  [data-screen-label="Estúdio de Beleza"] .h2-method-panel-text,
+  [data-screen-label="Estúdio de Beleza"] .h2-method-panel-img-wrap {
+    transition: opacity 0.25s ease;
+  }
+  [data-screen-label="Estúdio de Beleza"] .h2-method-panel.is-swapping .h2-method-panel-text,
+  [data-screen-label="Estúdio de Beleza"] .h2-method-panel.is-swapping .h2-method-panel-img-wrap {
+    opacity: 0;
+  }
   [data-screen-label="Estúdio de Beleza"] .h2-method-panel-text {
     display: flex; flex-direction: column; justify-content: center;
     margin-left: 50px;
@@ -1078,6 +1087,7 @@
       var target = step.offsetLeft - (list.clientWidth - step.offsetWidth) / 2;
       list.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
     }
+    var swapT;
     function setActive(i) {
       active = i;
       steps.forEach(function (s, k) {
@@ -1085,7 +1095,10 @@
         var fill = s.querySelector('.h2-step-progress-fill');
         if (fill) fill.style.width = '0%';
       });
-      renderPanel(i);
+      // troca de painel com fade suave (fade-out → render → fade-in)
+      panel.classList.add('is-swapping');
+      clearTimeout(swapT);
+      swapT = setTimeout(function () { renderPanel(i); panel.classList.remove('is-swapping'); }, 260);
       scrollActiveIntoView(i);
       elapsed = 0; lastT = null;
     }
