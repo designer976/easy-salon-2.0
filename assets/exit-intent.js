@@ -22,6 +22,9 @@
   var COOLDOWN = 2 * 60 * 60 * 1000;      // 2 horas
   var ARM_DELAY = 3000;                   // só arma 3s após o load
   var TOP_THRESHOLD = 0;                  // saiu pelo topo quando clientY <= isso
+  var WA_PHONE = '554123913300';
+  var WA_MSG = 'Olá! Eu estava no site e vi que estou a um passo de transformar a rotina do meu salão. Gostaria de saber mais sobre o sistema!';
+  var WA_LINK = 'https://api.whatsapp.com/send/?phone=' + WA_PHONE + '&text=' + encodeURIComponent(WA_MSG) + '&type=phone_number&app_absent=0';
 
   function recentlyShown() {
     try {
@@ -43,7 +46,9 @@
           '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>' +
         '</button>' +
         '<div class="exit-modal-banner">' +
-          '<img src="/assets/b-molda-saida.png?v=20260722" alt="Oferta Easy Salon ao sair">' +
+          '<a href="' + WA_LINK + '" target="_blank" rel="noopener noreferrer" aria-label="Falar com um especialista no WhatsApp">' +
+            '<img src="/assets/b-molda-saida.png?v=20260722" alt="Oferta Easy Salon ao sair">' +
+          '</a>' +
         '</div>' +
       '</div>';
     document.body.appendChild(root);
