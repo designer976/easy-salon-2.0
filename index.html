@@ -135,6 +135,8 @@
     overflow: hidden;
     display: flex; align-items: center; justify-content: center;
   }
+  /* Team photo: altura casa com a proporção da imagem nova (435x345 → box 444x352) */
+  [data-screen-label="Home"] .team-photo { height: 352px; }
   [data-screen-label="Home"] .h2-hero-img:not(:has(img)) {
     color: var(--c-text); opacity: 0.4; font-family: var(--ff-text); font-size: 13px;
     text-align: center; padding: 24px;
@@ -1089,7 +1091,7 @@
   <!-- ─────────────── SECTION · POR TRÁS DA EASY (team) ─────────────── -->
   <section class="team-section" style="margin: 40px auto 80px; border-radius: 20px;">
     <div class="team-block">
-      <div class="team-photo" aria-label="Equipe Easy" style="background-image: url('/assets/equipe.png');"></div>
+      <div class="team-photo" aria-label="Equipe Easy" style="background-image: url('/assets/equipe.png?v=20260719');"></div>
       <div class="team-text">
         <div class="pill-row"><span class="pill" style="background:var(--c-accent-soft);color:var(--c-accent);">Por trás da Easy</span></div>
         <h2>Nascida dentro de<br><span style="color:var(--c-accent);">salões reais!</span></h2>
