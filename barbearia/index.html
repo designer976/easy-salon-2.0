@@ -891,7 +891,7 @@
         <div class="h2-ia-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/></svg>
         </div>
-        <h3>Analisa o desempenho do seu salão</h3>
+        <h3>Analisa o desempenho da sua barbearia</h3>
         <p>Mostra quais serviços e profissionais geram mais resultado, quais clientes estão inativos e onde está a oportunidade.</p>
       </div>
     </div>
@@ -935,7 +935,7 @@
       <div class="footer-cta-grid">
         <div class="footer-cta-left">
           <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 5 dias</span>
-          <h2 style="margin: 24px 0px">Pronto para profissionalizar<br>a sua barbearia com<br>a Easy Salon?</h2>
+          <h2 style="margin: 24px 0px">Pronto para profissionalizar <br>a sua barbearia com <br>a Easy Salon?</h2>
           <p>A Easy ajuda donos de barbearia a saírem da bagunça do dia a dia para um sistema de gestão simples — com a gente do seu lado.</p>
           <div class="btn-cta-row" style="justify-content:flex-start;">
             <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width: 180px">Comece grátis</a>
@@ -947,7 +947,7 @@
             <span class="dot">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(237,231,217)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
             </span>
-            A gente organiza seu salão com você
+            A gente organiza sua barbearia com você
           </div>
           <div class="footer-bullet">
             <span class="dot">
@@ -1066,7 +1066,7 @@
 
     var active = 0;
     var paused = false;
-    var DUR = 5000;
+    var DUR = 7000;
     var raf, lastT = null, elapsed = 0;
 
     function renderPanel(i) {
@@ -1371,66 +1371,66 @@
     var feed = document.getElementById('chat-feed');
     if (!feed) return;
 
-    // Conversation script — runs in a loop (apenas serviços de salão de beleza)
+    // Conversation script — runs in a loop (apenas serviços de barbearia)
     var scripts = [
-      // ─── Conversa 1: Salão de Beleza (Marina) — Escova Progressiva ───
+      // ─── Conversa 1: Barbearia (Rafael) — Corte + Barba ───
       [
-        { side: 'out', author: 'Marina A.',   html: 'Oi, dá pra fazer <strong>escova progressiva</strong> nessa semana?' },
+        { side: 'out', author: 'Rafael M.',   html: 'Fala! Dá pra fazer <strong>corte e barba</strong> ainda essa semana?' },
         { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Claro, Marina! Tenho <strong>quinta às 14h</strong> ou <strong>sexta às 16h</strong> com a Júlia. Qual prefere?' },
-        { side: 'out', author: 'Marina A.',   html: 'Sexta 16h é perfeito 💇‍♀️' },
+        { side: 'in',  author: 'Easy IA',     html: 'Opa, Rafael! Tenho <strong>quinta às 19h</strong> ou <strong>sexta às 20h</strong> com o Bruno. Qual fica melhor?' },
+        { side: 'out', author: 'Rafael M.',   html: 'Sexta 20h fechado 💈' },
         { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1300 },
-        { side: 'in',  author: 'Easy IA',     html: 'Anotado! Reservei 2h pra você.' },
+        { side: 'in',  author: 'Easy IA',     html: 'Anotado! Reservei 1h pra você.' },
         { side: 'in',  author: 'Easy IA',     type: 'card', card: {
             title: 'Agendamento confirmado',
             rows: [
-              ['Serviço',     'Escova Progressiva'],
-              ['Profissional', 'Júlia'],
-              ['Quando',      'Sex · 16:00 — 18:00'],
-              ['Total',       'R$ 320,00'],
+              ['Serviço',     'Corte + Barba'],
+              ['Profissional', 'Bruno'],
+              ['Quando',      'Sex · 20:00 — 21:00'],
+              ['Total',       'R$ 80,00'],
             ]
         }},
-        { side: 'out', author: 'Marina A.',   html: 'Maravilha, obrigada!' },
+        { side: 'out', author: 'Rafael M.',   html: 'Show, valeu!' },
         { side: 'in',  author: 'Easy IA',     html: 'Até sexta! Mando lembrete na quinta 💌' },
       ],
-      // ─── Conversa 2: Salão de Beleza (Camila) — Coloração + Corte ───
+      // ─── Conversa 2: Barbearia (Lucas) — Corte degradê ───
       [
-        { side: 'out', author: 'Camila S.',   html: 'Oi! Queria fazer <strong>coloração e corte</strong> esse fim de semana ✨' },
+        { side: 'out', author: 'Lucas P.',    html: 'Oi! Queria um <strong>corte degradê</strong> esse fim de semana ✂️' },
         { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Oi Camila! Tenho <strong>sábado às 10h</strong> com a Patrícia. Reservo pra você?' },
-        { side: 'out', author: 'Camila S.',   html: 'Pode reservar 🙌' },
+        { side: 'in',  author: 'Easy IA',     html: 'E aí Lucas! Tenho <strong>sábado às 11h</strong> com o Diego. Reservo pra você?' },
+        { side: 'out', author: 'Lucas P.',    html: 'Pode reservar 🙌' },
         { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1300 },
-        { side: 'in',  author: 'Easy IA',     html: 'Pronto! Bloqueei 3h na agenda.' },
+        { side: 'in',  author: 'Easy IA',     html: 'Pronto! Bloqueei 45min na agenda.' },
         { side: 'in',  author: 'Easy IA',     type: 'card', card: {
             title: 'Agendamento confirmado',
             rows: [
-              ['Serviço',     'Coloração + Corte'],
-              ['Profissional', 'Patrícia'],
-              ['Quando',      'Sáb · 10:00 — 13:00'],
-              ['Total',       'R$ 280,00'],
+              ['Serviço',     'Corte Degradê'],
+              ['Profissional', 'Diego'],
+              ['Quando',      'Sáb · 11:00 — 11:45'],
+              ['Total',       'R$ 50,00'],
             ]
         }},
-        { side: 'out', author: 'Camila S.',   html: 'Perfeito, obrigada!' },
+        { side: 'out', author: 'Lucas P.',    html: 'Perfeito, valeu!' },
         { side: 'in',  author: 'Easy IA',     html: 'Até sábado! Te lembro na sexta 💌' },
       ],
-      // ─── Conversa 3: Salão de Beleza (Renata) — Hidratação + Manicure ───
+      // ─── Conversa 3: Barbearia (André) — Barba + Pezinho ───
       [
-        { side: 'out', author: 'Renata L.',   html: 'Boa tarde! Tem horário pra <strong>hidratação e manicure</strong>?' },
+        { side: 'out', author: 'André S.',    html: 'Boa! Tem horário pra <strong>barba e pezinho</strong>?' },
         { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1400 },
-        { side: 'in',  author: 'Easy IA',     html: 'Oi Renata! Tenho <strong>quarta às 15h</strong> com a Aline e a Bruna em paralelo. Combina?' },
-        { side: 'out', author: 'Renata L.',   html: 'Combina sim 💅' },
+        { side: 'in',  author: 'Easy IA',     html: 'Fala André! Tenho <strong>quarta às 18h</strong> com o Bruno. Combina?' },
+        { side: 'out', author: 'André S.',    html: 'Combina sim 🔥' },
         { side: 'in',  author: 'Easy IA',     type: 'typing', dur: 1200 },
-        { side: 'in',  author: 'Easy IA',     html: 'Fechado! Reservei 1h30 pra você.' },
+        { side: 'in',  author: 'Easy IA',     html: 'Fechado! Reservei 40min pra você.' },
         { side: 'in',  author: 'Easy IA',     type: 'card', card: {
             title: 'Agendamento confirmado',
             rows: [
-              ['Serviço',     'Hidratação + Manicure'],
-              ['Profissional', 'Aline & Bruna'],
-              ['Quando',      'Qua · 15:00 — 16:30'],
-              ['Total',       'R$ 145,00'],
+              ['Serviço',     'Barba + Pezinho'],
+              ['Profissional', 'Bruno'],
+              ['Quando',      'Qua · 18:00 — 18:40'],
+              ['Total',       'R$ 55,00'],
             ]
         }},
-        { side: 'out', author: 'Renata L.',   html: 'Obrigada!' },
+        { side: 'out', author: 'André S.',    html: 'Valeu!' },
         { side: 'in',  author: 'Easy IA',     html: 'Até quarta! Lembrete chega na véspera ⏰' },
       ],
     ];

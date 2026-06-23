@@ -684,6 +684,8 @@
     [data-screen-label="Blog"] .pl2-section:has(.pl2-letra-box) { padding-top: 60px; padding-bottom: 60px; }
     /* Sem hero no mobile: grid com respiro no topo (compensa nav fixo ~70px + folga) */
     [data-screen-label="Blog"] .pl2-section:has(.bl2-grid) { padding-top: 100px; padding-bottom: 60px; }
+    /* Post individual: respiro menor no topo no mobile (a seção contém o grid de relacionados, então sobrescreve o :has(.bl2-grid) acima) */
+    [data-screen-label="Blog"] .pl2-section:has(.bl2-post) { padding-top: 20px; }
 
     /* Hero — padrão das telas de Negócios / Funcionalidades */
     [data-screen-label="Blog"] .h2-hero { padding-top: 30px; padding-bottom: 0; }
@@ -947,7 +949,7 @@
       <div class="footer-cta-grid">
         <div class="footer-cta-left">
           <span class="pill pill-cream pill-glow pill-glow-cream">Teste grátis por 5 dias</span>
-          <h2>Pronto para Profissionalizar<br>o seu negócio da beleza com<br>a Easy Salon?</h2>
+          <h2>Pronto para Profissionalizar <br>o seu negócio da beleza com <br>a Easy Salon?</h2>
           <p>A Easy ajuda donos de salão, barbearia e estúdio a saírem da bagunça do dia a dia para um sistema de gestão simples — com a gente do seu lado.</p>
           <div class="btn-cta-row" style="justify-content:flex-start;">
             <a class="btn btn-primary" href="https://app.easysalon.com.br/register?utm_source=site" style="width: 180px">Comece grátis</a>
