@@ -26,6 +26,17 @@
   var WA_MSG = 'Olá! Eu estava no site e vi que estou a um passo de transformar a rotina do meu salão. Gostaria de saber mais sobre o sistema!';
   var WA_LINK = 'https://api.whatsapp.com/send/?phone=' + WA_PHONE + '&text=' + encodeURIComponent(WA_MSG) + '&type=phone_number&app_absent=0';
 
+  // Banner por negócio: cada página de negócio usa o seu; as demais usam o -geral
+  var BANNER_VER = '20260724';
+  function bannerUrl() {
+    var p = location.pathname;
+    var key = 'geral';
+    if (p.indexOf('barbearia') !== -1) key = 'barbearia';
+    else if (p.indexOf('estudio-de-beleza') !== -1) key = 'estudio-de-beleza';
+    else if (p.indexOf('salao-de-beleza') !== -1) key = 'salao-de-beleza';
+    return '/assets/b-molda-saida-' + key + '.png?v=' + BANNER_VER;
+  }
+
   function recentlyShown() {
     try {
       var last = parseInt(localStorage.getItem(STORE_KEY) || '0', 10);
@@ -47,7 +58,7 @@
         '</button>' +
         '<div class="exit-modal-banner">' +
           '<a href="' + WA_LINK + '" target="_blank" rel="noopener noreferrer" aria-label="Falar com um especialista no WhatsApp">' +
-            '<img src="/assets/b-molda-saida.png?v=20260722" alt="Oferta Easy Salon ao sair">' +
+            '<img src="' + bannerUrl() + '" alt="Oferta Easy Salon ao sair">' +
           '</a>' +
         '</div>' +
       '</div>';
