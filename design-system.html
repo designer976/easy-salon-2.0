@@ -95,7 +95,7 @@
   }
 
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; overflow-x: clip; } /* clip (não hidden) p/ não criar scroll-container e manter a .ds-sidebar sticky */
   body {
     background: var(--c-bg);
     color: var(--c-text);
@@ -1246,7 +1246,7 @@
     <!-- ─────────────── CARDS ─────────────── -->
     <section id="cards" class="ds-section">
       <h2>Cards</h2>
-      <p class="ds-section-sub">Dois cards-padrão da home: <code>.veja-card</code> (segmento) e <code>.demo-card</code> (destaque com sombra). Ambos usam radius 12px.</p>
+      <p class="ds-section-sub">Card-padrão da home: <code>.veja-card</code> (segmento). Usa radius 12px.</p>
 
       <div class="ds-block">
         <h3>veja-card</h3>
@@ -1265,24 +1265,6 @@
   <span class="tag">&lt;h3&gt;</span>Salão de Beleza<span class="tag">&lt;/h3&gt;</span>
   <span class="tag">&lt;p&gt;</span>Gestão completa para salões…<span class="tag">&lt;/p&gt;</span>
   <span class="tag">&lt;a</span> <span class="attr">class</span>=<span class="str">"more"</span><span class="tag">&gt;</span>Conhecer →<span class="tag">&lt;/a&gt;</span>
-<span class="tag">&lt;/div&gt;</span></pre>
-      </div>
-
-      <div class="ds-block">
-        <h3>demo-card</h3>
-        <div class="ds-preview">
-          <div class="demo-card">
-            <span class="pill pill-green demo-pill">● Conversa em tempo real</span>
-            <h4>Atendimento que parece humano</h4>
-            <p>A IA responde dúvidas, agenda horários e envia lembretes — automaticamente, no WhatsApp.</p>
-            <button class="btn btn-primary" style="align-self: flex-start;">Comece grátis</button>
-          </div>
-        </div>
-        <pre class="ds-code"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"demo-card"</span><span class="tag">&gt;</span>
-  <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pill pill-green"</span><span class="tag">&gt;</span>● Conversa em tempo real<span class="tag">&lt;/span&gt;</span>
-  <span class="tag">&lt;h3&gt;</span>Atendimento que parece humano<span class="tag">&lt;/h3&gt;</span>
-  <span class="tag">&lt;p&gt;</span>A IA responde dúvidas…<span class="tag">&lt;/p&gt;</span>
-  <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn btn-primary"</span><span class="tag">&gt;</span>Comece grátis<span class="tag">&lt;/button&gt;</span>
 <span class="tag">&lt;/div&gt;</span></pre>
       </div>
     </section>
@@ -1308,6 +1290,18 @@
   <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="str">"name"</span><span class="tag">&gt;</span>Nome do salão<span class="tag">&lt;/label&gt;</span>
   <span class="tag">&lt;input</span> <span class="attr">id</span>=<span class="str">"name"</span> <span class="attr">class</span>=<span class="str">"ds-input"</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">placeholder</span>=<span class="str">"Ex: Studio Marina"</span><span class="tag">&gt;</span>
 <span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+
+      <div class="ds-block">
+        <h3>Telefone (com máscara)</h3>
+        <div class="ds-preview column">
+          <div class="ds-field">
+            <label for="ds-tel">Telefone</label>
+            <input id="ds-tel" class="ds-input" type="tel" inputmode="numeric" placeholder="(00) 00000-0000" maxlength="16">
+          </div>
+        </div>
+        <pre class="ds-code"><span class="tag">&lt;input</span> <span class="attr">class</span>=<span class="str">"ds-input"</span> <span class="attr">type</span>=<span class="str">"tel"</span> <span class="attr">inputmode</span>=<span class="str">"numeric"</span> <span class="attr">placeholder</span>=<span class="str">"(00) 00000-0000"</span><span class="tag">&gt;</span>
+<span class="str">// JS aplica a máscara (00) 00000-0000 e bloqueia não-números</span></pre>
       </div>
 
       <div class="ds-block">
@@ -1431,7 +1425,7 @@
         <div class="ds-preview dark" style="padding: 0;">
           <div class="ex-footer-cta">
             <span class="pill pill-cream">Teste grátis por 5 dias</span>
-            <h3>Pronto para profissionalizar<br>o seu negócio da beleza?</h3>
+            <h3>Pronto para Profissionalizar <br>o seu negócio da beleza com <br>a Easy Salon?</h3>
             <p>A Easy Salon ajuda donos de salão, barbearia e estúdios a organizarem sua agenda e evoluírem para uma gestão simples e inteligente.</p>
             <div style="display: flex; gap: 12px;">
               <button class="btn btn-primary">Comece grátis</button>
