@@ -933,9 +933,6 @@ br.br-d { display: inline; }
   flex-direction: column;
   gap: 0;
 }
-.sol-hero .chat {
-  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.6), var(--shadow-card-2);
-}
 .chat-header {
   display: flex;
   align-items: center;
@@ -994,130 +991,6 @@ br.br-d { display: inline; }
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.7; }
 }
-
-.msg {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 14px;
-}
-.msg-incoming { align-items: flex-start; }
-.msg-outgoing { align-items: flex-end; }
-.msg .author {
-  font-weight: 700;
-  font-size: 12px;
-  color: var(--c-text);
-  margin-bottom: 6px;
-  padding: 0 4px;
-}
-.bubble {
-  background: var(--c-bubble);
-  border-radius: 16px;
-  padding: 12px 16px;
-  font-size: 14px;
-  line-height: 24px;
-  color: var(--c-text);
-  max-width: 297px;
-  white-space: pre-line;
-}
-.bubble strong { font-weight: 700; }
-.typing {
-  background: var(--c-bubble);
-  border-radius: 16px;
-  padding: 10px 14px;
-  display: inline-flex;
-  gap: 4px;
-}
-.typing span {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--c-ink-soft-30);
-  display: inline-block;
-  animation: typing 1.2s infinite ease-in-out;
-}
-.typing span:nth-child(2) { animation-delay: 0.15s; }
-.typing span:nth-child(3) { animation-delay: 0.3s; }
-@keyframes typing {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
-  30% { transform: translateY(-3px); opacity: 0.9; }
-}
-
-/* Interactive chat feed */
-.chat-feed {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 0;
-  position: relative;
-}
-.chat-feed .msg {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.chat-feed .msg.is-visible { opacity: 1; transform: translateY(0); }
-.chat-feed .msg.is-fading {
-  opacity: 0;
-  transform: translateY(-12px);
-  transition: opacity 0.4s ease, transform 0.5s ease;
-}
-.tw-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  background: currentColor;
-  vertical-align: -2px;
-  margin-left: 2px;
-  animation: tw-blink 0.9s steps(2, start) infinite;
-}
-@keyframes tw-blink { to { opacity: 0; } }
-
-
-/* ─── Confirmation card (chat) ──────────────────────────────────────── */
-.confirm-card {
-  background: var(--c-bg);
-  border: 1px solid var(--c-text-3);
-  border-radius: 12px;
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 280px;
-}
-.confirm-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--c-text);
-  font-family: var(--ff-display);
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 1.1;
-}
-.confirm-check {
-  width: 18px;
-  height: 18px;
-  border-radius: 100px;
-  background: var(--c-accent);
-  color: var(--c-white);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-}
-.confirm-rows {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 4px 14px;
-  font-size: 12px;
-  line-height: 1.35;
-}
-.confirm-rows .k { color: var(--c-accent); font-weight: 600; }
-.confirm-rows .v { color: var(--c-text); font-weight: 700; }
-
 
 /* ─── Team text block ───────────────────────────────────────────────── */
 .team-text {
@@ -1225,8 +1098,6 @@ br.br-d { display: inline; }
   .footer-social { justify-self: flex-start; }
 
   /* Chat / confirm / team — responsive */
-  .bubble { max-width: 240px; font-size: 13.5px; line-height: 22px; }
-  .confirm-card { max-width: 240px; }
   .team-text { padding: 8px 6px 12px; gap: 16px; }
   .team-text h2 { font-size: 30px !important; line-height: 1.1 !important; }
   .team-text h2 br { display: none; }
@@ -1260,7 +1131,6 @@ br.br-d { display: inline; }
 
 /* BlurFade — seletores específicos da página Salão */
 .nav-inner > *,
-.sol-hero > *,
 .hero-grid > *,
 .step-row > *,
 .pq-grid > *,
@@ -1280,7 +1150,6 @@ br.br-d { display: inline; }
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-inner > *,
-  .sol-hero > *,
   .hero-grid > *,
   .step-row > *,
   .pq-grid > *,
@@ -1297,123 +1166,6 @@ br.br-d { display: inline; }
 }
 
 
-/* ─── Hero solução (.sol-hero) ──────────────────────────────────────── */
-.sol-hero {
-  width: 1200px;
-  max-width: calc(100% - 48px);
-  margin: 50px auto 80px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-.sol-hero-left .pill { margin-bottom: 24px; }
-.sol-hero h1 {
-  font-family: var(--ff-display);
-  font-weight: 400;
-  font-size: 56px;
-  line-height: 1.05;
-  color: var(--c-text);
-  margin: 0 0 30px;
-  max-width: 520px;
-}
-.sol-hero h1 em { font-style: normal; color: var(--c-accent); }
-.sol-hero-sub {
-  font-size: 18px;
-  line-height: 30px;
-  color: var(--c-text);
-  margin: 0 0 40px;
-  max-width: 540px;
-}
-.sol-hero .cta-row { display: flex; gap: 12px; }
-
-.sol-hero-right {
-  position: relative;
-  height: 580px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: url('/assets/salao-hero.png') center/cover no-repeat;
-  /* Centraliza o .chat sobreposto (em vez do .sol-hero-card legado) */
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.sol-hero-right .chat { width: 100%; max-width: 420px; height: 480px; }
-
-/* Card sobreposto no hero (chat preview) */
-.sol-hero-card {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 380px;
-  background: var(--c-card-2);
-  border: 8px solid var(--c-card-2-soft);
-  border-radius: 12px;
-  box-shadow: var(--shadow-card-2);
-  padding: 24px;
-}
-.sol-hero-card .head {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--c-ink-soft-10);
-}
-.sol-hero-card .avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 100px;
-  background: var(--c-accent);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-}
-.sol-hero-card .head .meta .name { font-weight: 700; font-size: 13px; color: var(--c-text); }
-.sol-hero-card .head .meta .status {
-  font-size: 10px;
-  color: var(--c-text-2);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 4px;
-}
-.sol-hero-card .head .meta .status::before {
-  content: "";
-  width: 6px; height: 6px;
-  border-radius: 100px;
-  background: var(--c-green);
-  box-shadow: 0 0 0 3px var(--c-green-soft);
-}
-.sol-hero-card .out { margin: 18px 0 14px; padding: 0 4px; }
-.sol-hero-card .out .author { font-weight: 700; font-size: 12px; color: var(--c-text); margin-bottom: 6px; }
-.sol-hero-card .out p { font-size: 14px; line-height: 24px; color: var(--c-text); margin: 0; }
-.sol-hero-card .in { background: var(--c-bubble); border-radius: 16px; padding: 12px 16px; }
-.sol-hero-card .in .author { font-weight: 700; font-size: 12px; color: var(--c-text); margin-bottom: 4px; }
-.sol-hero-card .in p { font-size: 14px; line-height: 24px; color: var(--c-text); margin: 0; }
-.sol-hero-card .typing {
-  display: inline-flex;
-  gap: 4px;
-  align-items: center;
-  background: var(--c-bubble);
-  border-radius: 16px;
-  padding: 10px 14px;
-  margin-top: 10px;
-}
-.sol-hero-card .typing span {
-  width: 4px; height: 4px;
-  border-radius: 100px;
-  background: var(--c-ink-soft-30);
-  animation: dot 1.2s infinite ease-in-out;
-}
-.sol-hero-card .typing span:nth-child(2) { animation-delay: .15s; }
-.sol-hero-card .typing span:nth-child(3) { animation-delay: .3s; }
-@keyframes dot {
-  0%, 60%, 100% { transform: translateY(0); opacity: .4; }
-  30% { transform: translateY(-3px); opacity: 1; }
-}
 
 
 /* ─── 5 passos (.steps-section) ─────────────────────────────────────── */
@@ -1781,50 +1533,6 @@ br.br-d { display: inline; }
   .cta-row .btn { width: 100% !important; }
   .page .pill { font-size: 11px; height: 30px; }
 
-  /* Sol-hero ---------------------------------------------------- */
-  /* Mobile: padrão da home — width 100%, padding 0 16px (sem max-width nem margin lateral) */
-  .sol-hero {
-    grid-template-columns: 1fr !important;
-    gap: 24px;
-    margin: 24px 0 24px !important;
-    width: 100% !important;
-    max-width: none !important;
-    padding: 0 16px !important;
-  }
-  /* Mobile: hero alinhado ao padrão da home — texto centralizado */
-  .sol-hero-left {
-    text-align: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-  .sol-hero-left .pill { margin-left: auto; margin-right: auto; }
-  .sol-hero-left h1 {
-    font-size: 36px !important;
-    line-height: 1.05 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto 24px !important;
-  }
-  .sol-hero-left .sol-hero-sub {
-    font-size: 15px !important;
-    line-height: 1.55 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto 28px !important;
-  }
-  .sol-hero-left .cta-row { width: 100%; gap: 20px; }
-  .sol-hero-right { height: auto !important; min-height: 460px; padding: 18px !important; }
-  /* Trava de altura no mobile (igual home): height + min-height + max-height
-     impedem o chat de crescer conforme mensagens vão sendo adicionadas */
-  .sol-hero-right .chat {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 420px !important;
-    min-height: 420px !important;
-    max-height: 420px !important;
-  }
-
   /* 5 passos ---------------------------------------------------- */
   /* Mobile: max-width: none libera o width auto (padrão da home — sem clamp do desktop) */
   .steps-section {
@@ -1926,16 +1634,8 @@ br.br-d { display: inline; }
    Componentes específicos da página /barbearia.html.
    ═════════════════════════════════════════════════════════════════════ */
 
-[data-screen-label="Solução · Barbearia"] .sol-hero-right {
-  background-image: url('/assets/barbearia-hero.png');
-}
-
 [data-screen-label="Solução · Barbearia"] .pq-grid {
   grid-template-columns: repeat(5, 1fr);
-}
-
-[data-screen-label="Solução · Estúdio de Beleza"] .sol-hero-right {
-  background-image: url('/assets/estudio-hero.png');
 }
 
 [data-screen-label="Solução · Estúdio de Beleza"] .pq-grid {
@@ -3251,129 +2951,6 @@ br.br-d { display: inline; }
     50%      { opacity: 0.7; }
   }
 
-  .msg {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 14px;
-  }
-  .msg-incoming { align-items: flex-start; }
-  .msg-outgoing { align-items: flex-end; }
-  .msg .author {
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--c-text);
-    margin-bottom: 6px;
-    padding: 0 4px;
-  }
-  .bubble {
-    background: var(--c-bubble);
-    border-radius: 16px;
-    padding: 12px 16px;
-    font-size: 14px;
-    line-height: 24px;
-    color: var(--c-text);
-    max-width: 297px;
-    white-space: pre-line;
-  }
-  .bubble strong { font-weight: 700; }
-  .typing {
-    background: var(--c-bubble);
-    border-radius: 16px;
-    padding: 10px 14px;
-    display: inline-flex;
-    gap: 4px;
-  }
-  .typing span {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(115, 42, 29, 0.3);
-    display: inline-block;
-    animation: typing 1.2s infinite ease-in-out;
-  }
-  .typing span:nth-child(2) { animation-delay: 0.15s; }
-  .typing span:nth-child(3) { animation-delay: 0.3s; }
-  @keyframes typing {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
-    30% { transform: translateY(-3px); opacity: 0.9; }
-  }
-
-  /* ─── Interactive chat feed ─── */
-  .chat-feed {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0;
-    position: relative;
-  }
-  .chat-feed .msg {
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .chat-feed .msg.is-visible { opacity: 1; transform: translateY(0); }
-  .chat-feed .msg.is-fading {
-    opacity: 0;
-    transform: translateY(-12px);
-    transition: opacity 0.4s ease, transform 0.5s ease;
-  }
-  /* Typewriter cursor */
-  .tw-cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1em;
-    background: currentColor;
-    vertical-align: -2px;
-    margin-left: 2px;
-    animation: tw-blink 0.9s steps(2, start) infinite;
-  }
-  @keyframes tw-blink { to { opacity: 0; } }
-
-  /* Confirmation card */
-  .confirm-card {
-    background: var(--c-bg);
-    border: 1px solid rgba(115, 42, 29, 0.12);
-    border-radius: 12px;
-    padding: 14px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 280px;
-  }
-  .confirm-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--c-text);
-    font-family: var(--ff-display);
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 1.1;
-  }
-  .confirm-check {
-    width: 18px;
-    height: 18px;
-    border-radius: 100px;
-    background: var(--c-accent);
-    color: #fff;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-  }
-  .confirm-rows {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 4px 14px;
-    font-size: 12px;
-    line-height: 1.35;
-  }
-  .confirm-rows .k { color: var(--c-accent); font-weight: 600; }
-  .confirm-rows .v { color: var(--c-text); font-weight: 700; }
-
   /* ─── Section: Como organizamos ─── */
   .section-card {
     width: 1200px;
@@ -3908,8 +3485,6 @@ br.br-d { display: inline; }
       max-height: 360px !important;
       padding: 18px 18px 20px;
     }
-    .bubble { max-width: 240px; font-size: 13.5px; line-height: 22px; }
-    .confirm-card { max-width: 240px; }
 
     /* Section: Como organizamos ---------------------------------------- */
     .section-card {
