@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Easy Salon — Quem somos (sandbox)</title>
+<title>Easy Salon — Quem somos</title>
 <link rel="icon" type="image/png" href="/assets/fav.png">
 
 <!-- Sistema de design (mestre). Fontes, tokens, .nav, .btn, .pill, footer-bleed. -->
 <link rel="stylesheet" href="/design-system.css?v=20260724">
 
 <style>
-  /* Quem Somos 2 (sandbox) — redesign baseado no wireframe (Bento Aceternity)
+  /* Quem Somos 2 — redesign baseado no wireframe (Bento Aceternity)
      Reaproveita tokens do design-system: fontes (--ff-display Gyst, --ff-text Manrope),
      cores (--c-accent, --c-text, --c-tan-veil) e componentes (.pill, .btn).
      Regras escopadas para [data-screen-label="Quem somos"] — não vazam pra outras páginas. */
@@ -271,6 +271,24 @@
     padding: 20px 24px;
     flex: 1;
     display: flex; flex-direction: column; justify-content: center; gap: 10px;
+  }
+  /* Box Telefone clicável -> WhatsApp Web, com seta no canto e hover de sombra */
+  [data-screen-label="Quem somos"] a.qs2-channel--wa {
+    position: relative;
+    text-decoration: none; color: inherit; cursor: pointer;
+    transition: box-shadow .3s ease, transform .3s ease;
+  }
+  [data-screen-label="Quem somos"] a.qs2-channel--wa:hover {
+    box-shadow: var(--shadow-card);
+    transform: translateY(-2px);
+  }
+  [data-screen-label="Quem somos"] .qs2-channel-arrow {
+    position: absolute; top: 16px; right: 18px;
+    color: var(--c-accent); display: inline-flex;
+    opacity: .85; transition: opacity .3s ease, transform .3s ease;
+  }
+  [data-screen-label="Quem somos"] a.qs2-channel--wa:hover .qs2-channel-arrow {
+    opacity: 1; transform: translate(2px, -2px);
   }
   [data-screen-label="Quem somos"] .qs2-channel-head {
     display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
@@ -680,6 +698,15 @@
     }
   }
 </style>
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NKDV6BQQ');
+</script>
+<!-- End Google Tag Manager -->
 </head>
 <body class="has-nav">
 <div class="page">
@@ -826,7 +853,8 @@
           </div>
           <div class="qs2-channel-value qs2-addr"><span>Alameda Rio Negro 503, Sala 2020</span><span>Alphaville - Barueri/SP</span></div>
         </div>
-        <div class="qs2-channel">
+        <a class="qs2-channel qs2-channel--wa" href="https://web.whatsapp.com/send?phone=554123913300" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+          <span class="qs2-channel-arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
           <div class="qs2-channel-head">
             <span class="qs2-channel-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
@@ -834,7 +862,7 @@
             <span class="qs2-channel-title">Telefone</span>
           </div>
           <div class="qs2-channel-value">(41) 2391-3300</div>
-        </div>
+        </a>
         <div class="qs2-channel">
           <div class="qs2-channel-head">
             <span class="qs2-channel-icon">
@@ -868,13 +896,14 @@
           </div>
         </div>
         <div class="qs2-field">
-          <label for="qs2-email">E-mail<span class="qs2-req">*</span></label>
-          <input id="qs2-email" type="email" name="email" required data-error="Por favor, informe um e-mail válido.">
+          <label for="qs2-telefone">Telefone<span class="qs2-req">*</span></label>
+          <input id="qs2-telefone" type="tel" name="telefone" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="16" required data-error="Por favor, informe seu telefone.">
           <span class="qs2-error" aria-live="polite"></span>
         </div>
         <div class="qs2-field">
-          <label for="qs2-telefone">Telefone</label>
-          <input id="qs2-telefone" type="tel" name="telefone" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="16">
+          <label for="qs2-email">E-mail</label>
+          <input id="qs2-email" type="email" name="email" data-error="Por favor, informe um e-mail válido.">
+          <span class="qs2-error" aria-live="polite"></span>
         </div>
         <div class="qs2-field">
           <label for="qs2-mensagem">Mensagem<span class="qs2-req">*</span></label>
