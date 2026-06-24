@@ -23,18 +23,29 @@
   var ARM_DELAY = 3000;                   // só arma 3s após o load
   var TOP_THRESHOLD = 0;                  // saiu pelo topo quando clientY <= isso
   var WA_PHONE = '554123913300';
-  var WA_MSG = 'Olá! Eu estava no site e vi que estou a um passo de transformar a rotina do meu salão. Gostaria de saber mais sobre o sistema!';
-  var WA_LINK = 'https://api.whatsapp.com/send/?phone=' + WA_PHONE + '&text=' + encodeURIComponent(WA_MSG) + '&type=phone_number&app_absent=0';
-
-  // Banner por negócio: cada página de negócio usa o seu; as demais usam o -geral
   var BANNER_VER = '20260724';
-  function bannerUrl() {
+
+  // Negócio acessado (pelo pathname): define o banner E a mensagem do WhatsApp.
+  // Páginas de negócio usam o seu; as demais usam 'geral'.
+  function bizKey() {
     var p = location.pathname;
-    var key = 'geral';
-    if (p.indexOf('barbearia') !== -1) key = 'barbearia';
-    else if (p.indexOf('estudio-de-beleza') !== -1) key = 'estudio-de-beleza';
-    else if (p.indexOf('salao-de-beleza') !== -1) key = 'salao-de-beleza';
-    return '/assets/b-molda-saida-' + key + '.png?v=' + BANNER_VER;
+    if (p.indexOf('barbearia') !== -1) return 'barbearia';
+    if (p.indexOf('estudio-de-beleza') !== -1) return 'estudio-de-beleza';
+    if (p.indexOf('salao-de-beleza') !== -1) return 'salao-de-beleza';
+    return 'geral';
+  }
+  function bannerUrl() {
+    return '/assets/b-molda-saida-' + bizKey() + '.png?v=' + BANNER_VER;
+  }
+  function waLink() {
+    var sufixo = {
+      'geral': 'do meu negócio',
+      'barbearia': 'da minha Barbearia',
+      'salao-de-beleza': 'do meu Salão de beleza',
+      'estudio-de-beleza': 'do meu Estúdio de beleza'
+    }[bizKey()];
+    var msg = 'Olá! Eu estava no site e vi que estou a um passo de transformar a rotina ' + sufixo + '. Gostaria de saber mais sobre o sistema!';
+    return 'https://api.whatsapp.com/send/?phone=' + WA_PHONE + '&text=' + encodeURIComponent(msg) + '&type=phone_number&app_absent=0';
   }
 
   function recentlyShown() {
@@ -57,7 +68,7 @@
           '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>' +
         '</button>' +
         '<div class="exit-modal-banner">' +
-          '<a href="' + WA_LINK + '" target="_blank" rel="noopener noreferrer" aria-label="Falar com um especialista no WhatsApp">' +
+          '<a href="' + waLink() + '" target="_blank" rel="noopener noreferrer" aria-label="Falar com um especialista no WhatsApp">' +
             '<img src="' + bannerUrl() + '" alt="Oferta Easy Salon ao sair">' +
           '</a>' +
         '</div>' +

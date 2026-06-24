@@ -293,6 +293,8 @@
     color: var(--c-text); opacity: 0.75;
     margin-left: 0;
   }
+  /* Endereço: 1 linha com divisória no desktop; 2 linhas no mobile */
+  [data-screen-label="Quem somos"] .qs2-addr span + span::before { content: " · "; }
 
   [data-screen-label="Quem somos"] .qs2-form {
     background: var(--c-card, #faf6ed);
@@ -605,6 +607,9 @@
      Refinos de tamanhos sobre o bloco 1024.
      ═══════════════════════════════════════════════ */
   @media (max-width: 640px) {
+    /* Endereço: volta a 2 linhas no mobile (sem divisória) */
+    [data-screen-label="Quem somos"] .qs2-addr span { display: block; }
+    [data-screen-label="Quem somos"] .qs2-addr span + span::before { content: none; }
     /* Tipografia mobile — padronizada com home hero h1 (32px) */
     [data-screen-label="Quem somos"] .qs2-col h2 { font-size: 32px; line-height: 1.05; }
     /* Mobile: quebra DEPOIS de "uma" — "sistema, uma" / "metodologia" */
@@ -819,7 +824,7 @@
             </span>
             <span class="qs2-channel-title">Localização</span>
           </div>
-          <div class="qs2-channel-value">Av. Exemplo, 123 · Sala 4 · São Paulo, SP</div>
+          <div class="qs2-channel-value qs2-addr"><span>Alameda Rio Negro 503, Sala 2020</span><span>Alphaville - Barueri/SP</span></div>
         </div>
         <div class="qs2-channel">
           <div class="qs2-channel-head">
@@ -828,7 +833,7 @@
             </span>
             <span class="qs2-channel-title">Telefone</span>
           </div>
-          <div class="qs2-channel-value">+55 (41) 99104-4112</div>
+          <div class="qs2-channel-value">(41) 2391-3300</div>
         </div>
         <div class="qs2-channel">
           <div class="qs2-channel-head">
@@ -837,7 +842,7 @@
             </span>
             <span class="qs2-channel-title">E-mail</span>
           </div>
-          <div class="qs2-channel-value">contato@easysalon.com.br</div>
+          <div class="qs2-channel-value">comercial@easysalon.com.br</div>
         </div>
         <div class="qs2-channel">
           <div class="qs2-channel-head">
@@ -846,7 +851,7 @@
             </span>
             <span class="qs2-channel-title">Atendimento</span>
           </div>
-          <div class="qs2-channel-value">Segunda a sexta, das 9h às 18h</div>
+          <div class="qs2-channel-value">Segunda a sexta, das 8h às 17h</div>
         </div>
       </div>
       <form class="qs2-form" novalidate>
@@ -868,23 +873,8 @@
           <span class="qs2-error" aria-live="polite"></span>
         </div>
         <div class="qs2-field">
-          <span class="qs2-label">Assunto</span>
-          <div class="qs2-dropdown" data-state="closed">
-            <button type="button" class="qs2-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
-              <span class="qs2-dropdown-value">Quero conhecer o sistema</span>
-              <svg class="qs2-dropdown-chev" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </button>
-            <ul class="qs2-dropdown-menu" role="listbox">
-              <li role="option" data-value="Quero conhecer o sistema" class="is-selected">Quero conhecer o sistema</li>
-              <li role="option" data-value="Suporte técnico">Suporte técnico</li>
-              <li role="option" data-value="Parceria comercial">Parceria comercial</li>
-              <li role="option" data-value="Imprensa">Imprensa</li>
-              <li role="option" data-value="Outro">Outro</li>
-            </ul>
-            <input type="hidden" name="assunto" value="Quero conhecer o sistema">
-          </div>
+          <label for="qs2-telefone">Telefone</label>
+          <input id="qs2-telefone" type="tel" name="telefone" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="16">
         </div>
         <div class="qs2-field">
           <label for="qs2-mensagem">Mensagem<span class="qs2-req">*</span></label>
@@ -1185,37 +1175,20 @@
     });
   })();
 
-  // Custom dropdown (Assunto)
+  // Telefone — máscara (somente números): (00) 00000-0000 / (00) 0000-0000
   (function () {
-    document.querySelectorAll('.qs2-dropdown').forEach(function (dd) {
-      var trigger = dd.querySelector('.qs2-dropdown-trigger');
-      var valueEl = dd.querySelector('.qs2-dropdown-value');
-      var hidden = dd.querySelector('input[type="hidden"]');
-      var items = dd.querySelectorAll('[role="option"]');
-      function setOpen(open) {
-        dd.setAttribute('data-state', open ? 'open' : 'closed');
-        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      function selectItem(item) {
-        var val = item.getAttribute('data-value');
-        if (valueEl) valueEl.textContent = val;
-        if (hidden) hidden.value = val;
-        items.forEach(function (i) { i.classList.toggle('is-selected', i === item); });
-        setOpen(false);
-      }
-      trigger.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setOpen(dd.getAttribute('data-state') === 'closed');
-      });
-      items.forEach(function (item) {
-        item.addEventListener('click', function () { selectItem(item); });
-      });
-      document.addEventListener('click', function (e) {
-        if (!dd.contains(e.target)) setOpen(false);
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setOpen(false);
-      });
+    var tel = document.getElementById('qs2-telefone');
+    if (!tel) return;
+    function format(d) {
+      d = d.replace(/\D/g, '').slice(0, 11);
+      if (d.length <= 2) return d.length ? '(' + d : '';
+      if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+      if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+      return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+    }
+    tel.addEventListener('input', function () { tel.value = format(tel.value); });
+    tel.addEventListener('keypress', function (e) {
+      if (e.key && e.key.length === 1 && /\D/.test(e.key)) e.preventDefault();
     });
   })();
 
@@ -1246,6 +1219,6 @@
 
 <script src="/assets/widow-buster.js?v=20260708" defer></script>
 <script src="/assets/wa-widget.js?v=20260724" defer></script>
-<script src="/assets/exit-intent.js?v=20260724" defer></script>
+<script src="/assets/exit-intent.js?v=20260725" defer></script>
 </body>
 </html>

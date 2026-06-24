@@ -239,6 +239,10 @@
     font-family: var(--ff-text); font-size: 12px;
     color: var(--c-text); opacity: .7;
   }
+  /* Anual: "/mês no plano anual" fica abaixo do valor (evita quebra feia na linha) */
+  [data-screen-label="Planos"] .pl2-pcard .price[data-billing="anual"] {
+    flex-direction: column; align-items: flex-start; gap: 2px;
+  }
   [data-screen-label="Planos"] .pl2-pcard .desc {
     font-family: var(--ff-text); font-size: 13px; line-height: 1.5;
     color: var(--c-text); opacity: .75;
@@ -284,7 +288,7 @@
 
   /* ═══════════════════ SECTION 03 — ADICIONAIS ═══════════════════ */
   [data-screen-label="Planos"] .pl2-add-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
   }
   [data-screen-label="Planos"] .pl2-acard {
     background: var(--c-card-2);
@@ -649,8 +653,6 @@
           <ul class="check-list">
             <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Agenda de todos os profissionais num painel só</li>
             <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Agendamento pelo cliente via link</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>IA que agenda pelo WhatsApp</li>
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Confirmação e lembrete automáticos</li>
             <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>IA copiloto no agendamento</li>
             <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Agenda do profissional no app</li>
             <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Agendamentos e ausências recorrentes</li>
@@ -710,7 +712,6 @@
         <div class="pl2-tile pl2-fade">
           <h3>Inteligência Artificial</h3>
           <ul class="check-list">
-            <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Recepcionista virtual no WhatsApp</li>
             <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Copiloto da recepção</li>
             <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Aviso de cliente que não voltou</li>
             <li><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5 L4 7.5 L8 3" stroke="rgb(206,72,54)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Recomendação por histórico</li>
@@ -742,21 +743,15 @@
       </div>
       <div class="pl2-add-grid">
         <div class="pl2-acard pl2-fade">
+          <span class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></span>
+          <h3>Recepcionista virtual</h3>
+          <p>Uma IA que atende seus clientes no WhatsApp como uma recepcionista: responde dúvidas, agenda horários e confirma atendimentos — 24 horas por dia.</p>
+          <span class="chip">Contratação opcional</span>
+        </div>
+        <div class="pl2-acard pl2-fade">
           <span class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
           <h3>Rotina de mensageria</h3>
           <p>Disparo automatizado de mensagens para clientes inativos, aniversariantes e campanhas sazonais.</p>
-          <span class="chip">Contratação opcional</span>
-        </div>
-        <div class="pl2-acard pl2-fade">
-          <span class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span>
-          <h3>Clube de assinatura</h3>
-          <p>Crie planos de fidelidade recorrentes para os seus clientes. Receita previsível mês a mês.</p>
-          <span class="chip">Contratação opcional</span>
-        </div>
-        <div class="pl2-acard pl2-fade">
-          <span class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></span>
-          <h3>Aplicativo exclusivo do salão</h3>
-          <p>Seu próprio app de agendamento com a identidade visual do salão. Disponível na App Store e Google Play sob a sua marca.</p>
           <span class="chip">Contratação opcional</span>
         </div>
       </div>
@@ -768,7 +763,7 @@
     <div class="pl2-wrap">
       <div class="pl2-letra-box pl2-fade">
         <div class="pl2-sechead">
-          <h2>Sem <span class="accent">letra miúda</span></h2>
+          <h2 style="color: var(--c-accent);">Sem <span class="accent">letras miúdas</span></h2>
           <p>O que você precisa saber antes de contratar — direto, sem rodeio.</p>
         </div>
         <div class="pl2-letra-grid">
@@ -1003,6 +998,8 @@
       });
       suffixes.forEach(function (s) {
         s.textContent = '/mês' + (mode === 'anual' ? ' no plano anual' : '');
+        var price = s.closest('.price');
+        if (price) price.setAttribute('data-billing', mode);
       });
     }
 
@@ -1175,6 +1172,6 @@
 
 <script src="/assets/widow-buster.js?v=20260708" defer></script>
 <script src="/assets/wa-widget.js?v=20260724" defer></script>
-<script src="/assets/exit-intent.js?v=20260724" defer></script>
+<script src="/assets/exit-intent.js?v=20260725" defer></script>
 </body>
 </html>
